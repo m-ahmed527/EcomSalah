@@ -12,7 +12,7 @@
                 <div class="col-md-4 col-xs-12 col-sm-4">
                     <!-- Site Logo -->
                     <div class="logo text-center">
-                        <a href="{{ route('web.index') }}">
+                        <a href="{{ route('web.index') }}" class="logo-a">
                             <!-- replace logo here -->
                             <img src="{{ setting('logo') ?: asset('assets/web/images/logo.png') }}" alt="" width="100px"
                                 height="110px">

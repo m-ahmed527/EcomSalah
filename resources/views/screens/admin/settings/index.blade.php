@@ -1,8 +1,9 @@
 @extends('layouts.admin.app')
 @section('title', 'Settings')
+@section('page', 'Settings')
 @section('content')
 
-    <!-- Content Wrapper. Contains page content -->
+    {{-- <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <div class="content-header">
@@ -20,7 +21,7 @@
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>
-        <!-- /.content-header -->
+        <!-- /.content-header --> --}}
 
         <!-- Main content -->
         <section class="content">
@@ -184,7 +185,7 @@
             </div>
         </section>
         <!-- /.content -->
-    </div>
+    {{-- </div> --}}
     <!-- /.content-wrapper -->
 @endsection
 @push('scripts')

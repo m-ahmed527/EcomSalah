@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
                     <div class="block text-center">
-                        <a class="logo" href="{{ route('web.index') }}">
+                        <a class="logo logo-a" href="{{ route('web.index') }}">
                             <img src="{{ setting('logo') ?: asset('assets/web/images/logo.png') }}" alt="" width="150px">
                         </a>
                         <h2 class="text-center">Welcome Back</h2>

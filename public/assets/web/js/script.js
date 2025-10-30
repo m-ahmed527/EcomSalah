@@ -111,10 +111,10 @@ document.addEventListener("DOMContentLoaded", function () {
 //End Active menu item highlight karne ka code
 
 
-//Start-> Page load hone par buttons disable karne aur load hone ke baad enable karne ka code 
+//Start-> Page load hone par buttons disable karne aur load hone ke baad enable karne ka code
 function disableButtons() {
     // sab buttons aur anchors select karo, lekin slick buttons ko ignore karo
-    const buttons = document.querySelectorAll('button:not(.slick-arrow):not(.slick-dots button), a');
+    const buttons = document.querySelectorAll('button:not(.slick-arrow):not(.slick-dots button), a:not(.logo-a)');
 
     buttons.forEach(el => {
         if (!el.classList.contains('disabled')) {
