@@ -33,7 +33,7 @@
                             </div>
 
                             <form id="submit-form" enctype="multipart/form-data"
-                                action="{{ route('admin.profile.update') }}" method="POST">
+                                action="{{ route('admin.profile.update') }}" method="POST" data-reset="true">
                                 @csrf
 
                                 <div class="card-body">
@@ -137,13 +137,13 @@
                 </div>
             </div>
         </section>
-    {{-- </div> --}}
+        {{--
+    </div> --}}
 @endsection
 
 @push('scripts')
 
     <script>
-        var reset = true;
         $(function () {
 
             // 🔹 Preview image instantly
@@ -166,5 +166,5 @@
         });
     </script>
 
-    @include('includes.admin.ajax-requests.create')
+    @include('includes.admin.ajax-requests.create', ['redirectUrl' => null])
 @endpush

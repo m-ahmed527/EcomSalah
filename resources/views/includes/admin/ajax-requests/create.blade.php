@@ -1,7 +1,12 @@
 <script>
-    reset = reset || false;
+    redirectUrl = @json($redirectUrl);
     $(document).ready(function () {
-
+        $('#submit-form input').on('keypress', function (e) {
+            if (e.which === 13) {
+                e.preventDefault();
+                $('#submit-btn').trigger('click'); // optional — trigger AJAX save
+            }
+        });
         $(document).on("click", '#submit-btn', function (e) {
             e.preventDefault();
 
@@ -35,9 +40,7 @@
                             timer: 2000
                         })
                     }
-                    if (reset) {
-                        form[0].reset();
-                    }
+                    handleFormSuccess(form, response);
                 },
                 error: function (error) {
                     enableButtons('#submit-btn');
@@ -52,7 +55,6 @@
                             icon: "error",
                             title: error.responseJSON.message,
                             showConfirmButton: true,
-                            timer: 2000
                         });
                     }
                 },
@@ -69,7 +71,45 @@
             $(this).removeClass('is-invalid');
         });
 
+        // ✅ helper: handle success logic conditionally
+        function handleFormSuccess(form, response) {
+            // close modal if inside
+            let modal = form.closest('.modal');
+            if (modal.length) {
+                modal.modal('hide');
+            }
+            // console.log($.fn.DataTable.isDataTable('.dataTable'));
+            // reload datatable if exists
+            if ($.fn.DataTable.isDataTable('.dataTable')) {
+                $('.dataTable').DataTable().ajax.reload(null, false);
+            }
 
+            // reset form if attribute is set
+            if (form.data('reset') === true || form.attr('data-reset') === "true") {
+                form[0].reset();
+            }
+
+            // ✅ redirect condition (either from response or form attributes)
+
+
+            // if (response.redirect_url) {
+            //     redirectUrl = response.redirect_url;
+            // } else if (form.data('redirect') === true || form.attr('data-redirect') === "true") {
+            //     redirectUrl = form.data('redirect-url') || form.attr('data-redirect-url');
+            // }
+
+            if (redirectUrl) {
+                // thoda delay taake Toast visible rahe
+                setTimeout(() => {
+                    window.location.href = redirectUrl;
+                }, 1200);
+            }
+
+            // optional: custom callback for extra actions
+            if (typeof window.onFormSuccess === "function") {
+                window.onFormSuccess(form, response);
+            }
+        }
         function handleValidationErrors(errors) {
             // pehle sab error messages aur red borders hata do
             $('.error-message').remove();
@@ -80,7 +120,7 @@
                 // Laravel key ko [ ] notation me convert karna
                 // "modules.0.module_id" => "modules[0][module_id]"
                 let nameAttr = key.replace(/\.(\d+)/g, "[$1]").replace(/\.(\w+)/g, "[$1]");
-
+                console.log(key,nameAttr);
                 // Input/Select/Textarea dhoondo with that name
                 let inputField = $(
                     `input[name="${nameAttr}"], select[name="${nameAttr}"], textarea[name="${nameAttr}"]`
@@ -98,3 +138,11 @@
         }
     });
 </script>
+{{-- window.onFormSuccess = function (form, response) {
+console.log("Custom success callback chala for:", form.attr('id'));
+
+// example: kisi div me updated data inject karna
+if (response.updated_html) {
+$('#content-area').html(response.updated_html);
+}
+} --}}

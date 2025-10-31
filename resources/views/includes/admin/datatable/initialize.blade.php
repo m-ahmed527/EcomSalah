@@ -45,8 +45,8 @@
         // }
         let tableName = @json($table);
         let ajaxUrl = @json($ajaxUrl);
-        let columnsArray = @json($columns);
-        $(tableName).DataTable({
+        let columnsArray = columns || [];
+       let dataTable = $(tableName).DataTable({
             processing: true,
             serverSide: true,
             responsive: true,
@@ -63,7 +63,7 @@
     });
 </script>
 
-$('#example2').DataTable({
+{{-- $('#example2').DataTable({
             "paging": true,
             "lengthChange": false,
             "searching": false,
@@ -71,4 +71,4 @@ $('#example2').DataTable({
             "info": true,
             "autoWidth": false,
             "responsive": true,
-        });
+        }); --}}

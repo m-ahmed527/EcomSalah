@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SettingController;
@@ -24,4 +25,13 @@ Route::name('profile.')->prefix('profile')->controller(ProfileController::class)
 
 Route::name('categories.')->prefix('categories')->controller(CategoryController::class)->group(function () {
     Route::get('/', 'index')->name('index');
+    Route::get('/get-data', 'getCategoriesData')->name('get.data');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/destroy/{category}', 'destroy')->name('destroy');
+
+});
+
+Route::name('attributes.')->prefix('attributes')->controller(AttributeController::class)->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::post('/store', 'store')->name('store');
 });

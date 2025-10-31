@@ -20,6 +20,7 @@ class ProfileController extends Controller
             auth()->user()->update($request->sanitized());
             return successResponse("Profile updated successfully");
         } catch (Throwable $e) {
+            create_error_log(module: 'Profile Update', $e);
             return errorResponse("Something went wrong.");
         }
     }

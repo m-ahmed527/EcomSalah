@@ -70,6 +70,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('admin.attributes.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>Attributes</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('admin.profile.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Profile</p>

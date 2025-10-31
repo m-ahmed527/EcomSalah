@@ -13,36 +13,7 @@
                 </div>
 
                 <div class="card-body">
-                    <table id="category-table" class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th width="5%">#</th>
-                                <th>Name</th>
-                                <th>Parent</th>
-                                <th>Slug</th>
-                                <th width="15%">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {{-- @foreach (['Men','Women','Kids'] as $key => $cat)
-                            <tr>
-                                <td>{{ $key + 1 }}</td>
-                                <td>{{ $cat->name }}</td>
-                                <td>{{ $cat->parent?->name ?? '—' }}</td>
-                                <td>{{ $cat->slug }}</td>
-                                <td>
-                                    <button class="btn btn-sm btn-info editCategory" data-id="{{ $cat->id }}"
-                                        data-name="{{ $cat->name }}" data-parent="{{ $cat->parent_id }}">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-danger deleteCategory" data-id="{{ $cat->id }}">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            @endforeach --}}
-                        </tbody>
-                    </table>
+                    <table id="category-table" class="table table-bordered table-striped"></table>
                 </div>
             </div>
         </div>
@@ -51,7 +22,7 @@
     <div class="modal fade" id="categoryModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form id="categoryForm">
+                <form id="submit-form" action="{{ route('admin.categories.store') }}" method="POST" data-reset="true">
                     @csrf
                     <input type="hidden" name="id" id="catId">
 
@@ -70,16 +41,16 @@
                             <label>Parent Category</label>
                             <select name="parent_id" id="parentId" class="form-control">
                                 <option value="">None</option>
-                                {{-- @foreach ($parents as $p)
-                                <option value="{{ $p->id }}">{{ $p->name }}</option>
-                                @endforeach --}}
+                                @foreach ($parents as $p)
+                                    <option value="{{ $p->id }}">{{ $p->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Save</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <a type="button" id="submit-btn" class="btn btn-primary">Save</a>
+                        <a type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</a>
                     </div>
 
                 </form>
@@ -90,35 +61,68 @@
 @endsection
 
 @push('scripts')
-    @include('includes.admin.datatable.initialize', ['table' => '#category-table', 'ajaxUrl' => "#", 'columns' => []])
     <script>
+        let columns = [
+            {
+                data: 'DT_RowIndex',
+                name: 'DT_RowIndex',
+                title: '#', orderable: false,
+                searchable: false
+            },
+            {
+                data: 'name',
+                name: 'name',
+                title: 'Name'
+            },
+            {
+                data: 'parent_name',
+                name: 'parent.name',
+                title: 'Parent'
+            },
+
+            {
+                data: null,
+                title: 'Action',
+                orderable: false,
+                searchable: false,
+                render: function (data, type, row) {
+                    return `
+
+                                    <button class="btn btn-sm btn-info editCategory"
+                                            data-id="${row.id}"
+                                            data-name="${row.name}"
+                                            data-parent="${row.parent_id}">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                        <button class="btn btn-sm btn-danger"
+                                            id="delete-btn"
+                                            data-url="{{ url('admin/categories/destroy/${row.id}') }}"
+                                            data-id="${row.id}">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+
+                                    `;
+                }
+            },
+        ];
         $(document).ready(function () {
             // Edit Category
-            $('.editCategory').on('click', function () {
+            $(document).on('click', '.editCategory', function () {
+                const id = $(this).data('id');
+                const name = $(this).data('name');
+                const parent = $(this).data('parent');
+
+                console.log('Editing:', id);
+
                 $('#categoryModal').modal('show');
-                $('#catId').val($(this).data('id'));
-                $('#catName').val($(this).data('name'));
-                $('#parentId').val($(this).data('parent'));
+                $('#catId').val(id);
+                $('#catName').val(name);
+                $('#parentId').val(parent);
                 $('.modal-title').text('Edit Category');
             });
 
             // Delete Category
-            $('.deleteCategory').on('click', function () {
-                if (confirm('Are you sure you want to delete this category?')) {
-                    let id = $(this).data('id');
-                    $.ajax({
-                        url: "{{ url('admin/categories') }}/" + id,
-                        method: 'DELETE',
-                        data: { _token: '{{ csrf_token() }}' },
-                        success: function (res) {
-                            if (res.status) {
-                                toastr.success(res.message);
-                                setTimeout(() => location.reload(), 800);
-                            }
-                        }
-                    });
-                }
-            });
+
 
             // Reset modal on close
             $('#categoryModal').on('hidden.bs.modal', function () {
@@ -129,4 +133,7 @@
             });
         });
     </script>
+    @include('includes.admin.datatable.initialize', ['table' => '#category-table', 'ajaxUrl' => route('admin.categories.get.data')])
+    @include('includes.admin.ajax-requests.create', ['redirectUrl' => null])
+    @include('includes.admin.ajax-requests.delete');
 @endpush
