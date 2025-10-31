@@ -6,6 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Http\\Controllers\\Admin\\AttributeController' => $baseDir . '/app/Http/Controllers/Admin/AttributeController.php',
     'App\\Http\\Controllers\\Admin\\CategoryController' => $baseDir . '/app/Http/Controllers/Admin/CategoryController.php',
     'App\\Http\\Controllers\\Admin\\ProfileController' => $baseDir . '/app/Http/Controllers/Admin/ProfileController.php',
     'App\\Http\\Controllers\\Admin\\SettingController' => $baseDir . '/app/Http/Controllers/Admin/SettingController.php',
@@ -25,6 +26,8 @@ return array(
     'App\\Http\\Requests\\Web\\UpdateProfileRequest' => $baseDir . '/app/Http/Requests/Web/UpdateProfileRequest.php',
     'App\\Interfaces\\AuthRepositoryInterface' => $baseDir . '/app/Interfaces/AuthRepositoryInterface.php',
     'App\\Interfaces\\LoginRepositoryInterface' => $baseDir . '/app/Interfaces/LoginRepositoryInterface.php',
+    'App\\Models\\Attribute' => $baseDir . '/app/Models/Attribute.php',
+    'App\\Models\\AttributeValue' => $baseDir . '/app/Models/AttributeValue.php',
     'App\\Models\\Category' => $baseDir . '/app/Models/Category.php',
     'App\\Models\\ErrorLog' => $baseDir . '/app/Models/ErrorLog.php',
     'App\\Models\\Setting' => $baseDir . '/app/Models/Setting.php',

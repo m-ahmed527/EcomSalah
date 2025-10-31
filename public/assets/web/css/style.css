@@ -2050,6 +2050,10 @@ input[type="tel"]:focus {
 .coming-soon .block .count-down .syotimer-cell .syotimer-cell__unit {
     font-weight: normal;
 }
+.logo-a img {
+    width: 100%;
+    max-width: 170px;
+}
 @media (max-width: 768px) {
     .coming-soon .block .count-down ul li {
         font-size: 50px;

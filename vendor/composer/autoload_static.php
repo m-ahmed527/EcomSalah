@@ -595,6 +595,7 @@ class ComposerStaticInitc514d8f7b9fc5970bdd94287905ef584
     );
 
     public static $classMap = array (
+        'App\\Http\\Controllers\\Admin\\AttributeController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/AttributeController.php',
         'App\\Http\\Controllers\\Admin\\CategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/CategoryController.php',
         'App\\Http\\Controllers\\Admin\\ProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/ProfileController.php',
         'App\\Http\\Controllers\\Admin\\SettingController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/SettingController.php',
@@ -614,6 +615,8 @@ class ComposerStaticInitc514d8f7b9fc5970bdd94287905ef584
         'App\\Http\\Requests\\Web\\UpdateProfileRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Web/UpdateProfileRequest.php',
         'App\\Interfaces\\AuthRepositoryInterface' => __DIR__ . '/../..' . '/app/Interfaces/AuthRepositoryInterface.php',
         'App\\Interfaces\\LoginRepositoryInterface' => __DIR__ . '/../..' . '/app/Interfaces/LoginRepositoryInterface.php',
+        'App\\Models\\Attribute' => __DIR__ . '/../..' . '/app/Models/Attribute.php',
+        'App\\Models\\AttributeValue' => __DIR__ . '/../..' . '/app/Models/AttributeValue.php',
         'App\\Models\\Category' => __DIR__ . '/../..' . '/app/Models/Category.php',
         'App\\Models\\ErrorLog' => __DIR__ . '/../..' . '/app/Models/ErrorLog.php',
         'App\\Models\\Setting' => __DIR__ . '/../..' . '/app/Models/Setting.php',

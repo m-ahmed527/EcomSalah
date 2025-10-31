@@ -6,9 +6,8 @@
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
                     <div class="block text-center">
-                        <a class="logo logo-a" href="{{ route('web.index') }}">
-                            <img src="{{ setting('logo') ?: asset('assets/web/images/logo.png') }}" alt="" width="150px"
-                                height="110px">
+                        <a class="logo logo-a w-100" href="{{ route('web.index') }}">
+                            <img src="{{ setting('logo') ?: asset('assets/web/images/logo.png') }}" alt="logo">
                         </a>
                         <h2 class="text-center">Create Your Account</h2>
                         <form class="text-left clearfix" action="{{ route('register') }}" method="POST" id="register-form"
