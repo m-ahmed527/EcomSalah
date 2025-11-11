@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SettingController;
 use Illuminate\Support\Facades\Route;
@@ -34,4 +35,16 @@ Route::name('categories.')->prefix('categories')->controller(CategoryController:
 Route::name('attributes.')->prefix('attributes')->controller(AttributeController::class)->group(function () {
     Route::get('/', 'index')->name('index');
     Route::post('/store', 'store')->name('store');
+    Route::get('/get-data', 'getAttributesData')->name('get.data');
+    Route::get('/destroy/{attribute}', 'destroy')->name('destroy');
+});
+
+Route::name('products.')->prefix('products')->controller(ProductController::class)->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/get-data', 'getProductsData')->name('get.data');
+    Route::get('create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/edit/{product}', 'edit')->name('edit');
+    Route::post('/update/{product}', 'update')->name('update');
+    Route::get('/destroy/{product}', 'destroy')->name('destroy');
 });

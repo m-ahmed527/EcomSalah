@@ -11,6 +11,12 @@
             e.preventDefault();
 
             let form = $('#submit-form');
+            // 🔹 ensure Summernote data syncs to textarea before FormData creation
+            if (window.jQuery && $.fn && $.fn.summernote && $('.summernote').length) {
+                $('.summernote').each(function () {
+                    $(this).val($(this).summernote('code'));
+                });
+            }
             let formData = new FormData(form[0]);
 
             $.ajax({
@@ -120,7 +126,7 @@
                 // Laravel key ko [ ] notation me convert karna
                 // "modules.0.module_id" => "modules[0][module_id]"
                 let nameAttr = key.replace(/\.(\d+)/g, "[$1]").replace(/\.(\w+)/g, "[$1]");
-                console.log(key,nameAttr);
+                console.log(key, nameAttr);
                 // Input/Select/Textarea dhoondo with that name
                 let inputField = $(
                     `input[name="${nameAttr}"], select[name="${nameAttr}"], textarea[name="${nameAttr}"]`

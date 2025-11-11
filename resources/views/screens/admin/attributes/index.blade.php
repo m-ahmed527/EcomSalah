@@ -12,15 +12,15 @@
             </div>
 
             <div class="card-body">
-                <table class="table table-bordered table-striped" id="attributeTable">
-                    <thead>
+                <table class="table table-bordered table-striped" id="attribute-table">
+                    {{-- <thead>
                         <tr>
                             <th>#</th>
                             <th>Name</th>
                             <th>Values</th>
                             <th>Action</th>
                         </tr>
-                    </thead>
+                    </thead> --}}
                     {{-- <tbody>
                         @foreach ($attributes as $key => $attr)
                         <tr>
@@ -97,13 +97,13 @@
             // Add dynamic value field
             $(document).on('click', '.addValue', function () {
                 $('#valueFields').append(`
-                    <div class="input-group mb-2">
-                        <input type="text" name="values[]" class="form-control" placeholder="Enter value">
-                        <div class="input-group-append">
-                            <button type="button" class="btn btn-danger removeValue">-</button>
-                        </div>
-                    </div>
-                `);
+                                                    <div class="input-group mb-2">
+                                                        <input type="text" name="values[]" class="form-control" placeholder="Enter value">
+                                                        <div class="input-group-append">
+                                                            <button type="button" class="btn btn-danger removeValue">-</button>
+                                                        </div>
+                                                    </div>
+                                                `);
             });
 
             // Remove value field
@@ -124,19 +124,32 @@
             $(document).on('click', '.editAttr', function () {
                 const id = $(this).data('id');
                 const name = $(this).data('name');
-                const values = $(this).data('values');
+                // safe JSON decode
+                let raw = $(this).attr('data-values') || '[]';
+                let values;
+                try {
+                    values = JSON.parse(raw);
+                    if (typeof values === 'string') values = JSON.parse(values);
+                } catch {
+                    values = [];
+                }
 
+                console.log(typeof (values)); // ✅ Pure array e.g. ["Dolorem sequi eaque", "Cum in id dolore cup"]
                 $('#attrId').val(id);
                 $('#attrName').val(name);
                 $('.modal-title').text('Edit Attribute');
                 $('#valueFields').html('');
 
-                JSON.parse(values).forEach(v => {
+                values.forEach((v, i) => {
+                    const btn = i === 0
+                        ? '<button type="button" class="btn btn-success addValue">+</button>'
+                        : '<button type="button" class="btn btn-danger removeValue">-</button>';
+
                     $('#valueFields').append(`
                         <div class="input-group mb-2">
                             <input type="text" name="values[]" value="${v}" class="form-control">
                             <div class="input-group-append">
-                                <button type="button" class="btn btn-danger removeValue">-</button>
+                                ${btn}
                             </div>
                         </div>
                     `);
@@ -145,48 +158,66 @@
                 $('#attributeModal').modal('show');
             });
 
-            // Save (Add/Update)
-            // $('#attrForm').on('submit', function (e) {
-            //     e.preventDefault();
 
-            //     let id = $('#attrId').val();
-            //     
-
-            //     $.ajax({
-            //         url: url,
-            //         method: 'POST',
-            //         data: $(this).serialize(),
-            //         success: function (res) {
-            //             if (res.success) {
-            //                 toastr.success(res.message);
-            //                 setTimeout(() => location.reload(), 1000);
-            //             }
-            //         },
-            //         error: function (err) {
-            //             toastr.error('Something went wrong');
-            //         }
-            //     });
-            // });
-
-            // // Delete
-            // $(document).on('click', '.deleteAttr', function () {
-            //     if (confirm('Are you sure you want to delete this attribute?')) {
-            //         const id = $(this).data('id');
-            //         $.ajax({
-            //             url: `/admin/attributes/${id}`,
-            //             type: 'DELETE',
-            //             data: { _token: '{{ csrf_token() }}' },
-            //             success: function (res) {
-            //                 if (res.success) {
-            //                     toastr.success(res.message);
-            //                     setTimeout(() => location.reload(), 800);
-            //                 }
-            //             }
-            //         });
-            //     }
-            // });
         });
+        let columns = [
+            {
+                data: 'DT_RowIndex',
+                name: 'DT_RowIndex',
+                title: '#', orderable: false,
+                searchable: false
+            },
+            {
+                data: 'name',
+                name: 'name',
+                title: 'Name'
+            },
+            {
+                data: 'values',
+                name: 'values.value',
+                title: 'Values',
+                orderable: false,
+                searchable: false,
+                render: function (data, type, row) {
+                    console.log(JSON.parse(row.values));
+                    let values = [];
+                    try {
+                        values = JSON.parse(row.values || '[]');
+                    } catch {
+                        values = [];
+                    }
+                    if (!Array.isArray(values)) values = [values];
+                    return '<ol class="mb-0">' + values.map(v => `<li>${v}</li>`).join('') + '</ol>';
+                }
+            },
+
+            {
+                data: null,
+                title: 'Action',
+                orderable: false,
+                searchable: false,
+                render: function (data, type, row) {
+                    const values = JSON.stringify(row.values); // safe convert to JSON string
+                    return `
+                        <button class="btn btn-sm btn-info editAttr"
+                                data-id="${row.id}"
+                                data-name="${row.name}"
+                                data-values='${values}'>
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger"
+                            id="delete-btn"
+                            data-url="{{ url('admin/attributes/destroy/${row.id}') }}"
+                            data-id="${row.id}">
+                        <i class="fas fa-trash"></i>
+                    </button>
+
+                    `;
+                }
+            },
+        ];
     </script>
+    @include('includes.admin.datatable.initialize', ['table' => '#attribute-table', 'ajaxUrl' => route('admin.attributes.get.data')])
     @include('includes.admin.ajax-requests.create', ['redirectUrl' => null])
     @include('includes.admin.ajax-requests.delete');
 @endpush
