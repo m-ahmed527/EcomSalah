@@ -66,7 +66,8 @@
 <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js">
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+<!-- Bootstrap Switch -->
+<script src="{{ asset('assets/admin/plugins/bootstrap-switch/js/bootstrap-switch.min.js') }}"></script>
 <script>
     const Toast = Swal.mixin({
         toast: true,
@@ -79,6 +80,9 @@
             toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
     });
+    $("input[data-bootstrap-switch]").each(function () {
+        $(this).bootstrapSwitch('state', $(this).prop('checked'));
+    })
 </script>
 @stack('scripts')
 </body>

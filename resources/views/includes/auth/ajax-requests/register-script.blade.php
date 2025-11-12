@@ -1,5 +1,11 @@
 <script>
     $(document).ready(function () {
+        $('#register-form input').on('keypress', function (e) {
+            if (e.which === 13) {
+                e.preventDefault();
+                $('#register-btn').trigger('click'); // optional — trigger AJAX save
+            }
+        });
         $(document).on('click', '#register-btn', function (e) {
             e.preventDefault();
             let form = $('#register-form');

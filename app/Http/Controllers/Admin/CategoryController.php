@@ -12,6 +12,10 @@ class CategoryController extends Controller
 {
     public function index()
     {
+        $breadcrumbs = [
+            'Dashboard' => route('admin.index'),
+            'Manage Categories' => route('admin.categories.index'),
+        ];
         $parents = Category::whereNull('parent_id')->get();
         return view('screens.admin.categories.index', get_defined_vars());
     }

@@ -9,12 +9,26 @@
                 <div class="col-sm-6">
                     <h1 class="m-0">@yield('page')</h1>
                 </div><!-- /.col -->
-                <div class="col-sm-6">
+                {{-- <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
                         <li class="breadcrumb-item active">@yield('page')</li>
+                        <li class="breadcrumb-item active"></li>
                     </ol>
-                </div><!-- /.col -->
+                </div><!-- /.col --> --}}
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        @foreach ($breadcrumbs as $label => $url)
+                            @if ($loop->last)
+                                <li class="breadcrumb-item active">{{ $label }}</li>
+                            @else
+                                <li class="breadcrumb-item">
+                                    <a href="{{ $url }}">{{ $label }}</a>
+                                </li>
+                            @endif
+                        @endforeach
+                    </ol>
+                </div>
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>

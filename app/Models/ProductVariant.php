@@ -9,7 +9,7 @@ class ProductVariant extends Model
     protected $guarded = ['id'];
     public function values()
     {
-        return $this->belongsToMany(AttributeValue::class, 'product_variant_values');
+        return $this->belongsToMany(AttributeValue::class, 'product_variant_values')->withTimestamps();
     }
 
     public function product()

@@ -23,27 +23,84 @@ class CreateProductRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'name' => 'required|string|max:255',
             'short_description' => 'nullable|string',
             'long_description' => 'nullable|string',
             'base_price' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
             'featured_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'is_variable' => 'nullable',
+            'variants' => 'required_if:is_variable,on|array',
+        ];
+
+        // ✅ if is_variable is ON → validate each variant item
+        // if ($this->is_variable === 'on') {
+        //     // $rules['variants.*.price'] = 'required|numeric|min:0';
+        //     // $rules['variants.*.stock'] = 'required|integer|min:0';
+        //     $rules['variants.*.attribute_value_ids'] = 'required|array|min:1';
+        //     // $rules['variants.*.attribute_value_ids.*'] = 'required|integer';
+        //     // $rules['variants.*.attribute_value_ids.'] = 'required|integer';
+        // }
+
+
+        return $rules;
+    }
+    // public function withValidator($validator)
+// {
+//     $validator->after(function ($validator) {
+//         // sirf tab chale jab is_variable on ho
+//         if ($this->is_variable === 'on' && is_array($this->variants)) {
+//             foreach ($this->variants as $variant) {
+//                 // agar kisi variant me attribute_value_ids empty hain
+//                 if (empty($variant['attribute_value_ids']) || !is_array($variant['attribute_value_ids'])) {
+//                     $validator->errors()->add(
+//                         'variants',
+//                         'Please Select Varaints in Combination.'
+//                     );
+//                     break; // ✅ ek hi error add kare, multiple nahi
+//                 }
+//             }
+//         }
+//     });
+// }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'The product name is required.',
+            'name.string' => 'The product name must be a valid string.',
+            'name.max' => 'The product name may not be greater than 255 characters.',
+
+            'short_description.string' => 'The short description must be a valid string.',
+            'long_description.string' => 'The long description must be a valid string.',
+
+            'base_price.required' => 'The base price is required.',
+            'base_price.numeric' => 'The base price must be a numeric value.',
+            'base_price.min' => 'The base price cannot be less than 0.',
+
+            'stock.required' => 'The stock quantity is required.',
+            'stock.integer' => 'The stock quantity must be an integer.',
+            'stock.min' => 'The stock quantity cannot be less than 0.',
+
+            'featured_image.required' => 'A featured image is required.',
+            'featured_image.image' => 'The featured image must be a valid image file.',
+            'featured_image.mimes' => 'The featured image must be a file of type: jpeg, png, jpg, gif.',
+            'featured_image.max' => 'The featured image size may not exceed 2MB.',
+
+            // 'variants.required_if' => 'Variants are required when the product is marked as variable.',
+            // 'variants.array' => 'Variants must be sent as an array.',
+
+            // 'variants.*.price.required' => 'Each variant must have a price.',
+            // 'variants.*.price.numeric' => 'Each variant price must be a valid number.',
+            // 'variants.*.stock.required' => 'Each variant must have a stock quantity.',
+            // 'variants.*.stock.integer' => 'Each variant stock must be an integer.',
+            // 'variants.*.attribute_value_ids.required' => 'Each variant must have at least one attribute value.',
+            // 'variants.*.attribute_value_ids.array' => 'Attribute values must be an array.',
+            // 'variants.*.attribute_value_ids.required' => 'Please Select Varaints in Combination.',
         ];
     }
 
-    public function attributes(): array
-    {
-        return [
-            'name' => 'Product Name',
-            'short_description' => 'Short Description',
-            'long_description' => 'Long Description',
-            'base_price' => 'Base Price',
-            'stock' => 'Stock',
-            'featured_image' => 'Featured Image',
-        ];
-    }
 
     public function sanitized(): array
     {
@@ -58,7 +115,7 @@ class CreateProductRequest extends FormRequest
         }
         $data['sku'] = $sku;
         $data['slug'] = Str::slug($data['name']);
-        $data['has_variants'] = $this->filled('variants');
+        $data['has_variants'] = $this->filled('is_variable');
         return $data;
     }
 

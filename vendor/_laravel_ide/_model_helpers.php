@@ -1280,6 +1280,7 @@ namespace App\Models {
      * @property float $base_price
      * @property string $long_description
      * @property string $short_description
+     * @property string|null $slug
      * @property string $name
      * @property int $id
      * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ProductVariant> $variants
@@ -1288,6 +1289,7 @@ namespace App\Models {
      * @property-read int|null $images_count
      * @method static \Illuminate\Database\Eloquent\Builder<Product>|Product whereId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Product>|Product whereName($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Product>|Product whereSlug($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Product>|Product whereShortDescription($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Product>|Product whereLongDescription($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Product>|Product whereBasePrice($value)
@@ -1919,8 +1921,8 @@ namespace App\Models {
      * @property string|null $image
      * @property mixed $stock
      * @property float $price
-     * @property string $sku
-     * @property string $variant_name
+     * @property string|null $sku
+     * @property string|null $variant_name
      * @property mixed $product_id
      * @property int $id
      * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\AttributeValue> $values

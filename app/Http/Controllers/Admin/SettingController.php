@@ -12,6 +12,10 @@ class SettingController extends Controller
 {
     public function index()
     {
+        $breadcrumbs = [
+            'Dashboard' => route('admin.index'),
+            'Update Settings' => route('admin.settings.index'),
+        ];
         $settings = Setting::pluck('value', 'key')->toArray();
         return view('screens.admin.settings.index', get_defined_vars());
     }

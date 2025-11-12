@@ -12,7 +12,10 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/dashboard', function () {
-    return view('screens.admin.index');
+    $breadcrumbs = [
+        'Dashboard' => '#',
+    ];
+    return view('screens.admin.index', get_defined_vars());
 })->name('index');
 
 Route::name('settings.')->controller(SettingController::class)->group(function () {
@@ -42,9 +45,12 @@ Route::name('attributes.')->prefix('attributes')->controller(AttributeController
 Route::name('products.')->prefix('products')->controller(ProductController::class)->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/get-data', 'getProductsData')->name('get.data');
+    Route::get('/show/{product}', 'show')->name('show');
     Route::get('create', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
     Route::get('/edit/{product}', 'edit')->name('edit');
     Route::post('/update/{product}', 'update')->name('update');
     Route::get('/destroy/{product}', 'destroy')->name('destroy');
+    Route::get('/destroy/image/{image}', 'destroyImage')->name('image.destroy');
+
 });

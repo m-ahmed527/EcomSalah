@@ -13,7 +13,11 @@ class AttributeController extends Controller
 {
     public function index()
     {
-        return view('screens.admin.attributes.index');
+         $breadcrumbs = [
+            'Dashboard' => route('admin.index'),
+            'Manage Attributes' => route('admin.attributes.index'),
+        ];
+        return view('screens.admin.attributes.index',get_defined_vars());
     }
     public function getAttributesData(Request $request)
     {

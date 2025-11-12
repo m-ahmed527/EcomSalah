@@ -11,7 +11,11 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        return view('screens.admin.profile.index');
+         $breadcrumbs = [
+            'Dashboard' => route('admin.index'),
+            'Update Profile' => route('admin.profile.index'),
+        ];
+        return view('screens.admin.profile.index',get_defined_vars());
     }
 
     public function update(UpdateProfileRequest $request)
@@ -20,7 +24,7 @@ class ProfileController extends Controller
             auth()->user()->update($request->sanitized());
             return successResponse("Profile updated successfully");
         } catch (Throwable $e) {
-            create_error_log(module: 'Profile Update', $e);
+            create_error_log('Profile Update', $e);
             return errorResponse("Something went wrong.");
         }
     }

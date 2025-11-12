@@ -1,8 +1,16 @@
 <script>
     $(document).ready(function () {
-        $(document).on('click', '#delete-btn', function (e) {
+        $(document).on('click', '#delete-btn, .remove-gallery', function (e) {
             e.preventDefault();
+            let button = $(this);
             console.log(123);
+            if ($('.remove-gallery').length > 0) {
+                if (!button.data('id')) {
+                    button.closest('div').remove();
+                    return;
+                }
+
+            }
             Swal.fire({
                 title: "Are you sure?",
                 text: "You won't be able to revert this!",
@@ -13,7 +21,7 @@
                 confirmButtonText: "Yes, delete it!"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    let button = $(this);
+
                     let url = button.data("url"); // route ya api endpoint
                     disableButtons('#delete-btn');
                     console.log(url, button);
@@ -34,6 +42,9 @@
                                 });
                                 if ($.fn.DataTable.isDataTable('.dataTable')) {
                                     $('.dataTable').DataTable().ajax.reload(null, false);
+                                }
+                                if ($('.remove-gallery').length > 0) {
+                                    button.closest('div').remove();
                                 }
                             } else {
                                 Toast.fire({

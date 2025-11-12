@@ -4,10 +4,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Loop through all sidebar links
     document.querySelectorAll('.nav-sidebar a').forEach(link => {
-        if (currentUrl === link.href || currentUrl.startsWith(link.href)) {
+        console.log();
+
+        // if (currentUrl === link.href || currentUrl.startsWith(link.href)) {
+        if (currentUrl === link.href) {
             // Add active class to the current link
             link.classList.add('active');
-
             // If inside a treeview, open its parent
             let parent = link.closest('.nav-treeview');
             if (parent) {
@@ -20,7 +22,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
                 }
             }
+        } else if (link.href.includes('edit') && currentUrl.includes('edit')) {
+            link.classList.add('active');
         }
+
+
     });
 
 
@@ -137,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     $(function () {
         $('.select2').select2({
-            placeholder: 'Select an option',
+            // placeholder: 'Select an option',
         })
         $('.summernote').summernote({ height: 200 });
     });

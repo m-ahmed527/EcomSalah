@@ -117,31 +117,42 @@
             }
         }
         function handleValidationErrors(errors) {
-            // pehle sab error messages aur red borders hata do
-            $('.error-message').remove();
-            $('.form-control').removeClass('is-invalid');
+    $('.error-message').remove();
+    $('.form-control').removeClass('is-invalid');
 
+    $.each(errors, function (key, messages) {
+        let nameAttr = key.replace(/\.(\d+|\w+)/g, "[$1]");
+        
+        // Fallback: agar array index nahi milta to [] version bhi try kare
+        let inputField = $(
+            `input[name="${nameAttr}"], select[name="${nameAttr}"], textarea[name="${nameAttr}"]`
+        );
 
-            $.each(errors, function (key, messages) {
-                // Laravel key ko [ ] notation me convert karna
-                // "modules.0.module_id" => "modules[0][module_id]"
-                let nameAttr = key.replace(/\.(\d+)/g, "[$1]").replace(/\.(\w+)/g, "[$1]");
-                console.log(key, nameAttr);
-                // Input/Select/Textarea dhoondo with that name
-                let inputField = $(
-                    `input[name="${nameAttr}"], select[name="${nameAttr}"], textarea[name="${nameAttr}"]`
-                );
-                inputField.addClass('is-invalid');
-                if (inputField.length > 0) {
-                    // normal fields
-                    let errorMessage = $(`<span class="error-message text-danger">${messages[0]}</span>`);
-                    inputField.last().after(errorMessage);
-
-                } else {
-                    console.log("No input found for", nameAttr);
-                }
-            });
+        if (inputField.length === 0) {
+            // e.g. convert variants[1][attribute_value_ids][0] → variants[1][attribute_value_ids][]
+            let fallbackName = nameAttr.replace(/\[\d+\]$/, "[]");
+            inputField = $(
+                `input[name="${fallbackName}"], select[name="${fallbackName}"], textarea[name="${fallbackName}"]`
+            );
         }
+        if(nameAttr.includes('variants')){
+            inputField = $(`input[name="is_variable"]`);
+            let errorMessage = $(`<span class="error-message text-danger">${messages[0]}</span>`);
+            inputField.last().after(errorMessage);
+        }else{
+
+        
+        if (inputField.length > 0) {
+            inputField.addClass('is-invalid');
+            let errorMessage = $(`<span class="error-message text-danger">${messages[0]}</span>`);
+            inputField.last().after(errorMessage);
+        } else {
+            console.log("⚠️ No input found for:", nameAttr);
+        }
+        }
+    });
+}
+
     });
 </script>
 {{-- window.onFormSuccess = function (form, response) {

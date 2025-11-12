@@ -2,8 +2,15 @@
     var redirectUrl = @json($redirectUrl);
 
     $(document).ready(function () {
+        $('#login-form input').on('keypress', function (e) {
+            if (e.which === 13) {
+                e.preventDefault();
+                $('#login-btn').trigger('click'); // optional — trigger AJAX save
+            }
+        });
         $(document).on('click', '#login-btn', function (e) {
             e.preventDefault();
+
             let form = $('#login-form');
             let formData = new FormData(form[0]);
             disableButtons();
