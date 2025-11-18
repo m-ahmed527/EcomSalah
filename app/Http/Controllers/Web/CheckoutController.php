@@ -10,7 +10,11 @@ class CheckoutController extends Controller
 
     public function index()
     {
-        return view('screens.web.checkout.index');
+        $breadcrumbs = [
+            'Home' => route('web.index'),
+            'Checkout' => route('web.checkout.index'),
+        ];
+        return view('screens.web.checkout.index',get_defined_vars());
     }
 
 }

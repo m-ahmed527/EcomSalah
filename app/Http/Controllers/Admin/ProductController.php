@@ -6,12 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CreateProductRequest;
 use App\Http\Requests\Admin\UpdateProductRequest;
 use App\Models\Attribute;
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductVariant;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Throwable;
 
@@ -37,7 +39,7 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         try {
-            $product->load('variants.values.attribute', 'images');
+            $product->load('variants.values.attribute', 'images', 'categories');
             return successResponse("Product found successfully", $product);
         } catch (Throwable $e) {
             create_error_log('Getting Product', $e);
@@ -52,6 +54,7 @@ class ProductController extends Controller
             'Create Product' => '#',
         ];
         $attributes = Attribute::with('values')->get();
+        $categories = Category::all();
         return view('screens.admin.products.create', get_defined_vars());
     }
 
@@ -62,30 +65,17 @@ class ProductController extends Controller
             // dd($request->sanitized());
             DB::beginTransaction();
             $product = Product::create($request->sanitized());
+            $product->categories()->attach([$request->category_id]);
             $images = $this->productImages($request);
             if (!empty($images)) {
                 $product->images()->createMany($images);
             }
 
-            // ✅ Variants SKU generation
+            // ✅ Variants
             if ($request->has('variants')) {
-                foreach ($request->variants as $variant) {
-                    $attrIds = $variant['attribute_value_ids'] ?? [];
+                // ✅ Variants handle (refactored)
+                $this->createProductVariants($product, $request->variants ?? []);
 
-                    // Skip if it's not an array, empty, or contains any null value
-                    if (!is_array($attrIds) || empty($attrIds) || in_array(null, $attrIds, true)) {
-                        continue;
-                    }
-
-                    $productVariant = ProductVariant::create([
-                        'product_id' => $product->id,
-                        'sku' => $variant['sku'] ?? null,
-                        'price' => $variant['price'] ?? 0,
-                        'stock' => $variant['stock'] ?? 1,
-                    ]);
-
-                    $productVariant->values()->attach($attrIds);
-                }
             }
             DB::commit();
             return successResponse("Product created successfully.");
@@ -103,8 +93,9 @@ class ProductController extends Controller
             'Products' => route('admin.products.index'),
             'Edit Product' => '#',
         ];
-        $product->load('variants.values.attribute', 'images');
+        $product->load('variants.values.attribute', 'images', 'categories');
         $attributes = Attribute::with('values')->get();
+        $categories = Category::all();
         return view('screens.admin.products.edit', get_defined_vars());
     }
 
@@ -115,6 +106,7 @@ class ProductController extends Controller
 
             // 1️⃣ Update product fields
             $product->update($request->sanitized());
+            $product->categories()->sync([$request->category_id]);
             // 2️⃣ Update gallery images (optional new uploads)
             if ($request->hasFile('gallery_images')) {
                 $images = $this->productImages($request);
@@ -126,41 +118,9 @@ class ProductController extends Controller
 
             // 3️⃣ Update variants
             if ($request->has('variants')) {
-                // Prepare variant data
-                $existingVariantIds = $product->variants->pluck('id')->toArray();
-                $submittedVariantIds = [];
-                foreach ($request->variants as $variantData) {
-                    $attrIds = $variantData['attribute_value_ids'] ?? [];
+                // 3️⃣ Handle variants (optimized batch)
+                $this->syncProductVariants($product, $request->variants ?? []);
 
-                    // Skip if it's not an array, empty, or contains any null value
-                    if (!is_array($attrIds) || empty($attrIds) || in_array(null, $attrIds, true)) {
-                        continue;
-                    }
-                    if (isset($variantData['id'])) {
-                        // Update existing variant
-                        $variant = ProductVariant::find($variantData['id']);
-                        $variant->update([
-                            'sku' => $variantData['sku'] ?? null,
-                            'price' => $variantData['price'] ?? 0,
-                            'stock' => $variantData['stock'] ?? 1,
-                        ]);
-                        $variant->values()->sync($variantData['attribute_value_ids']);
-                        $submittedVariantIds[] = $variant->id;
-                    } else {
-                        // Create new variant
-                        $newVariant = $product->variants()->create([
-                            'sku' => $variantData['sku'] ?? null,
-                            'price' => $variantData['price'] ?? 0,
-                            'stock' => $variantData['stock'] ?? 1,
-                        ]);
-                        $newVariant->values()->syncWithoutDetaching($variantData['attribute_value_ids']);
-                        $submittedVariantIds[] = $newVariant->id;
-                    }
-                }
-
-                // Delete removed variants
-                $toDelete = array_diff($existingVariantIds, $submittedVariantIds);
-                ProductVariant::whereIn('id', $toDelete)->delete();
             }
 
             DB::commit();
@@ -174,14 +134,31 @@ class ProductController extends Controller
     }
 
 
-    public function destroy(Product $product)
+    public function destroy(Request $request, Product $product)
     {
         try {
-            dd($product);
             DB::beginTransaction();
+            $this->unlinkAllImages($product);
             $product->delete();
             DB::commit();
             return successResponse("Product deleted successfully.");
+        } catch (Throwable $e) {
+            DB::rollBack();
+            create_error_log('Product Delete', $e);
+            return errorResponse("Something went wrong.");
+        }
+    }
+
+    public function destroySelected(Request $request){
+        try {
+            DB::beginTransaction();
+            $products = Product::whereIn('id', $request->ids)->get();
+            foreach ($products as $product) {
+                $this->unlinkAllImages($product);
+            }
+            Product::whereIn('id', $request->ids)->delete();
+            DB::commit();
+            return successResponse("Products deleted successfully.");
         } catch (Throwable $e) {
             DB::rollBack();
             create_error_log('Product Delete', $e);
@@ -193,6 +170,7 @@ class ProductController extends Controller
     {
         try {
             DB::beginTransaction();
+            $this->unlinkImage($image->image);
             $image->delete();
             DB::commit();
             return successResponse("Image deleted successfully.");
@@ -220,157 +198,286 @@ class ProductController extends Controller
         return [];
     }
 
+    private function unlinkAllImages($product)
+    {
+        $images = $product->images;
+        $this->unlinkImage($product->featured_image);
+        foreach ($images as $image) {
+            $filePath = public_path(parse_url($image->image, PHP_URL_PATH));
+            if (file_exists($filePath)) {
+                @unlink($filePath);
+            }
+        }
+    }
 
+    private function unlinkImage($image)
+    {
+        $imagePath = public_path(parse_url($image, PHP_URL_PATH));
+
+        if (File::exists($imagePath)) {
+            File::delete($imagePath);
+        }
+    }
+
+
+
+    private function createProductVariants(Product $product, array $variants): void
+    {
+        if (empty($variants)) {
+            return;
+        }
+
+        $variantData = [];
+        $variantValueRelations = [];
+        $now = now();
+
+        foreach ($variants as $variant) {
+            $attrIds = $variant['attribute_value_ids'] ?? [];
+
+            // skip invalid data
+            if (!is_array($attrIds) || empty($attrIds) || in_array(null, $attrIds, true)) {
+                continue;
+            }
+
+            $variantData[] = [
+                'product_id' => $product->id,
+                'sku' => $variant['sku'] ?? null,
+                'price' => $variant['price'] ?? 0,
+                'stock' => $variant['stock'] ?? 1,
+                'created_at' => $now,
+                'updated_at' => $now,
+            ];
+
+            // temporarily store attribute ids (we’ll map them later)
+            $variantValueRelations[] = $attrIds;
+        }
+
+        if (empty($variantData)) {
+            return;
+        }
+
+        // ✅ Batch insert variants
+        ProductVariant::insert($variantData);
+
+        // ✅ Get inserted variants with correct IDs
+        $insertedVariants = ProductVariant::where('product_id', $product->id)
+            ->orderBy('id', 'desc')
+            ->take(count($variantData))
+            ->get()
+            ->reverse() // because last inserted first comes first
+            ->values();
+
+        // ✅ Prepare pivot (variant_value) data
+        $pivotData = [];
+        foreach ($insertedVariants as $index => $variantModel) {
+            foreach ($variantValueRelations[$index] as $valueId) {
+                $pivotData[] = [
+                    'product_variant_id' => $variantModel->id,
+                    'attribute_value_id' => $valueId,
+                ];
+            }
+        }
+
+        // ✅ Batch insert into pivot table (assuming table name `product_variant_values`)
+        DB::table('product_variant_values')->insert($pivotData);
+    }
+
+    /**
+     * Sync product variants in optimized batch way
+     */
+    private function syncProductVariants(Product $product, array $variants): void
+    {
+        $now = now();
+
+        // existing variants
+        $existing = $product->variants()->pluck('id')->toArray();
+
+        $toInsert = [];
+        $toUpdate = [];
+        $updateValueRelations = []; // existing variants ke attribute IDs
+        $insertValueRelations = []; // new variants ke attribute IDs
+        $submittedIds = [];
+
+        foreach ($variants as $variant) {
+            $attrIds = $variant['attribute_value_ids'] ?? [];
+
+            // skip invalid variant
+            if (!is_array($attrIds) || empty($attrIds) || in_array(null, $attrIds, true)) {
+                continue;
+            }
+
+            if (!empty($variant['id']) && in_array($variant['id'], $existing)) {
+                // ✅ existing variant (update)
+                $toUpdate[] = [
+                    'id' => $variant['id'],
+                    'sku' => $variant['sku'] ?? null,
+                    'price' => $variant['price'] ?? 0,
+                    'stock' => $variant['stock'] ?? 1,
+                    'updated_at' => $now,
+                ];
+                $updateValueRelations[$variant['id']] = $attrIds;
+                $submittedIds[] = $variant['id'];
+            } else {
+                // ✅ new variant (insert later)
+                $toInsert[] = [
+                    'product_id' => $product->id,
+                    'sku' => $variant['sku'] ?? null,
+                    'price' => $variant['price'] ?? 0,
+                    'stock' => $variant['stock'] ?? 1,
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                ];
+                $insertValueRelations[] = $attrIds; // index-based
+            }
+        }
+
+        // ✅ Batch update existing variants
+        if (!empty($toUpdate)) {
+            foreach ($toUpdate as $data) {
+                ProductVariant::where('id', $data['id'])->update([
+                    'sku' => $data['sku'],
+                    'price' => $data['price'],
+                    'stock' => $data['stock'],
+                    'updated_at' => $data['updated_at'],
+                ]);
+            }
+
+            // sync their attribute values
+            foreach ($updateValueRelations as $variantId => $attrIds) {
+                $variant = ProductVariant::find($variantId);
+                if ($variant) {
+                    $variant->values()->sync($attrIds);
+                }
+            }
+        }
+
+        // ✅ Batch insert new variants
+        if (!empty($toInsert)) {
+            ProductVariant::insert($toInsert);
+
+            // get newly inserted variants
+            $inserted = ProductVariant::where('product_id', $product->id)
+                ->orderBy('id', 'desc')
+                ->take(count($toInsert))
+                ->get()
+                ->reverse()
+                ->values();
+
+            // prepare pivot data
+            $pivotData = [];
+            foreach ($inserted as $index => $variantModel) {
+                if (!isset($insertValueRelations[$index]))
+                    continue; // 🔧 avoid undefined index
+                foreach ($insertValueRelations[$index] as $valueId) {
+                    $pivotData[] = [
+                        'product_variant_id' => $variantModel->id,
+                        'attribute_value_id' => $valueId,
+                        'created_at' => $now,
+                        'updated_at' => $now,
+                    ];
+                }
+                $submittedIds[] = $variantModel->id;
+            }
+
+            // batch insert pivot
+            if (!empty($pivotData)) {
+                DB::table('product_variant_values')->insert($pivotData);
+            }
+        }
+
+        // ✅ Delete removed variants
+        $toDelete = array_diff($existing, $submittedIds);
+        if (!empty($toDelete)) {
+            ProductVariant::whereIn('id', $toDelete)->delete();
+        }
+    }
 
 
 }
-// private function prepareVariants(Request $request)
+
+/**
+ * Handle creation of product variants
+ */
+// private function createProductVariants(Product $product, array $variants): void
 // {
-//     $variants = [];
+//     foreach ($variants as $variant) {
+//         $attrIds = $variant['attribute_value_ids'] ?? [];
 
-//     foreach ($request->variants as $variant) {
+//         // Skip invalid attribute arrays
+//         if (!is_array($attrIds) || empty($attrIds) || in_array(null, $attrIds, true)) {
+//             continue;
+//         }
 
-//         $variantData = [
-//             // 'variant_name' => $variant['name'] ?? null,
+//         $productVariant = $product->variants()->create([
+//             'sku' => $variant['sku'] ?? null,
 //             'price' => $variant['price'] ?? 0,
 //             'stock' => $variant['stock'] ?? 1,
-//             'sku' => $variant['sku'] ?? null,
-//         ];
+//         ]);
 
-//         // 👇 Check if image exists and is an uploaded file
-//         if (isset($variant['image']) && $variant['image'] instanceof UploadedFile) {
-//             $image = $variant['image'];
-//             $imageName = time() . '-' . uniqid() . '-' . $image->getClientOriginalName();
-//             $image->move(public_path('uploads/products/variants'), $imageName);
-//             $variantData['image'] = asset('uploads/products/variants/' . $imageName);
-//         }
-
-//         $variants[] = $variantData;
-//     }
-
-//     return $variants;
-// }
-// public function update(UpdateProductRequest $request, Product $product)
-// {
-//     try {
-//         DB::beginTransaction();
-
-//         // 1️⃣ Product main fields update
-//         $product->update($request->sanitized());
-
-//         // 2️⃣ Gallery images handle
-//         if ($request->hasFile('gallery_images')) {
-//             $newImages = $this->productImages($request);
-
-//             if (!empty($newImages)) {
-//                 // (optional) Purani images delete karni ho to uncomment karo:
-//                 // $product->images()->delete();
-
-//                 $product->images()->createMany($newImages);
-//             }
-//         }
-
-//         // 3️⃣ Variants handle
-//         if ($request->has('variants')) {
-//             $variants = $this->prepareVariants($request);
-
-//             // existing variant IDs
-//             $existingIds = $product->variants()->pluck('id')->toArray();
-//             $incomingIds = collect($request->variants)
-//                 ->pluck('id')
-//                 ->filter()
-//                 ->toArray();
-
-//             // 🔹 Delete variants jo ab request me nahi hain
-//             $toDelete = array_diff($existingIds, $incomingIds);
-//             if (!empty($toDelete)) {
-//                 $product->variants()->whereIn('id', $toDelete)->delete();
-//             }
-
-//             // 🔹 Update ya Create variants
-//             foreach ($request->variants as $variant) {
-//                 $variantData = [
-//                     'variant_name' => $variant['name'] ?? null,
-//                     'price' => $variant['price'] ?? 0,
-//                     'stock' => $variant['stock'] ?? 1,
-//                     'sku' => $variant['sku'] ?? null,
-//                 ];
-
-//                 if (isset($variant['image']) && $variant['image'] instanceof UploadedFile) {
-//                     $image = $variant['image'];
-//                     $imageName = time() . '-' . uniqid() . '-' . $image->getClientOriginalName();
-//                     $image->move(public_path('uploads/products/variants'), $imageName);
-//                     $variantData['image'] = asset('uploads/products/variants/' . $imageName);
-//                 }
-
-//                 if (isset($variant['id'])) {
-//                     // update existing
-//                     $product->variants()->where('id', $variant['id'])->update($variantData);
-//                 } else {
-//                     // create new
-//                     $product->variants()->create($variantData);
-//                 }
-//             }
-//         }
-
-//         DB::commit();
-//         return successResponse('Product updated successfully.');
-//     } catch (Throwable $e) {
-//         DB::rollback();
-//         create_error_log('Product Update', $e);
-//         return errorResponse('Something went wrong.');
+//         $productVariant->values()->attach($attrIds);
 //     }
 // }
 
-// public function update(UpdateProductRequest $request, Product $product)
-// {
-//     try {
-//         DB::beginTransaction();
 
-//         // 1️⃣ Update product fields
-//         $product->update($request->sanitized());
-//         // 2️⃣ Update gallery images (optional new uploads)
-//         if ($request->hasFile('gallery_images')) {
-//             $images = $this->productImages($request);
-//             if (!empty($images)) {
-//                 // $product->images()->delete(); // Uncomment if you want to replace old
-//                 $product->images()->createMany($images);
-//             }
-//         }
+// Create ke liye
 
-//         // 3️⃣ Update variants
-//         if ($request->has('variants')) {
-//             // Prepare variant data
-//             $variants = $this->prepareVariants($request);
-//             // Existing + incoming variant IDs
-//             $existing = $product->variants()->pluck('id')->toArray();
-//             $incoming = collect($request->variants)->pluck('id')->filter()->toArray();
+// foreach ($request->variants as $variant) {
+//     $attrIds = $variant['attribute_value_ids'] ?? [];
 
-//             // Delete removed variants
-//             $toDelete = array_diff($existing, $incoming);
-//             // dd($variants,$existing,$incoming,$toDelete,$request->variants);
-//             if ($toDelete) {
-//                 $product->variants()->whereIn('id', $toDelete)->delete();
-//             }
+//     // Skip if it's not an array, empty, or contains any null value
+//     if (!is_array($attrIds) || empty($attrIds) || in_array(null, $attrIds, true)) {
+//         continue;
+//     }
 
-//             // Create / Update variants
-//             foreach ($request->variants as $i => $variant) {
-//                 $data = $variants[$i];
+//     $productVariant = ProductVariant::create([
+//         'product_id' => $product->id,
+//         'sku' => $variant['sku'] ?? null,
+//         'price' => $variant['price'] ?? 0,
+//         'stock' => $variant['stock'] ?? 1,
+//     ]);
 
-//                 if (!empty($variant['id'])) {
-//                     $product->variants()->where('id', $variant['id'])->update($data);
-//                 } else {
-//                     $product->variants()->create($data);
-//                 }
-//             }
-//         }
+//     $productVariant->values()->attach($attrIds);
+// }
 
-//         DB::commit();
-//         return successResponse("Product updated successfully.");
-//     } catch (Throwable $e) {
-//         DB::rollBack();
-//         dd($e->getMessage());
-//         create_error_log('Product Update', $e);
-//         return errorResponse("Something went wrong.");
+
+
+
+
+
+// Update k liye
+
+// Prepare variant data
+// $existingVariantIds = $product->variants->pluck('id')->toArray();
+// $submittedVariantIds = [];
+// foreach ($request->variants as $variantData) {
+//     $attrIds = $variantData['attribute_value_ids'] ?? [];
+
+//     // Skip if it's not an array, empty, or contains any null value
+//     if (!is_array($attrIds) || empty($attrIds) || in_array(null, $attrIds, true)) {
+//         continue;
+//     }
+//     if (isset($variantData['id'])) {
+//         // Update existing variant
+//         $variant = ProductVariant::find($variantData['id']);
+//         $variant->update([
+//             'sku' => $variantData['sku'] ?? null,
+//             'price' => $variantData['price'] ?? 0,
+//             'stock' => $variantData['stock'] ?? 1,
+//         ]);
+//         $variant->values()->sync($variantData['attribute_value_ids']);
+//         $submittedVariantIds[] = $variant->id;
+//     } else {
+//         // Create new variant
+//         $newVariant = $product->variants()->create([
+//             'sku' => $variantData['sku'] ?? null,
+//             'price' => $variantData['price'] ?? 0,
+//             'stock' => $variantData['stock'] ?? 1,
+//         ]);
+//         $newVariant->values()->syncWithoutDetaching($variantData['attribute_value_ids']);
+//         $submittedVariantIds[] = $newVariant->id;
 //     }
 // }
+
+// // Delete removed variants
+// $toDelete = array_diff($existingVariantIds, $submittedVariantIds);
+// ProductVariant::whereIn('id', $toDelete)->delete();

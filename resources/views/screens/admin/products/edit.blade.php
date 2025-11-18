@@ -34,7 +34,16 @@
                             <input type="text" name="stock" class="form-control only-numeric" value="{{ $product->stock }}">
                         </div>
                     </div>
-
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select name="category_id" class="form-control select2" required>
+                            <option value="">Select Category</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}" @if ($product->categories->contains($category)) selected
+                                @endif>{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="form-group">
                         <label>SKU</label>
                         <input type="text" name="sku" class="form-control" readonly value="{{ $product->sku }}">
@@ -267,9 +276,9 @@
                 // Ab naye selected files ka preview add karo
                 Array.from(this.files).forEach(file => {
                     const img = $('<div class="position-relative m-1">\
-                                    <img src="'+ URL.createObjectURL(file) + '" class="img-thumbnail" style="width:100px;height:100px;object-fit:cover;">\
-                                    <button type="button" class="btn btn-danger btn-sm position-absolute remove-gallery" style="top:2px;right:2px;">&times;</button>\
-                                </div>');
+                                                <img src="'+ URL.createObjectURL(file) + '" class="img-thumbnail" style="width:100px;height:100px;object-fit:cover;">\
+                                                <button type="button" class="btn btn-danger btn-sm position-absolute remove-gallery" style="top:2px;right:2px;">&times;</button>\
+                                            </div>');
                     $('#galleryPreview').append(img);
                 });
             });
@@ -346,6 +355,6 @@
         });
     </script>
 
-    @include('includes.admin.ajax-requests.create', ['redirectUrl' => null])
+    @include('includes.admin.ajax-requests.create', ['redirectUrl' => route('admin.products.index')])
     @include('includes.admin.ajax-requests.delete')
 @endpush

@@ -100,4 +100,17 @@ class AttributeController extends Controller
             return errorResponse("Something went wrong.");
         }
     }
+
+    public function destroySelected(Request $request){
+        try {
+            DB::beginTransaction();
+            Attribute::whereIn('id', $request->ids)->delete();
+            DB::commit();
+            return successResponse("Attributes deleted successfully.");
+        } catch (Throwable $e) {
+            DB::rollBack();
+            create_error_log('Attribute Delete', $e);
+            return errorResponse("Something went wrong.");
+        }
+    }
 }

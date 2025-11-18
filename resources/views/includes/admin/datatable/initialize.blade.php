@@ -46,11 +46,14 @@
         let tableName = @json($table);
         let ajaxUrl = @json($ajaxUrl);
         let columnsArray = columns || [];
-       let dataTable = $(tableName).DataTable({
+        let dataTable = $(tableName).DataTable({
             processing: true,
             serverSide: true,
             responsive: true,
             searching: true,
+            
+            fixedHeader: true,// 🔥 Sticky Header enabled
+            // fixedHeader: { header: true, footer: true }, // 🔥 Sticky Header and Footer enabled
             searchDelay: 1000, //delay on search key input, but doesn't work for first search
             pageLength: 10,
             ajax: ajaxUrl,
@@ -64,11 +67,11 @@
 </script>
 
 {{-- $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-        }); --}}
+"paging": true,
+"lengthChange": false,
+"searching": false,
+"ordering": true,
+"info": true,
+"autoWidth": false,
+"responsive": true,
+}); --}}

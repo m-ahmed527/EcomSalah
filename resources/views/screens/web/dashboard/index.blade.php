@@ -135,6 +135,13 @@
                         $('#dashboard-content').html(response.html);
                         $('.tab-ajax').removeClass('active');
                         $(clickedLink).addClass('active');
+
+                        // Put the route in the browser URL bar without reloading the page
+                        var newUrl = $(clickedLink).data('url') || url;
+                        if (newUrl && newUrl !== window.location.pathname + window.location.search) {
+                            window.history.pushState({}, '', newUrl);
+                        }
+
                     },
                     error: function () {
                         $('#dashboard-content').html('<p class="text-danger text-center">Failed to load content.</p>');

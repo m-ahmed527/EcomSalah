@@ -4,47 +4,20 @@
 @section('content')
     <div class="container-fluid">
         <div class="card card-outline card-primary">
-            <div class="card-header">
+            <div class="card-header action-buttons">
                 <h3 class="card-title">Attributes</h3>
                 <button class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#attributeModal">
                     <i class="fas fa-plus"></i> Add Attribute
                 </button>
+                <button class="btn btn-danger btn-sm float-right d-none"
+                    data-url="{{ route('admin.attributes.destroy.selected') }}" id="delete-selected">
+                    <i class="fas fa-trash"></i> Delete Selected
+                </button>
             </div>
 
             <div class="card-body">
-                <table class="table table-bordered table-striped" id="attribute-table">
-                    {{-- <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Values</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead> --}}
-                    {{-- <tbody>
-                        @foreach ($attributes as $key => $attr)
-                        <tr>
-                            <td>{{ $key + 1 }}</td>
-                            <td>{{ $attr->name }}</td>
-                            <td>
-                                @foreach ($attr->values as $val)
-                                <span class="badge badge-info">{{ $val->value }}</span>
-                                @endforeach
-                            </td>
-                            <td>
-                                <button class="btn btn-sm btn-info editAttr" data-id="{{ $attr->id }}"
-                                    data-name="{{ $attr->name }}"
-                                    data-values="{{ json_encode($attr->values->pluck('value')) }}">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="btn btn-sm btn-danger deleteAttr" data-id="{{ $attr->id }}">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody> --}}
-                </table>
+                
+                <table class="table table-bordered table-striped" id="attribute-table"></table>
             </div>
         </div>
     </div>
@@ -97,13 +70,13 @@
             // Add dynamic value field
             $(document).on('click', '.addValue', function () {
                 $('#valueFields').append(`
-                                                    <div class="input-group mb-2">
-                                                        <input type="text" name="values[]" class="form-control" placeholder="Enter value">
-                                                        <div class="input-group-append">
-                                                            <button type="button" class="btn btn-danger removeValue">-</button>
-                                                        </div>
-                                                    </div>
-                                                `);
+                                                                                <div class="input-group mb-2">
+                                                                                    <input type="text" name="values[]" class="form-control" placeholder="Enter value">
+                                                                                    <div class="input-group-append">
+                                                                                        <button type="button" class="btn btn-danger removeValue">-</button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            `);
             });
 
             // Remove value field
@@ -146,13 +119,13 @@
                         : '<button type="button" class="btn btn-danger removeValue">-</button>';
 
                     $('#valueFields').append(`
-                        <div class="input-group mb-2">
-                            <input type="text" name="values[]" value="${v}" class="form-control">
-                            <div class="input-group-append">
-                                ${btn}
-                            </div>
-                        </div>
-                    `);
+                                                    <div class="input-group mb-2">
+                                                        <input type="text" name="values[]" value="${v}" class="form-control">
+                                                        <div class="input-group-append">
+                                                            ${btn}
+                                                        </div>
+                                                    </div>
+                                                `);
                 });
 
                 $('#attributeModal').modal('show');
@@ -161,10 +134,20 @@
 
         });
         let columns = [
+           {
+                data: 'id',
+                title: `<input type="checkbox" id="select-all"> <span class="ml-1">Select All</span>`,
+                orderable: false,
+                searchable: false,
+                render: function (data, type, row) {
+                    return `<input type="checkbox" class="row-checkbox" value="${row.id}">`;
+                }
+            },
             {
                 data: 'DT_RowIndex',
                 name: 'DT_RowIndex',
-                title: '#', orderable: false,
+                title: 'Sr.No.',
+                orderable: false,
                 searchable: false
             },
             {
@@ -199,20 +182,20 @@
                 render: function (data, type, row) {
                     const values = JSON.stringify(row.values); // safe convert to JSON string
                     return `
-                        <button class="btn btn-sm btn-info editAttr"
-                                data-id="${row.id}"
-                                data-name="${row.name}"
-                                data-values='${values}'>
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="btn btn-sm btn-danger"
-                            id="delete-btn"
-                            data-url="{{ url('admin/attributes/destroy/${row.id}') }}"
-                            data-id="${row.id}">
-                        <i class="fas fa-trash"></i>
-                    </button>
+                                                    <button class="btn btn-sm btn-info editAttr"
+                                                            data-id="${row.id}"
+                                                            data-name="${row.name}"
+                                                            data-values='${values}'>
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-danger"
+                                                        id="delete-btn"
+                                                        data-url="{{ url('admin/attributes/destroy/${row.id}') }}"
+                                                        data-id="${row.id}">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
 
-                    `;
+                                                `;
                 }
             },
         ];
@@ -220,4 +203,5 @@
     @include('includes.admin.datatable.initialize', ['table' => '#attribute-table', 'ajaxUrl' => route('admin.attributes.get.data')])
     @include('includes.admin.ajax-requests.create', ['redirectUrl' => null])
     @include('includes.admin.ajax-requests.delete');
+    @include('includes.admin.ajax-requests.delete-selected');
 @endpush

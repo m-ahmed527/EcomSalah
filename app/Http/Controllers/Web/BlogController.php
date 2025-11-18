@@ -10,7 +10,11 @@ class BlogController extends Controller
 
     public function index()
     {
-        return view('screens.web.blog.index');
+         $breadcrumbs = [
+            'Home' => route('web.index'),
+            'Blogs' => route('web.blog.index'),
+        ];
+        return view('screens.web.blog.index',get_defined_vars());
     }
 
 

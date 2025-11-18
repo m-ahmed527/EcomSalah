@@ -17,4 +17,9 @@ class Category extends Model
     {
         return $this->hasMany(Category::class, 'parent_id');
     }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'product_categories')->withTimestamps();
+    }
 }

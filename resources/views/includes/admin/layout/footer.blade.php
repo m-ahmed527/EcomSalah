@@ -1,8 +1,8 @@
 <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
+    <strong>Copyright &copy;{{ date('Y') }}, Designed &amp; Developed by Salah Wears.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
-        <b>Version</b> 3.1.0
+        {{-- <b>Version</b> 3.1.0 --}}
     </div>
 </footer>
 
@@ -49,6 +49,8 @@
 
 <!-- DataTables  & Plugins -->
 <script src="{{asset('assets/admin/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('assets/admin/plugins/datatables-fixedheader/js/dataTables.fixedHeader.min.js')}}"></script>
+<script src="{{asset('assets/admin/plugins/datatables-fixedheader/js/fixedHeader.bootstrap4.min.js')}}"></script>
 <script src="{{asset('assets/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
 <script src="{{asset('assets/admin/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
 <script src="{{asset('assets/admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
@@ -85,6 +87,8 @@
     })
 </script>
 @stack('scripts')
+
+
 </body>
 
 </html>

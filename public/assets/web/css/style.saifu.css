@@ -648,10 +648,16 @@ input[type="tel"]:focus {
     position: relative;
 }
 
-.top-header .container {
+/* .top-header .container {
     padding-top: 35px;
     padding-bottom: 35px;
     border-bottom: 1px solid #dedede;
+} */
+
+.header-top .row-custom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 .top-header .dropdown-menu {
     left: auto;
@@ -743,11 +749,12 @@ input[type="tel"]:focus {
 .cart-dropdown .remove {
     padding: 1px 6px;
     position: absolute;
-    right: 0;
-    top: 0;
+    right: -5px;
+    top: -5px;
     background-color: #f7f8f9;
     color: #7f7f7f;
     font-size: 12px;
+    z-index: 1000152;
 }
 
 .cart-buttons {
@@ -770,7 +777,12 @@ input[type="tel"]:focus {
 .cart-summary .total-price {
     float: right;
 }
-
+@media (max-width: 767px) {
+    .cart-buttons li {
+        display: inline-block;
+        width: 80%;
+    }
+}
 .navigation {
     margin-bottom: 0;
     padding: 10px 0;
@@ -779,6 +791,7 @@ input[type="tel"]:focus {
     display: none;
     font-size: 16px;
 }
+
 @media (max-width: 480px) {
     .navigation .menu-title {
         display: inline-block;
@@ -2047,10 +2060,6 @@ input[type="tel"]:focus {
 .coming-soon .block .count-down .syotimer-cell .syotimer-cell__unit {
     font-weight: normal;
 }
-.logo-a img {
-    width: 100%;
-    max-width: 170px;
-}
 @media (max-width: 768px) {
     .coming-soon .block .count-down ul li {
         font-size: 50px;
@@ -2495,7 +2504,59 @@ a.disabled {
 }
 /*# sourceMappingURL=style.css.map */
 
+@media (max-width: 991px) {
+    .navigation .navbar-nav > li > a {
+        font-size: 12px;
+        padding: 20px 10px;
+    }
+}
 
+.header-menu-area {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
 
+.list-inline-2 {
+    padding-left: 0;
+    /* margin-left: -5px; */
+    list-style: none;
+    display: flex;
+    align-items: center;
+    /* gap: 1px; */
+}
 
+.navbar-toggle {
+    margin-right: 0 !important;
+    padding: 0 !important;
+}
 
+.side-bar-custom {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    height: 100vh;
+    width: 250px;
+    background: #fff;
+    box-shadow: 0 0 2px #000;
+    z-index: 99;
+}
+
+.side-bar-custom.active {
+    right: 0;
+}
+
+.side-bar-custom .collapse {
+    display: block !important;
+}
+
+.cross-btn {
+    border: 1px solid gray;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    left: -10px;
+    top: 10px;
+    z-index: 999;
+}

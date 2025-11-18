@@ -28,6 +28,9 @@
                     $.ajax({
                         url: url,
                         type: "GET",
+                        // data: {
+                        //     _token: "{{ csrf_token() }}"
+                        // },
                         processData: false,
                         contentType: false,
                         success: function (response) {

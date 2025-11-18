@@ -10,7 +10,11 @@ class ContactController extends Controller
 
     public function index()
     {
-        return view('screens.web.contact.index');
+         $breadcrumbs = [
+            'Home' => route('web.index'),
+            'Contact' => route('web.contact.index'),
+        ];
+        return view('screens.web.contact.index',get_defined_vars());
     }
 
 

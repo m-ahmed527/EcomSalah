@@ -10,7 +10,11 @@ class CartController extends Controller
 
     public function index()
     {
-        return view('screens.web.cart.index');
+         $breadcrumbs = [
+            'Home' => route('web.index'),
+            'Cart' => route('web.cart.index'),
+        ];
+        return view('screens.web.cart.index',get_defined_vars());
     }
 
 }

@@ -11,6 +11,10 @@ class DashboardController extends Controller
 
     public function profile()
     {
+           $breadcrumbs = [
+            'Home' => route('web.index'),
+            'Dashboard' => route('web.dashboard.profile.index'),
+        ];
         $user = auth()->user();
         if (request()->ajax()) {
             $html = view('includes.web.dashboard-components.profile', get_defined_vars())->render();
@@ -24,6 +28,10 @@ class DashboardController extends Controller
 
     public function order()
     {
+        $breadcrumbs = [
+            'Home' => route('web.index'),
+            'Dashboard' => route('web.dashboard.orders.index'),
+        ];
         if (request()->ajax()) {
             $html = view('includes.web.dashboard-components.order')->render();
             return response()->json([
@@ -31,7 +39,7 @@ class DashboardController extends Controller
                 'html' => $html,
             ], 200);
         }
-        return view('screens.web.dashboard.index');
+        return view('screens.web.dashboard.index',get_defined_vars());
     }
 
     public function profileUpdate(UpdateProfileRequest $request)

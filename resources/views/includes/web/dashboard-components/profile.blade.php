@@ -15,8 +15,8 @@
             </ul>
         </div>
         <!-- Edit Profile Button -->
-        <a href="#" class="btn btn-small" data-toggle="modal" data-target="#editProfileModal">
+        <button  class="btn btn-small" data-toggle="modal" data-target="#editProfileModal" title="Edit Profile">
             Edit Profile
-        </a>
+        </button>
     </div>
-</div> 
+</div>

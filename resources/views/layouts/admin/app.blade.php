@@ -8,14 +8,8 @@
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1 class="m-0">@yield('page')</h1>
-                </div><!-- /.col -->
-                {{-- <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">@yield('page')</li>
-                        <li class="breadcrumb-item active"></li>
-                    </ol>
-                </div><!-- /.col --> --}}
+                </div>
+                
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         @foreach ($breadcrumbs as $label => $url)
@@ -34,5 +28,13 @@
     </div>
     <!-- /.content-header -->
     @yield('content')
+    <!-- GLOBAL IMAGE VIEWER MODAL -->
+    <div class="modal fade" id="imageViewModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content bg-dark text-center">
+                <img id="imageViewModalImg" src="" class="img-fluid rounded">
+            </div>
+        </div>
+    </div>
 </div>
 @include('includes.admin.layout.footer')

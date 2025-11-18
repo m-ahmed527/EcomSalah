@@ -32,6 +32,7 @@ Route::name('categories.')->prefix('categories')->controller(CategoryController:
     Route::get('/get-data', 'getCategoriesData')->name('get.data');
     Route::post('/store', 'store')->name('store');
     Route::get('/destroy/{category}', 'destroy')->name('destroy');
+    Route::post('/destroy/selected', 'destroySelected')->name('destroy.selected');
 
 });
 
@@ -40,6 +41,8 @@ Route::name('attributes.')->prefix('attributes')->controller(AttributeController
     Route::post('/store', 'store')->name('store');
     Route::get('/get-data', 'getAttributesData')->name('get.data');
     Route::get('/destroy/{attribute}', 'destroy')->name('destroy');
+    Route::post('/destroy/selected', 'destroySelected')->name('destroy.selected');
+
 });
 
 Route::name('products.')->prefix('products')->controller(ProductController::class)->group(function () {
@@ -51,6 +54,8 @@ Route::name('products.')->prefix('products')->controller(ProductController::clas
     Route::get('/edit/{product}', 'edit')->name('edit');
     Route::post('/update/{product}', 'update')->name('update');
     Route::get('/destroy/{product}', 'destroy')->name('destroy');
+    Route::post('/destroy/selected', 'destroySelected')->name('destroy.selected');
     Route::get('/destroy/image/{image}', 'destroyImage')->name('image.destroy');
+
 
 });

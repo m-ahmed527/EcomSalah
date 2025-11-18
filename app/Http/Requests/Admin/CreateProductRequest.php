@@ -29,6 +29,7 @@ class CreateProductRequest extends FormRequest
             'long_description' => 'nullable|string',
             'base_price' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
+            'category_id' => 'required|integer|exists:categories,id',
             'featured_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'is_variable' => 'nullable',
             'variants' => 'required_if:is_variable,on|array',
@@ -82,6 +83,10 @@ class CreateProductRequest extends FormRequest
             'stock.required' => 'The stock quantity is required.',
             'stock.integer' => 'The stock quantity must be an integer.',
             'stock.min' => 'The stock quantity cannot be less than 0.',
+
+            'category_id.required' => 'The category is required.',
+            'category_id.integer' => 'The category must be a valid integer.',
+            'category_id.exists' => 'The selected category does not exist.',
 
             'featured_image.required' => 'A featured image is required.',
             'featured_image.image' => 'The featured image must be a valid image file.',

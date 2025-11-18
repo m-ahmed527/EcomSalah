@@ -10,12 +10,21 @@ class ProductController extends Controller
 
     public function index()
     {
-        return view('screens.web.product.index');
+        $breadcrumbs = [
+            'Home' => route('web.index'),
+            'Products' => route('web.product.index'),
+        ];
+        return view('screens.web.product.index',get_defined_vars());
     }
 
     public function show()
     {
-        return view('screens.web.product.show');
+        $breadcrumbs = [
+            'Home' => route('web.index'),
+            'Products' => route('web.product.index'),
+            'Product Details' => '#',
+        ];
+        return view('screens.web.product.show',get_defined_vars());
     }
 
 }

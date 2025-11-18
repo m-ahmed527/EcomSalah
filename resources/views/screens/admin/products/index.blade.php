@@ -1,18 +1,37 @@
 @extends('layouts.admin.app')
 @section('title', 'Manage Products')
 @section('page', 'Manage Products')
+
 @section('content')
     <section class="content">
         <div class="container-fluid">
             <div class="card card-outline card-primary">
-                <div class="card-header">
+                {{-- <div class="card-header">
                     <h3 class="card-title">Products</h3>
+                    <div class="margin">
+                        <button class="btn btn-danger btn-sm float-right d-none ml-1"
+                            data-url="{{ route('admin.products.destroy.selected') }}" id="delete-selected">
+                            <i class="fas fa-trash"></i> Delete Selected
+                        </button>
+                        <a href="{{ route('admin.products.create') }}" class="btn btn-primary btn-sm float-right">
+                            <i class="fas fa-plus"></i> Add Product
+                        </a>
+                    </div>
+                </div> --}}
+                <div class="card-header action-buttons">
+                    <h3 class="card-title">Products</h3>
+
                     <a href="{{ route('admin.products.create') }}" class="btn btn-primary btn-sm float-right">
                         <i class="fas fa-plus"></i> Add Product
                     </a>
-                </div>
 
+                    <button class="btn btn-danger btn-sm float-right d-none"
+                        data-url="{{ route('admin.products.destroy.selected') }}" id="delete-selected">
+                        <i class="fas fa-trash"></i> Delete Selected
+                    </button>
+                </div>
                 <div class="card-body">
+                    
                     <table id="product-table" class="table table-bordered table-striped"></table>
                 </div>
             </div>
@@ -35,7 +54,8 @@
                         <!-- 🔹 Left: Images -->
                         <div class="col-md-5 text-center">
                             <img id="modalFeaturedImage" src="{{ asset('assets/web/images/no-image.png') }}"
-                                class="img-fluid rounded shadow mb-3" style="max-height: 300px; object-fit: cover;">
+                                class="img-fluid rounded shadow mb-3 image-preview"
+                                style="max-height: 300px; object-fit: cover;">
 
                             <div id="modalGallery" class="d-flex flex-wrap justify-content-center"></div>
                         </div>
@@ -44,8 +64,9 @@
                         <div class="col-md-7">
                             <h4 id="modalProductName" class="fw-bold"></h4>
                             <p><strong>SKU:</strong> <span id="modalProductSku"></span></p>
-                            <p><strong>Price:</strong> $<span id="modalProductPrice"></span></p>
+                            <p><strong>Price:</strong> PKR <span id="modalProductPrice"></span></p>
                             <p><strong>Stock:</strong> <span id="modalProductStock"></span></p>
+                            <p><strong>Category:</strong> <span id="modalProductCategory"></span></p>
                             <hr>
                             <h6>Short Description</h6>
                             <div id="modalShortDescription" class="border rounded p-2 mb-2 bg-light"></div>
@@ -57,7 +78,7 @@
 
                     <!-- 🔹 Variants -->
                     <div id="modalVariantsSection" style="display:none;">
-                    <hr>
+                        <hr>
 
                         <h5>Product Variants</h5>
                         <table class="table table-bordered mt-2">
@@ -87,10 +108,30 @@
     <script>
         let columns = [
             {
+                data: 'id',
+                title: `<input type="checkbox" id="select-all"> <span class="ml-1">Select All</span>`,
+                orderable: false,
+                searchable: false,
+                render: function (data, type, row) {
+                    return `<input type="checkbox" class="row-checkbox" value="${row.id}">`;
+                }
+            },
+            {
                 data: 'DT_RowIndex',
                 name: 'DT_RowIndex',
-                title: '#', orderable: false,
+                title: 'Sr.No.',
+                orderable: false,
                 searchable: false
+            },
+            {
+                data: 'featured_image',
+                name: 'featured_image',
+                title: 'Image',
+                orderable: false,
+                searchable: false,
+                render: function (data, type, row) {
+                    return `<img src="${row.featured_image}" class="img-thumbnail m-1 image-preview" style="width:70px;height:70px;object-fit:cover;">`;
+                }
             },
             {
                 data: 'name',
@@ -98,11 +139,23 @@
                 title: 'Name'
             },
             {
+                data: 'sku',
+                name: 'sku',
+                title: 'SKU',
+            },
+            {
                 data: 'base_price',
                 name: 'base_price',
-                title: 'Base Price'
+                title: 'Base Price',
+                render: function (data, type, row) {
+                    return 'PKR ' + data;
+                }
             },
-
+            {
+                data: 'stock',
+                name: 'stock',
+                title: 'Stock',
+            },
             {
                 data: null,
                 title: 'Action',
@@ -110,25 +163,25 @@
                 searchable: false,
                 render: function (data, type, row) {
                     return `
-                        <!-- 👁 View Button -->
-                    <button class="btn btn-sm btn-primary viewProduct"
-                            data-url='{{ url('admin/products/show/${row.slug}') }}'
-                            title="View Product">
-                        <i class="fas fa-eye"></i>
-                    </button>
+                            <!-- 👁 View Button -->
+                        <button class="btn btn-sm btn-primary viewProduct"
+                                data-url='{{ url('admin/products/show/${row.slug}') }}'
+                                title="View Product">
+                            <i class="fas fa-eye"></i>
+                        </button>
 
-                    <a href="{{ url('admin/products/edit/${row.slug}') }}" class="btn btn-sm btn-info editProduct">
-                        <i class="fas fa-edit"></i>
-                    </a>
+                        <a href="{{ url('admin/products/edit/${row.slug}') }}" class="btn btn-sm btn-info editProduct">
+                            <i class="fas fa-edit"></i>
+                        </a>
 
-                    <button class="btn btn-sm btn-danger"
-                        id="delete-btn"
-                        data-url="{{ url('admin/products/destroy/${row.slug}') }}"
-                        data-id="${row.slug}">
-                    <i class="fas fa-trash"></i>
-                    </button>
+                        <button class="btn btn-sm btn-danger"
+                            id="delete-btn"
+                            data-url="{{ url('admin/products/destroy/${row.slug}') }}"
+                            data-id="${row.slug}">
+                            <i class="fas fa-trash"></i>
+                        </button>
 
-                    `;
+                        `;
                 }
             },
         ];
@@ -144,6 +197,7 @@
                     $('#modalProductSku').text('');
                     $('#modalProductPrice').text('');
                     $('#modalProductStock').text('');
+                    $('#modalProductCategory').text('');
                     $('#modalFeaturedImage').attr('src', "{{ asset('assets/web/images/no-image.png') }}");
                     $('#modalShortDescription').html('');
                     $('#modalLongDescription').html('');
@@ -154,20 +208,28 @@
                 success: function (response) {
                     $('.modal-body').LoadingOverlay('hide');
                     product = response.data;
-                    console.log(product);
+
                     $('#modalProductName').text(product.name);
                     $('#modalProductSku').text(product.sku);
                     $('#modalProductPrice').text(product.base_price || '-');
                     $('#modalProductStock').text(product.stock || '-');
+                    if (product.categories && product.categories.length) {
+                        product.categories.forEach(cat => {
+                            $('#modalProductCategory').append(`<span class="badge badge-primary">${cat.name}</span> `);
+                        })
+                    } else {
+                        console.log(product.categories);
+                        $('#modalProductCategory').html('<span class="badge badge-danger">Uncategorized</span>');
+                    }
                     $('#modalFeaturedImage').attr('src', product.featured_image || '{{ asset("assets/web/images/no-image.png") }}');
-                    $('#modalShortDescription').html(product.short_description || '');
-                    $('#modalLongDescription').html(product.long_description || '');
+                    $('#modalShortDescription').html(product.short_description || '<span class="text-muted">No Description</span>');
+                    $('#modalLongDescription').html(product.long_description || '<span class="text-muted">No Description</span>');
 
                     // Gallery
                     $('#modalGallery').html('');
                     if (product.images && product.images.length) {
                         product.images.forEach(img => {
-                            $('#modalGallery').append(`<img src="${img.image}" class="img-thumbnail m-1" style="width:70px;height:70px;object-fit:cover;">`);
+                            $('#modalGallery').append(`<img src="${img.image}" class="img-thumbnail m-1 image-preview" style="width:70px;height:70px;object-fit:cover;">`);
                         });
                     }
 
@@ -192,14 +254,14 @@
                                 : (attrHTML || '-');
 
                             $('#modalVariantTable').append(`
-                                                    <tr>
-                                                        <td>${displayName}</td>
-                                                        <td>${v.sku || '-'}</td>
-                                                        <td>${v.price}</td>
-                                                        <td>${v.stock}</td>
-                                                        <td>${v.image ? `<img src="${v.image}" width="50" height="50" style="object-fit:cover;">` : '-'}</td>
-                                                    </tr>
-                                                `);
+                                                                                                            <tr>
+                                                                                                                <td>${displayName}</td>
+                                                                                                                <td>${v.sku || '-'}</td>
+                                                                                                                <td>${v.price}</td>
+                                                                                                                <td>${v.stock}</td>
+                                                                                                                <td>${v.image ? `<img src="${v.image}" width="50" height="50" style="object-fit:cover;">` : '-'}</td>
+                                                                                                            </tr>
+                                                                                                        `);
                         });
 
                         $('#modalVariantsSection').show();
@@ -220,4 +282,5 @@
     </script>
     @include('includes.admin.datatable.initialize', ['table' => '#product-table', 'ajaxUrl' => route('admin.products.get.data')])
     @include('includes.admin.ajax-requests.delete');
+    @include('includes.admin.ajax-requests.delete-selected');
 @endpush

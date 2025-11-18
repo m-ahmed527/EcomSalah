@@ -29,6 +29,7 @@ class UpdateProductRequest extends FormRequest
             'long_description' => 'nullable|string',
             'base_price' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
+            'category_id' => 'required|integer|exists:categories,id',
             'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'is_variable' => 'nullable',
             'variants' => 'required_if:is_variable,on|array',
@@ -51,6 +52,10 @@ class UpdateProductRequest extends FormRequest
             'stock.required' => 'The stock quantity is required.',
             'stock.integer' => 'The stock quantity must be an integer.',
             'stock.min' => 'The stock quantity cannot be less than 0.',
+
+            'category_id.required' => 'The category is required.',
+            'category_id.integer' => 'The category must be a valid integer.',
+            'category_id.exists' => 'The selected category does not exist.',
 
             'featured_image.image' => 'The featured image must be a valid image file.',
             'featured_image.mimes' => 'The featured image must be a file of type: jpeg, png, jpg, gif.',

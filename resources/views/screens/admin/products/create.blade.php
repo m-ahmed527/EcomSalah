@@ -4,7 +4,8 @@
 
 @section('content')
     <div class="container-fluid">
-        <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data" id="submit-form">
+        <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data" id="submit-form"
+            data-reset="true">
             @csrf
             <div class="card card-outline card-primary">
                 <div class="card-header">
@@ -17,6 +18,7 @@
                 <div class="card-body">
                     {{-- 🔹 Basic Info --}}
                     <div class="row">
+
                         <div class="form-group col-md-6">
                             <label>Product Name</label>
                             <input type="text" name="name" class="form-control" required>
@@ -32,7 +34,15 @@
                             <input type="text" name="stock" class="form-control only-numeric">
                         </div>
                     </div>
-
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select name="category_id" class="form-control select2" required>
+                            <option value="">Select Category</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="form-group">
                         <label>SKU</label>
                         <input type="text" name="sku" class="form-control" readonly>
@@ -196,9 +206,9 @@
                 $('#galleryPreview').html('');
                 Array.from(this.files).forEach(file => {
                     const img = $('<div class="position-relative m-1">\
-                                                    <img src="'+ URL.createObjectURL(file) + '" class="img-thumbnail" style="width:100px;height:100px;object-fit:cover;">\
-                                                    <button type="button" class="btn btn-danger btn-sm position-absolute remove-gallery" style="top:2px;right:2px;">&times;</button>\
-                                                </div>');
+                                    <img src="'+ URL.createObjectURL(file) + '" class="img-thumbnail" style="width:100px;height:100px;object-fit:cover;">\
+                                    <button type="button" class="btn btn-danger btn-sm position-absolute remove-gallery" style="top:2px;right:2px;">&times;</button>\
+                                </div>');
                     $('#galleryPreview').append(img);
                 });
             });
@@ -207,21 +217,7 @@
                 $(this).closest('div').remove();
             });
 
-            // ✅ Variable product toggle
-            // $('#isVariable').on('change', function () {
-            //     if ($(this).is(':checked')) {
-            //         $('#variantSection').slideDown();
-            //     }
-            //     else {
-            //         $('#variantSection').slideUp();
-            //         $('.remove-variant').trigger('click');
-            //         $('#variant-wrapper').find('input,select').each(function () {
-            //             const name = $(this).attr('name');
-            //             if (name) $(this).attr('name', name.replace(/\[\d+\]/, '[0]')).val('');
-            //         });
 
-            //     }
-            // });
             $('#isVariable').on('switchChange.bootstrapSwitch', function (event, state) {
                 if (state) {
                     $('#variantSection').slideDown();

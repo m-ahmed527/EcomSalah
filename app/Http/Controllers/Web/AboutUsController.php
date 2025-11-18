@@ -10,7 +10,11 @@ class AboutUsController extends Controller
 
     public function index()
     {
-        return view('screens.web.about.index');
+        $breadcrumbs = [
+            'Home' => route('web.index'),
+            'About Us' => route('web.about.index'),
+        ];
+        return view('screens.web.about.index', get_defined_vars());
     }
 
 

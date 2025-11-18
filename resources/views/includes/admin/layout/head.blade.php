@@ -36,9 +36,103 @@
 
     <!-- DataTables -->
     <link rel="stylesheet" href="{{asset('assets/admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+    <link rel="stylesheet"
+        href="{{asset('assets/admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/admin/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
+    <link rel="stylesheet"
+        href="{{asset('assets/admin/plugins/datatables-fixedheader/css/fixedHeader.bootstrap4.min.css')}}">
 
-      <link rel="stylesheet" href="{{ asset('assets/admin/plugins/select2/css/select2.min.css') }}">
+
+
+    <link rel="stylesheet" href="{{ asset('assets/admin/plugins/select2/css/select2.min.css') }}">
     @stack('styles')
+    <style>
+        .image-viewer-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .image-viewer-img {
+            max-width: 90%;
+            max-height: 80%;
+            transition: transform 0.3s ease;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .image-viewer-controls {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 2rem;
+            color: #fff;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .image-viewer-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+            color: #fff;
+            cursor: pointer;
+            user-select: none;
+            padding: 0 20px;
+        }
+
+        .image-viewer-arrow.left {
+            left: 0;
+        }
+
+        .image-viewer-arrow.right {
+            right: 0;
+        }
+
+        .image-viewer-zoom-controls {
+            position: absolute;
+            bottom: 30px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .image-viewer-zoom-btn {
+            font-size: 1.8rem;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.3s;
+        }
+
+        .image-viewer-zoom-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .action-buttons .btn {
+            margin-left: 8px !important;
+        }
+
+        /* .table-scroll {
+            max-height: 500px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        table.dataTable thead th {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: white;
+        } */
+    </style>
+
 </head>
