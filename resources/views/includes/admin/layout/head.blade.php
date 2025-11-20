@@ -121,18 +121,19 @@
             margin-left: 8px !important;
         }
 
-        /* .table-scroll {
-            max-height: 500px;
-            overflow-y: auto;
-            overflow-x: hidden;
+        /* For classic select2 (single select) */
+        .select2-container--default .select2-selection--single.is-invalid {
+            border-color: #dc3545 !important;
+            padding-right: 2.25rem;
+            background-position: right calc(.375em + .1875rem) center;
+            background-repeat: no-repeat;
+            background-size: calc(.75em + .375rem) calc(.75em + .375rem);
         }
 
-        table.dataTable thead th {
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            background: white;
-        } */
+        /* For multiple select */
+        .select2-container--default .select2-selection--multiple.is-invalid {
+            border-color: #dc3545 !important;
+        }
     </style>
 
 </head>

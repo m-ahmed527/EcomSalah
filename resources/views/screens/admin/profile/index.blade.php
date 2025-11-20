@@ -33,7 +33,7 @@
                             </div>
 
                             <form id="submit-form" enctype="multipart/form-data"
-                                action="{{ route('admin.profile.update') }}" method="POST" data-reset="true">
+                                action="{{ route('admin.profile.update') }}" method="POST" data-reset="true" data-parsley-validate>
                                 @csrf
 
                                 <div class="card-body">
@@ -69,14 +69,14 @@
                                     <div class="form-group">
                                         <label>First Name</label>
                                         <input type="text" name="first_name" class="form-control"
-                                            value="{{auth()?->user()?->first_name}}" placeholder="First Name">
+                                            value="{{auth()?->user()?->first_name}}" placeholder="First Name" required>
                                     </div>
 
                                     {{-- Last Name --}}
                                     <div class="form-group">
                                         <label>Last Name</label>
                                         <input type="text" name="last_name" class="form-control"
-                                            value="{{auth()?->user()?->last_name}}" placeholder="Last Name">
+                                            value="{{auth()?->user()?->last_name}}" placeholder="Last Name" >
                                     </div>
 
                                     {{-- Email --}}

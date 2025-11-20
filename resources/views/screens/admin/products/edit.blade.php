@@ -1,11 +1,16 @@
 @extends('layouts.admin.app')
 @section('title', 'Edit Product')
 @section('page', 'Manage Products')
-
+@php
+    use App\Models\Product;
+    $productCount = substr($product->sku, 4);
+    $productCount = $productCount ?: str_pad($product->id, 4, '0', STR_PAD_LEFT);
+    // dd($productCount);
+@endphp
 @section('content')
     <div class="container-fluid">
         <form action="{{ route('admin.products.update', $product->slug) }}" method="POST" enctype="multipart/form-data"
-            id="submit-form">
+            id="submit-form" data-parsley-validate>
             @csrf
             <div class="card card-outline card-primary">
                 <div class="card-header">
@@ -20,18 +25,19 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Product Name</label>
-                            <input type="text" name="name" class="form-control" value="{{ $product->name }}">
+                            <input type="text" name="name" class="form-control" value="{{ $product->name }}" required>
                         </div>
 
                         <div class="form-group col-md-3">
                             <label>Base Price</label>
                             <input type="text" name="base_price" class="form-control only-numeric"
-                                value="{{ $product->base_price }}">
+                                value="{{ $product->base_price }}" required>
                         </div>
 
                         <div class="form-group col-md-3">
                             <label>Stock</label>
-                            <input type="text" name="stock" class="form-control only-numeric" value="{{ $product->stock }}">
+                            <input type="text" name="stock" class="form-control only-numeric" value="{{ $product->stock }}"
+                                required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -74,7 +80,7 @@
                                 alt="Featured" class="img-thumbnail mb-2"
                                 style="width:150px;height:150px;object-fit:cover;">
                             <input type="file" name="featured_image" id="featuredInput" class="form-control-file mt-2"
-                                accept="image/*">
+                                accept="image/*" required>
                         </div>
 
                         <div class="form-group col-md-6">
@@ -127,11 +133,7 @@
                                     <input type="hidden" name="variants[{{ $index }}][id]" value="{{ $variant->id }}">
                                     <div class="card-body">
                                         <div class="row">
-                                            {{-- <div class="form-group col-md-3">
-                                                <label>SKU</label>
-                                                <input type="text" name="variants[0][sku]" class="form-control variant-sku"
-                                                    required readonly>
-                                            </div> --}}
+
 
                                             <div class="form-group col-md-6">
                                                 <label>Price</label>
@@ -170,6 +172,11 @@
                                                 </div>
                                             @endforeach
                                         </div>
+                                        <div class="form-group col-md-12">
+                                            <label>SKU</label>
+                                            <input type="text" name="variants[{{ $index }}][sku]"
+                                                class="form-control variant-sku" value="{{ $variant->sku }}" readonly>
+                                        </div>
                                     </div>
                                 </div>
                             @empty
@@ -180,11 +187,7 @@
                                     </button>
                                     <div class="card-body">
                                         <div class="row">
-                                            {{-- <div class="form-group col-md-3">
-                                                <label>SKU</label>
-                                                <input type="text" name="variants[0][sku]" class="form-control variant-sku"
-                                                    required readonly>
-                                            </div> --}}
+
 
                                             <div class="form-group col-md-6">
                                                 <label>Price</label>
@@ -222,6 +225,11 @@
                                                 </div>
                                             @endforeach
                                         </div>
+                                        <div class="form-group col-md-12">
+                                            <label>SKU</label>
+                                            <input type="text" name="variants[0][sku]" class="form-control variant-sku" required
+                                                readonly>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -246,67 +254,120 @@
 
 @push('scripts')
     <script>
+
         $(function () {
-            // $('.summernote').summernote({ height: 150 });
+
             if ($('#isVariable').is(':checked')) {
                 $('#variantSection').slideDown();
             }
-            // ✅ Only numeric fields
+
+            // -------------------------
+            //  ONLY NUMERIC FIELDS
+            // -------------------------
             $(document).on('input', '.only-numeric', function () {
                 this.value = this.value.replace(/[^0-9.]/g, '');
             });
 
-            // ✅ SKU auto from product name
+            // -------------------------
+            //  BASE SKU GENERATION
+            // -------------------------
+            let baseSku = "";
+
             $('input[name="name"]').on('input', function () {
                 const base = $(this).val().trim().substring(0, 3).toUpperCase();
-                $('input[name="sku"]').val(base);
-            });
 
-            // ✅ Featured image preview
-            $('#featuredInput').on('change', function () {
-                const file = this.files[0];
-                if (file) $('#featuredPreview').attr('src', URL.createObjectURL(file));
-            });
+                let count = "{{ $productCount }}";
+                count = count.toString().padStart(4, '0');
 
-            // ✅ Gallery image preview
-            $('#galleryInput').on('change', function () {
-                // Pehle sirf un previews ko remove karo jinke pas data-id nahi hai
-                $('#galleryPreview .position-relative:not([data-id])').remove();
+                baseSku = base ? base + '-' + count : null;
 
-                // Ab naye selected files ka preview add karo
-                Array.from(this.files).forEach(file => {
-                    const img = $('<div class="position-relative m-1">\
-                                                <img src="'+ URL.createObjectURL(file) + '" class="img-thumbnail" style="width:100px;height:100px;object-fit:cover;">\
-                                                <button type="button" class="btn btn-danger btn-sm position-absolute remove-gallery" style="top:2px;right:2px;">&times;</button>\
-                                            </div>');
-                    $('#galleryPreview').append(img);
+                $('input[name="sku"]').val(baseSku);
+
+                $(".variant-group").each(function () {
+                    generateVariantSKU($(this));
                 });
             });
 
-            // $(document).on('click', '.remove-gallery', function () {
-            //     $(this).closest('div').remove();
-            // });
 
-            // ✅ Variable product toggle
-            // $('#isVariable').on('change', function () {
-            //     if ($(this).is(':checked')) {
-            //         $('#variantSection').slideDown();
-            //     }
-            //     else {
-            //         $('#variantSection').slideUp();
-            //         $('.remove-variant').trigger('click');
-            //     }
-            // });
-            $('#isVariable').on('switchChange.bootstrapSwitch', function (event, state) {
-                if (state) {
-                    $('#variantSection').slideDown();
-                } else {
-                    $('#variantSection').slideUp();
-                    $('.remove-variant').trigger('click');
+            // -------------------------
+            //  GENERATE VARIANT SKU
+            // -------------------------
+            function generateVariantSKU(group) {
+                let sku = baseSku ? baseSku : $('input[name="sku"]').val();
 
+                group.find('.variant-attr').each(function () {
+                    if (!$(this).val()) return;
+                    const text = $(this).find("option:selected").text().trim();
+                    if (text) sku += "-" + text.replace(/\s+/g, '').toUpperCase();
+                });
+
+                group.find('.variant-sku').val(sku);
+            }
+
+
+
+            // -------------------------
+            //  GET COMBINATION STRING
+            // -------------------------
+            function getVariantCombination(group) {
+                let combo = [];
+
+                group.find('.variant-attr').each(function () {
+                    const txt = $(this).find("option:selected").text().trim();
+                    if (txt) combo.push(txt);
+                });
+
+                return combo.join("|").toUpperCase();  // ex: "RED|M"
+            }
+
+            // -------------------------
+            //  DUPLICATE CHECK
+            // -------------------------
+            function isDuplicateVariant(currentGroup) {
+                const currentCombo = getVariantCombination(currentGroup);
+                if (!currentCombo) return false;
+
+                let found = false;
+
+                $('.variant-group').not(currentGroup).each(function () {
+                    const otherCombo = getVariantCombination($(this));
+                    if (otherCombo === currentCombo && otherCombo !== "") {
+                        found = true;
+                    }
+                });
+
+                return found;
+            }
+
+
+
+            // -------------------------
+            //  ON ATTRIBUTE CHANGE
+            // -------------------------
+            $(document).on("change", ".variant-attr", function () {
+
+                const group = $(this).closest(".variant-group");
+
+                if (isDuplicateVariant(group)) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Duplicate Variant',
+                        text: 'Yeh variant combination already exist karta hai!',
+                    });
+
+                    $(this).val("").trigger("change");
+                    return;
                 }
+
+                generateVariantSKU(group);
             });
-            // ✅ Add / remove variant rows
+
+
+
+
+            // -------------------------
+            //  ADD VARIANT (CLONE)
+            // -------------------------
             let variantIndex = {{ $product->variants->count() }};
 
             $('#add-variant').on('click', function () {
@@ -314,11 +375,8 @@
                 wrapper.find('.remove-variant').show();
                 const firstGroup = wrapper.find('.variant-group').first();
 
-                // Destroy all select2 before cloning
                 firstGroup.find('.select2').each(function () {
-                    if ($(this).data('select2')) {
-                        $(this).select2('destroy');
-                    }
+                    if ($(this).data('select2')) $(this).select2('destroy');
                 });
 
                 const newGroup = firstGroup.clone();
@@ -329,32 +387,82 @@
                 });
 
                 newGroup.find('.remove-variant').show();
+                generateVariantSKU(newGroup);
 
-                // Remove any leftover select2 containers
                 newGroup.find('.select2-container').remove();
-
                 wrapper.append(newGroup);
 
-                // Reinitialize select2 cleanly
                 newGroup.find('.select2').select2({ width: '100%' });
-
-                // Reinitialize select2 on original firstGroup
                 firstGroup.find('.select2').select2({ width: '100%' });
+
+
+                // duplicate check for cloned row
+                if (isDuplicateVariant(newGroup)) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Duplicate Variant',
+                        text: 'Yeh combination already exist karta hai!',
+                    });
+
+                    newGroup.remove();
+                    return;
+                }
 
                 variantIndex++;
             });
 
+
+
+            // -------------------------
+            //  REMOVE VARIANT
+            // -------------------------
             $(document).on('click', '.remove-variant', function () {
                 if ($('.variant-group').length > 1) {
                     $(this).closest('.variant-group').remove();
                 }
             });
 
-            // Initialize select2 initially
+
+            // -------------------------
+            //  INIT SELECT2
+            // -------------------------
             if ($.fn.select2) $('.select2').select2({ width: '100%' });
+
+
+
+            // -------------------------
+            //  FEATURED IMAGE PREVIEW
+            // -------------------------
+            $('#featuredInput').on('change', function () {
+                const file = this.files[0];
+                if (file) $('#featuredPreview').attr('src', URL.createObjectURL(file));
+            });
+
+
+
+            // -------------------------
+            //  GALLERY PREVIEW
+            // -------------------------
+            $('#galleryInput').on('change', function () {
+                $('#galleryPreview .position-relative:not([data-id])').remove();
+
+                Array.from(this.files).forEach(file => {
+                    const img = $('<div class="position-relative m-1">\
+                                        <img src="' + URL.createObjectURL(file) + '" class="img-thumbnail" style="width:100px;height:100px;object-fit:cover;">\
+                                        <button type="button" class="btn btn-danger btn-sm position-absolute remove-gallery" style="top:2px;right:2px;">&times;</button>\
+                                    </div>');
+                    $('#galleryPreview').append(img);
+                });
+            });
+
+
         });
+
     </script>
 
     @include('includes.admin.ajax-requests.create', ['redirectUrl' => route('admin.products.index')])
     @include('includes.admin.ajax-requests.delete')
 @endpush
+
+
+{{-- Chalta hua hai ye bas combo check nahi hai --}}

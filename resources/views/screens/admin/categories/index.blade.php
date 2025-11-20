@@ -26,7 +26,8 @@
     <div class="modal fade" id="categoryModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form id="submit-form" action="{{ route('admin.categories.store') }}" method="POST" data-reset="true">
+                <form id="submit-form" action="{{ route('admin.categories.store') }}" method="POST" data-reset="true"
+                    data-parsley-validate data-parsley-errors-messages-disabled>
                     @csrf
                     <input type="hidden" name="id" id="catId">
 
@@ -76,7 +77,7 @@
                     return `<input type="checkbox" class="row-checkbox" value="${row.id}">`;
                 }
             },
-                {
+            {
                 data: 'DT_RowIndex',
                 name: 'DT_RowIndex',
                 title: 'Sr.No.',
@@ -102,20 +103,20 @@
                 render: function (data, type, row) {
                     return `
 
-                                                        <button class="btn btn-sm btn-info editCategory"
-                                                                data-id="${row.id}"
-                                                                data-name="${row.name}"
-                                                                data-parent="${row.parent_id}">
-                                                            <i class="fas fa-edit"></i>
-                                                        </button>
-                                                            <button class="btn btn-sm btn-danger"
-                                                                id="delete-btn"
-                                                                data-url="{{ url('admin/categories/destroy/${row.id}') }}"
-                                                                data-id="${row.id}">
-                                                            <i class="fas fa-trash"></i>
-                                                        </button>
+                                                            <button class="btn btn-sm btn-info editCategory"
+                                                                    data-id="${row.id}"
+                                                                    data-name="${row.name}"
+                                                                    data-parent="${row.parent_id}">
+                                                                <i class="fas fa-edit"></i>
+                                                            </button>
+                                                                <button class="btn btn-sm btn-danger"
+                                                                    id="delete-btn"
+                                                                    data-url="{{ url('admin/categories/destroy/${row.id}') }}"
+                                                                    data-id="${row.id}">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
 
-                                                        `;
+                                                            `;
                 }
             },
         ];

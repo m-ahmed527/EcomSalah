@@ -16,7 +16,7 @@
             </div>
 
             <div class="card-body">
-                
+
                 <table class="table table-bordered table-striped" id="attribute-table"></table>
             </div>
         </div>
@@ -26,7 +26,8 @@
     <div class="modal fade" id="attributeModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form id="submit-form" action="{{route('admin.attributes.store')}}" method="POST" data-reset="true">
+                <form id="submit-form" action="{{route('admin.attributes.store')}}" method="POST" data-reset="true"
+                    data-parsley-validate data-parsley-errors-messages-disabled>
                     @csrf
                     <input type="hidden" id="attrId" name="id">
 
@@ -44,7 +45,7 @@
                         <div id="valueFields">
                             <label>Values</label>
                             <div class="input-group mb-2">
-                                <input type="text" name="values[]" class="form-control" placeholder="Enter value">
+                                <input type="text" name="values[0]" class="form-control" placeholder="Enter value" required>
                                 <div class="input-group-append">
                                     <button type="button" class="btn btn-success addValue">+</button>
                                 </div>
@@ -69,19 +70,40 @@
 
             // Add dynamic value field
             $(document).on('click', '.addValue', function () {
+                // determine next numeric index for name="values[<index>]"
+                let nextIndex = 0;
+                const inputs = $('#valueFields').find('input[name^="values"]');
+
+                inputs.each(function () {
+                    const name = $(this).attr('name') || '';
+                    const m = name.match(/values\[(\d+)\]/);
+                    if (m) nextIndex = Math.max(nextIndex, parseInt(m[1], 10) + 1);
+                });
+
+                // if no indexed names found (e.g. names are "values[]"), fall back to count
+                if (nextIndex === 0) nextIndex = inputs.length;
+
                 $('#valueFields').append(`
-                                                                                <div class="input-group mb-2">
-                                                                                    <input type="text" name="values[]" class="form-control" placeholder="Enter value">
-                                                                                    <div class="input-group-append">
-                                                                                        <button type="button" class="btn btn-danger removeValue">-</button>
-                                                                                    </div>
-                                                                                </div>
-                                                                            `);
+                                            <div class="input-group mb-2">
+                                                <input type="text" name="values[${nextIndex}]" class="form-control" placeholder="Enter value" required>
+                                                <div class="input-group-append">
+                                                    <button type="button" class="btn btn-danger removeValue">-</button>
+                                                </div>
+                                            </div>
+                                        `);
             });
 
-            // Remove value field
+            // Remove value field and reset indexes
             $(document).on('click', '.removeValue', function () {
-                $(this).closest('.input-group').remove();
+                const $group = $(this).closest('.input-group');
+                // remove only the error span immediately following this group (if any)
+                $group.next('span.error-message').remove();
+                $group.remove();
+
+                // reindex remaining inputs to values[0], values[1], ...
+                $('#valueFields').find('input[name^="values"]').each(function (i) {
+                    $(this).attr('name', 'values[' + i + ']');
+                });
             });
 
             // Reset modal
@@ -119,13 +141,13 @@
                         : '<button type="button" class="btn btn-danger removeValue">-</button>';
 
                     $('#valueFields').append(`
-                                                    <div class="input-group mb-2">
-                                                        <input type="text" name="values[]" value="${v}" class="form-control">
-                                                        <div class="input-group-append">
-                                                            ${btn}
-                                                        </div>
-                                                    </div>
-                                                `);
+                                                                            <div class="input-group mb-2">
+                                                                                <input type="text" name="values[]" value="${v}" class="form-control">
+                                                                                <div class="input-group-append">
+                                                                                    ${btn}
+                                                                                </div>
+                                                                            </div>
+                                                                        `);
                 });
 
                 $('#attributeModal').modal('show');
@@ -134,7 +156,7 @@
 
         });
         let columns = [
-           {
+            {
                 data: 'id',
                 title: `<input type="checkbox" id="select-all"> <span class="ml-1">Select All</span>`,
                 orderable: false,
@@ -162,7 +184,6 @@
                 orderable: false,
                 searchable: false,
                 render: function (data, type, row) {
-                    console.log(JSON.parse(row.values));
                     let values = [];
                     try {
                         values = JSON.parse(row.values || '[]');
@@ -182,20 +203,20 @@
                 render: function (data, type, row) {
                     const values = JSON.stringify(row.values); // safe convert to JSON string
                     return `
-                                                    <button class="btn btn-sm btn-info editAttr"
-                                                            data-id="${row.id}"
-                                                            data-name="${row.name}"
-                                                            data-values='${values}'>
-                                                        <i class="fas fa-edit"></i>
-                                                    </button>
-                                                    <button class="btn btn-sm btn-danger"
-                                                        id="delete-btn"
-                                                        data-url="{{ url('admin/attributes/destroy/${row.id}') }}"
-                                                        data-id="${row.id}">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
+                                                                            <button class="btn btn-sm btn-info editAttr"
+                                                                                    data-id="${row.id}"
+                                                                                    data-name="${row.name}"
+                                                                                    data-values='${values}'>
+                                                                                <i class="fas fa-edit"></i>
+                                                                            </button>
+                                                                            <button class="btn btn-sm btn-danger"
+                                                                                id="delete-btn"
+                                                                                data-url="{{ url('admin/attributes/destroy/${row.id}') }}"
+                                                                                data-id="${row.id}">
+                                                                            <i class="fas fa-trash"></i>
+                                                                        </button>
 
-                                                `;
+                                                                        `;
                 }
             },
         ];

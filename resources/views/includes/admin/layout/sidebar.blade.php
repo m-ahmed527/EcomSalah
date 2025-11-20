@@ -96,6 +96,12 @@
                                 <p>Create</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.imports.products.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Imports</p>
+                            </a>
+                        </li>
 
                     </ul>
                 </li>

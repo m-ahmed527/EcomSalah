@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\CreateProductRequest;
-use App\Http\Requests\Admin\UpdateProductRequest;
+use App\Http\Requests\Admin\Product\CreateProductRequest;
+use App\Http\Requests\Admin\Product\UpdateProductRequest;
 use App\Models\Attribute;
 use App\Models\Category;
 use App\Models\Product;
@@ -96,6 +96,7 @@ class ProductController extends Controller
         $product->load('variants.values.attribute', 'images', 'categories');
         $attributes = Attribute::with('values')->get();
         $categories = Category::all();
+        // dd($product);
         return view('screens.admin.products.edit', get_defined_vars());
     }
 
@@ -149,7 +150,8 @@ class ProductController extends Controller
         }
     }
 
-    public function destroySelected(Request $request){
+    public function destroySelected(Request $request)
+    {
         try {
             DB::beginTransaction();
             $products = Product::whereIn('id', $request->ids)->get();
@@ -242,6 +244,7 @@ class ProductController extends Controller
             $variantData[] = [
                 'product_id' => $product->id,
                 'sku' => $variant['sku'] ?? null,
+                'variant_name' => $variant['sku'] ?? null,
                 'price' => $variant['price'] ?? 0,
                 'stock' => $variant['stock'] ?? 1,
                 'created_at' => $now,
@@ -251,7 +254,7 @@ class ProductController extends Controller
             // temporarily store attribute ids (we’ll map them later)
             $variantValueRelations[] = $attrIds;
         }
-
+        // dd($variantData);
         if (empty($variantData)) {
             return;
         }
@@ -288,7 +291,7 @@ class ProductController extends Controller
     private function syncProductVariants(Product $product, array $variants): void
     {
         $now = now();
-
+        // dd($variants);
         // existing variants
         $existing = $product->variants()->pluck('id')->toArray();
 
@@ -311,6 +314,7 @@ class ProductController extends Controller
                 $toUpdate[] = [
                     'id' => $variant['id'],
                     'sku' => $variant['sku'] ?? null,
+                    'variant_name' => $variant['sku'] ?? null,
                     'price' => $variant['price'] ?? 0,
                     'stock' => $variant['stock'] ?? 1,
                     'updated_at' => $now,
@@ -322,6 +326,7 @@ class ProductController extends Controller
                 $toInsert[] = [
                     'product_id' => $product->id,
                     'sku' => $variant['sku'] ?? null,
+                    'variant_name' => $variant['sku'] ?? null,
                     'price' => $variant['price'] ?? 0,
                     'stock' => $variant['stock'] ?? 1,
                     'created_at' => $now,
@@ -330,12 +335,13 @@ class ProductController extends Controller
                 $insertValueRelations[] = $attrIds; // index-based
             }
         }
-
+        // dd($toUpdate, $toInsert);
         // ✅ Batch update existing variants
         if (!empty($toUpdate)) {
             foreach ($toUpdate as $data) {
                 ProductVariant::where('id', $data['id'])->update([
                     'sku' => $data['sku'],
+                    'variant_name' => $data['variant_name'],
                     'price' => $data['price'],
                     'stock' => $data['stock'],
                     'updated_at' => $data['updated_at'],

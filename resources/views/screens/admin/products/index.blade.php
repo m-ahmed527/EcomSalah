@@ -6,23 +6,15 @@
     <section class="content">
         <div class="container-fluid">
             <div class="card card-outline card-primary">
-                {{-- <div class="card-header">
-                    <h3 class="card-title">Products</h3>
-                    <div class="margin">
-                        <button class="btn btn-danger btn-sm float-right d-none ml-1"
-                            data-url="{{ route('admin.products.destroy.selected') }}" id="delete-selected">
-                            <i class="fas fa-trash"></i> Delete Selected
-                        </button>
-                        <a href="{{ route('admin.products.create') }}" class="btn btn-primary btn-sm float-right">
-                            <i class="fas fa-plus"></i> Add Product
-                        </a>
-                    </div>
-                </div> --}}
+
                 <div class="card-header action-buttons">
                     <h3 class="card-title">Products</h3>
 
                     <a href="{{ route('admin.products.create') }}" class="btn btn-primary btn-sm float-right">
                         <i class="fas fa-plus"></i> Add Product
+                    </a>
+                    <a href="{{ route('admin.imports.products.index') }}" class="btn btn-outline-info btn-sm float-right">
+                        <i class="fas fa-plus"></i> Bulk Upload
                     </a>
 
                     <button class="btn btn-danger btn-sm float-right d-none"
@@ -31,7 +23,7 @@
                     </button>
                 </div>
                 <div class="card-body">
-                    
+
                     <table id="product-table" class="table table-bordered table-striped"></table>
                 </div>
             </div>
@@ -43,7 +35,8 @@
         <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title" id="productDetailLabel">Product Details</h5>
+                    <h5 class="modal-title" id="productDetailLabel">Product Details <span id="modalProductType"
+                            class="badge badge-success"></span></h5>
                     <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -88,7 +81,7 @@
                                     <th>SKU</th>
                                     <th>Price</th>
                                     <th>Stock</th>
-                                    <th>Image</th>
+                                    {{-- <th>Image</th> --}}
                                 </tr>
                             </thead>
                             <tbody id="modalVariantTable"></tbody>
@@ -163,25 +156,25 @@
                 searchable: false,
                 render: function (data, type, row) {
                     return `
-                            <!-- 👁 View Button -->
-                        <button class="btn btn-sm btn-primary viewProduct"
-                                data-url='{{ url('admin/products/show/${row.slug}') }}'
-                                title="View Product">
-                            <i class="fas fa-eye"></i>
-                        </button>
+                                            <!-- 👁 View Button -->
+                                        <button class="btn btn-sm btn-primary viewProduct"
+                                                data-url='{{ url('admin/products/show/${row.slug}') }}'
+                                                title="View Product">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
 
-                        <a href="{{ url('admin/products/edit/${row.slug}') }}" class="btn btn-sm btn-info editProduct">
-                            <i class="fas fa-edit"></i>
-                        </a>
+                                        <a href="{{ url('admin/products/edit/${row.slug}') }}" class="btn btn-sm btn-info editProduct">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
 
-                        <button class="btn btn-sm btn-danger"
-                            id="delete-btn"
-                            data-url="{{ url('admin/products/destroy/${row.slug}') }}"
-                            data-id="${row.slug}">
-                            <i class="fas fa-trash"></i>
-                        </button>
+                                        <button class="btn btn-sm btn-danger"
+                                            id="delete-btn"
+                                            data-url="{{ url('admin/products/destroy/${row.slug}') }}"
+                                            data-id="${row.slug}">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
 
-                        `;
+                                        `;
                 }
             },
         ];
@@ -193,6 +186,7 @@
                 type: 'GET',
                 dataType: 'JSON',
                 beforeSend: function () {
+                    $('#modalProductType').text('');
                     $('#modalProductName').text('');
                     $('#modalProductSku').text('');
                     $('#modalProductPrice').text('');
@@ -208,7 +202,7 @@
                 success: function (response) {
                     $('.modal-body').LoadingOverlay('hide');
                     product = response.data;
-
+                    $('#modalProductType').text(product.has_variants ? '(Variable)' : '(Simple)');
                     $('#modalProductName').text(product.name);
                     $('#modalProductSku').text(product.sku);
                     $('#modalProductPrice').text(product.base_price || '-');
@@ -254,14 +248,14 @@
                                 : (attrHTML || '-');
 
                             $('#modalVariantTable').append(`
-                                                                                                            <tr>
-                                                                                                                <td>${displayName}</td>
-                                                                                                                <td>${v.sku || '-'}</td>
-                                                                                                                <td>${v.price}</td>
-                                                                                                                <td>${v.stock}</td>
-                                                                                                                <td>${v.image ? `<img src="${v.image}" width="50" height="50" style="object-fit:cover;">` : '-'}</td>
-                                                                                                            </tr>
-                                                                                                        `);
+                                                            <tr>
+                                                                <td>${displayName}</td>
+                                                                <td>${v.sku || '-'}</td>
+                                                                <td>${v.price}</td>
+                                                                <td>${v.stock}</td>
+
+                                                            </tr>
+                                                        `);
                         });
 
                         $('#modalVariantsSection').show();
@@ -284,3 +278,4 @@
     @include('includes.admin.ajax-requests.delete');
     @include('includes.admin.ajax-requests.delete-selected');
 @endpush
+{{-- <td>${v.image ? `<img src="${v.image}" width="50" height="50" style="object-fit:cover;">` : '-'}</td> --}}

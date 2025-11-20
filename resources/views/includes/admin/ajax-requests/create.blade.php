@@ -11,6 +11,15 @@
             e.preventDefault();
 
             let form = $('#submit-form');
+            if (!form.parsley().validate()) {
+                Toast.fire({
+                    icon: "warning",
+                    title: "Please fill all the required fields!",
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+                return;
+            }
             // 🔹 ensure Summernote data syncs to textarea before FormData creation
             if (window.jQuery && $.fn && $.fn.summernote && $('.summernote').length) {
                 $('.summernote').each(function () {
@@ -72,10 +81,7 @@
         });
 
 
-        $(document).on('input change keydown', 'input, select, textarea', function () {
-            $(this).next('span.error-message').text('');
-            $(this).removeClass('is-invalid');
-        });
+
 
         // ✅ helper: handle success logic conditionally
         function handleFormSuccess(form, response) {
@@ -116,42 +122,101 @@
                 window.onFormSuccess(form, response);
             }
         }
+
+
+
         function handleValidationErrors(errors) {
-    $('.error-message').remove();
-    $('.form-control').removeClass('is-invalid');
+            $('.error-message').remove();
+            $('.form-control').removeClass('is-invalid');
 
-    $.each(errors, function (key, messages) {
-        let nameAttr = key.replace(/\.(\d+|\w+)/g, "[$1]");
-        
-        // Fallback: agar array index nahi milta to [] version bhi try kare
-        let inputField = $(
-            `input[name="${nameAttr}"], select[name="${nameAttr}"], textarea[name="${nameAttr}"]`
-        );
+            $.each(errors, function (key, messages) {
+                let nameAttr = key.replace(/\.(\d+|\w+)/g, "[$1]");
+                console.log(nameAttr);
 
-        if (inputField.length === 0) {
-            // e.g. convert variants[1][attribute_value_ids][0] → variants[1][attribute_value_ids][]
-            let fallbackName = nameAttr.replace(/\[\d+\]$/, "[]");
-            inputField = $(
-                `input[name="${fallbackName}"], select[name="${fallbackName}"], textarea[name="${fallbackName}"]`
-            );
-        }
-        if(nameAttr.includes('variants')){
-            inputField = $(`input[name="is_variable"]`);
-            let errorMessage = $(`<span class="error-message text-danger">${messages[0]}</span>`);
-            inputField.last().after(errorMessage);
-        }else{
+                // Fallback: agar array index nahi milta to [] version bhi try kare
+                let inputField = $(
+                    `input[name="${nameAttr}"], select[name="${nameAttr}"], textarea[name="${nameAttr}"]`
+                );
+                // get the name of the first matched element (null if none)
+                // let inputName = inputField.length ? inputField.first().attr('name') : null;
+                // console.log(inputName);
+                // if (inputField.length === 0) {
+                //     // e.g. convert variants[1][attribute_value_ids][0] → variants[1][attribute_value_ids][]
+                //     let fallbackName = nameAttr.replace(/\[\d+\]$/, "[]");
+                //     inputField = $(
+                //         `input[name="${fallbackName}"], select[name="${fallbackName}"], textarea[name="${fallbackName}"]`
+                //     );
+                // }
+                if (inputField.length > 0) {
+                    inputField.addClass('is-invalid');
+                    let errorMessage = $(`<span class="error-message text-danger">${messages[0]}</span>`);
 
-        
-        if (inputField.length > 0) {
-            inputField.addClass('is-invalid');
-            let errorMessage = $(`<span class="error-message text-danger">${messages[0]}</span>`);
-            inputField.last().after(errorMessage);
-        } else {
-            console.log("⚠️ No input found for:", nameAttr);
+                    // 1️⃣ If inside an input-group (like password + eye icon)
+                    if (inputField.closest('.input-group').length > 0) {
+                        let group = inputField.closest('.input-group');
+                        group.after(errorMessage);
+                        return;
+                    }
+
+                    // 2️⃣ If input is select2
+                    if (inputField.hasClass('select2')) {
+                        let select2Container = inputField.next('.select2-container');
+                        let selection = select2Container.find('.select2-selection');
+                        selection.addClass('is-invalid');
+                        select2Container.after(errorMessage);
+                        return;
+                    }
+
+                    // 3️⃣ Normal input
+                    inputField.after(errorMessage);
+
+                } else {
+                    console.log("⚠️ No input found for:", nameAttr);
+                }
+
+                // if (inputField.length > 0) {
+                //     inputField.addClass('is-invalid');
+                //     let errorMessage = $(`<span class="error-message text-danger">${messages[0]}</span>`);
+                //     inputField.last().after(errorMessage);
+                // } else {
+                //     console.log("⚠️ No input found for:", nameAttr);
+                // }
+
+            });
         }
-        }
-    });
-}
+
+
+        $(document).on('input change keydown', 'input, select, textarea', function () {
+            var $el = $(this);
+
+            // remove validation styling
+            $el.removeClass('is-invalid');
+
+            // remove error message immediately after the field
+            var $nextErr = $el.next('span.error-message');
+            if ($nextErr.length) {
+                $nextErr.remove();
+            }
+
+            // if field is inside an input-group, remove error message after the group
+            var $group = $el.closest('.input-group');
+            if ($group.length) {
+                var $groupErr = $group.next('span.error-message');
+                if ($groupErr.length) {
+                    $groupErr.remove();
+                }
+            }
+
+            // handle select2: remove invalid class on the selection and its error message
+            if ($el.hasClass('select2')) {
+                var $select2Container = $el.next('.select2-container');
+                if ($select2Container.length) {
+                    $select2Container.find('.select2-selection').removeClass('is-invalid');
+                    var $selErr = $select2Container.next('span.error-message');
+                    if ($selErr.length) $selErr.remove();
+                }
+            }
+        });
 
     });
 </script>

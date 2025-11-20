@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\ProductImportController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -56,6 +57,15 @@ Route::name('products.')->prefix('products')->controller(ProductController::clas
     Route::get('/destroy/{product}', 'destroy')->name('destroy');
     Route::post('/destroy/selected', 'destroySelected')->name('destroy.selected');
     Route::get('/destroy/image/{image}', 'destroyImage')->name('image.destroy');
-
+});
+Route::name('imports.')->prefix('imports')->controller(ProductImportController::class)->group(function () {
+    Route::get('products/', 'index')->name('products.index');
+    Route::get('products/get-data', 'getProductsData')->name('products.get.data');
+    Route::post('products/', 'store')->name('products.store');
+    Route::get('products/sample', 'sampleCsv')->name('products.sample');
+    Route::get('products/status/{import}', 'status')->name('products.status');
+    Route::get('products/file/{import}', 'downloadProductFile')->name('products.file');
+    Route::get('products/errors/{import}', 'downloadErrors')->name('products.errors');
+    Route::post('/products/destroy/selected', 'destroySelected')->name('products.destroy.selected');
 
 });
