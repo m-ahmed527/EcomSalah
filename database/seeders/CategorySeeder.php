@@ -14,22 +14,34 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
+
         $categories = [
-            [
-                'name' => 'Men',
-                'slug' => 'men',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
             [
                 'name' => 'Women',
                 'slug' => 'women',
+                'parent_id' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'name' => 'Summer',
+                'slug' => 'summer',
+                'parent_id' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'Winter',
+                'slug' => 'winter',
+                'parent_id' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
 
         ];
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Category::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         Category::insertOrIgnore($categories);
 
     }

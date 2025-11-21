@@ -15,8 +15,8 @@
                 Toast.fire({
                     icon: "warning",
                     title: "Please fill all the required fields!",
-                    timer: 2000,
-                    showConfirmButton: false
+                    timer: false,
+                    showConfirmButton: true
                 });
                 return;
             }

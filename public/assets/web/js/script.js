@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
 //Start-> Page load hone par buttons disable karne aur load hone ke baad enable karne ka code
 function disableButtons() {
     // sab buttons aur anchors select karo, lekin slick buttons ko ignore karo
-    const buttons = document.querySelectorAll('button:not(.slick-arrow):not(.slick-dots button), a:not(.logo-a)');
+    const buttons = document.querySelectorAll('button:not(.slick-arrow):not(.slick-dots button), a:not(.logo-a):not(.product-a)');
 
     buttons.forEach(el => {
         if (!el.classList.contains('disabled')) {

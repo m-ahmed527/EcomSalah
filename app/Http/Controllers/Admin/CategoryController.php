@@ -17,7 +17,10 @@ class CategoryController extends Controller
             'Dashboard' => route('admin.index'),
             'Manage Categories' => route('admin.categories.index'),
         ];
-        $parents = Category::whereNull('parent_id')->get();
+        // dd( Category::with('childrenRecursive')
+        //     ->whereNull('parent_id')
+        //     ->get());
+        $parents = Category::all();
         return view('screens.admin.categories.index', get_defined_vars());
     }
     public function getCategoriesData()

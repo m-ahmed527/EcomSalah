@@ -6,7 +6,8 @@
             console.log(123);
             if ($('.remove-gallery').length > 0) {
                 if (!button.data('id')) {
-                    button.closest('div').remove();
+                    // button.closest('div').remove();
+                    removeImageFromInput(button);
                     return;
                 }
 
@@ -72,6 +73,31 @@
             })
 
         })
+
+        function removeImageFromInput(button) {
+            // ---------- NEW IMAGE DELETE (input.files se remove) ----------
+            let wrapper = button.closest('div');
+            let indexToRemove = wrapper.data('index');
+
+            let input = document.getElementById("galleryInput");
+            let dt = new DataTransfer();
+
+            let files = input.files;
+
+            Array.from(files).forEach((file, index) => {
+                if (index !== indexToRemove) dt.items.add(file);
+            });
+
+            input.files = dt.files;
+
+            wrapper.remove();
+
+            // Re-index new images again
+            $('#galleryPreview .position-relative:not([data-id])')
+                .each(function (i) {
+                    $(this).attr('data-index', i);
+                });
+        }
 
     })
 </script>

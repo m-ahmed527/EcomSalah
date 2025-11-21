@@ -20,7 +20,6 @@ class DatabaseSeeder extends Seeder
         User::updateOrCreate(['email' => 'admin@example.com'], [
             'first_name' => 'Admin',
             'last_name' => 'Ahmed',
-            // 'email' => 'admin@example.com',
             'phone' => '+923242534131',
             'role' => User::ADMIN,
             'status' => User::ACTIVE,
@@ -29,7 +28,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             SettingSeeder::class,
             CategorySeeder::class,
-            AttributeSeeder::class
+            AttributeSeeder::class,
+            ProductSeeder::class
         ]);
     }
 }

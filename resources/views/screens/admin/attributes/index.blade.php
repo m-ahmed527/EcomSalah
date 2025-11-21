@@ -38,12 +38,12 @@
 
                     <div class="modal-body">
                         <div class="form-group">
-                            <label>Attribute Name</label>
+                            <label class="required">Attribute Name</label>
                             <input type="text" id="attrName" name="name" class="form-control" required>
                         </div>
 
                         <div id="valueFields">
-                            <label>Values</label>
+                            <label class="required">Values</label>
                             <div class="input-group mb-2">
                                 <input type="text" name="values[0]" class="form-control" placeholder="Enter value" required>
                                 <div class="input-group-append">

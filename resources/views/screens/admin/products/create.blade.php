@@ -24,22 +24,22 @@
                     <div class="row">
 
                         <div class="form-group col-md-6">
-                            <label>Product Name</label>
+                            <label class="required">Product Name</label>
                             <input type="text" name="name" class="form-control" required>
                         </div>
 
                         <div class="form-group col-md-3">
-                            <label>Base Price</label>
+                            <label class="required">Base Price</label>
                             <input type="text" name="base_price" class="form-control only-numeric" required>
                         </div>
 
                         <div class="form-group col-md-3">
-                            <label>Stock</label>
+                            <label class="required">Stock</label>
                             <input type="text" name="stock" class="form-control only-numeric" required>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Category</label>
+                        <label class="required">Category</label>
                         <select name="category_id" class="form-control select2" required>
                             <option value="">Select Category</option>
                             @foreach ($categories as $category)
@@ -48,28 +48,16 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>SKU</label>
+                        <label class="required">SKU</label>
                         <input type="text" name="sku" class="form-control" readonly>
                     </div>
-
-                    {{-- 🔹 Descriptions --}}
-                    <div class="form-group">
-                        <label>Short Description</label>
-                        <textarea name="short_description" class="form-control summernote"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Long Description</label>
-                        <textarea name="long_description" class="form-control summernote"></textarea>
-                    </div>
-
                     <hr>
 
                     {{-- 🔹 Images --}}
                     <h5>Product Images</h5>
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label>Featured Image</label><br>
+                            <label class="required">Featured Image</label><br>
                             <img id="featuredPreview" src="{{ asset('assets/web/images/no-image.png') }}" alt="Featured"
                                 class="img-thumbnail mb-2" style="width:150px;height:150px;object-fit:cover;">
                             <input type="file" name="featured_image" id="featuredInput" class="form-control-file mt-2"
@@ -83,6 +71,18 @@
                             <div id="galleryPreview" class="d-flex flex-wrap mt-2"></div>
                         </div>
                     </div>
+                    {{-- 🔹 Descriptions --}}
+                    <div class="form-group">
+                        <label>Short Description</label>
+                        <textarea name="short_description" class="form-control summernote"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Long Description</label>
+                        <textarea name="long_description" class="form-control summernote"></textarea>
+                    </div>
+
+
 
                     <hr>
 
@@ -196,7 +196,64 @@
                 this.value = this.value.replace(/[^0-9.]/g, '');
             });
 
+            // ✅ Featured image preview
+            $('#featuredInput').on('change', function () {
+                const file = this.files[0];
+                if (file) $('#featuredPreview').attr('src', URL.createObjectURL(file));
+            });
 
+            // === Gallery Preview ===
+            $('#galleryInput').on('change', function () {
+                $('#galleryPreview').html('');
+
+                const files = Array.from(this.files);
+
+                files.forEach((file, index) => {
+                    const wrapper = $('<div>')
+                        .addClass('position-relative m-1')
+                        .attr('data-index', index);
+
+                    const imgEl = $('<img>')
+                        .addClass('img-thumbnail')
+                        .css({ width: '100px', height: '100px', 'object-fit': 'cover' })
+                        .attr('src', URL.createObjectURL(file));
+
+                    const removeBtn = $('<button type="button">')
+                        .addClass('btn btn-danger btn-sm position-absolute remove-gallery')
+                        .css({ top: '2px', right: '2px' })
+                        .html('&times;');
+
+                    wrapper.append(imgEl).append(removeBtn);
+                    $('#galleryPreview').append(wrapper);
+                });
+            });
+
+            // === Remove Image Preview + Remove File From Input ===
+            $(document).on('click', '.remove-gallery', function () {
+
+                let indexToRemove = $(this).closest('div').data('index');
+
+                let input = document.getElementById("galleryInput");
+                let dt = new DataTransfer();
+
+                let files = input.files;
+
+                // Sirf un files ko wapas add karo jo remove nahi karni
+                Array.from(files).forEach((file, index) => {
+                    if (index !== indexToRemove) dt.items.add(file);
+                });
+
+                // Nayi file list input me set karo
+                input.files = dt.files;
+
+                // Preview se remove
+                $(this).closest('div').remove();
+
+                // Dobara indexes update karo (taake remove phir sahi chale)
+                $('#galleryPreview > div').each(function (i) {
+                    $(this).attr('data-index', i);
+                });
+            });
             // -------------------------------
             //  BASE SKU FROM PRODUCT NAME
             // -------------------------------

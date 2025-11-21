@@ -10,7 +10,7 @@
 @section('content')
     <div class="container-fluid">
         <form action="{{ route('admin.products.update', $product->slug) }}" method="POST" enctype="multipart/form-data"
-            id="submit-form" data-parsley-validate>
+            id="submit-form" data-parsley-validate data-parsley-errors-messages-disabled>
             @csrf
             <div class="card card-outline card-primary">
                 <div class="card-header">
@@ -24,24 +24,24 @@
                     {{-- 🔹 Basic Info --}}
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label>Product Name</label>
+                            <label class="required">Product Name</label>
                             <input type="text" name="name" class="form-control" value="{{ $product->name }}" required>
                         </div>
 
                         <div class="form-group col-md-3">
-                            <label>Base Price</label>
+                            <label class="required">Base Price</label>
                             <input type="text" name="base_price" class="form-control only-numeric"
                                 value="{{ $product->base_price }}" required>
                         </div>
 
                         <div class="form-group col-md-3">
-                            <label>Stock</label>
+                            <label class="required">Stock</label>
                             <input type="text" name="stock" class="form-control only-numeric" value="{{ $product->stock }}"
                                 required>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Category</label>
+                        <label class="required">Category</label>
                         <select name="category_id" class="form-control select2" required>
                             <option value="">Select Category</option>
                             @foreach ($categories as $category)
@@ -51,21 +51,8 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>SKU</label>
+                        <label class="required">SKU</label>
                         <input type="text" name="sku" class="form-control" readonly value="{{ $product->sku }}">
-                    </div>
-
-                    {{-- 🔹 Descriptions --}}
-                    <div class="form-group">
-                        <label>Short Description</label>
-                        <textarea name="short_description"
-                            class="form-control summernote">{{ $product->short_description }}</textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Long Description</label>
-                        <textarea name="long_description"
-                            class="form-control summernote">{{ $product->long_description }}</textarea>
                     </div>
 
                     <hr>
@@ -74,13 +61,13 @@
                     <h5>Product Images</h5>
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label>Featured Image</label><br>
+                            <label class="required">Featured Image</label><br>
                             <img id="featuredPreview"
                                 src="{{ $product->featured_image ?: asset('assets/web/images/no-image.png') }}"
                                 alt="Featured" class="img-thumbnail mb-2"
                                 style="width:150px;height:150px;object-fit:cover;">
                             <input type="file" name="featured_image" id="featuredInput" class="form-control-file mt-2"
-                                accept="image/*" required>
+                                accept="image/*" {{ $product->featured_image ? '' : 'required'  }}>
                         </div>
 
                         <div class="form-group col-md-6">
@@ -102,6 +89,21 @@
                             </div>
                         </div>
                     </div>
+
+                    {{-- 🔹 Descriptions --}}
+                    <div class="form-group">
+                        <label>Short Description</label>
+                        <textarea name="short_description"
+                            class="form-control summernote">{{ $product->short_description }}</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Long Description</label>
+                        <textarea name="long_description"
+                            class="form-control summernote">{{ $product->long_description }}</textarea>
+                    </div>
+
+
 
                     <hr>
 
@@ -227,7 +229,7 @@
                                         </div>
                                         <div class="form-group col-md-12">
                                             <label>SKU</label>
-                                            <input type="text" name="variants[0][sku]" class="form-control variant-sku" required
+                                            <input type="text" name="variants[0][sku]" class="form-control variant-sku"
                                                 readonly>
                                         </div>
                                     </div>
@@ -439,21 +441,45 @@
             });
 
 
-
             // -------------------------
             //  GALLERY PREVIEW
             // -------------------------
             $('#galleryInput').on('change', function () {
+                // Purani uploaded images ko mat hatao (jin par data-id hai)
                 $('#galleryPreview .position-relative:not([data-id])').remove();
 
-                Array.from(this.files).forEach(file => {
-                    const img = $('<div class="position-relative m-1">\
-                                        <img src="' + URL.createObjectURL(file) + '" class="img-thumbnail" style="width:100px;height:100px;object-fit:cover;">\
-                                        <button type="button" class="btn btn-danger btn-sm position-absolute remove-gallery" style="top:2px;right:2px;">&times;</button>\
-                                    </div>');
-                    $('#galleryPreview').append(img);
+                const files = Array.from(this.files);
+
+                files.forEach((file, index) => {
+                    const wrapper = $(`
+                            <div class="position-relative m-1" data-index="${index}">
+                                <img src="${URL.createObjectURL(file)}" class="img-thumbnail"
+                                     style="width:100px;height:100px;object-fit:cover;">
+                                <button type="button"
+                                        class="btn btn-danger btn-sm position-absolute remove-gallery"
+                                        style="top:2px;right:2px;">&times;</button>
+                            </div>
+                                `);
+
+                    $('#galleryPreview').append(wrapper);
                 });
             });
+
+
+            // // -------------------------
+            // //  GALLERY PREVIEW
+            // // -------------------------
+            // $('#galleryInput').on('change', function () {
+            //     $('#galleryPreview .position-relative:not([data-id])').remove();
+
+            //     Array.from(this.files).forEach(file => {
+            //         const img = $('<div class="position-relative m-1">\
+            //                             <img src="' + URL.createObjectURL(file) + '" class="img-thumbnail" style="width:100px;height:100px;object-fit:cover;">\
+            //                             <button type="button" class="btn btn-danger btn-sm position-absolute remove-gallery" style="top:2px;right:2px;">&times;</button>\
+            //                         </div>');
+            //         $('#galleryPreview').append(img);
+            //     });
+            // });
 
 
         });

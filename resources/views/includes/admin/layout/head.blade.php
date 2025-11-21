@@ -134,6 +134,15 @@
         .select2-container--default .select2-selection--multiple.is-invalid {
             border-color: #dc3545 !important;
         }
+
+        label.required::after {
+            content: " *";
+            color: red;
+            font-weight: bold;
+            font-size: 18px;
+            /* 👈 Bara size */
+            line-height: 1;
+        }
     </style>
 
 </head>

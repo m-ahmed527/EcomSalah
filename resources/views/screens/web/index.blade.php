@@ -101,7 +101,7 @@
                         <div class="product-item">
                             <div class="product-thumb">
                                 <span class="bage">Sale</span>
-                                <a href="{{ route('web.product.show') }}">
+                                <a href="{{ route('web.product.show') }}" class="product-a">
                                     <img class="img-responsive"
                                         src="{{ asset('assets/web/images/shop/products/product-' . $item . '.jpg') }}"
                                         alt="product-img" />

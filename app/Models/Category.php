@@ -17,7 +17,10 @@ class Category extends Model
     {
         return $this->hasMany(Category::class, 'parent_id');
     }
-
+    public function childrenRecursive()
+    {
+        return $this->children()->with('childrenRecursive');
+    }
     public function products()
     {
         return $this->belongsToMany(Product::class, 'product_categories')->withTimestamps();

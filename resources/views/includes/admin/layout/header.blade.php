@@ -1,4 +1,4 @@
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-footer-fixed layout-navbar-fixed layout-fixed">
     <div class="wrapper">
 
         <!-- Preloader -->

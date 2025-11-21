@@ -38,8 +38,8 @@
 
                     <div class="modal-body">
                         <div class="form-group">
-                            <label>Category Name</label>
-                            <input type="text" name="name" id="catName" class="form-control" required>
+                            <label class="required">Category Name</label>
+                            <input type="text" name="name" id="catName" class="form-control" placeholder="Enter Category Name" required>
                         </div>
 
                         <div class="form-group">
