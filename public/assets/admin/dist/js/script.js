@@ -136,7 +136,12 @@ document.addEventListener('DOMContentLoaded', function () {
             document.querySelector('.main-header').className = 'main-header navbar navbar-expand ' + navbarColor;
             document.querySelector('.main-sidebar').className = 'main-sidebar ' + sidebarColor;
 
-            toastr.success('Theme updated successfully!');
+            Toast.fire({
+                icon: "success",
+                title: "Theme settings saved!",
+                showConfirmButton: false,
+                timer: 1500
+            });
         });
     }
 
@@ -144,18 +149,22 @@ document.addEventListener('DOMContentLoaded', function () {
     $(function () {
         $('.select2').select2({
             // placeholder: 'Select an option',
+            // allowClear: true,
+            width: '100%',
+            dropdownAutoWidth: true
         })
+
         $('.summernote').summernote({ height: 200 });
     });
 });
 
 // Image Preview
 
-    document.addEventListener("DOMContentLoaded", function () {
-        // create overlay only once
-        const overlay = document.createElement("div");
-        overlay.className = "image-viewer-overlay";
-        overlay.innerHTML = `
+document.addEventListener("DOMContentLoaded", function () {
+    // create overlay only once
+    const overlay = document.createElement("div");
+    overlay.className = "image-viewer-overlay";
+    overlay.innerHTML = `
                             <span class="image-viewer-controls">&times;</span>
                             <span class="image-viewer-arrow left">&#10094;</span>
                             <img class="image-viewer-img" src="" alt="">
@@ -166,79 +175,79 @@ document.addEventListener('DOMContentLoaded', function () {
                             <span class="image-viewer-zoom-btn" data-zoom="reset">⟳</span>
                             </div>
                         `;
-        document.body.appendChild(overlay);
+    document.body.appendChild(overlay);
 
-        const viewerImg = overlay.querySelector(".image-viewer-img");
-        const closeBtn = overlay.querySelector(".image-viewer-controls");
-        const leftArrow = overlay.querySelector(".image-viewer-arrow.left");
-        const rightArrow = overlay.querySelector(".image-viewer-arrow.right");
-        const zoomBtns = overlay.querySelectorAll(".image-viewer-zoom-btn");
+    const viewerImg = overlay.querySelector(".image-viewer-img");
+    const closeBtn = overlay.querySelector(".image-viewer-controls");
+    const leftArrow = overlay.querySelector(".image-viewer-arrow.left");
+    const rightArrow = overlay.querySelector(".image-viewer-arrow.right");
+    const zoomBtns = overlay.querySelectorAll(".image-viewer-zoom-btn");
 
-        let currentIndex = 0;
-        let scale = 1;
-        let allImages = [];
+    let currentIndex = 0;
+    let scale = 1;
+    let allImages = [];
 
-        const showImage = (index) => {
-            if (index < 0 || index >= allImages.length) return;
-            currentIndex = index;
-            viewerImg.src = allImages[currentIndex].src;
-            overlay.style.display = "flex";
-            scale = 1;
+    const showImage = (index) => {
+        if (index < 0 || index >= allImages.length) return;
+        currentIndex = index;
+        viewerImg.src = allImages[currentIndex].src;
+        overlay.style.display = "flex";
+        scale = 1;
+        viewerImg.style.transform = `scale(${scale})`;
+    };
+
+    // ✅ event delegation — handle all current + future .image-preview
+    document.addEventListener("click", (e) => {
+        if (e.target.classList.contains("image-preview")) {
+            allImages = Array.from(document.querySelectorAll(".image-preview"));
+            const index = allImages.indexOf(e.target);
+            showImage(index);
+        }
+    });
+
+    // close viewer
+    closeBtn.addEventListener("click", () => overlay.style.display = "none");
+
+    // navigate left/right
+    leftArrow.addEventListener("click", (e) => {
+        e.stopPropagation();
+        showImage((currentIndex - 1 + allImages.length) % allImages.length);
+    });
+
+    rightArrow.addEventListener("click", (e) => {
+        e.stopPropagation();
+        showImage((currentIndex + 1) % allImages.length);
+    });
+
+    // zoom controls
+    zoomBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const action = btn.dataset.zoom;
+            if (action === "in") scale += 0.2;
+            else if (action === "out") scale = Math.max(0.4, scale - 0.2);
+            else if (action === "reset") scale = 1;
             viewerImg.style.transform = `scale(${scale})`;
-        };
-
-        // ✅ event delegation — handle all current + future .image-preview
-        document.addEventListener("click", (e) => {
-            if (e.target.classList.contains("image-preview")) {
-                allImages = Array.from(document.querySelectorAll(".image-preview"));
-                const index = allImages.indexOf(e.target);
-                showImage(index);
-            }
-        });
-
-        // close viewer
-        closeBtn.addEventListener("click", () => overlay.style.display = "none");
-
-        // navigate left/right
-        leftArrow.addEventListener("click", (e) => {
-            e.stopPropagation();
-            showImage((currentIndex - 1 + allImages.length) % allImages.length);
-        });
-
-        rightArrow.addEventListener("click", (e) => {
-            e.stopPropagation();
-            showImage((currentIndex + 1) % allImages.length);
-        });
-
-        // zoom controls
-        zoomBtns.forEach(btn => {
-            btn.addEventListener("click", () => {
-                const action = btn.dataset.zoom;
-                if (action === "in") scale += 0.2;
-                else if (action === "out") scale = Math.max(0.4, scale - 0.2);
-                else if (action === "reset") scale = 1;
-                viewerImg.style.transform = `scale(${scale})`;
-            });
-        });
-
-        // close on background click
-        overlay.addEventListener("click", (e) => {
-            if (e.target === overlay) overlay.style.display = "none";
-        });
-
-        // keyboard navigation
-        document.addEventListener("keydown", (e) => {
-            if (overlay.style.display !== "flex") return;
-            if (e.key === "Escape") overlay.style.display = "none";
-            if (e.key === "ArrowRight") rightArrow.click();
-            if (e.key === "ArrowLeft") leftArrow.click();
         });
     });
 
+    // close on background click
+    overlay.addEventListener("click", (e) => {
+        if (e.target === overlay) overlay.style.display = "none";
+    });
 
-    // // Image preview click - works for dynamically loaded images
-    // $(document).on('click', '.image-preview', function () {
-    //     const src = $(this).attr('src');
-    //     $('#imageViewModalImg').attr('src', src);
-    //     $('#imageViewModal').modal('show');
-    // });
+    // keyboard navigation
+    document.addEventListener("keydown", (e) => {
+        if (overlay.style.display !== "flex") return;
+        if (e.key === "Escape") overlay.style.display = "none";
+        if (e.key === "ArrowRight") rightArrow.click();
+        if (e.key === "ArrowLeft") leftArrow.click();
+    });
+});
+
+
+// // Image preview click - works for dynamically loaded images
+// $(document).on('click', '.image-preview', function () {
+//     const src = $(this).attr('src');
+//     $('#imageViewModalImg').attr('src', src);
+//     $('#imageViewModal').modal('show');
+// });

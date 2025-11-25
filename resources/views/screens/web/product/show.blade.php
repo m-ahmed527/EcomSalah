@@ -2,10 +2,8 @@
 
 @section('title', 'Details of a Product of Salah Wears')
 @section('page', 'Products')
-@section('url', route('web.product.index'))
-@section('detail', 'Product Details')
 @section('content')
-
+    {{-- @dd($product) --}}
     <section class="single-product">
         <div class="container">
 
@@ -17,30 +15,22 @@
                                 <!-- me art lab slider -->
                                 <div class='carousel-inner '>
                                     <div class='item active'>
-                                        <img src='{{asset('assets/web/images/shop/single-products/product-1.jpg')}}' alt=''
-                                            data-zoom-image="{{asset('assets/web/images/shop/single-products/product-1.jpg')}}" />
+                                        <img src='{{$product->featured_image ?? asset('assets/web/images/no-image.png')}}'
+                                            alt=''
+                                            data-zoom-image="{{$product->featured_image ?? asset('assets/web/images/no-image.png')}}" />
                                     </div>
-                                    <div class='item'>
-                                        <img src='{{asset('assets/web/images/shop/single-products/product-2.jpg')}}' alt=''
-                                            data-zoom-image="{{asset('assets/web/images/shop/single-products/product-2.jpg')}}" />
-                                    </div>
+                                    @forelse ($product->images as $image)
+                                        <div class='item'>
+                                            <img src='{{$image->image ?? asset('assets/web/images/no-image.png')}}' alt=''
+                                                data-zoom-image="{{$image->image ?? asset('assets/web/images/no-image.png')}}" />
+                                        </div>
+                                    @empty
+                                        <div class='item'>
+                                            <img src='{{ asset('assets/web/images/no-image.png')}}' alt=''
+                                                data-zoom-image="{{ asset('assets/web/images/no-image.png')}}" />
+                                        </div>
+                                    @endforelse
 
-                                    <div class='item'>
-                                        <img src='{{asset('assets/web/images/shop/single-products/product-3.jpg')}}' alt=''
-                                            data-zoom-image="{{asset('assets/web/images/shop/single-products/product-3.jpg')}}" />
-                                    </div>
-                                    <div class='item'>
-                                        <img src='{{asset('assets/web/images/shop/single-products/product-4.jpg')}}' alt=''
-                                            data-zoom-image="{{asset('assets/web/images/shop/single-products/product-4.jpg')}}" />
-                                    </div>
-                                    <div class='item'>
-                                        <img src='{{asset('assets/web/images/shop/single-products/product-5.jpg')}}' alt=''
-                                            data-zoom-image="{{asset('assets/web/images/shop/single-products/product-5.jpg')}}" />
-                                    </div>
-                                    <div class='item'>
-                                        <img src='{{asset('assets/web/images/shop/single-products/product-6.jpg')}}' alt=''
-                                            data-zoom-image="{{asset('assets/web/images/shop/single-products/product-6.jpg')}}" />
-                                    </div>
 
                                 </div>
 
@@ -56,80 +46,83 @@
                             <!-- thumb -->
                             <ol class='carousel-indicators mCustomScrollbar meartlab'>
                                 <li data-target='#carousel-custom' data-slide-to='0' class='active'>
-                                    <img src='{{asset('assets/web/images/shop/single-products/product-1.jpg')}}' alt='' />
+                                    <img src='{{$product->featured_image ?? asset('assets/web/images/no-image.png')}}'
+                                        alt='' />
                                 </li>
-                                <li data-target='#carousel-custom' data-slide-to='1'>
-                                    <img src='{{asset('assets/web/images/shop/single-products/product-2.jpg')}}' alt='' />
-                                </li>
-                                <li data-target='#carousel-custom' data-slide-to='2'>
-                                    <img src='{{asset('assets/web/images/shop/single-products/product-3.jpg')}}' alt='' />
-                                </li>
-                                <li data-target='#carousel-custom' data-slide-to='3'>
-                                    <img src='{{asset('assets/web/images/shop/single-products/product-4.jpg')}}' alt='' />
-                                </li>
-                                <li data-target='#carousel-custom' data-slide-to='4'>
-                                    <img src='{{asset('assets/web/images/shop/single-products/product-5.jpg')}}' alt='' />
-                                </li>
-                                <li data-target='#carousel-custom' data-slide-to='5'>
-                                    <img src='{{asset('assets/web/images/shop/single-products/product-6.jpg')}}' alt='' />
-                                </li>
-                                <li data-target='#carousel-custom' data-slide-to='6'>
-                                    <img src='{{asset('assets/web/images/shop/single-products/product-6.jpg')}}' alt='' />
-                                </li>
+                                @forelse ($product->images as $key => $image)
+                                    <li data-target='#carousel-custom' data-slide-to='{{ $key + 1 }}'>
+                                        <img src='{{$image->image ?? asset('assets/web/images/no-image.png')}}' alt='' />
+                                    </li>
+                                @empty
+                                    <li data-target='#carousel-custom' data-slide-to='1'>
+                                        <img src='{{ asset('assets/web/images/no-image.png')}}' alt='' />
+                                    </li>
+                                @endforelse
+
                             </ol>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-7">
                     <div class="single-product-details">
-                        <h2>Eclipse Crossbody</h2>
-                        <p class="product-price">$300</p>
+                        <h2>{{ $product->name }}</h2>
+                        <p class="product-price">PKR {{ $product->priceRange() }}</p>
 
                         <p class="product-description mt-20">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum ipsum dicta quod, quia
-                            doloremque aut deserunt commodi quis. Totam a consequatur beatae nostrum, earum consequuntur?
-                            Eveniet consequatur ipsum dicta recusandae.
+                            {!! $product->short_description !!}
                         </p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt, velit, sunt temporibus, nulla
-                            accusamus similique sapiente tempora, at atque cumque assumenda minus asperiores est esse sequi
-                            dolore magnam. Debitis, explicabo.</p>
-                        <div class="color-swatches">
-                            <span>color:</span>
-                            <ul>
-                                <li>
-                                    <a href="#!" class="swatch-violet"></a>
-                                </li>
-                                <li>
-                                    <a href="#!" class="swatch-black"></a>
-                                </li>
-                                <li>
-                                    <a href="#!" class="swatch-cream"></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="product-size">
-                            <span>Size:</span>
-                            <select class="form-control">
-                                <option>S</option>
-                                <option>M</option>
-                                <option>L</option>
-                                <option>XL</option>
-                            </select>
-                        </div>
-                        <div class="product-quantity">
-                            <span>Quantity:</span>
-                            <div class="product-quantity-slider">
-                                <input id="product-quantity" type="text" value="0" name="product-quantity">
+                        {{-- @dd($attributes) --}}
+                        <form action="">
+                            <div class="row" id="variant-selectors">
+                                @foreach ($attributes as $attribute)
+
+                                    <div class="mb-3">
+                                        <label class="form-label d-block fw-bold">{{ $attribute->name }}:</label>
+                                        <div style="display: flex; gap:10px; margin:5px">
+                                            @foreach ($attribute->values as $value)
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input variant-radio" type="radio"
+                                                        name="attribute_{{ $attribute->id }}"
+                                                        data-attribute-id="{{ $attribute->id }}" value="{{ $value->id }}">
+                                                    <label class="form-check-label">{{ $value->value }}</label>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                        {{-- Reset Button --}}
+                                        <button type="button" class="btn btn-sm btn-outline-secondary ms-2 reset-attribute"
+                                            data-attribute-id="{{ $attribute->id }}">
+                                            Reset {{ $attribute->name }}
+                                        </button>
+                                    </div>
+                                @endforeach
                             </div>
+                        </form>
+                        <div class="mt-4">
+                            <h5>Additional price: <span id="variant-price">-</span></h5>
+                            <h5>Stock of variant: <span id="variant-stock">-</span></h5>
                         </div>
                         <div class="product-category">
                             <span>Categories:</span>
                             <ul>
-                                <li><a href="product-single.html">Products</a></li>
-                                <li><a href="product-single.html">Soap</a></li>
+                                @forelse ($product->categories as $category)
+                                    <li><a href="#!">{{ $category->name }}</a></li>
+                                @empty
+                                    <li><a href="#!">Uncategorized</a></li>
+                                @endforelse
+
                             </ul>
                         </div>
-                        <a href="cart.html" class="btn btn-main mt-20">Add To Cart</a>
+                        <form id="cart-form">
+                            <input type="hidden" name="variant_id" id="selected-variant-id">
+                            <div class="product-quantity">
+                                <span>Quantity:</span>
+                                <div class="product-quantity-slider">
+                                    <input id="quantity" type="text" value="0" name="product-quantity">
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-main mt-20">Add To Cart</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -138,24 +131,15 @@
                     <div class="tabCommon mt-20">
                         <ul class="nav nav-tabs">
                             <li class="active"><a data-toggle="tab" href="#details" aria-expanded="true">Details</a></li>
-                            <li class=""><a data-toggle="tab" href="#reviews" aria-expanded="false">Reviews (3)</a></li>
+                            {{-- <li class=""><a data-toggle="tab" href="#reviews" aria-expanded="false">Reviews (3)</a>
+                            </li> --}}
                         </ul>
                         <div class="tab-content patternbg">
                             <div id="details" class="tab-pane fade active in">
                                 <h4>Product Description</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                                    dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                                    mollit anim id est laborum. Sed ut per spici</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis delectus quidem
-                                    repudiandae veniam distinctio repellendus magni pariatur molestiae asperiores animi, eos
-                                    quod iusto hic doloremque iste a, nisi iure at unde molestias enim fugit, nulla
-                                    voluptatibus. Deserunt voluptate tempora aut illum harum, deleniti laborum animi neque,
-                                    praesentium explicabo, debitis ipsa?</p>
+                                <p>{!! $product->long_description !!}</p>
                             </div>
-                            <div id="reviews" class="tab-pane fade">
+                            {{-- <div id="reviews" class="tab-pane fade">
                                 <div class="post-comments">
                                     <ul class="media-list comments-list m-bot-50 clearlist">
                                         <!-- Comment Item start-->
@@ -251,7 +235,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -266,46 +250,45 @@
                 </div>
             </div>
             <div class="row">
-                @for ($item = 1; $item <= 3; $item++)
+                @forelse ($relatedProducts as $relProduct)
                     <div class="col-md-3">
                         <div class="product-item">
 
                             <div class="product-thumb">
                                 <span class="bage">Sale</span>
-                                <a href="{{ route('web.product.show') }}">
+                                <a href="{{ route('web.product.show', $relProduct->slug) }}" class="product-a">
                                     <img class="img-responsive"
-                                        src="{{ asset('assets/web/images/shop/products/product-' . $item . '.jpg') }}"
+                                        src="{{ $relProduct->featured_image ?? asset('assets/web/images/no-image.png') }}"
                                         alt="product-img" />
                                 </a>
                                 <div class="preview-meta">
                                     <ul>
                                         <li>
-                                            <span class="icon-search" data-toggle="modal" data-target="#product-modal">
-                                                <i class="tf-ion-ios-search-strong"></i>
+                                            <span class="modalProductShow"
+                                                data-url="{{ route('web.product.details', $relProduct->slug) }}">
+                                                <i class="tf-ion-ios-eye" style="font-size:22px;"></i>
                                             </span>
                                         </li>
                                         <li>
-                                            <span class="icon-heart">
-                                                <i class="tf-ion-ios-heart"></i>
-                                            </span>
+                                            <span><i class="tf-ion-ios-heart"></i></span>
                                         </li>
-                                        <li>
-                                            <span class="icon-cart">
-                                                <i class="tf-ion-android-cart"></i>
-                                            </span>
-                                        </li>
+
                                     </ul>
                                 </div>
                             </div>
 
                             <div class="product-content">
-                                <h4 class="mb-1">Rainbow Shoes</h4>
-                                <p class="price">$200</p>
+                                <h4 class="mb-1">{{ $relProduct->name }}</h4>
+                                <p class="price">PKR {{ $relProduct->priceRange() }}</p>
                             </div>
                         </div>
                     </div>
 
-                @endfor
+                @empty
+                    <div class="col-12">
+                        <h5 class="text-center text-muted">No related products found.</h5>
+                    </div>
+                @endforelse
 
             </div>
         </div>
@@ -314,35 +297,156 @@
 
 
     <!-- Modal -->
-    <div class="modal product-modal fade" id="product-modal">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <i class="tf-ion-close"></i>
-        </button>
-        <div class="modal-dialog " role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="modal-image">
-                                <img class="img-responsive"
-                                    src="{{ asset('assets/web/images/shop/products/modal-product.jpg') }}" />
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="product-short-details">
-                                <h2 class="product-title">GM Pendant, Basalt Grey</h2>
-                                <p class="product-price">$200</p>
-                                <p class="product-short-description">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem iusto nihil cum. Illo
-                                    laborum numquam rem aut officia dicta cumque.
-                                </p>
-                                <a href="#!" class="btn btn-main">Add To Cart</a>
-                                <a href="#!" class="btn btn-transparent">View Product Details</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('screens.web.product.partials.modal')
 @endsection
+@push('scripts')
+    @include('includes.web.common.modal-script')
+
+    <script>
+        const variantMap = @json($variantMap);
+        const priceDisplay = $('#variant-price');
+        const stockDisplay = $('#variant-stock');
+        let currentVariantId = null;
+
+        function getSelectedAttributes() {
+            const selected = {};
+            $('.variant-radio:checked').each(function () {
+                const attrId = $(this).data('attribute-id');
+                selected[attrId] = parseInt($(this).val());
+            });
+
+            return selected;
+        }
+
+        function filterRadios(changedInput = null) {
+            const selected = getSelectedAttributes();
+
+            $('.variant-radio').prop('disabled', false); // reset all first
+
+            if (changedInput && !$(changedInput).is(':checked')) {
+                // If radio was unchecked (user clicked same again), stop here
+                priceDisplay.text('-');
+                stockDisplay.text('-');
+                $('#selected-variant-id').val('');
+                currentVariantId = null;
+                return;
+            }
+
+            // Loop through all attribute radios
+            $('.variant-radio').each(function () {
+                const currentAttr = $(this).data('attribute-id');
+                const currentVal = parseInt($(this).val());
+
+
+                const otherSelected = {
+                    ...selected
+                };
+
+                delete otherSelected[currentAttr]; // remove self from filtering
+
+                const isValid = variantMap.some(function (combo) {
+                    let match = true;
+                    for (const key in otherSelected) {
+                        if (combo[key] !== otherSelected[key]) {
+                            match = false;
+                            break;
+                        }
+                    }
+                    return match && combo[currentAttr] === currentVal;
+                });
+
+                if (!isValid) {
+                    $(this).prop('disabled', true);
+                    // Uncheck if already selected and invalid now
+                    if ($(this).is(':checked')) {
+                        $(this).prop('checked', false);
+                    }
+                }
+            });
+
+            // Check if full selection done
+            if (Object.keys(selected).length === {{ $attributes->count() }}) {
+                $.ajax({
+                    url: "{{ route('web.product.get.variant') }}",
+                    method: "POST",
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        product_id: {{ $product->id }},
+                        attribute_value_ids: Object.values(selected)
+                    }),
+                    success: function (response) {
+                        if (response.success) {
+                            // Update UI with variant data
+                            if (response.data.price) {
+                                priceDisplay.text(`PKR ${response.data.price}`);
+                                stockDisplay.text(response.data.stock);
+                            } else {
+                                priceDisplay.text('-');
+                                stockDisplay.text('-');
+                            }
+
+                            if (response.data.variant_id) {
+                                $('#selected-variant-id').val(response.data.variant_id);
+                                currentVariantId = response.data.variant_id;
+                            }
+                        } else {
+                            Swal.fire('Not available', response.message, 'info');
+                        }
+                    },
+                    error: function (error) {
+                        Swal.fire('Error', error.responseJSON.message, 'error');
+                    }
+                });
+            } else {
+                priceDisplay.text('-');
+                stockDisplay.text('-');
+                $('#selected-variant-id').val('');
+                currentVariantId = null;
+            }
+        }
+
+        // 🔄 On radio change
+        $('.variant-radio').on('change', function () {
+            filterRadios(this);
+        });
+        $('.reset-attribute').on('click', function () {
+            const attrId = $(this).data('attribute-id');
+
+            // Uncheck selected radio of this attribute
+            $(`.variant-radio[data-attribute-id="${attrId}"]`).prop('checked', false);
+
+            // Trigger filtering logic to update UI
+            filterRadios();
+        });
+        // 🛒 Cart submission
+        $('#cart-form').on('submit', function (e) {
+            e.preventDefault();
+            const isVariantRequired = {{ $attributes->isEmpty() ? 'false' : 'true' }};
+            const variantId = $('#selected-variant-id').val();
+            const quantity = $('#quantity').val();
+
+            if (isVariantRequired && !variantId) {
+                Swal.fire('Select Variant', 'Please select a valid product variant before adding to cart.', 'warning');
+                return;
+            }
+
+            $.ajax({
+                url: "#",
+                method: "POST",
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                data: {
+                    variant_id: variantId,
+                    quantity: quantity
+                },
+                success: function (response) {
+                    $('#cart-message').text(response.message);
+                }
+            });
+        });
+    </script>
+@endpush

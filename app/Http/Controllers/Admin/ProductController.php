@@ -64,6 +64,7 @@ class ProductController extends Controller
         try {
             // dd($request->sanitized());
             DB::beginTransaction();
+
             $product = Product::create($request->sanitized());
             $product->categories()->attach([$request->category_id]);
             $images = $this->productImages($request);
@@ -277,6 +278,8 @@ class ProductController extends Controller
                 $pivotData[] = [
                     'product_variant_id' => $variantModel->id,
                     'attribute_value_id' => $valueId,
+                    'created_at' => $now,
+                    'updated_at' => $now,
                 ];
             }
         }

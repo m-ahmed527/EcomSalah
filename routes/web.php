@@ -9,10 +9,12 @@ use App\Http\Controllers\Web\ContactController;
 use App\Http\Controllers\Web\DashboardController;
 use App\Http\Controllers\Web\ProductController;
 use App\Http\Controllers\Web\ProfileController;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('screens.web.index');
+    $products = Product::take(3)->get();
+    return view('screens.web.index', get_defined_vars());
 })->name('web.index');
 
 
@@ -42,9 +44,11 @@ Route::prefix('web')->name('web.')->group(function () {
     Route::prefix('checkout')->name('checkout.')->controller(CheckoutController::class)->group(function () {
         Route::get('/index', 'index')->name('index');
     });
-    Route::prefix('products')->name('product.')->controller(ProductController::class)->group(function () {
+    Route::prefix('product')->name('product.')->controller(ProductController::class)->group(function () {
         Route::get('/index', 'index')->name('index');
-        Route::get('/show', 'show')->name('show');
+        Route::get('/show/{product}', 'show')->name('show');
+        Route::post('/get-variant', 'getVariant')->name('get.variant');
+        Route::get('/details/{product}', 'details')->name('details');
     });
     Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->controller(DashboardController::class)->group(function () {
         Route::get('/profile/index', 'profile')->name('profile.index');

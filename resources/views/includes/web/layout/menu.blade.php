@@ -74,19 +74,7 @@
                 <div class="col-md-12">
                     <div class="content">
                         <h1 class="page-name">@yield('page')</h1>
-                        {{-- <ol class="breadcrumb">
-                            <li><a href="{{ route('web.index') }}">Home</a></li>
-                            <li class="{{ $show ? 'active' : '' }}">
-                                @if($show)
-                                <a href=@yield('url')>@yield('page')</a>
-                                @else
-                                @yield('page')
-                                @endif
-                            </li>
-                            @if($show)
-                            <li class="active">@yield('detail')</li>
-                            @endif
-                        </ol> --}}
+                        
                         <ol class="breadcrumb float-sm-right">
                             @foreach ($breadcrumbs as $label => $url)
                                 @if ($loop->last)

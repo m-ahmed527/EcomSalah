@@ -649,8 +649,7 @@ input[type="tel"]:focus {
 }
 
 .top-header .container {
-    padding-top: 35px;
-    padding-bottom: 35px;
+    padding: 20px 0;
     border-bottom: 1px solid #dedede;
 }
 .top-header .dropdown-menu {
@@ -2049,7 +2048,7 @@ input[type="tel"]:focus {
 }
 .logo-a img {
     width: 100%;
-    max-width: 170px;
+    max-width: 100px;
 }
 @media (max-width: 768px) {
     .coming-soon .block .count-down ul li {
@@ -2401,6 +2400,10 @@ input[type="tel"]:focus {
     display: inline-block;
     margin-right: 10px;
 }
+.d-flex {
+    display: flex;
+    align-items: center;
+}
 @media (max-width: 400px) {
     .social-icon ul li {
         margin-bottom: 5px;
@@ -2492,6 +2495,31 @@ a.disabled {
     pointer-events: none;
     opacity: 0.6;
     cursor: not-allowed;
+}
+/* .loader{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    height: 400px;
+
+} */
+
+.product-list-div {
+    position: relative;
+    min-height: 200px; /* fallback */
+}
+
+.loader-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
 }
 /*# sourceMappingURL=style.css.map */
 

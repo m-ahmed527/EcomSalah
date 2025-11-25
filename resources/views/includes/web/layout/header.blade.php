@@ -2,7 +2,7 @@
 <section class="top-header">
     <div class="container">
         <div class="header-top">
-            <div class="row">
+            <div class="row d-flex align-items-center">
                 <div class="col-md-4 col-xs-12 col-sm-4">
                     <div class="contact-number">
                         <i class="tf-ion-ios-telephone"></i>
@@ -12,7 +12,7 @@
                 <div class="col-md-4 col-xs-12 col-sm-4">
                     <!-- Site Logo -->
                     <div class="logo text-center">
-                        <a href="{{ route('web.index') }}" class="logo-a w-100">
+                        <a href="{{ route('web.index') }}" class="logo-a">
                             <!-- replace logo here -->
                             <img src="{{ setting('logo') ?: asset('assets/web/images/logo.png') }}" alt="">
                         </a>
@@ -110,7 +110,7 @@
     <div class="container">
         <div class="header-top">
             <div class="row-custom">
-                
+
                 <div class="col-md-3 col-xs-12 col-sm-3" style="padding: 0">
                     <!-- Site Logo -->
                     <div class="logo">
@@ -135,7 +135,7 @@
                                     data-hover="dropdown"><i class="tf-ion-android-cart"></i></a>
                                 <div class="dropdown-menu cart-dropdown">
                                     <!-- Cart Item Start-->
-                                    
+
                                     <div class="new-class">
                                         <div class="media">
                                             <a class="pull-left" href="#!">

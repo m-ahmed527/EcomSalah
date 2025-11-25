@@ -158,13 +158,13 @@ function enableButtons() {
 }
 
 // DOM Ready
-document.addEventListener('DOMContentLoaded', function () {
-    disableButtons(); // page load pe disable
+// document.addEventListener('DOMContentLoaded', function () {
+//     disableButtons(); // page load pe disable
 
-    window.addEventListener('load', function () {
-        enableButtons(); // load complete pe enable
-    });
-});
+//     window.addEventListener('load', function () {
+//         enableButtons(); // load complete pe enable
+//     });
+// });
 
 
 

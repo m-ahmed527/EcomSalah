@@ -96,77 +96,49 @@
                 </div>
             </div>
             <div class="row">
-                @for ($item = 1; $item <= 9; $item++)
+
+                @forelse ($products as $key => $product)
                     <div class="col-md-4">
-                        <div class="product-item">
+                        <div class="product-item" style="cursor:pointer;">
                             <div class="product-thumb">
                                 <span class="bage">Sale</span>
-                                <a href="{{ route('web.product.show') }}" class="product-a">
+                                <a href="{{ route('web.product.show', $product->slug) }}" class="product-a">
                                     <img class="img-responsive"
-                                        src="{{ asset('assets/web/images/shop/products/product-' . $item . '.jpg') }}"
+                                        src="{{ $product->featured_image ?? asset('assets/web/images/no-image.png') }}"
                                         alt="product-img" />
                                 </a>
                                 <div class="preview-meta">
                                     <ul>
                                         <li>
-                                            <span data-toggle="modal" data-target="#product-modal">
-                                                <i class="tf-ion-ios-search-strong"></i>
+                                            <span class="modalProductShow"
+                                                data-url="{{ route('web.product.details', $product->slug) }}">
+                                                <i class="tf-ion-ios-eye" style="font-size:22px;"></i>
                                             </span>
                                         </li>
                                         <li>
                                             <span><i class="tf-ion-ios-heart"></i></span>
                                         </li>
-                                        <li>
-                                            <span><i class="tf-ion-android-cart"></i></span>
-                                        </li>
+
                                     </ul>
                                 </div>
                             </div>
                             <div class="product-content">
-                                <h4 class="mb-1">Rainbow Shoes</h4>
-                                <p class="price">$200</p>
+                                <h4 class="mb-1">{{ $product->name }}</h4>
+                                <p class="price">PKR {{ $product->priceRange() }}</p>
                             </div>
                         </div>
                     </div>
-                @endfor
+                @empty
+                    <div class="col-12">
+                        <h5 class="text-center text-muted">No products found.</h5>
+                    </div>
+                @endforelse
 
 
 
 
                 <!-- Modal -->
-                <div class="modal product-modal fade" id="product-modal">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <i class="tf-ion-close"></i>
-                    </button>
-                    <div class="modal-dialog " role="document">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <div class="row">
-                                    <div class="col-md-8 col-sm-6 col-xs-12">
-                                        <div class="modal-image">
-                                            <img class="img-responsive"
-                                                src="{{ asset('assets/web/images/shop/products/modal-product.jpg') }}"
-                                                alt="product-img" />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 col-sm-6 col-xs-12">
-                                        <div class="product-short-details">
-                                            <h2 class="product-title">GM Pendant, Basalt Grey</h2>
-                                            <p class="product-price">$200</p>
-                                            <p class="product-short-description">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem iusto nihil
-                                                cum. Illo laborum numquam rem aut officia dicta cumque.
-                                            </p>
-                                            <a href="cart.html" class="btn btn-main">Add To Cart</a>
-                                            <a href="product-single.html" class="btn btn-transparent">View Product
-                                                Details</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- /.modal -->
+                @include('screens.web.product.partials.modal')
 
             </div>
         </div>
@@ -174,8 +146,8 @@
 
 
     <!--
-                                    Start Call To Action
-                                    ==================================== -->
+                                            Start Call To Action
+                                            ==================================== -->
     <section class="call-to-action bg-gray section">
         <div class="container">
             <div class="row">
@@ -216,3 +188,6 @@
         </div>
     </section>
 @endsection
+@push('scripts')
+    @include('includes.web.common.modal-script')
+@endpush

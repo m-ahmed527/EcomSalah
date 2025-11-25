@@ -100,6 +100,27 @@
             if (form.data('reset') === true || form.attr('data-reset') === "true") {
                 form[0].reset();
             }
+            // reset summernote fields
+            if (window.jQuery && $.fn && $.fn.summernote && $('.summernote').length) {
+                $('.summernote').each(function () {
+                    $(this).val($(this).summernote('code', ''));
+                });
+            }
+
+            // reset select2 fields
+            if (window.jQuery && $.fn && $.fn.select2 && $('.select2').length) {
+                $('.select2').each(function () {
+                    $(this).val(null).trigger('change');
+                });
+            }
+            // reset image preview if any
+            if (window.jQuery && form.find('#featuredPreview').length) {
+                form.find('#featuredPreview').attr('src', "{{ asset('assets/web/images/no-image.png') }}");
+            }
+            if (window.jQuery && form.find('#galleryPreview').length) {
+                form.find('#galleryPreview').html('');
+            }
+
 
             // ✅ redirect condition (either from response or form attributes)
 

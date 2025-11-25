@@ -9,7 +9,8 @@ class Product extends Model
 {
     protected $guarded = ['id'];
 
-    public function getRouteKeyName(){
+    public function getRouteKeyName()
+    {
         return 'slug';
     }
     protected static function boot()
@@ -22,6 +23,23 @@ class Product extends Model
             }
         });
     }
+    public function priceRange()
+    {
+        $prices = $this->variants()->pluck('price')->filter();
+
+
+        $prices = $prices->map(function ($p) {
+            return (float) $p + (float) $this->base_price;
+        })->sort()->values();
+
+        if ($prices->isEmpty()) {
+            return (float) $this->base_price;
+        }
+        return $prices->count() > 1 ?
+            number_format($prices->first(), 2) . ' - ' . number_format($prices->last(), 2) :
+            number_format($this->base_price, 2);
+    }
+
     public function variants()
     {
         return $this->hasMany(ProductVariant::class);

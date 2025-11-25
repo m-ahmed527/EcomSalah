@@ -55,8 +55,8 @@
                     </a>
                     <h1>404</h1>
                     <h2>Page Not Found</h2>
-                    <a href="{{ route('web.index') }}" class="btn btn-main"><i class="tf-ion-android-arrow-back"></i> Go
-                        Home</a>
+                    <a href="{{ url()->previous() }}" class="btn btn-main"><i class="tf-ion-android-arrow-back"></i> Go
+                        Back</a>
                     <p class="copyright-text">Copyright &copy;{{ date('Y') }}, Designed &amp; Developed by Salah Wears
                     </p>
                 </div>
