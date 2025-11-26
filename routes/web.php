@@ -29,6 +29,12 @@ Route::middleware('guest')->controller(AuthController::class)->group(function ()
 });
 
 Route::prefix('web')->name('web.')->group(function () {
+    Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->controller(DashboardController::class)->group(function () {
+        Route::get('/profile/index', 'profile')->name('profile.index');
+        Route::post('/profile/update', 'profileUpdate')->name('profile.update');
+        Route::get('/orders/index', 'order')->name('orders.index');
+        Route::post('/update-profile-image', 'updateProfileImage')->name('update.profile.image');
+    });
     Route::prefix('about')->name('about.')->controller(AboutUsController::class)->group(function () {
         Route::get('/index', 'index')->name('index');
     });
@@ -40,6 +46,7 @@ Route::prefix('web')->name('web.')->group(function () {
     });
     Route::prefix('cart')->name('cart.')->controller(CartController::class)->group(function () {
         Route::get('/index', 'index')->name('index');
+        Route::post('/add', 'addOrUpdate')->name('add');
     });
     Route::prefix('checkout')->name('checkout.')->controller(CheckoutController::class)->group(function () {
         Route::get('/index', 'index')->name('index');
@@ -50,10 +57,5 @@ Route::prefix('web')->name('web.')->group(function () {
         Route::post('/get-variant', 'getVariant')->name('get.variant');
         Route::get('/details/{product}', 'details')->name('details');
     });
-    Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->controller(DashboardController::class)->group(function () {
-        Route::get('/profile/index', 'profile')->name('profile.index');
-        Route::post('/profile/update', 'profileUpdate')->name('profile.update');
-        Route::get('/orders/index', 'order')->name('orders.index');
-        Route::post('/update-profile-image', 'updateProfileImage')->name('update.profile.image');
-    });
+
 });

@@ -25,10 +25,7 @@
                                                 data-zoom-image="{{$image->image ?? asset('assets/web/images/no-image.png')}}" />
                                         </div>
                                     @empty
-                                        <div class='item'>
-                                            <img src='{{ asset('assets/web/images/no-image.png')}}' alt=''
-                                                data-zoom-image="{{ asset('assets/web/images/no-image.png')}}" />
-                                        </div>
+
                                     @endforelse
 
 
@@ -54,9 +51,7 @@
                                         <img src='{{$image->image ?? asset('assets/web/images/no-image.png')}}' alt='' />
                                     </li>
                                 @empty
-                                    <li data-target='#carousel-custom' data-slide-to='1'>
-                                        <img src='{{ asset('assets/web/images/no-image.png')}}' alt='' />
-                                    </li>
+
                                 @endforelse
 
                             </ol>
@@ -65,63 +60,69 @@
                 </div>
                 <div class="col-md-7">
                     <div class="single-product-details">
+
                         <h2>{{ $product->name }}</h2>
-                        <p class="product-price">PKR {{ $product->priceRange() }}</p>
+                        <p class="product-price">PKR {{ $product->base_price }}</p>
 
                         <p class="product-description mt-20">
                             {!! $product->short_description !!}
                         </p>
-                        {{-- @dd($attributes) --}}
-                        <form action="">
-                            <div class="row" id="variant-selectors">
-                                @foreach ($attributes as $attribute)
+                        <div class="row" id="variant-selectors" style="margin:3px;">
+                            @foreach ($attributes as $attribute)
 
-                                    <div class="mb-3">
-                                        <label class="form-label d-block fw-bold">{{ $attribute->name }}:</label>
-                                        <div style="display: flex; gap:10px; margin:5px">
-                                            @foreach ($attribute->values as $value)
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input variant-radio" type="radio"
-                                                        name="attribute_{{ $attribute->id }}"
-                                                        data-attribute-id="{{ $attribute->id }}" value="{{ $value->id }}">
-                                                    <label class="form-check-label">{{ $value->value }}</label>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                        {{-- Reset Button --}}
-                                        <button type="button" class="btn btn-sm btn-outline-secondary ms-2 reset-attribute"
-                                            data-attribute-id="{{ $attribute->id }}">
-                                            Reset {{ $attribute->name }}
-                                        </button>
+                                <div class="mb-3">
+                                    <label class="form-label d-block fw-bold">{{ $attribute->name }}:</label>
+                                    <div style="display: flex; gap:10px; margin:5px">
+                                        @foreach ($attribute->values as $value)
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input variant-radio" type="radio"
+                                                    name="attribute_{{ $attribute->id }}" data-attribute-id="{{ $attribute->id }}"
+                                                    value="{{ $value->id }}">
+                                                <label class="form-check-label">{{ $value->value }}</label>
+                                            </div>
+                                        @endforeach
                                     </div>
-                                @endforeach
-                            </div>
-                        </form>
+                                    {{-- Reset Button --}}
+                                    <button type="button" class="btn btn-sm btn-outline-secondary ms-2 reset-attribute"
+                                        data-attribute-id="{{ $attribute->id }}">
+                                        Reset {{ $attribute->name }}
+                                    </button>
+                                </div>
+                            @endforeach
+                        </div>
                         <div class="mt-4">
                             <h5>Additional price: <span id="variant-price">-</span></h5>
-                            <h5>Stock of variant: <span id="variant-stock">-</span></h5>
+                            <h2 id="variant-stock">
+                                @if ($product->stock > 0)
+                                    <span class="label label-success label-lg">In Stock</span>
+                                @else
+                                    <span class="label label-danger label-lg">Out of Stock</span>
+                                @endif
+                            </h2>
+                            <input type="hidden" id="stock" value="">
                         </div>
                         <div class="product-category">
                             <span>Categories:</span>
                             <ul>
                                 @forelse ($product->categories as $category)
-                                    <li><a href="#!">{{ $category->name }}</a></li>
+                                    <li>{{ $category->name }}</li>
                                 @empty
-                                    <li><a href="#!">Uncategorized</a></li>
+                                    <li>Uncategorized</li>
                                 @endforelse
 
                             </ul>
                         </div>
-                        <form id="cart-form">
+                        <form id="cart-form" action="{{ route('web.cart.add') }}" method="POST">
+                            @csrf
                             <input type="hidden" name="variant_id" id="selected-variant-id">
                             <div class="product-quantity">
                                 <span>Quantity:</span>
                                 <div class="product-quantity-slider">
-                                    <input id="quantity" type="text" value="0" name="product-quantity">
+                                    <input id="quantity" type="text" value="1" min="1" name="product-quantity">
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn-main mt-20">Add To Cart</button>
+                            <button type="button" class="btn btn-main mt-20" id="add-to-cart">Add To Cart</button>
                         </form>
                     </div>
                 </div>
@@ -301,152 +302,6 @@
 @endsection
 @push('scripts')
     @include('includes.web.common.modal-script')
-
-    <script>
-        const variantMap = @json($variantMap);
-        const priceDisplay = $('#variant-price');
-        const stockDisplay = $('#variant-stock');
-        let currentVariantId = null;
-
-        function getSelectedAttributes() {
-            const selected = {};
-            $('.variant-radio:checked').each(function () {
-                const attrId = $(this).data('attribute-id');
-                selected[attrId] = parseInt($(this).val());
-            });
-
-            return selected;
-        }
-
-        function filterRadios(changedInput = null) {
-            const selected = getSelectedAttributes();
-
-            $('.variant-radio').prop('disabled', false); // reset all first
-
-            if (changedInput && !$(changedInput).is(':checked')) {
-                // If radio was unchecked (user clicked same again), stop here
-                priceDisplay.text('-');
-                stockDisplay.text('-');
-                $('#selected-variant-id').val('');
-                currentVariantId = null;
-                return;
-            }
-
-            // Loop through all attribute radios
-            $('.variant-radio').each(function () {
-                const currentAttr = $(this).data('attribute-id');
-                const currentVal = parseInt($(this).val());
-
-
-                const otherSelected = {
-                    ...selected
-                };
-
-                delete otherSelected[currentAttr]; // remove self from filtering
-
-                const isValid = variantMap.some(function (combo) {
-                    let match = true;
-                    for (const key in otherSelected) {
-                        if (combo[key] !== otherSelected[key]) {
-                            match = false;
-                            break;
-                        }
-                    }
-                    return match && combo[currentAttr] === currentVal;
-                });
-
-                if (!isValid) {
-                    $(this).prop('disabled', true);
-                    // Uncheck if already selected and invalid now
-                    if ($(this).is(':checked')) {
-                        $(this).prop('checked', false);
-                    }
-                }
-            });
-
-            // Check if full selection done
-            if (Object.keys(selected).length === {{ $attributes->count() }}) {
-                $.ajax({
-                    url: "{{ route('web.product.get.variant') }}",
-                    method: "POST",
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    contentType: 'application/json',
-                    data: JSON.stringify({
-                        product_id: {{ $product->id }},
-                        attribute_value_ids: Object.values(selected)
-                    }),
-                    success: function (response) {
-                        if (response.success) {
-                            // Update UI with variant data
-                            if (response.data.price) {
-                                priceDisplay.text(`PKR ${response.data.price}`);
-                                stockDisplay.text(response.data.stock);
-                            } else {
-                                priceDisplay.text('-');
-                                stockDisplay.text('-');
-                            }
-
-                            if (response.data.variant_id) {
-                                $('#selected-variant-id').val(response.data.variant_id);
-                                currentVariantId = response.data.variant_id;
-                            }
-                        } else {
-                            Swal.fire('Not available', response.message, 'info');
-                        }
-                    },
-                    error: function (error) {
-                        Swal.fire('Error', error.responseJSON.message, 'error');
-                    }
-                });
-            } else {
-                priceDisplay.text('-');
-                stockDisplay.text('-');
-                $('#selected-variant-id').val('');
-                currentVariantId = null;
-            }
-        }
-
-        // 🔄 On radio change
-        $('.variant-radio').on('change', function () {
-            filterRadios(this);
-        });
-        $('.reset-attribute').on('click', function () {
-            const attrId = $(this).data('attribute-id');
-
-            // Uncheck selected radio of this attribute
-            $(`.variant-radio[data-attribute-id="${attrId}"]`).prop('checked', false);
-
-            // Trigger filtering logic to update UI
-            filterRadios();
-        });
-        // 🛒 Cart submission
-        $('#cart-form').on('submit', function (e) {
-            e.preventDefault();
-            const isVariantRequired = {{ $attributes->isEmpty() ? 'false' : 'true' }};
-            const variantId = $('#selected-variant-id').val();
-            const quantity = $('#quantity').val();
-
-            if (isVariantRequired && !variantId) {
-                Swal.fire('Select Variant', 'Please select a valid product variant before adding to cart.', 'warning');
-                return;
-            }
-
-            $.ajax({
-                url: "#",
-                method: "POST",
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                },
-                data: {
-                    variant_id: variantId,
-                    quantity: quantity
-                },
-                success: function (response) {
-                    $('#cart-message').text(response.message);
-                }
-            });
-        });
-    </script>
+    @include('includes.web.common.variant-script')
+    @include('includes.web.common.add-to-cart-script')
 @endpush

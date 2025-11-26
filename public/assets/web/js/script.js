@@ -112,11 +112,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 //Start-> Page load hone par buttons disable karne aur load hone ke baad enable karne ka code
-function disableButtons() {
-    // sab buttons aur anchors select karo, lekin slick buttons ko ignore karo
-    const buttons = document.querySelectorAll('button:not(.slick-arrow):not(.slick-dots button), a:not(.logo-a):not(.product-a)');
+function disableButtons(selector = null) {
+    // selector pass ho to usko use karo warna sab ko select karo (slick buttons exclude)
+    const elements = selector
+        ? document.querySelectorAll(selector)
+        : document.querySelectorAll('button:not(.slick-arrow):not(.slick-dots button), a');
 
-    buttons.forEach(el => {
+    elements.forEach(el => {
         if (!el.classList.contains('disabled')) {
             el.classList.add('disabled');
             el.setAttribute('aria-disabled', 'true');
@@ -137,10 +139,12 @@ function disableButtons() {
     });
 }
 
-function enableButtons() {
-    const buttons = document.querySelectorAll('button:not(.slick-arrow):not(.slick-dots button), a');
+function enableButtons(selector = null) {
+    const elements = selector
+        ? document.querySelectorAll(selector)
+        : document.querySelectorAll('button:not(.slick-arrow):not(.slick-dots button), a');
 
-    buttons.forEach(el => {
+    elements.forEach(el => {
         el.classList.remove('disabled');
         el.removeAttribute('aria-disabled');
 

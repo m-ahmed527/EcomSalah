@@ -23,29 +23,45 @@
                     <ul class="top-menu text-right list-inline">
                         <li class="dropdown cart-nav dropdown-slide">
                             <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"
-                                data-hover="dropdown"><i class="tf-ion-android-cart"></i> Cart</a>
+                                data-hover="dropdown"><i class="tf-ion-android-cart"></i><span
+                                    class="cart-count">{{ session('cart.total_items', 0) }}</span> Cart</a>
                             <div class="dropdown-menu cart-dropdown">
                                 <!-- Cart Item Start-->
                                 <div class="media">
-                                    <a class="pull-left" href="#!">
-                                        <img class="media-object"
-                                            src="{{ asset('assets/web/images/shop/cart/cart-1.jpg') }}" alt="image" />
-                                    </a>
-                                    <div class="media-body">
-                                        <h4 class="media-heading"><a href="#!">Ladies Bag</a></h4>
-                                        <div class="cart-price">
-                                            <span>1 x</span>
-                                            <span>1250.00</span>
+                                    @php
+                                        $first = collect(session('cart.items', []))->first();
+                                    @endphp
+                                    @if($first)
+                                        <a class="pull-left" href="javascript:void(0);">
+                                            <img class="media-object" src="{{$first['product']['featured_image']  }}"
+                                                alt="image" />
+                                        </a>
+                                        <div class="media-body">
+                                            <h4 class="media-heading">{{ $first['product']['name'] }}</h4>
+                                            <div class="cart-price">
+                                                <span id="cart-quantity">{{ $first['quantity'] }}x</span>
+                                                <span id="cart-product-price">{{ $first['product']['base_price'] + ($first['variant']['price'] ?? 0) }}</span>
+                                            </div>
+                                            <h5><strong>PKR {{ $first['total_price'] }}</strong></h5>
                                         </div>
-                                        <h5><strong>$1200</strong></h5>
-                                    </div>
-                                    <a href="#!" class="remove"><i class="tf-ion-close"></i></a>
+                                    @else
+                                        <div class="media-body">
+                                            <p class="text-center">Your cart is empty</p>
+                                        </div>
+                                    @endif
+                                    {{-- <a href="#!" class="remove"><i class="tf-ion-close"></i></a> --}}
                                 </div><!-- / Cart Item End-->
 
 
                                 <div class="cart-summary">
-                                    <span>Total</span>
-                                    <span class="total-price">$1799.00</span>
+                                    <span>Total Items</span>
+                                    <span class="total-price">{{ session('cart.total_items', 0) }}</span>
+
+                                </div>
+                                <div class="cart-summary">
+                                    <span>Total Amount</span>
+                                    <span class="total-price">PKR {{ session('cart.total_amount', 0) }}</span>
+
                                 </div>
                                 <ul class="text-center cart-buttons">
                                     <li><a href="{{ route('web.cart.index') }}" class="btn btn-small">View Cart</a></li>
@@ -76,24 +92,24 @@
                             </a>
                             <ul class="dropdown-menu">
                                 @guest
-                                <li><a href="{{ route('login') }}"><i class="tf-ion-log-in"></i> Login</a></li>
-                                <li><a href="{{ route('register') }}"><i class="tf-ion-plus-circled"></i> Register</a>
-                                </li>
+                                    <li><a href="{{ route('login') }}"><i class="tf-ion-log-in"></i> Login</a></li>
+                                    <li><a href="{{ route('register') }}"><i class="tf-ion-plus-circled"></i> Register</a>
+                                    </li>
                                 @else
-                                @if(auth()->user()->role == App\Models\User::ADMIN)
-                                <li><a href="{{ route('admin.index') }}"><i class="tf-ion-ios-speedometer"></i> Admin
-                                        Dashboard</a></li>
-                                @endif
-                                <li>
-                                    <a href="{{ route('logout') }}"
-                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        <i class="tf-ion-log-out"></i> Logout
-                                    </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                        style="display: none;">
-                                        @csrf
-                                    </form>
-                                </li>
+                                    @if(auth()->user()->role == App\Models\User::ADMIN)
+                                        <li><a href="{{ route('admin.index') }}"><i class="tf-ion-ios-speedometer"></i> Admin
+                                                Dashboard</a></li>
+                                    @endif
+                                    <li>
+                                        <a href="{{ route('logout') }}"
+                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            <i class="tf-ion-log-out"></i> Logout
+                                        </a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </li>
                                 @endguest
                             </ul>
                         </li>
@@ -191,26 +207,26 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     @guest
-                                        <li><a href="{{ route('login') }}"><i class="tf-ion-log-in"></i> Login</a></li>
-                                        <li><a href="{{ route('register') }}"><i class="tf-ion-plus-circled"></i>
-                                                Register</a>
-                                        </li>
+                                    <li><a href="{{ route('login') }}"><i class="tf-ion-log-in"></i> Login</a></li>
+                                    <li><a href="{{ route('register') }}"><i class="tf-ion-plus-circled"></i>
+                                            Register</a>
+                                    </li>
                                     @else
-                                        @if (auth()->user()->role == App\Models\User::ADMIN)
-                                            <li><a href="{{ route('admin.index') }}"><i class="tf-ion-ios-speedometer"></i>
-                                                    Admin
-                                                    Dashboard</a></li>
-                                        @endif
-                                        <li>
-                                            <a href="{{ route('logout') }}"
-                                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                                <i class="tf-ion-log-out"></i> Logout
-                                            </a>
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                                style="display: none;">
-                                                @csrf
-                                            </form>
-                                        </li>
+                                    @if (auth()->user()->role == App\Models\User::ADMIN)
+                                    <li><a href="{{ route('admin.index') }}"><i class="tf-ion-ios-speedometer"></i>
+                                            Admin
+                                            Dashboard</a></li>
+                                    @endif
+                                    <li>
+                                        <a href="{{ route('logout') }}"
+                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            <i class="tf-ion-log-out"></i> Logout
+                                        </a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </li>
                                     @endguest
                                 </ul>
                             </li>
@@ -243,35 +259,35 @@
 </section><!-- End Top Header Bar --> --}}
 
 {{-- @php
-    $routeName = request()->route()->getName();
-    $show = str_contains($routeName, 'show');
-    $index = $routeName != 'web.index';
+$routeName = request()->route()->getName();
+$show = str_contains($routeName, 'show');
+$index = $routeName != 'web.index';
 @endphp
 @if ($index)
-    <section class="page-header">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="content">
-                        <h1 class="page-name">@yield('page')</h1>
-                        <ol class="breadcrumb">
-                            <li><a href="{{ route('web.index') }}">Home</a></li>
-                            <li class="{{ $show ? 'active' : '' }}">
-                                @if ($show)
-                                    <a href=@yield('url')>@yield('page')</a>
-                                @else
-                                    @yield('page')
-                                @endif
-                            </li>
+<section class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="content">
+                    <h1 class="page-name">@yield('page')</h1>
+                    <ol class="breadcrumb">
+                        <li><a href="{{ route('web.index') }}">Home</a></li>
+                        <li class="{{ $show ? 'active' : '' }}">
                             @if ($show)
-                                <li class="active">@yield('detail')</li>
+                            <a href=@yield('url')>@yield('page')</a>
+                            @else
+                            @yield('page')
                             @endif
-                        </ol>
-                    </div>
+                        </li>
+                        @if ($show)
+                        <li class="active">@yield('detail')</li>
+                        @endif
+                    </ol>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 @endif
 
 <script>
