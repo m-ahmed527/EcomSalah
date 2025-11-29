@@ -10,6 +10,7 @@ use App\Http\Controllers\Web\DashboardController;
 use App\Http\Controllers\Web\ProductController;
 use App\Http\Controllers\Web\ProfileController;
 use App\Models\Product;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -45,8 +46,10 @@ Route::prefix('web')->name('web.')->group(function () {
         Route::get('/index', 'index')->name('index');
     });
     Route::prefix('cart')->name('cart.')->controller(CartController::class)->group(function () {
-        Route::get('/index', 'index')->name('index');
+        Route::get('/index', 'index')->name('index')->middleware('cart');
         Route::post('/add', 'addOrUpdate')->name('add');
+        Route::post('/update', 'updateQuantity')->name('update');
+        Route::post('/remove', 'removeCart')->name('remove')->middleware('cart');
     });
     Route::prefix('checkout')->name('checkout.')->controller(CheckoutController::class)->group(function () {
         Route::get('/index', 'index')->name('index');
@@ -58,4 +61,17 @@ Route::prefix('web')->name('web.')->group(function () {
         Route::get('/details/{product}', 'details')->name('details');
     });
 
+});
+
+Route::get('/clear-cache/{key}', function ($key) {
+    if ($key !== 'password')
+        abort(403);
+    // dd(session()->all());
+    session()->flush();
+    Artisan::call('optimize:clear');
+    // Artisan::call('queue:restart');
+    Artisan::call('view:clear');
+    Artisan::call('config:cache');
+    // exec('rm ' . storage_path('logs/*.log'));
+    return view('clear-cache');
 });

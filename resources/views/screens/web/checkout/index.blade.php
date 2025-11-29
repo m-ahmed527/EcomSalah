@@ -2,6 +2,7 @@
 @section('title', 'Checkout Salah Wears')
 @section('page', 'Checkout')
 @section('content')
+    {{-- @dd(session('cart',[])) --}}
     <div class="page-wrapper">
         <div class="checkout shopping">
             <div class="container">
@@ -68,26 +69,37 @@
                         <div class="product-checkout-details">
                             <div class="block">
                                 <h4 class="widget-title">Order Summary</h4>
+                                @forelse (session('cart.items', []) as $key=> $item )
+                                
                                 <div class="media product-card">
-                                    <a class="pull-left" href="product-single.html">
-                                        <img class="media-object"
-                                            src="{{ asset('assets/web/images/shop/cart/cart-1.jpg') }}" alt="Image" />
-                                    </a>
+                                    <a class="pull-left" href="{{route('web.product.show', $item['product']['slug'])}}">
+                                            <img class="media-object" id="cart-product-image"
+                                                src="{{$item['product']['featured_image']  }}" alt="image" />
+                                        </a>
                                     <div class="media-body">
-                                        <h4 class="media-heading"><a href="product-single.html">Ambassador Heritage 1921</a>
+                                        <h4 class="media-heading"><a href="#">{{ $item['product']['name'] }}</a>
                                         </h4>
-                                        <p class="price">1 x $249</p>
-                                        <span class="remove">Remove</span>
+                                        <p class="price">{{ $item['variant']['variant_name'] ?? 'Simple' }}</p>
+                                        <p class="price">{{ $item['quantity'] .' x '. number_format($item['product']['base_price'] + ($item['variant']['price'] ?? 0),2) . ' = '. number_format($item['total_price'],2) . '' }} PKR</p>
                                     </div>
                                 </div>
-                                <div class="discount-code">
+                                    
+                                @empty
+                                    
+                                @endforelse
+                                {{-- <div class="discount-code">
                                     <p>Have a discount ? <a data-toggle="modal" data-target="#coupon-modal" href="#!">enter
                                             it here</a></p>
-                                </div>
-                                <ul class="summary-prices">
+                                </div> --}}
+                                <hr>
+                                <ul class="summary-prices mt-10">
+                                    <li>
+                                        <span>Total Items:</span>
+                                        <span class="price">{{ session('cart.total_items', 0) }}</span>
+                                    </li>
                                     <li>
                                         <span>Subtotal:</span>
-                                        <span class="price">$190</span>
+                                        <span class="price">PKR {{ session('cart.total_amount', 0) }}</span>
                                     </li>
                                     <li>
                                         <span>Shipping:</span>
@@ -96,7 +108,7 @@
                                 </ul>
                                 <div class="summary-total">
                                     <span>Total</span>
-                                    <span>$250</span>
+                                    <span>PKR {{ session('cart.total_amount', 0) }}</span>
                                 </div>
                                 <div class="verified-icon">
                                     <img src="{{ asset('assets/web/images/shop/verified.png') }}">

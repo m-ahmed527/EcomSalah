@@ -79,6 +79,7 @@
                     }),
                     success: function (response) {
                         if (response.success) {
+                            console.log(parseFloat(response.data.price),basePrice);
                             // Update UI with variant data
                             if (response.data.price) {
                                 priceDisplay.text(`PKR ${response.data.price}`);
@@ -86,8 +87,9 @@
                                     `<span class="label label-success label-lg">In Stock</span>` :
                                     `<span class="label label-danger label-lg">Out of stock</span>`);
 
-                                $('.product-price').text(`PKR ${parseFloat(response.data.price) + parseFloat(basePrice)}`);
+                                $('.product-price').text(`PKR ${parseFloat(parseFloat(response.data.price) + parseFloat(basePrice)).toFixed(2)}`);
                                 $('#stock').val(response.data.stock);
+
                             } else {
                                 priceDisplay.text('-');
                                 stockDisplay.html(`<span class="label label-success label-lg">In Stock</span>`);
@@ -97,12 +99,18 @@
                                 $('#selected-variant-id').val(response.data.variant_id);
                                 currentVariantId = response.data.variant_id;
                             }
+                            checkVariantIdToDisableCartButton();
+
                         } else {
                             Swal.fire('Not available', response.message, 'info');
+                            checkVariantIdToDisableCartButton();
+
                         }
                     },
                     error: function (error) {
                         Swal.fire('Error', error.responseJSON.message, 'error');
+                        checkVariantIdToDisableCartButton();
+
                     }
                 });
             } else {
@@ -125,7 +133,17 @@
 
             // Trigger filtering logic to update UI
             filterRadios();
+            checkVariantIdToDisableCartButton();
         });
+        function checkVariantIdToDisableCartButton() {
+            let variant_id = $('#selected-variant-id').val();
+            console.log('variant_di :', variant_id);
+            if (!variant_id) {
+                $('#add-to-cart').prop('disabled', true);
+            } else {
+                $('#add-to-cart').prop('disabled', false);
+            }
+        }
 
     });
 </script>

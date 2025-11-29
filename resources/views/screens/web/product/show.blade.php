@@ -91,7 +91,9 @@
                             @endforeach
                         </div>
                         <div class="mt-4">
-                            <h5>Additional price: <span id="variant-price">-</span></h5>
+                            <h5 style="display:{{ $product->has_variants ? 'block' : 'none' }}">Additional price: <span
+                                    id="variant-price">-</span>
+                            </h5>
                             <h2 id="variant-stock">
                                 @if ($product->stock > 0)
                                     <span class="label label-success label-lg">In Stock</span>
@@ -99,7 +101,7 @@
                                     <span class="label label-danger label-lg">Out of Stock</span>
                                 @endif
                             </h2>
-                            <input type="hidden" id="stock" value="">
+                            <input type="hidden" id="stock" value="{{ $product->has_variants ? '' : $product->stock }}">
                         </div>
                         <div class="product-category">
                             <span>Categories:</span>
@@ -114,7 +116,8 @@
                         </div>
                         <form id="cart-form" action="{{ route('web.cart.add') }}" method="POST">
                             @csrf
-                            <input type="hidden" name="variant_id" id="selected-variant-id">
+                            <input type="hidden" name="{{ $product->has_variants ? 'variant_id' : 'product_id' }}"
+                                id="selected-variant-id" value="{{ $product->has_variants ? '' : $product->id }}">
                             <div class="product-quantity">
                                 <span>Quantity:</span>
                                 <div class="product-quantity-slider">
@@ -122,7 +125,7 @@
                                 </div>
                             </div>
 
-                            <button type="button" class="btn btn-main mt-20" id="add-to-cart">Add To Cart</button>
+                            <button type="button" class="btn btn-main mt-20" id="add-to-cart" {{ $product->has_variants ? 'disabled' : '' }}>Add To Cart</button>
                         </form>
                     </div>
                 </div>
@@ -304,4 +307,8 @@
     @include('includes.web.common.modal-script')
     @include('includes.web.common.variant-script')
     @include('includes.web.common.add-to-cart-script')
+
+    <script>
+
+    </script>
 @endpush

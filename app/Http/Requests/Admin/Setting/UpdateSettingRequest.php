@@ -31,7 +31,7 @@ class UpdateSettingRequest extends FormRequest
             'site_phone' => ['nullable', 'max:20', 'string', new PKNumberFormat()],
 
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048', // 2MB limit
-            'favicon' => 'nullable|image|mimes:ico,png,jpg,svg|max:1024',  // 1MB limit
+            'favicon' => 'nullable|image|mimes:ico,png,jpg,svg|max:2024',  // 2MB limit
 
             // 🟢 Social Links
             'facebook' => 'nullable|url|max:255',

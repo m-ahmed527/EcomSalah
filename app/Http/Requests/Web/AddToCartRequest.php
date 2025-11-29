@@ -21,9 +21,9 @@ class AddToCartRequest extends FormRequest
      */
     public function rules(): array
     {
-        // dd($this->all());
         return [
-            'variant_id' => 'required|exists:product_variants,id',
+            'product_id' => 'sometimes|exists:products,id',
+            'variant_id' => 'sometimes|exists:product_variants,id',
             'product-quantity' => 'required|integer|min:1'
         ];
     }

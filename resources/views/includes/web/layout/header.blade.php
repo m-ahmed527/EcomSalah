@@ -22,49 +22,55 @@
                     <!-- Cart -->
                     <ul class="top-menu text-right list-inline">
                         <li class="dropdown cart-nav dropdown-slide">
-                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"
+                            <a href="{{ route('web.cart.index') }}" 
                                 data-hover="dropdown"><i class="tf-ion-android-cart"></i><span
                                     class="cart-count">{{ session('cart.total_items', 0) }}</span> Cart</a>
                             <div class="dropdown-menu cart-dropdown">
                                 <!-- Cart Item Start-->
-                                <div class="media">
+                                <div class="media" id="cart-drop">
                                     @php
-                                        $first = collect(session('cart.items', []))->first();
+                                        $first = collect(session('cart.items', []))->last();
                                     @endphp
                                     @if($first)
                                         <a class="pull-left" href="javascript:void(0);">
-                                            <img class="media-object" src="{{$first['product']['featured_image']  }}"
-                                                alt="image" />
+                                            <img class="media-object" id="cart-product-image"
+                                                src="{{$first['product']['featured_image']  }}" alt="image" />
                                         </a>
                                         <div class="media-body">
-                                            <h4 class="media-heading">{{ $first['product']['name'] }}</h4>
+                                            <h4 class="media-heading cart-product-name" id="cart-product-name">
+                                                {{ $first['product']['name'] }}</h4>
                                             <div class="cart-price">
-                                                <span id="cart-quantity">{{ $first['quantity'] }}x</span>
-                                                <span id="cart-product-price">{{ $first['product']['base_price'] + ($first['variant']['price'] ?? 0) }}</span>
+                                                <span id="cart-product-quantity">{{ $first['quantity'] }}x</span>
+                                                <span
+                                                    id="cart-product-price">{{ number_format($first['product']['base_price'] + ($first['variant']['price'] ?? 0),2) }}</span>
                                             </div>
-                                            <h5><strong>PKR {{ $first['total_price'] }}</strong></h5>
+                                            <h5><strong id="cart-product-total">PKR {{ number_format($first['total_price'],2) }}</strong>
+                                            </h5>
                                         </div>
                                     @else
                                         <div class="media-body">
                                             <p class="text-center">Your cart is empty</p>
                                         </div>
                                     @endif
-                                    {{-- <a href="#!" class="remove"><i class="tf-ion-close"></i></a> --}}
+
                                 </div><!-- / Cart Item End-->
 
 
                                 <div class="cart-summary">
                                     <span>Total Items</span>
-                                    <span class="total-price">{{ session('cart.total_items', 0) }}</span>
+                                    <span class="total-price"
+                                        id="cart-total-items">{{ session('cart.total_items', 0) }}</span>
 
                                 </div>
                                 <div class="cart-summary">
                                     <span>Total Amount</span>
-                                    <span class="total-price">PKR {{ session('cart.total_amount', 0) }}</span>
+                                    <span class="total-price" id="cart-total-amount">PKR
+                                        {{ session('cart.total_amount', 0) }}</span>
 
                                 </div>
                                 <ul class="text-center cart-buttons">
-                                    <li><a href="{{ route('web.cart.index') }}" class="btn btn-small">View Cart</a></li>
+                                    <li><a href="{{ route('web.cart.index') }}" class="btn btn-small view-cart-btn">View
+                                            Cart</a></li>
                                     <li><a href="{{ route('web.checkout.index') }}"
                                             class="btn btn-small btn-solid-border">Checkout</a></li>
                                 </ul>
