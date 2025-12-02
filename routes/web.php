@@ -9,6 +9,7 @@ use App\Http\Controllers\Web\ContactController;
 use App\Http\Controllers\Web\DashboardController;
 use App\Http\Controllers\Web\ProductController;
 use App\Http\Controllers\Web\ProfileController;
+use App\Http\Controllers\Web\WishlistController;
 use App\Models\Product;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -50,6 +51,11 @@ Route::prefix('web')->name('web.')->group(function () {
         Route::post('/add', 'addOrUpdate')->name('add');
         Route::post('/update', 'updateQuantity')->name('update');
         Route::post('/remove', 'removeCart')->name('remove')->middleware('cart');
+    });
+    Route::prefix('wishlist')->name('wishlist.')->controller(WishlistController::class)->group(function () {
+        Route::get('/index', 'index')->name('index');
+        Route::post('/store/{product}', 'store')->name('store');
+        Route::post('/remove','destroy')->name('remove');
     });
     Route::prefix('checkout')->name('checkout.')->controller(CheckoutController::class)->group(function () {
         Route::get('/index', 'index')->name('index');

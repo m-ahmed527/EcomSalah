@@ -1614,6 +1614,8 @@ namespace App\Models {
      * @property-read int|null $images_count
      * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Category> $categories
      * @property-read int|null $categories_count
+     * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $wishlistedByUsers
+     * @property-read int|null $wishlistedByUsers_count
      * @method static \Illuminate\Database\Eloquent\Builder<Product>|Product whereId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Product>|Product whereName($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Product>|Product whereSlug($value)
@@ -2898,6 +2900,8 @@ namespace App\Models {
      * @property string|null $last_name
      * @property string $first_name
      * @property int $id
+     * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Product> $wishlist
+     * @property-read int|null $wishlist_count
      * @property-read \Illuminate\Database\Eloquent\Collection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
      * @property-read int|null $notifications_count
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereId($value)

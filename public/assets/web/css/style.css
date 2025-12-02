@@ -2542,11 +2542,12 @@ a.disabled {
     font-size: 16px !important;
     /* padding: 6px 12px !important; */
 }
-
+.wishlist-nav >a,
 .cart-nav > a {
     position: relative;
 }
 
+.wishlist-nav .wishlist-count,
 .cart-nav .cart-count {
     position: absolute;
     top: -5px;

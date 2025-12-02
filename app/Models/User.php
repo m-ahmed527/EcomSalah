@@ -18,11 +18,11 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $guarded = ['id'];
-    public const ADMIN=0;
-    public const USER=1;
+    public const ADMIN = 0;
+    public const USER = 1;
 
-    public const ACTIVE=1;
-    public const INACTIVE=0;
+    public const ACTIVE = 1;
+    public const INACTIVE = 0;
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -44,5 +44,21 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+
+    public function wishlist()
+    {
+        return $this->belongsToMany(Product::class, 'wishlists')->withTimestamps();
+    }
+
+    public function hasWishlisted($productId)
+    {
+        return $this->wishlist()->where('product_id', $productId)->exists();
+    }
+
+    public function wishlistCount()
+    {
+        return $this->wishlist()->count();
     }
 }

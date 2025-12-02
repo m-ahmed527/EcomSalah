@@ -125,7 +125,14 @@
                                 </div>
                             </div>
 
-                            <button type="button" class="btn btn-main mt-20" id="add-to-cart" {{ $product->has_variants ? 'disabled' : '' }}>Add To Cart</button>
+                            <button type="button" class="btn btn-main mt-20" id="add-to-cart" {{ $product->has_variants ? 'disabled' : '' }}
+                                title="{{ $product->has_variants ? 'Please select a valid variant' : '' }}"><i
+                                    class="tf-ion-android-cart"></i> Add To Cart</button>
+
+                            <button type="button" class="btn btn-main btn-solid-border mt-20 add-to-wishlist"
+                                id="add-to-wishlist" data-slug="{{ $product->slug }}"
+                                data-url="{{ route('web.wishlist.store', $product->slug) }}">
+                                <i class="{{ auth()?->user()?->hasWishlisted($product->id) ? 'fa-solid' : 'fa-regular' }} fa-heart"></i>Wishlist</button>
                         </form>
                     </div>
                 </div>
@@ -307,7 +314,6 @@
     @include('includes.web.common.modal-script')
     @include('includes.web.common.variant-script')
     @include('includes.web.common.add-to-cart-script')
-
     <script>
 
     </script>

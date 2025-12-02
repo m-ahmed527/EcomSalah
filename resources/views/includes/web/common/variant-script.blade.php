@@ -79,7 +79,7 @@
                     }),
                     success: function (response) {
                         if (response.success) {
-                            console.log(parseFloat(response.data.price),basePrice);
+                            console.log(parseFloat(response.data.price), basePrice);
                             // Update UI with variant data
                             if (response.data.price) {
                                 priceDisplay.text(`PKR ${response.data.price}`);
@@ -140,8 +140,10 @@
             console.log('variant_di :', variant_id);
             if (!variant_id) {
                 $('#add-to-cart').prop('disabled', true);
+                $('#add-to-cart').attr('title', 'Please select a valid variant');
             } else {
                 $('#add-to-cart').prop('disabled', false);
+                $('#add-to-cart').attr('title', 'Add to Cart');
             }
         }
 

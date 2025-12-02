@@ -116,7 +116,9 @@
                                             </span>
                                         </li>
                                         <li>
-                                            <span><i class="tf-ion-ios-heart"></i></span>
+                                            <span class="add-to-wishlist"
+                                                data-url=" {{ route('web.wishlist.store', $product->slug) }}"><i class="{{ auth()?->user()?->hasWishlisted($product->id) ? 'fa-solid' : 'fa-regular' }}
+                                                                    fa-heart"></i></span>
                                         </li>
 
                                     </ul>
@@ -146,8 +148,8 @@
 
 
     <!--
-                                            Start Call To Action
-                                            ==================================== -->
+                                                            Start Call To Action
+                                                            ==================================== -->
     <section class="call-to-action bg-gray section">
         <div class="container">
             <div class="row">

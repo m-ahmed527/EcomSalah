@@ -32,4 +32,6 @@
 @endsection
 @push('scripts')
     @include('includes.web.common.update-cart')
+
+    
 @endpush

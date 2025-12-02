@@ -90,7 +90,20 @@
             toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
     });
-
+    @if (session('success'))
+        Toast.fire({
+            icon: 'success',
+            title: '{{ session('success') }}',
+            timer: 1500
+        })
+    @endif
+    @if (session('error'))
+        Toast.fire({
+            icon: 'error',
+            title: '{{ session('error') }}',
+            timer: 1500
+        })
+    @endif
     $(document).ready(function () {
         $('.view-cart-btn').on('click', function (e) {
             e.preventDefault();
@@ -125,4 +138,6 @@
 
 
 </script>
+@include('includes.web.common.add-to-wishlist-script')
+
 @stack('scripts')

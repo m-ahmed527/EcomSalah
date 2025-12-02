@@ -70,7 +70,7 @@
                             <div class="block">
                                 <h4 class="widget-title">Order Summary</h4>
                                 @forelse (session('cart.items', []) as $key=> $item )
-                                
+
                                 <div class="media product-card">
                                     <a class="pull-left" href="{{route('web.product.show', $item['product']['slug'])}}">
                                             <img class="media-object" id="cart-product-image"
@@ -83,14 +83,14 @@
                                         <p class="price">{{ $item['quantity'] .' x '. number_format($item['product']['base_price'] + ($item['variant']['price'] ?? 0),2) . ' = '. number_format($item['total_price'],2) . '' }} PKR</p>
                                     </div>
                                 </div>
-                                    
+
                                 @empty
-                                    
+
                                 @endforelse
-                                {{-- <div class="discount-code">
+                                <div class="discount-code">
                                     <p>Have a discount ? <a data-toggle="modal" data-target="#coupon-modal" href="#!">enter
                                             it here</a></p>
-                                </div> --}}
+                                </div>
                                 <hr>
                                 <ul class="summary-prices mt-10">
                                     <li>

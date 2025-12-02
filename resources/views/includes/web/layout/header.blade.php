@@ -22,9 +22,9 @@
                     <!-- Cart -->
                     <ul class="top-menu text-right list-inline">
                         <li class="dropdown cart-nav dropdown-slide">
-                            <a href="{{ route('web.cart.index') }}" 
-                                data-hover="dropdown"><i class="tf-ion-android-cart"></i><span
-                                    class="cart-count">{{ session('cart.total_items', 0) }}</span> Cart</a>
+                            <a href="{{ route('web.cart.index') }}" data-hover="dropdown"><i
+                                    class="tf-ion-android-cart"></i><span
+                                    class="cart-count">{{ session('cart.total_items', 0) }}</span> </a>
                             <div class="dropdown-menu cart-dropdown">
                                 <!-- Cart Item Start-->
                                 <div class="media" id="cart-drop">
@@ -38,13 +38,15 @@
                                         </a>
                                         <div class="media-body">
                                             <h4 class="media-heading cart-product-name" id="cart-product-name">
-                                                {{ $first['product']['name'] }}</h4>
+                                                {{ $first['product']['name'] }}
+                                            </h4>
                                             <div class="cart-price">
                                                 <span id="cart-product-quantity">{{ $first['quantity'] }}x</span>
                                                 <span
-                                                    id="cart-product-price">{{ number_format($first['product']['base_price'] + ($first['variant']['price'] ?? 0),2) }}</span>
+                                                    id="cart-product-price">{{ number_format($first['product']['base_price'] + ($first['variant']['price'] ?? 0), 2) }}</span>
                                             </div>
-                                            <h5><strong id="cart-product-total">PKR {{ number_format($first['total_price'],2) }}</strong>
+                                            <h5><strong id="cart-product-total">PKR
+                                                    {{ number_format($first['total_price'], 2) }}</strong>
                                             </h5>
                                         </div>
                                     @else
@@ -78,10 +80,20 @@
 
                         </li><!-- / Cart -->
 
+                        <!--wihsilist-->
+                        <li class="dropdown wishlist-nav dropdown-slide">
+                            <a href="{{route('web.wishlist.index')}}" title="Wishlist"> <i
+                                    class="fa-solid fa-heart"></i>
+                                <span class="wishlist-count">{{ auth()?->user()?->wishlistCount() ?? 0 }}</span>
+                            </a>
+                        </li>
+
+
                         <!-- Search -->
+
                         <li class="dropdown search dropdown-slide">
                             <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"
-                                data-hover="dropdown"><i class="tf-ion-ios-search-strong"></i> Search</a>
+                                data-hover="dropdown"><i class="tf-ion-ios-search-strong"></i></a>
                             <ul class="dropdown-menu search-dropdown">
                                 <li>
                                     <form action="post"><input type="search" class="form-control"
@@ -94,7 +106,7 @@
                         <li class="dropdown auth-nav dropdown-slide">
                             <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"
                                 data-hover="dropdown">
-                                <i class="tf-ion-person"></i> Account
+                                <i class="tf-ion-person"></i>
                             </a>
                             <ul class="dropdown-menu">
                                 @guest
