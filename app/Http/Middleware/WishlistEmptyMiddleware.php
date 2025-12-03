@@ -20,7 +20,7 @@ class WishlistEmptyMiddleware
                 return response()->json([
                     'success' => false,
                     'message' => 'Your wishlist is empty.'
-                ], 403);
+                ], 200);
             }
             return redirect()->route('web.index')->with('error', 'Your wishlist is empty.');
         }

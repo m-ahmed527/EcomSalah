@@ -104,40 +104,11 @@
             timer: 1500
         })
     @endif
-    $(document).ready(function () {
-        $('.view-cart-btn').on('click', function (e) {
-            e.preventDefault();
 
-            $.ajax({
-                url: "{{ route('web.cart.index') }}",
-                type: "GET",
-
-                success: function (response) {
-
-                    if (response.success === false) {
-                        Swal.fire({
-                            icon: 'warning',
-                            title: response.message,
-                        });
-                    } else {
-                        // If success true OR page returned (HTML)
-                        window.location.href = "{{ route('web.cart.index') }}";
-                    }
-                },
-
-                error: function (error) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: error.responseJSON?.message || 'Failed to load cart.'
-                    });
-                }
-            });
-        });
-
-    });
 
 
 </script>
-@include('includes.web.common.add-to-wishlist-script')
+@include('includes.web.common.cart.cart-wishlist-index-script')
+@include('includes.web.common.wishlist.add-to-wishlist-script')
 
 @stack('scripts')

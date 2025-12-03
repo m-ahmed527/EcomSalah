@@ -313,7 +313,7 @@
 @push('scripts')
     @include('includes.web.common.modal-script')
     @include('includes.web.common.variant-script')
-    @include('includes.web.common.add-to-cart-script')
+    @include('includes.web.common.cart.add-to-cart-script')
     <script>
 
     </script>

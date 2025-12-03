@@ -12,6 +12,7 @@
                     <div class="col-md-8 col-md-offset-2">
                         <div class="block">
                             <div class="product-list">
+                                <a class="product-remove remove-from-cart" style="cursor: pointer;">Empty Cart</a>
                                 <div class="cart-product-list">
                                     @include('screens.web.cart.partials.cart-products')
                                 </div>
@@ -31,7 +32,7 @@
     </div>
 @endsection
 @push('scripts')
-    @include('includes.web.common.update-cart')
+    @include('includes.web.common.cart.update-cart')
 
-    
+
 @endpush

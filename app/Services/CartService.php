@@ -146,7 +146,10 @@ class CartService
             $this->recalculateCart($cart);
         }
 
-        // session()->put('cart', $cart);
+    }
+    public function emptyCart()
+    {
+        session()->forget('cart');
     }
     public function isCartEmpty()
     {
@@ -157,27 +160,7 @@ class CartService
         return false;
     }
 
-    // private function recalculateCart($cart)
-    // {
-    //     // If items key does not exist → create empty
-    //     if (!isset($cart['items']) || empty($cart['items'])) {
-    //         $cart['items'] = [];
-    //         $cart['total_amount'] = 0;
-    //         $cart['total_items'] = 0;
 
-    //         session()->put('cart', $cart);
-    //         return;
-    //     }
-
-    //     // Safe total amount & total items calculation
-    //     $cart['total_amount'] = collect($cart['items'])
-    //         ->sum(fn($item) => $item['total_price']);
-
-    //     $cart['total_items'] = collect($cart['items'])
-    //         ->sum(fn($item) => $item['quantity']);
-
-    //     session()->put('cart', $cart);
-    // }
 
 
     private function recalculateCart($cart)

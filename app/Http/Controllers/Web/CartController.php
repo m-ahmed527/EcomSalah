@@ -41,9 +41,13 @@ class CartController extends Controller
     {
         try {
             $variantId = $request->id;
-            // dd($variantId);
-            Cart::removeFromCart($variantId);
-            $cartIsEmpty = Cart::isCartEmpty();
+            if (!$variantId) {
+                Cart::emptyCart();
+                $cartIsEmpty = true;
+            } else {
+                Cart::removeFromCart($variantId);
+                $cartIsEmpty = Cart::isCartEmpty();
+            }
             $html = view('screens.web.cart.partials.cart-products', get_defined_vars())->render();
             return successResponse('Product removed from cart successfully.', [
                 'html' => $html,
@@ -67,7 +71,6 @@ class CartController extends Controller
                 'html' => $html,
             ]);
         } catch (Throwable $e) {
-            dd($e->getMessage());
             create_error_log('Cart Update', $e);
             return errorResponse('Something went wrong.');
         }

@@ -22,9 +22,9 @@
                     <!-- Cart -->
                     <ul class="top-menu text-right list-inline">
                         <li class="dropdown cart-nav dropdown-slide">
-                            <a href="{{ route('web.cart.index') }}" data-hover="dropdown"><i
-                                    class="tf-ion-android-cart"></i><span
-                                    class="cart-count">{{ session('cart.total_items', 0) }}</span> </a>
+                            <a href="javascript:void(0);" data-hover="dropdown"><i
+                                    class="tf-ion-android-cart view-cart-btn"></i><span class="cart-count"
+                                    title="Cart">{{ session('cart.total_items', 0) }}</span> </a>
                             <div class="dropdown-menu cart-dropdown">
                                 <!-- Cart Item Start-->
                                 <div class="media" id="cart-drop">
@@ -71,7 +71,7 @@
 
                                 </div>
                                 <ul class="text-center cart-buttons">
-                                    <li><a href="{{ route('web.cart.index') }}" class="btn btn-small view-cart-btn">View
+                                    <li><a href="javascript:void(0);" class="btn btn-small view-cart-btn">View
                                             Cart</a></li>
                                     <li><a href="{{ route('web.checkout.index') }}"
                                             class="btn btn-small btn-solid-border">Checkout</a></li>
@@ -82,8 +82,8 @@
 
                         <!--wihsilist-->
                         <li class="dropdown wishlist-nav dropdown-slide">
-                            <a href="{{route('web.wishlist.index')}}" title="Wishlist"> <i
-                                    class="fa-solid fa-heart"></i>
+                            <a href="javascript:void(0);" title="Wishlist"> <i
+                                    class="fa-solid fa-heart view-wishlist-btn"></i>
                                 <span class="wishlist-count">{{ auth()?->user()?->wishlistCount() ?? 0 }}</span>
                             </a>
                         </li>

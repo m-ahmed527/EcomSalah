@@ -7,8 +7,7 @@
         </tr>
     </thead>
     <tbody>
-        {{-- @dd(session('cart', [])) --}}
-        @forelse ($wishlistProducts as $key => $item)
+        @forelse ($wishlistProducts ?? [] as $key => $item)
 
             <tr class="">
                 <td class="">
@@ -31,7 +30,7 @@
         @empty
 
             <tr>
-                <td colspan="5" class="text-center">Cart is empty</td>
+                <td colspan="5" class="text-center">Wishlist is Empty</td>
             </tr>
 
         @endforelse
@@ -41,7 +40,7 @@
 <hr>
 <div class="cart-summary mt-2">
     <span>Total Items</span>
-    <span class="total-price">{{ $wishlistProducts->count() }}</span>
+    <span class="total-price">{{ $wishlistProducts?->count() ?? 0 }}</span>
 
 </div>
 

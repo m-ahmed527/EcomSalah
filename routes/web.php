@@ -53,7 +53,7 @@ Route::prefix('web')->name('web.')->group(function () {
         Route::post('/remove', 'removeCart')->name('remove')->middleware('cart');
     });
     Route::prefix('wishlist')->name('wishlist.')->controller(WishlistController::class)->group(function () {
-        Route::get('/index', 'index')->name('index');
+        Route::get('/index', 'index')->name('index')->middleware('wishlist');
         Route::post('/store/{product}', 'store')->name('store');
         Route::post('/remove','destroy')->name('remove');
     });
