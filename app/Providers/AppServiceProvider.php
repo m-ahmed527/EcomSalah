@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Interfaces\AuthRepositoryInterface;
 use App\Interfaces\LoginRepositoryInterface;
+use App\Models\Product;
 use App\Repositories\AuthRepository;
 use App\Repositories\LoginRepository;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $minPrice = Product::globalMinPrice();
+        $maxPrice = Product::globalMaxPrice();
+        View::share(['minPrice' => $minPrice, 'maxPrice' => $maxPrice]);
     }
 }

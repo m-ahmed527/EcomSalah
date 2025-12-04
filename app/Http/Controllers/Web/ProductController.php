@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Filters\Product\PriceRange;
+use App\Filters\Product\SortByName;
+use App\Filters\Product\SortByPrice;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\ProductVariant;
@@ -17,7 +20,11 @@ class ProductController extends Controller
             'Home' => route('web.index'),
             'Products' => route('web.product.index'),
         ];
-        $products = Product::paginate(4);
+        $products = Product::filter([
+            SortByName::class,
+            SortByPrice::class,
+            PriceRange::class
+        ])->paginate(6);
         if (request()->ajax()) {
             try {
                 $html = view('screens.web.product.partials.list', get_defined_vars())->render();
