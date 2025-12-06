@@ -1,195 +1,1812 @@
 @extends('layouts.web.app')
 @section('content')
-    <div class="hero-slider">
-        <div class="slider-item th-fullpage hero-area"
-            style="background-image: url({{ asset('assets/web/images/slider/slider-1.jpg') }});">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 text-center">
-                        <p data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".1">PRODUCTS</p>
-                        <h1 data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".5">The beauty of nature <br>
-                            is hidden in details.</h1>
-                        <a data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".8" class="btn"
-                            href="{{ route('web.product.index') }}">Shop Now</a>
-                    </div>
+    <!--slider area start-->
+    <div class="slider-area pos-rltv carosule-pagi cp-line">
+        <div class="active-slider">
+            <div class="single-slider pos-rltv">
+                <div class="slider-img"><img src="{{asset('assets/web/images/slider/slider01.webp')}}" alt=""></div>
+                <div class="slider-content pos-abs">
+                    <h4>Best Collection</h4>
+                    <h1 class="uppercase pos-rltv underline">exclusive Fashion 2022</h1>
+                    <a href="#" class="btn-def btn-white">Shop Now</a>
+                </div>
+            </div>
+            <div class="single-slider pos-rltv">
+                <div class="slider-img"><img src="{{asset('assets/web/images/slider/slider02.webp')}}" alt=""></div>
+                <div class="slider-content pos-abs">
+                    <h4>Best Collection</h4>
+                    <h1 class="uppercase pos-rltv underline">exclusive Fashion 2022</h1>
+                    <a href="#" class="btn-def btn-white">Shop Now</a>
+                </div>
+            </div>
+            <div class="single-slider pos-rltv">
+                <div class="slider-img"><img src="{{asset('assets/web/images/slider/slider01.webp')}}" alt=""></div>
+                <div class="slider-content pos-abs">
+                    <h4>Best Collection</h4>
+                    <h1 class="uppercase pos-rltv underline">exclusive Fashion 2022</h1>
+                    <a href="#" class="btn-def btn-white">Shop Now</a>
                 </div>
             </div>
         </div>
-        <div class="slider-item th-fullpage hero-area"
-            style="background-image: url({{ asset('assets/web/images/slider/slider-3.jpg') }});">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 text-left">
-                        <p data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".1">PRODUCTS</p>
-                        <h1 data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".5">The beauty of nature <br>
-                            is hidden in details.</h1>
-                        <a data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".8" class="btn"
-                            href="{{ route('web.product.index') }}">Shop Now</a>
+    </div>
+    <!--slider area start-->
+
+    <!--delivery service start-->
+    <div class="delivery-service-area ptb-30">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="single-service shadow-box text-center">
+                        <img src="{{asset('assets/web/images/icons/garantee.png')}}" alt="">
+                        <h5>Money Back Guarantee</h5>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="slider-item th-fullpage hero-area"
-            style="background-image: url({{ asset('assets/web/images/slider/slider-3.jpg') }});">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 text-right">
-                        <p data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".1">PRODUCTS</p>
-                        <h1 data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".5">The beauty of nature <br>
-                            is hidden in details.</h1>
-                        <a data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".8" class="btn"
-                            href="{{ route('web.product.index') }}">Shop Now</a>
+                <div class="col-lg-3 col-md-6">
+                    <div class="single-service shadow-box text-center">
+                        <img src="{{asset('assets/web/images/icons/coupon.png')}}" alt="">
+                        <h5>Gift Coupon</h5>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="single-service shadow-box text-center">
+                        <img src="{{asset('assets/web/images/icons/delivery.png')}}" alt="">
+                        <h5>Free Shipping</h5>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="single-service shadow-box text-center">
+                        <img src="{{asset('assets/web/images/icons/support.png')}}" alt="">
+                        <h5>24x7 Support</h5>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <!--delivery service start-->
 
-    <section class="product-category section">
+    <!--branding-section-area start-->
+    <div class="branding-section-area">
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
-                    <div class="title text-center">
-                        <h2>Product Category</h2>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="category-box">
-                        <a href="#!">
-                            <img src="{{ asset('assets/web/images/shop/category/category-1.jpg') }}" alt="" />
-                            <div class="content">
-                                <h3>Clothes Sales</h3>
-                                <p>Shop New Season Clothing</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="category-box">
-                        <a href="#!">
-                            <img src="{{ asset('assets/web/images/shop/category/category-2.jpg') }}" alt="" />
-                            <div class="content">
-                                <h3>Smart Casuals</h3>
-                                <p>Get Wide Range Selection</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="category-box category-box-2">
-                        <a href="#!">
-                            <img src="{{ asset('assets/web/images/shop/category/category-3.jpg') }}" alt="" />
-                            <div class="content">
-                                <h3>Jewellery</h3>
-                                <p>Special Design Comes First</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+                <div class="col-lg-12">
+                    <div class="active-slider pos-rltv carosule-pagi cp-line pagi-02">
+                        <div class="single-slider">
+                            <div class="row">
+                                <div class="col-xl-7 col-lg-6 col-md-6">
+                                    <div class="brand-img text-center">
+                                        <img src="{{ asset('assets/web/images/team/branding.webp') }}" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-xl-5 col-lg-6 col-md-6">
+                                    <div class="brand-content ptb-55">
+                                        <div class="brand-text color-lightgrey">
+                                            <h6>New Fashion</h6>
+                                            <h2 class="uppercase montserrat">Brand Cortta</h2>
+                                            <h3 class="montserrat">$200.00</h3>
+                                            <p>It is a long established fact that a reader will be distracted by the
+                                                readable content of a page when looking at its layout.</p>
+                                            <div class="social-icon-wraper mt-35">
+                                                <div class="social-icon">
+                                                    <ul>
+                                                        <li><a href="#"><i class="zmdi zmdi-shopping-cart"></i></a>
+                                                        </li>
+                                                        <li><a href="#"><i class="zmdi zmdi-favorite-outline"></i></a></li>
+                                                        <li><a href="#" data-tooltip="Quick View" class="q-view"
+                                                                data-bs-toggle="modal" data-bs-target=".modal"
+                                                                tabindex="0"><i class="zmdi zmdi-eye"></i></a></li>
+                                                        <li><a href="#"><i class="zmdi zmdi-repeat"></i></a></li>
 
-    <section class="products section bg-gray">
-        <div class="container">
-            <div class="row">
-                <div class="title text-center">
-                    <h2>Trendy Products</h2>
-                </div>
-            </div>
-            <div class="row">
-
-                @forelse ($products as $key => $product)
-                    <div class="col-md-4">
-                        <div class="product-item" style="cursor:pointer;">
-                            <div class="product-thumb">
-                                <span class="bage">Sale</span>
-                                <a href="{{ route('web.product.show', $product->slug) }}" class="product-a">
-                                    <img class="img-responsive"
-                                        src="{{ $product->featured_image ?? asset('assets/web/images/no-image.png') }}"
-                                        alt="product-img" />
-                                </a>
-                                <div class="preview-meta">
-                                    <ul>
-                                        <li>
-                                            <span class="modalProductShow"
-                                                data-url="{{ route('web.product.details', $product->slug) }}">
-                                                <i class="tf-ion-ios-eye" style="font-size:22px;"></i>
-                                            </span>
-                                        </li>
-                                        <li>
-                                            <span class="add-to-wishlist"
-                                                data-url=" {{ route('web.wishlist.store', $product->slug) }}"><i class="{{ auth()?->user()?->hasWishlisted($product->id) ? 'fa-solid' : 'fa-regular' }}
-                                                                    fa-heart"></i></span>
-                                        </li>
-
-                                    </ul>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="brand-timer shadow-box-2 mt-50">
+                                            <div class="timer-wraper text-center">
+                                                <div class="timer">
+                                                    <div data-countdown="2023/02/01"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="product-content">
-                                <h4 class="mb-1">{{ $product->name }}</h4>
-                                <p class="price">PKR {{ $product->priceRange() }}</p>
+                        </div>
+                        <div class="single-slider">
+                            <div class="row">
+                                <div class="col-xl-7 col-lg-6 col-md-6">
+                                    <div class="brand-img text-center">
+                                        <img src="{{ asset('assets/web/images/team/branding.png') }}" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-xl-5 col-lg-6 col-md-6">
+                                    <div class="brand-content ptb-55">
+                                        <div class="brand-text color-lightgrey">
+                                            <h6>New Fashion</h6>
+                                            <h2 class="uppercase montserrat">Brand Cortta</h2>
+                                            <h3 class="montserrat">$200.00</h3>
+                                            <p>It is a long established fact that a reader will be distracted by the
+                                                readable content of a page when looking at its layout.</p>
+                                            <div class="social-icon-wraper mt-35">
+                                                <div class="social-icon">
+                                                    <ul>
+                                                        <li><a href="#"><i class="zmdi zmdi-shopping-cart"></i></a>
+                                                        </li>
+                                                        <li><a href="#"><i class="zmdi zmdi-favorite-outline"></i></a></li>
+                                                        <li><a href="#" data-tooltip="Quick View" class="q-view"
+                                                                data-bs-toggle="modal" data-bs-target=".modal"
+                                                                tabindex="0"><i class="zmdi zmdi-eye"></i></a></li>
+                                                        <li><a href="#"><i class="zmdi zmdi-repeat"></i></a></li>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="brand-timer shadow-box-2 mt-50">
+                                            <div class="timer-wraper text-center">
+                                                <div class="timer">
+                                                    <div data-countdown="2017/02/01"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single-slider">
+                            <div class="row">
+                                <div class="col-xl-7 col-lg-6 col-md-6">
+                                    <div class="brand-img text-center">
+                                        <img src="{{ asset('assets/web/images/team/branding.png') }}" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-xl-5 col-lg-6 col-md-6">
+                                    <div class="brand-content ptb-55">
+                                        <div class="brand-text color-lightgrey">
+                                            <h6>New Fashion</h6>
+                                            <h2 class="uppercase montserrat">Brand Cortta</h2>
+                                            <h3 class="montserrat">$200.00</h3>
+                                            <p>It is a long established fact that a reader will be distracted by the
+                                                readable content of a page when looking at its layout.</p>
+                                            <div class="social-icon-wraper mt-35">
+                                                <div class="social-icon">
+                                                    <ul>
+                                                        <li><a href="#"><i class="zmdi zmdi-shopping-cart"></i></a>
+                                                        </li>
+                                                        <li><a href="#"><i class="zmdi zmdi-favorite-outline"></i></a></li>
+                                                        <li><a href="#" data-tooltip="Quick View" class="q-view"
+                                                                data-bs-toggle="modal" data-bs-target=".modal"
+                                                                tabindex="0"><i class="zmdi zmdi-eye"></i></a></li>
+                                                        <li><a href="#"><i class="zmdi zmdi-repeat"></i></a></li>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="brand-timer shadow-box-2 mt-50">
+                                            <div class="timer-wraper text-center">
+                                                <div class="timer">
+                                                    <div data-countdown="2023/02/01"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                @empty
-                    <div class="col-12">
-                        <h5 class="text-center text-muted">No products found.</h5>
-                    </div>
-                @endforelse
-
-
-
-
-                <!-- Modal -->
-                @include('screens.web.product.partials.modal')
-
-            </div>
-        </div>
-    </section>
-
-
-    <!--
-                                                            Start Call To Action
-                                                            ==================================== -->
-    <section class="call-to-action bg-gray section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <div class="title">
-                        <h2>SUBSCRIBE TO NEWSLETTER</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat, <br> facilis numquam impedit ut
-                            sequi. Minus facilis vitae excepturi sit laboriosam.</p>
-                    </div>
-                    <div class="col-lg-6 col-md-offset-3">
-                        <div class="input-group subscription-form">
-                            <input type="text" class="form-control" placeholder="Enter Your Email Address">
-                            <span class="input-group-btn">
-                                <button class="btn btn-main" type="button">Subscribe Now!</button>
-                            </span>
-                        </div><!-- /input-group -->
-                    </div><!-- /.col-lg-6 -->
-
-                </div>
-            </div> <!-- End row -->
-        </div> <!-- End container -->
-    </section> <!-- End section -->
-
-    <section class="section instagram-feed">
-        <div class="container">
-            <div class="row">
-                <div class="title">
-                    <h2>View us on instagram</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="instagram-slider" id="instafeed"
-                        data-accessToken="IGQVJYeUk4YWNIY1h4OWZANeS1wRHZARdjJ5QmdueXN2RFR6NF9iYUtfcGp1NmpxZA3RTbnU1MXpDNVBHTzZAMOFlxcGlkVHBKdjhqSnUybERhNWdQSE5hVmtXT013MEhOQVJJRGJBRURn">
-                    </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+    <!--branding-section-area end-->
+
+    <!--new arrival area start-->
+    <div class="new-arrival-area pt-70">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="heading-title heading-style pos-rltv mb-50 text-center">
+                        <h5 class="uppercase">New Arrival</h5>
+                    </div>
+                    <div class="total-new-arrival new-arrival-slider-active carsoule-btn row">
+                        <div class="product-item">
+                            <!-- single product start-->
+                            <div class="single-product">
+                                <div class="product-img">
+                                    <div class="product-label">
+                                        <div class="new">New</div>
+                                    </div>
+                                    <div class="single-prodcut-img  product-overlay pos-rltv">
+
+                                        <a href="single-product.html"> <img alt=""
+                                                src="{{asset('assets/web/images/product/01.webp')}}" class="primary-image">
+                                            <img alt="" src="{{asset('assets/web/images/product/02.webp')}}"
+                                                class="secondary-image"> </a>
+                                    </div>
+                                    <div class="product-icon socile-icon-tooltip text-center">
+                                        <ul>
+                                            <li><a href="#" data-tooltip="Add To Cart" class="add-cart"
+                                                    data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
+                                            <li><a href="#" data-tooltip="Wishlist" class="w-list"><i
+                                                        class="fa fa-heart-o"></i></a></li>
+                                            <li><a href="#" data-tooltip="Compare" class="cpare"><i
+                                                        class="fa fa-refresh"></i></a></li>
+                                            <li><a href="#" data-tooltip="Quick View" class="q-view" data-bs-toggle="modal"
+                                                    data-bs-target=".modal"><i class="fa fa-eye"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="product-text">
+                                    <div class="prodcut-name"> <a href="single-product.html">Quisque fringilla</a>
+                                    </div>
+                                    <div class="prodcut-ratting-price">
+                                        <div class="prodcut-price">
+                                            <div class="new-price"> $220 </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- single product end-->
+                        </div>
+                        <div class="product-item">
+                            <!-- single product start-->
+                            <div class="single-product">
+                                <div class="product-img">
+                                    <div class="single-prodcut-img  product-overlay pos-rltv">
+
+                                        <a href="single-product.html"> <img alt=""
+                                                src="{{asset('assets/web/images/product/03.webp')}}" class="primary-image">
+                                            <img alt="" src="{{asset('assets/web/images/product/04.webp')}}"
+                                                class="secondary-image"> </a>
+                                    </div>
+                                    <div class="product-icon socile-icon-tooltip text-center">
+                                        <ul>
+                                            <li><a href="#" data-tooltip="Add To Cart" class="add-cart"
+                                                    data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
+                                            <li><a href="#" data-tooltip="Wishlist" class="w-list"><i
+                                                        class="fa fa-heart-o"></i></a></li>
+                                            <li><a href="#" data-tooltip="Compare" class="cpare"><i
+                                                        class="fa fa-refresh"></i></a></li>
+                                            <li><a href="#" data-tooltip="Quick View" class="q-view" data-bs-toggle="modal"
+                                                    data-bs-target=".modal"><i class="fa fa-eye"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="product-text">
+                                    <div class="prodcut-name"> <a href="single-product.html">Quisque fringilla</a>
+                                    </div>
+                                    <div class="prodcut-ratting-price">
+                                        <div class="prodcut-price">
+                                            <div class="new-price"> $220 </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- single product end-->
+                        </div>
+                        <div class="product-item">
+                            <!-- single product start-->
+                            <div class="single-product">
+                                <div class="product-img">
+                                    <div class="product-label">
+                                        <div class="new">Sale</div>
+                                    </div>
+                                    <div class="single-prodcut-img  product-overlay pos-rltv">
+
+                                        <a href="single-product.html"> <img alt=""
+                                                src="{{asset('assets/web/images/product/02.webp')}}" class="primary-image">
+                                            <img alt="" src="{{asset('assets/web/images/product/03.webp')}}"
+                                                class="secondary-image"> </a>
+                                    </div>
+                                    <div class="product-icon socile-icon-tooltip text-center">
+                                        <ul>
+                                            <li><a href="#" data-tooltip="Add To Cart" class="add-cart"
+                                                    data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
+                                            <li><a href="#" data-tooltip="Wishlist" class="w-list"><i
+                                                        class="fa fa-heart-o"></i></a></li>
+                                            <li><a href="#" data-tooltip="Compare" class="cpare"><i
+                                                        class="fa fa-refresh"></i></a></li>
+                                            <li><a href="#" data-tooltip="Quick View" class="q-view" data-bs-toggle="modal"
+                                                    data-bs-target=".modal"><i class="fa fa-eye"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="product-text">
+                                    <div class="prodcut-name"> <a href="single-product.html">Quisque fringilla</a>
+                                    </div>
+                                    <div class="prodcut-ratting-price">
+                                        <div class="prodcut-ratting">
+                                            <a href="#"><i class="fa fa-star"></i></a>
+                                            <a href="#"><i class="fa fa-star"></i></a>
+                                            <a href="#"><i class="fa fa-star"></i></a>
+                                            <a href="#"><i class="fa fa-star"></i></a>
+                                            <a href="#"><i class="fa fa-star-o"></i></a>
+                                        </div>
+                                        <div class="prodcut-price">
+                                            <div class="new-price"> $220 </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- single product end-->
+                        </div>
+                        <div class="product-item">
+                            <!-- single product start-->
+                            <div class="single-product">
+                                <div class="product-img">
+                                    <div class="single-prodcut-img  product-overlay pos-rltv">
+
+                                        <a href="single-product.html"> <img alt=""
+                                                src="{{asset('assets/web/images/product/04.webp')}}" class="primary-image">
+                                            <img alt="" src="{{asset('assets/web/images/product/03.webp')}}"
+                                                class="secondary-image"> </a>
+                                    </div>
+                                    <div class="product-icon socile-icon-tooltip text-center">
+                                        <ul>
+                                            <li><a href="#" data-tooltip="Add To Cart" class="add-cart"
+                                                    data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
+                                            <li><a href="#" data-tooltip="Wishlist" class="w-list"><i
+                                                        class="fa fa-heart-o"></i></a></li>
+                                            <li><a href="#" data-tooltip="Compare" class="cpare"><i
+                                                        class="fa fa-refresh"></i></a></li>
+                                            <li><a href="#" data-tooltip="Quick View" class="q-view" data-bs-toggle="modal"
+                                                    data-bs-target=".modal"><i class="fa fa-eye"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="product-text">
+                                    <div class="prodcut-name"> <a href="single-product.html">Quisque fringilla</a>
+                                    </div>
+                                    <div class="prodcut-ratting-price">
+                                        <div class="prodcut-price">
+                                            <div class="new-price"> $220 </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- single product end-->
+                        </div>
+                        <div class="product-item">
+                            <!-- single product start-->
+                            <div class="single-product">
+                                <div class="product-img">
+                                    <div class="single-prodcut-img  product-overlay pos-rltv">
+
+                                        <a href="single-product.html"> <img alt=""
+                                                src="{{asset('assets/web/images/product/05.webp')}}" class="primary-image">
+                                            <img alt="" src="{{asset('assets/web/images/product/06.webp')}}"
+                                                class="secondary-image"> </a>
+                                    </div>
+                                    <div class="product-icon socile-icon-tooltip text-center">
+                                        <ul>
+                                            <li><a href="#" data-tooltip="Add To Cart" class="add-cart"
+                                                    data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
+                                            <li><a href="#" data-tooltip="Wishlist" class="w-list"><i
+                                                        class="fa fa-heart-o"></i></a></li>
+                                            <li><a href="#" data-tooltip="Compare" class="cpare"><i
+                                                        class="fa fa-refresh"></i></a></li>
+                                            <li><a href="#" data-tooltip="Quick View" class="q-view" data-bs-toggle="modal"
+                                                    data-bs-target=".modal"><i class="fa fa-eye"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="product-text">
+                                    <div class="prodcut-name"> <a href="single-product.html">Quisque fringilla</a>
+                                    </div>
+                                    <div class="prodcut-ratting-price">
+                                        <div class="prodcut-ratting">
+                                            <a href="#"><i class="fa fa-star"></i></a>
+                                            <a href="#"><i class="fa fa-star"></i></a>
+                                            <a href="#"><i class="fa fa-star"></i></a>
+                                            <a href="#"><i class="fa fa-star"></i></a>
+                                            <a href="#"><i class="fa fa-star-o"></i></a>
+                                        </div>
+                                        <div class="prodcut-price">
+                                            <div class="new-price"> $220 </div>
+                                            <div class="old-price"> <del>$250</del> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- single product end-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--new arrival area end-->
+
+    <!--banner area start-->
+    <div class="banner-area pt-70">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="single-banner gray-bg">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="sb-img text-center">
+                                    <img src="{{asset('assets/web/images/banner/02.webp')}}" alt="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="sb-content mt-60">
+                                    <div class="banner-text">
+                                        <h5 class="lato">New Arrival</h5>
+                                        <h2 class="montserrat">Grag T- Shirt</h2>
+                                        <h3 class="montserrat">$99.99</h3>
+                                        <div class="banner-list">
+                                            <ul>
+                                                <li>Best quality</li>
+                                                <li>Best quality</li>
+                                                <li>Best quality</li>
+                                            </ul>
+                                        </div>
+                                        <div class="social-icon-wraper mt-25">
+                                            <div class="social-icon socile-icon-style-1">
+                                                <ul>
+                                                    <li><a href="#"><i class="zmdi zmdi-shopping-cart"></i></a></li>
+                                                    <li><a href="#"><i class="zmdi zmdi-favorite-outline"></i></a>
+                                                    </li>
+                                                    <li><a href="#" data-tooltip="Quick View" class="q-view"
+                                                            data-bs-toggle="modal" data-bs-target=".modal" tabindex="0"><i
+                                                                class="zmdi zmdi-eye"></i></a></li>
+                                                    <li><a href="#"><i class="zmdi zmdi-repeat"></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="single-banner gray-bg">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="sb-img text-center">
+                                    <img src="{{asset('assets/web/images/banner/01.webp')}}" alt="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="sb-content mt-60">
+                                    <div class="banner-text">
+                                        <h5 class="lato">New Arrival</h5>
+                                        <h2 class="montserrat">Grag T- Shirt</h2>
+                                        <h3 class="montserrat">$99.99</h3>
+                                        <p>It is a long established fact that a reader will be distracted by the
+                                            readable content.</p>
+                                        <a class="btn-def btn2" href="#">Shop Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--banner area end-->
+
+    <!--discunt-featured-onsale-area start -->
+    <div class="discunt-featured-onsale-area pt-60">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="product-area tab-cars-style">
+                        <div class="title-tab-product-category">
+                            <div class="col-lg-12 text-center">
+                                <ul class="nav mb-40 heading-style-2" role="tablist">
+                                    <li role="presentation"><a class="active" href="#newarrival" aria-controls="newarrival"
+                                            role="tab" data-bs-toggle="tab">New
+                                            Arrival</a>
+                                    </li>
+                                    <li role="presentation"><a href="#bestsellr" aria-controls="bestsellr" role="tab"
+                                            data-bs-toggle="tab">Best Seller</a></li>
+                                    <li role="presentation"><a href="#specialoffer" aria-controls="specialoffer" role="tab"
+                                            data-bs-toggle="tab">Special Offer</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="content-tab-product-category">
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane fade in active" id="newarrival">
+                                    <div class="total-new-arrival new-arrival-slider-active carsoule-btn">
+                                        <div class="product-item">
+                                            <!-- single product start-->
+                                            <div class="single-product">
+                                                <div class="product-img">
+                                                    <div class="product-label">
+                                                        <div class="new">New</div>
+                                                    </div>
+                                                    <div class="single-prodcut-img  product-overlay pos-rltv">
+                                                        <a href="single-product.html"> <img alt=""
+                                                                src="{{asset('assets/web/images/product/01.webp')}}"
+                                                                class="primary-image">
+
+                                                            <img alt="" src="{{asset('assets/web/images/product/02.webp')}}"
+                                                                class="secondary-image"> </a>
+                                                    </div>
+                                                    <div class="product-icon socile-icon-tooltip text-center">
+                                                        <ul>
+                                                            <li><a href="#" data-tooltip="Add To Cart" class="add-cart"
+                                                                    data-placement="left"><i
+                                                                        class="fa fa-cart-plus"></i></a></li>
+                                                            <li><a href="#" data-tooltip="Wishlist" class="w-list"><i
+                                                                        class="fa fa-heart-o"></i></a>
+                                                            </li>
+                                                            <li><a href="#" data-tooltip="Compare" class="cpare"><i
+                                                                        class="fa fa-refresh"></i></a></li>
+                                                            <li><a href="#" data-tooltip="Quick View" class="q-view"
+                                                                    data-bs-toggle="modal" data-bs-target=".modal"><i
+                                                                        class="fa fa-eye"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="product-text">
+                                                    <div class="prodcut-name"> <a href="single-product.html">Quisque
+                                                            fringilla</a> </div>
+                                                    <div class="prodcut-ratting-price">
+                                                        <div class="prodcut-price">
+                                                            <div class="new-price"> $220 </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- single product end-->
+                                        </div>
+                                        <div class="product-item">
+                                            <!-- single product start-->
+                                            <div class="single-product">
+                                                <div class="product-img">
+                                                    <div class="single-prodcut-img  product-overlay pos-rltv">
+                                                        <a href="single-product.html"> <img alt=""
+                                                                src="{{asset('assets/web/images/product/03.webp')}}"
+                                                                class="primary-image">
+
+                                                            <img alt="" src="{{asset('assets/web/images/product/04.webp')}}"
+                                                                class="secondary-image"> </a>
+                                                    </div>
+                                                    <div class="product-icon socile-icon-tooltip text-center">
+                                                        <ul>
+                                                            <li><a href="#" data-tooltip="Add To Cart" class="add-cart"
+                                                                    data-placement="left"><i
+                                                                        class="fa fa-cart-plus"></i></a></li>
+                                                            <li><a href="#" data-tooltip="Wishlist" class="w-list"><i
+                                                                        class="fa fa-heart-o"></i></a>
+                                                            </li>
+                                                            <li><a href="#" data-tooltip="Compare" class="cpare"><i
+                                                                        class="fa fa-refresh"></i></a></li>
+                                                            <li><a href="#" data-tooltip="Quick View" class="q-view"
+                                                                    data-bs-toggle="modal" data-bs-target=".modal"><i
+                                                                        class="fa fa-eye"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="product-text">
+                                                    <div class="prodcut-name"> <a href="single-product.html">Quisque
+                                                            fringilla</a> </div>
+                                                    <div class="prodcut-ratting-price">
+                                                        <div class="prodcut-price">
+                                                            <div class="new-price"> $220 </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- single product end-->
+                                        </div>
+                                        <div class="product-item">
+                                            <!-- single product start-->
+                                            <div class="single-product">
+                                                <div class="product-img">
+                                                    <div class="product-label">
+                                                        <div class="new">Sale</div>
+                                                    </div>
+                                                    <div class="single-prodcut-img  product-overlay pos-rltv">
+                                                        <a href="single-product.html"> <img alt=""
+                                                                src="{{asset('assets/web/images/product/02.webp')}}"
+                                                                class="primary-image">
+
+                                                            <img alt="" src="{{asset('assets/web/images/product/03.webp')}}"
+                                                                class="secondary-image"> </a>
+                                                    </div>
+                                                    <div class="product-icon socile-icon-tooltip text-center">
+                                                        <ul>
+                                                            <li><a href="#" data-tooltip="Add To Cart" class="add-cart"
+                                                                    data-placement="left"><i
+                                                                        class="fa fa-cart-plus"></i></a></li>
+                                                            <li><a href="#" data-tooltip="Wishlist" class="w-list"><i
+                                                                        class="fa fa-heart-o"></i></a>
+                                                            </li>
+                                                            <li><a href="#" data-tooltip="Compare" class="cpare"><i
+                                                                        class="fa fa-refresh"></i></a></li>
+                                                            <li><a href="#" data-tooltip="Quick View" class="q-view"
+                                                                    data-bs-toggle="modal" data-bs-target=".modal"><i
+                                                                        class="fa fa-eye"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="product-text">
+                                                    <div class="prodcut-name"> <a href="single-product.html">Quisque
+                                                            fringilla</a> </div>
+                                                    <div class="prodcut-ratting-price">
+                                                        <div class="prodcut-ratting">
+                                                            <a href="#"><i class="fa fa-star"></i></a>
+                                                            <a href="#"><i class="fa fa-star"></i></a>
+                                                            <a href="#"><i class="fa fa-star"></i></a>
+                                                            <a href="#"><i class="fa fa-star"></i></a>
+                                                            <a href="#"><i class="fa fa-star-o"></i></a>
+                                                        </div>
+                                                        <div class="prodcut-price">
+                                                            <div class="new-price"> $220 </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- single product end-->
+                                        </div>
+                                        <div class="product-item">
+                                            <!-- single product start-->
+                                            <div class="single-product">
+                                                <div class="product-img">
+                                                    <div class="single-prodcut-img  product-overlay pos-rltv">
+                                                        <a href="single-product.html"> <img alt=""
+                                                                src="{{asset('assets/web/images/product/04.webp')}}"
+                                                                class="primary-image">
+
+                                                            <img alt="" src="{{asset('assets/web/images/product/03.webp')}}"
+                                                                class="secondary-image"> </a>
+                                                    </div>
+                                                    <div class="product-icon socile-icon-tooltip text-center">
+                                                        <ul>
+                                                            <li><a href="#" data-tooltip="Add To Cart" class="add-cart"
+                                                                    data-placement="left"><i
+                                                                        class="fa fa-cart-plus"></i></a></li>
+                                                            <li><a href="#" data-tooltip="Wishlist" class="w-list"><i
+                                                                        class="fa fa-heart-o"></i></a>
+                                                            </li>
+                                                            <li><a href="#" data-tooltip="Compare" class="cpare"><i
+                                                                        class="fa fa-refresh"></i></a></li>
+                                                            <li><a href="#" data-tooltip="Quick View" class="q-view"
+                                                                    data-bs-toggle="modal" data-bs-target=".modal"><i
+                                                                        class="fa fa-eye"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="product-text">
+                                                    <div class="prodcut-name"> <a href="single-product.html">Quisque
+                                                            fringilla</a> </div>
+                                                    <div class="prodcut-ratting-price">
+                                                        <div class="prodcut-price">
+                                                            <div class="new-price"> $220 </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- single product end-->
+                                        </div>
+                                        <div class="product-item">
+                                            <!-- single product start-->
+                                            <div class="single-product">
+                                                <div class="product-img">
+                                                    <div class="single-prodcut-img  product-overlay pos-rltv">
+                                                        <a href="single-product.html"> <img alt=""
+                                                                src="{{asset('assets/web/images/product/05.webp')}}"
+                                                                class="primary-image">
+
+                                                            <img alt="" src="{{asset('assets/web/images/product/06.webp')}}"
+                                                                class="secondary-image"> </a>
+                                                    </div>
+                                                    <div class="product-icon socile-icon-tooltip text-center">
+                                                        <ul>
+                                                            <li><a href="#" data-tooltip="Add To Cart" class="add-cart"
+                                                                    data-placement="left"><i
+                                                                        class="fa fa-cart-plus"></i></a></li>
+                                                            <li><a href="#" data-tooltip="Wishlist" class="w-list"><i
+                                                                        class="fa fa-heart-o"></i></a>
+                                                            </li>
+                                                            <li><a href="#" data-tooltip="Compare" class="cpare"><i
+                                                                        class="fa fa-refresh"></i></a></li>
+                                                            <li><a href="#" data-tooltip="Quick View" class="q-view"
+                                                                    data-bs-toggle="modal" data-bs-target=".modal"><i
+                                                                        class="fa fa-eye"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="product-text">
+                                                    <div class="prodcut-name"> <a href="single-product.html">Quisque
+                                                            fringilla</a> </div>
+                                                    <div class="prodcut-ratting-price">
+                                                        <div class="prodcut-ratting">
+                                                            <a href="#"><i class="fa fa-star"></i></a>
+                                                            <a href="#"><i class="fa fa-star"></i></a>
+                                                            <a href="#"><i class="fa fa-star"></i></a>
+                                                            <a href="#"><i class="fa fa-star"></i></a>
+                                                            <a href="#"><i class="fa fa-star-o"></i></a>
+                                                        </div>
+                                                        <div class="prodcut-price">
+                                                            <div class="new-price"> $220 </div>
+                                                            <div class="old-price"> <del>$250</del> </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- single product end-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane  fade in" id="bestsellr">
+                                    <div class="total-new-arrival new-arrival-slider-active carsoule-btn">
+                                        <div class="product-item">
+                                            <!-- single product start-->
+                                            <div class="single-product">
+                                                <div class="product-img">
+                                                    <div class="product-label">
+                                                        <div class="new">New</div>
+                                                    </div>
+                                                    <div class="single-prodcut-img  product-overlay pos-rltv">
+                                                        <a href="single-product.html"> <img alt=""
+                                                                src="{{asset('assets/web/images/product/01.webp')}}"
+                                                                class="primary-image">
+
+                                                            <img alt="" src="{{asset('assets/web/images/product/02.webp')}}"
+                                                                class="secondary-image"> </a>
+                                                    </div>
+                                                    <div class="product-icon socile-icon-tooltip text-center">
+                                                        <ul>
+                                                            <li><a href="#" data-tooltip="Add To Cart" class="add-cart"
+                                                                    data-placement="left"><i
+                                                                        class="fa fa-cart-plus"></i></a></li>
+                                                            <li><a href="#" data-tooltip="Wishlist" class="w-list"><i
+                                                                        class="fa fa-heart-o"></i></a>
+                                                            </li>
+                                                            <li><a href="#" data-tooltip="Compare" class="cpare"><i
+                                                                        class="fa fa-refresh"></i></a></li>
+                                                            <li><a href="#" data-tooltip="Quick View" class="q-view"
+                                                                    data-bs-toggle="modal" data-bs-target=".modal"><i
+                                                                        class="fa fa-eye"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="product-text">
+                                                    <div class="prodcut-name"> <a href="single-product.html">Quisque
+                                                            fringilla</a> </div>
+                                                    <div class="prodcut-ratting-price">
+                                                        <div class="prodcut-price">
+                                                            <div class="new-price"> $220 </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- single product end-->
+                                        </div>
+                                        <div class="product-item">
+                                            <!-- single product start-->
+                                            <div class="single-product">
+                                                <div class="product-img">
+                                                    <div class="product-label">
+                                                        <div class="new">Sale</div>
+                                                    </div>
+                                                    <div class="single-prodcut-img  product-overlay pos-rltv">
+                                                        <a href="single-product.html"> <img alt=""
+                                                                src="{{asset('assets/web/images/product/02.webp')}}"
+                                                                class="primary-image">
+
+                                                            <img alt="" src="{{asset('assets/web/images/product/03.webp')}}"
+                                                                class="secondary-image"> </a>
+                                                    </div>
+                                                    <div class="product-icon socile-icon-tooltip text-center">
+                                                        <ul>
+                                                            <li><a href="#" data-tooltip="Add To Cart" class="add-cart"
+                                                                    data-placement="left"><i
+                                                                        class="fa fa-cart-plus"></i></a></li>
+                                                            <li><a href="#" data-tooltip="Wishlist" class="w-list"><i
+                                                                        class="fa fa-heart-o"></i></a>
+                                                            </li>
+                                                            <li><a href="#" data-tooltip="Compare" class="cpare"><i
+                                                                        class="fa fa-refresh"></i></a></li>
+                                                            <li><a href="#" data-tooltip="Quick View" class="q-view"
+                                                                    data-bs-toggle="modal" data-bs-target=".modal"><i
+                                                                        class="fa fa-eye"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="product-text">
+                                                    <div class="prodcut-name"> <a href="single-product.html">Quisque
+                                                            fringilla</a> </div>
+                                                    <div class="prodcut-ratting-price">
+                                                        <div class="prodcut-ratting">
+                                                            <a href="#"><i class="fa fa-star"></i></a>
+                                                            <a href="#"><i class="fa fa-star"></i></a>
+                                                            <a href="#"><i class="fa fa-star"></i></a>
+                                                            <a href="#"><i class="fa fa-star"></i></a>
+                                                            <a href="#"><i class="fa fa-star-o"></i></a>
+                                                        </div>
+                                                        <div class="prodcut-price">
+                                                            <div class="new-price"> $220 </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- single product end-->
+                                        </div>
+                                        <div class="product-item">
+                                            <!-- single product start-->
+                                            <div class="single-product">
+                                                <div class="product-img">
+                                                    <div class="single-prodcut-img  product-overlay pos-rltv">
+                                                        <a href="single-product.html"> <img alt=""
+                                                                src="{{asset('assets/web/images/product/04.webp')}}"
+                                                                class="primary-image">
+
+                                                            <img alt="" src="{{asset('assets/web/images/product/03.webp')}}"
+                                                                class="secondary-image"> </a>
+                                                    </div>
+                                                    <div class="product-icon socile-icon-tooltip text-center">
+                                                        <ul>
+                                                            <li><a href="#" data-tooltip="Add To Cart" class="add-cart"
+                                                                    data-placement="left"><i
+                                                                        class="fa fa-cart-plus"></i></a></li>
+                                                            <li><a href="#" data-tooltip="Wishlist" class="w-list"><i
+                                                                        class="fa fa-heart-o"></i></a>
+                                                            </li>
+                                                            <li><a href="#" data-tooltip="Compare" class="cpare"><i
+                                                                        class="fa fa-refresh"></i></a></li>
+                                                            <li><a href="#" data-tooltip="Quick View" class="q-view"
+                                                                    data-bs-toggle="modal" data-bs-target=".modal"><i
+                                                                        class="fa fa-eye"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="product-text">
+                                                    <div class="prodcut-name"> <a href="single-product.html">Quisque
+                                                            fringilla</a> </div>
+                                                    <div class="prodcut-ratting-price">
+                                                        <div class="prodcut-price">
+                                                            <div class="new-price"> $220 </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- single product end-->
+                                        </div>
+                                        <div class="product-item">
+                                            <!-- single product start-->
+                                            <div class="single-product">
+                                                <div class="product-img">
+                                                    <div class="single-prodcut-img  product-overlay pos-rltv">
+                                                        <a href="single-product.html"> <img alt=""
+                                                                src="{{asset('assets/web/images/product/03.webp')}}"
+                                                                class="primary-image">
+
+                                                            <img alt="" src="{{asset('assets/web/images/product/04.webp')}}"
+                                                                class="secondary-image"> </a>
+                                                    </div>
+                                                    <div class="product-icon socile-icon-tooltip text-center">
+                                                        <ul>
+                                                            <li><a href="#" data-tooltip="Add To Cart" class="add-cart"
+                                                                    data-placement="left"><i
+                                                                        class="fa fa-cart-plus"></i></a></li>
+                                                            <li><a href="#" data-tooltip="Wishlist" class="w-list"><i
+                                                                        class="fa fa-heart-o"></i></a>
+                                                            </li>
+                                                            <li><a href="#" data-tooltip="Compare" class="cpare"><i
+                                                                        class="fa fa-refresh"></i></a></li>
+                                                            <li><a href="#" data-tooltip="Quick View" class="q-view"
+                                                                    data-bs-toggle="modal" data-bs-target=".modal"><i
+                                                                        class="fa fa-eye"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="product-text">
+                                                    <div class="prodcut-name"> <a href="single-product.html">Quisque
+                                                            fringilla</a> </div>
+                                                    <div class="prodcut-ratting-price">
+                                                        <div class="prodcut-price">
+                                                            <div class="new-price"> $220 </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- single product end-->
+                                        </div>
+                                        <div class="product-item">
+                                            <!-- single product start-->
+                                            <div class="single-product">
+                                                <div class="product-img">
+                                                    <div class="single-prodcut-img  product-overlay pos-rltv">
+                                                        <a href="single-product.html"> <img alt=""
+                                                                src="{{asset('assets/web/images/product/05.webp')}}"
+                                                                class="primary-image">
+
+                                                            <img alt="" src="{{asset('assets/web/images/product/06.webp')}}"
+                                                                class="secondary-image"> </a>
+                                                    </div>
+                                                    <div class="product-icon socile-icon-tooltip text-center">
+                                                        <ul>
+                                                            <li><a href="#" data-tooltip="Add To Cart" class="add-cart"
+                                                                    data-placement="left"><i
+                                                                        class="fa fa-cart-plus"></i></a></li>
+                                                            <li><a href="#" data-tooltip="Wishlist" class="w-list"><i
+                                                                        class="fa fa-heart-o"></i></a>
+                                                            </li>
+                                                            <li><a href="#" data-tooltip="Compare" class="cpare"><i
+                                                                        class="fa fa-refresh"></i></a></li>
+                                                            <li><a href="#" data-tooltip="Quick View" class="q-view"
+                                                                    data-bs-toggle="modal" data-bs-target=".modal"><i
+                                                                        class="fa fa-eye"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="product-text">
+                                                    <div class="prodcut-name"> <a href="single-product.html">Quisque
+                                                            fringilla</a> </div>
+                                                    <div class="prodcut-ratting-price">
+                                                        <div class="prodcut-ratting">
+                                                            <a href="#"><i class="fa fa-star"></i></a>
+                                                            <a href="#"><i class="fa fa-star"></i></a>
+                                                            <a href="#"><i class="fa fa-star"></i></a>
+                                                            <a href="#"><i class="fa fa-star"></i></a>
+                                                            <a href="#"><i class="fa fa-star-o"></i></a>
+                                                        </div>
+                                                        <div class="prodcut-price">
+                                                            <div class="new-price"> $220 </div>
+                                                            <div class="old-price"> <del>$250</del> </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- single product end-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane  fade in" id="specialoffer">
+                                    <div class="total-new-arrival new-arrival-slider-active carsoule-btn">
+                                        <div class="product-item">
+                                            <!-- single product start-->
+                                            <div class="single-product">
+                                                <div class="product-img">
+                                                    <div class="single-prodcut-img  product-overlay pos-rltv">
+                                                        <a href="single-product.html"> <img alt=""
+                                                                src="{{asset('assets/web/images/product/04.webp')}}"
+                                                                class="primary-image">
+
+                                                            <img alt="" src="{{asset('assets/web/images/product/03.webp')}}"
+                                                                class="secondary-image"> </a>
+                                                    </div>
+                                                    <div class="product-icon socile-icon-tooltip text-center">
+                                                        <ul>
+                                                            <li><a href="#" data-tooltip="Add To Cart" class="add-cart"
+                                                                    data-placement="left"><i
+                                                                        class="fa fa-cart-plus"></i></a></li>
+                                                            <li><a href="#" data-tooltip="Wishlist" class="w-list"><i
+                                                                        class="fa fa-heart-o"></i></a>
+                                                            </li>
+                                                            <li><a href="#" data-tooltip="Compare" class="cpare"><i
+                                                                        class="fa fa-refresh"></i></a></li>
+                                                            <li><a href="#" data-tooltip="Quick View" class="q-view"
+                                                                    data-bs-toggle="modal" data-bs-target=".modal"><i
+                                                                        class="fa fa-eye"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="product-text">
+                                                    <div class="prodcut-name"> <a href="single-product.html">Quisque
+                                                            fringilla</a> </div>
+                                                    <div class="prodcut-ratting-price">
+                                                        <div class="prodcut-price">
+                                                            <div class="new-price"> $220 </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- single product end-->
+                                        </div>
+                                        <div class="product-item">
+                                            <!-- single product start-->
+                                            <div class="single-product">
+                                                <div class="product-img">
+                                                    <div class="single-prodcut-img  product-overlay pos-rltv">
+                                                        <a href="single-product.html"> <img alt=""
+                                                                src="{{asset('assets/web/images/product/05.webp')}}"
+                                                                class="primary-image">
+
+                                                            <img alt="" src="{{asset('assets/web/images/product/06.webp')}}"
+                                                                class="secondary-image"> </a>
+                                                    </div>
+                                                    <div class="product-icon socile-icon-tooltip text-center">
+                                                        <ul>
+                                                            <li><a href="#" data-tooltip="Add To Cart" class="add-cart"
+                                                                    data-placement="left"><i
+                                                                        class="fa fa-cart-plus"></i></a></li>
+                                                            <li><a href="#" data-tooltip="Wishlist" class="w-list"><i
+                                                                        class="fa fa-heart-o"></i></a>
+                                                            </li>
+                                                            <li><a href="#" data-tooltip="Compare" class="cpare"><i
+                                                                        class="fa fa-refresh"></i></a></li>
+                                                            <li><a href="#" data-tooltip="Quick View" class="q-view"
+                                                                    data-bs-toggle="modal" data-bs-target=".modal"><i
+                                                                        class="fa fa-eye"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="product-text">
+                                                    <div class="prodcut-name"> <a href="single-product.html">Quisque
+                                                            fringilla</a> </div>
+                                                    <div class="prodcut-ratting-price">
+                                                        <div class="prodcut-ratting">
+                                                            <a href="#"><i class="fa fa-star"></i></a>
+                                                            <a href="#"><i class="fa fa-star"></i></a>
+                                                            <a href="#"><i class="fa fa-star"></i></a>
+                                                            <a href="#"><i class="fa fa-star"></i></a>
+                                                            <a href="#"><i class="fa fa-star-o"></i></a>
+                                                        </div>
+                                                        <div class="prodcut-price">
+                                                            <div class="new-price"> $220 </div>
+                                                            <div class="old-price"> <del>$250</del> </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- single product end-->
+                                        </div>
+                                        <div class="product-item">
+                                            <!-- single product start-->
+                                            <div class="single-product">
+                                                <div class="product-img">
+                                                    <div class="product-label">
+                                                        <div class="new">New</div>
+                                                    </div>
+                                                    <div class="single-prodcut-img  product-overlay pos-rltv">
+                                                        <a href="single-product.html"> <img alt=""
+                                                                src="{{asset('assets/web/images/product/01.webp')}}"
+                                                                class="primary-image">
+
+                                                            <img alt="" src="{{asset('assets/web/images/product/02.webp')}}"
+                                                                class="secondary-image"> </a>
+                                                    </div>
+                                                    <div class="product-icon socile-icon-tooltip text-center">
+                                                        <ul>
+                                                            <li><a href="#" data-tooltip="Add To Cart" class="add-cart"
+                                                                    data-placement="left"><i
+                                                                        class="fa fa-cart-plus"></i></a></li>
+                                                            <li><a href="#" data-tooltip="Wishlist" class="w-list"><i
+                                                                        class="fa fa-heart-o"></i></a>
+                                                            </li>
+                                                            <li><a href="#" data-tooltip="Compare" class="cpare"><i
+                                                                        class="fa fa-refresh"></i></a></li>
+                                                            <li><a href="#" data-tooltip="Quick View" class="q-view"
+                                                                    data-bs-toggle="modal" data-bs-target=".modal"><i
+                                                                        class="fa fa-eye"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="product-text">
+                                                    <div class="prodcut-name"> <a href="single-product.html">Quisque
+                                                            fringilla</a> </div>
+                                                    <div class="prodcut-ratting-price">
+                                                        <div class="prodcut-price">
+                                                            <div class="new-price"> $220 </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- single product end-->
+                                        </div>
+                                        <div class="product-item">
+                                            <!-- single product start-->
+                                            <div class="single-product">
+                                                <div class="product-img">
+                                                    <div class="single-prodcut-img  product-overlay pos-rltv">
+                                                        <a href="single-product.html"> <img alt=""
+                                                                src="{{asset('assets/web/images/product/03.webp')}}"
+                                                                class="primary-image">
+
+                                                            <img alt="" src="{{asset('assets/web/images/product/04.webp')}}"
+                                                                class="secondary-image"> </a>
+                                                    </div>
+                                                    <div class="product-icon socile-icon-tooltip text-center">
+                                                        <ul>
+                                                            <li><a href="#" data-tooltip="Add To Cart" class="add-cart"
+                                                                    data-placement="left"><i
+                                                                        class="fa fa-cart-plus"></i></a></li>
+                                                            <li><a href="#" data-tooltip="Wishlist" class="w-list"><i
+                                                                        class="fa fa-heart-o"></i></a>
+                                                            </li>
+                                                            <li><a href="#" data-tooltip="Compare" class="cpare"><i
+                                                                        class="fa fa-refresh"></i></a></li>
+                                                            <li><a href="#" data-tooltip="Quick View" class="q-view"
+                                                                    data-bs-toggle="modal" data-bs-target=".modal"><i
+                                                                        class="fa fa-eye"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="product-text">
+                                                    <div class="prodcut-name"> <a href="single-product.html">Quisque
+                                                            fringilla</a> </div>
+                                                    <div class="prodcut-ratting-price">
+                                                        <div class="prodcut-price">
+                                                            <div class="new-price"> $220 </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- single product end-->
+                                        </div>
+                                        <div class="product-item">
+                                            <!-- single product start-->
+                                            <div class="single-product">
+                                                <div class="product-img">
+                                                    <div class="product-label">
+                                                        <div class="new">Sale</div>
+                                                    </div>
+                                                    <div class="single-prodcut-img  product-overlay pos-rltv">
+                                                        <a href="single-product.html"> <img alt=""
+                                                                src="{{asset('assets/web/images/product/02.webp')}}"
+                                                                class="primary-image">
+
+                                                            <img alt="" src="{{asset('assets/web/images/product/03.webp')}}"
+                                                                class="secondary-image"> </a>
+                                                    </div>
+                                                    <div class="product-icon socile-icon-tooltip text-center">
+                                                        <ul>
+                                                            <li><a href="#" data-tooltip="Add To Cart" class="add-cart"
+                                                                    data-placement="left"><i
+                                                                        class="fa fa-cart-plus"></i></a></li>
+                                                            <li><a href="#" data-tooltip="Wishlist" class="w-list"><i
+                                                                        class="fa fa-heart-o"></i></a>
+                                                            </li>
+                                                            <li><a href="#" data-tooltip="Compare" class="cpare"><i
+                                                                        class="fa fa-refresh"></i></a></li>
+                                                            <li><a href="#" data-tooltip="Quick View" class="q-view"
+                                                                    data-bs-toggle="modal" data-bs-target=".modal"><i
+                                                                        class="fa fa-eye"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="product-text">
+                                                    <div class="prodcut-name"> <a href="single-product.html">Quisque
+                                                            fringilla</a> </div>
+                                                    <div class="prodcut-ratting-price">
+                                                        <div class="prodcut-ratting">
+                                                            <a href="#"><i class="fa fa-star"></i></a>
+                                                            <a href="#"><i class="fa fa-star"></i></a>
+                                                            <a href="#"><i class="fa fa-star"></i></a>
+                                                            <a href="#"><i class="fa fa-star"></i></a>
+                                                            <a href="#"><i class="fa fa-star-o"></i></a>
+                                                        </div>
+                                                        <div class="prodcut-price">
+                                                            <div class="new-price"> $220 </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- single product end-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--discunt-featured-onsale-area end-->
+
+    <!--testimonial-area-start-->
+    <div class="testimonial-area overlay ptb-70 mt-70">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="heading-title color-lightgrey mb-40 text-center">
+                        <h5 class="uppercase">Testimonial</h5>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="total-testimonial active-slider carosule-pagi pagi-03">
+                        <div class="single-testimonial">
+                            <div class="testimonial-img">
+                                <img src="{{asset('assets/web/images/team/testi-03.webp')}}" alt="">
+                            </div>
+                            <div class="testimonial-content color-lightgrey">
+                                <div class="name-degi pos-rltv">
+                                    <h5>Alexandra</h5>
+                                    <p>Developer</p>
+                                </div>
+                                <div class="testi-text">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                        quis nostrud exercitation ullamco.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single-testimonial">
+                            <div class="testimonial-img">
+                                <img src="{{asset('assets/web/images/team/testi-02.webp')}}" alt="">
+                            </div>
+                            <div class="testimonial-content color-lightgrey">
+                                <div class="name-degi pos-rltv">
+                                    <h5>Bernadette</h5>
+                                    <p>Facebook Liker</p>
+                                </div>
+                                <div class="testi-text">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                        quis nostrud exercitation ullamco.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single-testimonial">
+                            <div class="testimonial-img">
+                                <img src="{{asset('assets/web/images/team/testi-01.webp')}}" alt="">
+                            </div>
+                            <div class="testimonial-content color-lightgrey">
+                                <div class="name-degi pos-rltv">
+                                    <h5>Amanda</h5>
+                                    <p>Designer</p>
+                                </div>
+                                <div class="testi-text">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                        quis nostrud exercitation ullamco.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--testimonial-area-end-->
+
+    <!--new-arrival on-sale Top-ratted area start-->
+    <div class="arrival-ratted-sale-area pt-70">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="heading-title heading-style pos-rltv mb-50 text-center">
+                        <h5 class="uppercase">New Arrival</h5>
+                    </div>
+                    <div class="ctg-slider-active">
+                        <div class="single-ctg new-arrival-ctg">
+                            <div class="single-ctg-item">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-12 col-sm-6">
+                                        <div class="product-ctg-img pos-rltv product-overlay">
+
+                                            <a href="single-product.html"><img
+                                                    src="{{asset('assets/web/images/product/s01.webp')}}" alt=""></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-6">
+                                        <div class="product-ctg-content">
+                                            <p>Primo Court Mid Suede</p>
+                                            <p class="font-bold">$236.99</p>
+                                            <div class="social-icon socile-icon-style-1 mt-15">
+                                                <ul>
+                                                    <li><a href="#"><i class="zmdi zmdi-shopping-cart"></i></a></li>
+                                                    <li><a href="#" data-tooltip="Quick View" class="q-view"
+                                                            data-bs-toggle="modal" data-bs-target=".modal" tabindex="0"><i
+                                                                class="zmdi zmdi-eye"></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="single-ctg-item">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-12 col-sm-6">
+                                        <div class="product-ctg-img pos-rltv product-overlay">
+
+                                            <a href="single-product.html"><img
+                                                    src="{{asset('assets/web/images/product/s02.webp')}}" alt=""></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-6">
+                                        <div class="product-ctg-content">
+                                            <p>Primo Court Mid Suede</p>
+                                            <p class="font-bold">$236.99</p>
+                                            <div class="social-icon socile-icon-style-1 mt-15">
+                                                <ul>
+                                                    <li><a href="#"><i class="zmdi zmdi-shopping-cart"></i></a></li>
+                                                    <li><a href="#" data-tooltip="Quick View" class="q-view"
+                                                            data-bs-toggle="modal" data-bs-target=".modal" tabindex="0"><i
+                                                                class="zmdi zmdi-eye"></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single-ctg new-arrival-ctg">
+                            <div class="single-ctg-item">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-12 col-sm-6">
+                                        <div class="product-ctg-img pos-rltv product-overlay">
+
+                                            <a href="single-product.html"><img
+                                                    src="{{asset('assets/web/images/product/s01.webp')}}" alt=""></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-6">
+                                        <div class="product-ctg-content">
+                                            <p>Primo Court Mid Suede</p>
+                                            <p class="font-bold">$236.99</p>
+                                            <div class="social-icon socile-icon-style-1 mt-15">
+                                                <ul>
+                                                    <li><a href="#"><i class="zmdi zmdi-shopping-cart"></i></a></li>
+                                                    <li><a href="#" data-tooltip="Quick View" class="q-view"
+                                                            data-bs-toggle="modal" data-bs-target=".modal" tabindex="0"><i
+                                                                class="zmdi zmdi-eye"></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="single-ctg-item">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-12 col-sm-6">
+                                        <div class="product-ctg-img pos-rltv product-overlay">
+
+                                            <a href="single-product.html"><img
+                                                    src="{{asset('assets/web/images/product/s02.webp')}}" alt=""></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-6">
+                                        <div class="product-ctg-content">
+                                            <p>Primo Court Mid Suede</p>
+                                            <p class="font-bold">$236.99</p>
+                                            <div class="social-icon socile-icon-style-1 mt-15">
+                                                <ul>
+                                                    <li><a href="#"><i class="zmdi zmdi-shopping-cart"></i></a></li>
+                                                    <li><a href="#" data-tooltip="Quick View" class="q-view"
+                                                            data-bs-toggle="modal" data-bs-target=".modal" tabindex="0"><i
+                                                                class="zmdi zmdi-eye"></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="single-ctg on-sale-ctg">
+                        <div class="heading-title heading-style pos-rltv mb-50 text-center">
+                            <h5 class="uppercase">On Sale</h5>
+                        </div>
+                        <div class="ctg-slider-active">
+                            <div class="single-ctg new-arrival-ctg">
+                                <div class="single-ctg-item">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-12 col-sm-6">
+                                            <div class="product-ctg-img pos-rltv product-overlay">
+
+                                                <a href="single-product.html"><img
+                                                        src="{{asset('assets/web/images/product/s01.webp')}}" alt=""></a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12 col-sm-6">
+                                            <div class="product-ctg-content">
+                                                <p>Primo Court Mid Suede</p>
+                                                <p class="font-bold">$236.99</p>
+                                                <div class="social-icon socile-icon-style-1 mt-15">
+                                                    <ul>
+                                                        <li><a href="#"><i class="zmdi zmdi-shopping-cart"></i></a>
+                                                        </li>
+                                                        <li><a href="#" data-tooltip="Quick View" class="q-view"
+                                                                data-bs-toggle="modal" data-bs-target=".modal"
+                                                                tabindex="0"><i class="zmdi zmdi-eye"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="single-ctg-item">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-12 col-sm-6">
+                                            <div class="product-ctg-img pos-rltv product-overlay">
+
+                                                <a href="single-product.html"><img
+                                                        src="{{asset('assets/web/images/product/s02.webp')}}" alt=""></a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12 col-sm-6">
+                                            <div class="product-ctg-content">
+                                                <p>Primo Court Mid Suede</p>
+                                                <p class="font-bold">$236.99</p>
+                                                <div class="social-icon socile-icon-style-1 mt-15">
+                                                    <ul>
+                                                        <li><a href="#"><i class="zmdi zmdi-shopping-cart"></i></a>
+                                                        </li>
+                                                        <li><a href="#" data-tooltip="Quick View" class="q-view"
+                                                                data-bs-toggle="modal" data-bs-target=".modal"
+                                                                tabindex="0"><i class="zmdi zmdi-eye"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="single-ctg new-arrival-ctg">
+                                <div class="single-ctg-item">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-12 col-sm-6">
+                                            <div class="product-ctg-img pos-rltv product-overlay">
+
+                                                <a href="single-product.html"><img
+                                                        src="{{asset('assets/web/images/product/s01.webp')}}" alt=""></a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12 col-sm-6">
+                                            <div class="product-ctg-content">
+                                                <p>Primo Court Mid Suede</p>
+                                                <p class="font-bold">$236.99</p>
+                                                <div class="social-icon socile-icon-style-1 mt-15">
+                                                    <ul>
+                                                        <li><a href="#"><i class="zmdi zmdi-shopping-cart"></i></a>
+                                                        </li>
+                                                        <li><a href="#" data-tooltip="Quick View" class="q-view"
+                                                                data-bs-toggle="modal" data-bs-target=".modal"
+                                                                tabindex="0"><i class="zmdi zmdi-eye"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="single-ctg-item">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-12 col-sm-6">
+                                            <div class="product-ctg-img pos-rltv product-overlay">
+
+                                                <a href="single-product.html"><img
+                                                        src="{{asset('assets/web/images/product/s02.webp')}}" alt=""></a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12 col-sm-6">
+                                            <div class="product-ctg-content">
+                                                <p>Primo Court Mid Suede</p>
+                                                <p class="font-bold">$236.99</p>
+                                                <div class="social-icon socile-icon-style-1 mt-15">
+                                                    <ul>
+                                                        <li><a href="#"><i class="zmdi zmdi-shopping-cart"></i></a>
+                                                        </li>
+                                                        <li><a href="#" data-tooltip="Quick View" class="q-view"
+                                                                data-bs-toggle="modal" data-bs-target=".modal"
+                                                                tabindex="0"><i class="zmdi zmdi-eye"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="single-ctg top-rated-ctg">
+                        <div class="heading-title heading-style pos-rltv mb-50 text-center">
+                            <h5 class="uppercase">Top Rated</h5>
+                        </div>
+                        <div class="ctg-slider-active">
+                            <div class="single-ctg new-arrival-ctg">
+                                <div class="single-ctg-item">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-12 col-sm-6">
+                                            <div class="product-ctg-img pos-rltv product-overlay">
+
+                                                <a href="single-product.html"><img
+                                                        src="{{asset('assets/web/images/product/s01.webp')}}" alt=""></a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12 col-sm-6">
+                                            <div class="product-ctg-content">
+                                                <p>Primo Court Mid Suede</p>
+                                                <p class="font-bold">$236.99</p>
+                                                <div class="social-icon socile-icon-style-1 mt-15">
+                                                    <ul>
+                                                        <li><a href="#"><i class="zmdi zmdi-shopping-cart"></i></a>
+                                                        </li>
+                                                        <li><a href="#" data-tooltip="Quick View" class="q-view"
+                                                                data-bs-toggle="modal" data-bs-target=".modal"
+                                                                tabindex="0"><i class="zmdi zmdi-eye"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="single-ctg-item">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-12 col-sm-6">
+                                            <div class="product-ctg-img pos-rltv product-overlay">
+
+                                                <a href="single-product.html"><img
+                                                        src="{{asset('assets/web/images/product/s02.webp')}}" alt=""></a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12 col-sm-6">
+                                            <div class="product-ctg-content">
+                                                <p>Primo Court Mid Suede</p>
+                                                <p class="font-bold">$236.99</p>
+                                                <div class="social-icon socile-icon-style-1 mt-15">
+                                                    <ul>
+                                                        <li><a href="#"><i class="zmdi zmdi-shopping-cart"></i></a>
+                                                        </li>
+                                                        <li><a href="#" data-tooltip="Quick View" class="q-view"
+                                                                data-bs-toggle="modal" data-bs-target=".modal"
+                                                                tabindex="0"><i class="zmdi zmdi-eye"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="single-ctg new-arrival-ctg">
+                                <div class="single-ctg-item">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-12 col-sm-6">
+                                            <div class="product-ctg-img pos-rltv product-overlay">
+
+                                                <a href="single-product.html"><img
+                                                        src="{{asset('assets/web/images/product/s01.webp')}}" alt=""></a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12 col-sm-6">
+                                            <div class="product-ctg-content">
+                                                <p>Primo Court Mid Suede</p>
+                                                <p class="font-bold">$236.99</p>
+                                                <div class="social-icon socile-icon-style-1 mt-15">
+                                                    <ul>
+                                                        <li><a href="#"><i class="zmdi zmdi-shopping-cart"></i></a>
+                                                        </li>
+                                                        <li><a href="#" data-tooltip="Quick View" class="q-view"
+                                                                data-bs-toggle="modal" data-bs-target=".modal"
+                                                                tabindex="0"><i class="zmdi zmdi-eye"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="single-ctg-item">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-12 col-sm-6">
+                                            <div class="product-ctg-img pos-rltv product-overlay">
+
+                                                <a href="single-product.html"><img
+                                                        src="{{asset('assets/web/images/product/s02.webp')}}" alt=""></a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12 col-sm-6">
+                                            <div class="product-ctg-content">
+                                                <p>Primo Court Mid Suede</p>
+                                                <p class="font-bold">$236.99</p>
+                                                <div class="social-icon socile-icon-style-1 mt-15">
+                                                    <ul>
+                                                        <li><a href="#"><i class="zmdi zmdi-shopping-cart"></i></a>
+                                                        </li>
+                                                        <li><a href="#" data-tooltip="Quick View" class="q-view"
+                                                                data-bs-toggle="modal" data-bs-target=".modal"
+                                                                tabindex="0"><i class="zmdi zmdi-eye"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--new-arrival on-sale Top-ratted area end-->
+
+    <!--brand area are start-->
+    <div class="brand-area ptb-60">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="total-brand">
+                        <div class="brand-item">
+                            <div class="single-brand shadow-box"><a href="#"><img
+                                        src="{{asset('assets/web/images/brand/01.png')}}" alt=""></a></div>
+                        </div>
+                        <div class="brand-item">
+                            <div class="single-brand shadow-box"><a href="#"><img
+                                        src="{{asset('assets/web/images/brand/02.png')}}" alt=""></a></div>
+                        </div>
+                        <div class="brand-item">
+                            <div class="single-brand shadow-box"><a href="#"><img
+                                        src="{{asset('assets/web/images/brand/03.png')}}" alt=""></a></div>
+                        </div>
+                        <div class="brand-item">
+                            <div class="single-brand shadow-box"><a href="#"><img
+                                        src="{{asset('assets/web/images/brand/04.png')}}" alt=""></a></div>
+                        </div>
+                        <div class="brand-item">
+                            <div class="single-brand shadow-box"><a href="#"><img
+                                        src="{{asset('assets/web/images/brand/05.png')}}" alt=""></a></div>
+                        </div>
+                        <div class="brand-item">
+                            <div class="single-brand shadow-box"><a href="#"><img
+                                        src="{{asset('assets/web/images/brand/06.png')}}" alt=""></a></div>
+                        </div>
+                        <div class="brand-item">
+                            <div class="single-brand shadow-box"><a href="#"><img
+                                        src="{{asset('assets/web/images/brand/01.png')}}" alt=""></a></div>
+                        </div>
+                        <div class="brand-item">
+                            <div class="single-brand shadow-box"><a href="#"><img
+                                        src="{{asset('assets/web/images/brand/02.png')}}" alt=""></a></div>
+                        </div>
+                        <div class="brand-item">
+                            <div class="single-brand shadow-box"><a href="#"><img
+                                        src="{{asset('assets/web/images/brand/03.png')}}" alt=""></a></div>
+                        </div>
+                        <div class="brand-item">
+                            <div class="single-brand shadow-box"><a href="#"><img
+                                        src="{{asset('assets/web/images/brand/04.png')}}" alt=""></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--brand area are start-->
+
+    <!--blog area are start-->
+    <div class="blog-area pb-70">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="heading-title heading-style pos-rltv mb-50 text-center">
+                        <h5 class="uppercase">Blog</h5>
+                    </div>
+                    <div class="total-blog">
+                        <div class="blog-item">
+                            <div class="single-blog">
+                                <div class="blog-img pos-rltv product-overlay">
+                                    <a href="#"><img src="{{asset('assets/web/images/blog/01.webp')}}" alt=""></a>
+                                </div>
+                                <div class="blog-content">
+                                    <div class="blog-title">
+                                        <h5 class="uppercase font-bold"><a href="#">New fashion collection 2022</a>
+                                        </h5>
+                                        <div class="like-comments-date">
+                                            <ul>
+                                                <li><a href="#"><i class="zmdi zmdi-favorite-outline"></i>13
+                                                        Like</a>
+                                                </li>
+                                                <li><a href="#"><i class="zmdi zmdi-comment-outline"></i>03
+                                                        Comments</a>
+                                                </li>
+                                                <li class="blog-date"><a href="#"><i class="zmdi zmdi-calendar-alt"></i>16
+                                                        jun 2022</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="blog-text">
+                                            <p>It is a long established fact that a reader will be distracted by the
+                                                readable content of a page when looking at its layout. The point of
+                                                using.</p>
+                                        </div>
+                                        <a class="read-more montserrat" href="single-blog.html">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="blog-item">
+                            <div class="single-blog">
+                                <div class="blog-img pos-rltv product-overlay">
+                                    <a href="#"><img src="{{asset('assets/web/images/blog/02.webp')}}" alt=""></a>
+                                </div>
+                                <div class="blog-content">
+                                    <div class="blog-title">
+                                        <h5 class="uppercase font-bold"><a href="#">New fashion collection 2022</a>
+                                        </h5>
+                                        <div class="like-comments-date">
+                                            <ul>
+                                                <li><a href="#"><i class="zmdi zmdi-favorite-outline"></i>13
+                                                        Like</a>
+                                                </li>
+                                                <li><a href="#"><i class="zmdi zmdi-comment-outline"></i>03
+                                                        Comments</a>
+                                                </li>
+                                                <li class="blog-date"><a href="#"><i class="zmdi zmdi-calendar-alt"></i>16
+                                                        jun 2022</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="blog-text">
+                                            <p>It is a long established fact that a reader will be distracted by the
+                                                readable content of a page when looking at its layout. The point of
+                                                using.</p>
+                                        </div>
+                                        <a class="read-more montserrat" href="single-blog.html">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="blog-item">
+                            <div class="single-blog">
+                                <div class="blog-img pos-rltv product-overlay">
+                                    <a href="#"><img src="{{asset('assets/web/images/blog/03.webp')}}" alt=""></a>
+                                </div>
+                                <div class="blog-content">
+                                    <div class="blog-title">
+                                        <h5 class="uppercase font-bold"><a href="#">New fashion collection 2022</a>
+                                        </h5>
+                                        <div class="like-comments-date">
+                                            <ul>
+                                                <li><a href="#"><i class="zmdi zmdi-favorite-outline"></i>13
+                                                        Like</a>
+                                                </li>
+                                                <li><a href="#"><i class="zmdi zmdi-comment-outline"></i>03
+                                                        Comments</a>
+                                                </li>
+                                                <li class="blog-date"><a href="#"><i class="zmdi zmdi-calendar-alt"></i>16
+                                                        jun 2022</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="blog-text">
+                                            <p>It is a long established fact that a reader will be distracted by the
+                                                readable content of a page when looking at its layout. The point of
+                                                using.</p>
+                                        </div>
+                                        <a class="read-more montserrat" href="single-blog.html">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="blog-item">
+                            <div class="single-blog">
+                                <div class="blog-img pos-rltv product-overlay">
+                                    <a href="#"><img src="{{asset('assets/web/images/blog/01.webp')}}" alt=""></a>
+                                </div>
+                                <div class="blog-content">
+                                    <div class="blog-title">
+                                        <h5 class="uppercase font-bold"><a href="#">New fashion collection 2022</a>
+                                        </h5>
+                                        <div class="like-comments-date">
+                                            <ul>
+                                                <li><a href="#"><i class="zmdi zmdi-favorite-outline"></i>13
+                                                        Like</a>
+                                                </li>
+                                                <li><a href="#"><i class="zmdi zmdi-comment-outline"></i>03
+                                                        Comments</a>
+                                                </li>
+                                                <li class="blog-date"><a href="#"><i class="zmdi zmdi-calendar-alt"></i>16
+                                                        jun 2022</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="blog-text">
+                                            <p>It is a long established fact that a reader will be distracted by the
+                                                readable content of a page when looking at its layout. The point of
+                                                using.</p>
+                                        </div>
+                                        <a class="read-more montserrat" href="single-blog.html">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--blog area are end-->
+
 @endsection
-@push('scripts')
-    @include('includes.web.common.modal-script')
-@endpush

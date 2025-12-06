@@ -7,7 +7,11 @@ use Illuminate\Pipeline\Pipeline;
 
 trait Filter
 {
-    public function scopeFilter(Builder $query, $filters = [])  {
-        return app(Pipeline::class)->send($query)->through($filters)->thenReturn();
+    public function scopeFilter(Builder $query, $filters = [])
+    {
+        return app(Pipeline::class)
+            ->send($query)
+            ->through($filters)
+            ->thenReturn();
     }
 }

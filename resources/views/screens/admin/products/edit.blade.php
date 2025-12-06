@@ -129,7 +129,7 @@
                             @forelse ($product->variants as $index => $variant)
                                 <div class="card mb-3 variant-group position-relative border border-secondary">
                                     <button type="button" class="btn btn-danger btn-sm position-absolute remove-variant"
-                                        style="top: 5px; right: 5px; display: none;">
+                                        style="top: 5px; right: 5px;">
                                         <i class="fas fa-times"></i>
                                     </button>
                                     <input type="hidden" name="variants[{{ $index }}][id]" value="{{ $variant->id }}">

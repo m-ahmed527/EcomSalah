@@ -16,9 +16,12 @@ return new class extends Migration {
             $table->string('variant_name');
             $table->string('sku')->unique();
             $table->decimal('price', 10, 2);
+            $table->decimal('effective_price', 10, 2)->nullable()->comment('Price with base price')->index();
             $table->integer('stock')->default(0);
             $table->string('image')->nullable();
             $table->timestamps();
+
+            $table->index(['product_id', 'price'], 'product_id_price_index');
         });
     }
 

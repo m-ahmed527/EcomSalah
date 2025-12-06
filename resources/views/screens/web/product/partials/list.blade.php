@@ -1,48 +1,40 @@
-@forelse ($products as $key => $product)
-    <div class="col-md-4">
-        <div class="product-item" style="cursor:pointer;">
-            <div class="product-thumb">
-                <span class="bage">Sale</span>
-                <a href="{{ route('web.product.show', $product->slug) }}" class="product-a">
-                    <img class="img-responsive"
-                        src="{{ $product->featured_image ?? asset('assets/web/images/no-image.png') }}" alt="product-img" />
-                </a>
-                <div class="preview-meta">
+@forelse ($products as $product)
+    <div class="col-lg-4 col-md-6 item">
+        <!-- single product start-->
+        <div class="single-product">
+            <div class="product-img">
+                <div class="product-label red">
+                    <div class="new">New</div>
+                </div>
+                <div class="single-prodcut-img  product-overlay pos-rltv">
+                    <a href="single-product.html"> <img alt=""
+                            src="{{$product->featured_image ?? asset('assets/web/images/product/01.jpg')}}"
+                            class="primary-image">
+                        <img alt="" src="{{$product->featured_image ?? asset('assets/web/images/product/02.jpg')}}"
+                            class="secondary-image">
+                    </a>
+                </div>
+                <div class="product-icon socile-icon-tooltip text-center">
                     <ul>
-                        <li>
-                            <span class="modalProductShow" data-url="{{ route('web.product.details', $product->slug) }}">
-                                <i class="tf-ion-ios-eye" style="font-size:22px;"></i>
-                            </span>
-                        </li>
-                        <li>
-                            <span class="add-to-wishlist" data-url="{{ route('web.wishlist.store', $product->slug) }}"><i
-                                        class="{{ auth()?->user()?->hasWishlisted($product->id) ? 'fa-solid' : 'fa-regular' }}
-                                        fa-heart"></i></span>
-                        </li>
 
+                        <li><a href="#" data-tooltip="Wishlist" class="w-list"><i class="fa fa-heart-o"></i></a></li>
+                        <li><a href="javascript:void(0)" data-tooltip="Quick View"
+                                data-url="{{ route('web.product.details', $product->slug) }}" class="q-view modalProductShow"
+                                ><i class="fa fa-eye"></i></a></li>
                     </ul>
                 </div>
             </div>
-            <div class="product-content">
-                <h4 class="mb-1">{{ $product->name }}</h4>
-                <p class="price">PKR {{ $product->priceRange() }}</p>
+            <div class="product-text">
+                <div class="prodcut-name"> <a href="single-product.html">{{ $product->name }}</a> </div>
+                <div class="prodcut-ratting-price">
+                    <div class="prodcut-price">
+                        <div class="new-price"> PKR {{ $product->priceRange() }} </div>
+                    </div>
+                </div>
             </div>
         </div>
+        <!-- single product end-->
     </div>
 @empty
-    <div class="col-12">
-        <h5 class="text-center text-muted">No products found.</h5>
-    </div>
+
 @endforelse
-@push('scripts')
-    <script>
-        $('.pagination-div').html(`<div class="col-6 ">
-                                                        <nav aria-label="Page navigation example">
-                                                            {{ $products->appends(request()->query())->links('pagination::bootstrap-5') }}
-                                                        </nav>
-                                                    </div>`);
-
-
-
-    </script>
-@endpush

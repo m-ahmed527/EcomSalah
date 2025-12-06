@@ -1,29 +1,60 @@
 <script>
-        // AJAX Pagination
-        $(document).on('click', '.pagination a', function (event) {
-            event.preventDefault();
-            var page = $(this).attr('href').split('page=')[1];
-            fetch_data(page);
-        });
+    console.log({{ $products->min('effective_price') }}, {{ $products->max('effective_price') }});
 
-        function fetch_data(page) {
-            $.ajax({
-                url: "{{ route('web.product.index') }}?page=" + page,
-                beforeSend: function () {
-                    if (!$('.product-list-div .loader-overlay').length) {
-                        $('.product-list-div').append(`<div class="loader-overlay"><i class="fa fa-spinner fa-spin fa-2x"></i></div>`);
-                    }
-                },
-                success: function (response) {
-                    $('.product-list-div .loader-overlay').remove();
-                    $('.product-list-div').html(response.data.html);
-                    $('.pagination-div').html(response.data.pagination);
-                    $('#showing-results-container').html(response.data.showing_results);
-                },
-                error: function (xhr, status, error) {
-                    $('.product-list-div').html('<p class="text-danger text-center">Failed to load content.</p>');
-                    console.log('AJAX Error: ' + status + error);
-                }
-            });
-        }
-    </script>
+
+    // Sorting
+    $("#sort-select").change(function () {
+        loadProducts();
+    });
+
+    // AJAX Pagination
+    $(document).on('click', '.pagination a', function (event) {
+        event.preventDefault();
+
+        let page = $(this).attr('href').split('page=')[1];
+        loadProducts(page);
+    });
+
+    function loadProducts(page = 1) {
+
+        let data = {
+            page: page,
+            sort: $("#sort-select").val(),
+            // category_id: $("#category-select").val(),
+            // brand_id: $("#brand-select").val(),
+            price_min: $("#min_price").val(),
+            price_max: $("#max_price").val(),
+            // attributes: {}
+        };
+
+        // collect attributes filters e.g. color[1,2], size[3,4]
+        // $(".attribute-filter").each(function () {
+        //     let attrId = $(this).data("attribute-id");
+        //     let selectedValues = [];
+
+        //     $(this).find("input[type=checkbox]:checked").each(function () {
+        //         selectedValues.push($(this).val());
+        //     });
+
+        //     if (selectedValues.length > 0) {
+        //         data.attributes[attrId] = selectedValues;
+        //     }
+        // });
+        console.log(data);
+        $.ajax({
+            url: "{{ route('web.product.index') }}",
+            data: data,
+            beforeSend: function () {
+                $(".product-list").LoadingOverlay('show');
+            },
+            success: function (response) {
+                $(".product-list").LoadingOverlay('hide');
+                $(".product-list").html(response.data.html);
+                $(".pagination-div").html(response.data.pagination);
+                $("#showing-results-container").html(response.data.showing_results);
+            }
+        });
+    }
+
+
+</script>

@@ -1,426 +1,864 @@
-<!DOCTYPE html>
+<!doctype html>
+<html class="no-js" lang="en">
 
-<!--
- // WEBSITE: https://themefisher.com
- // TWITTER: https://twitter.com/themefisher
- // FACEBOOK: https://www.facebook.com/themefisher
- // GITHUB: https://github.com/themefisher/
--->
-
-<html lang="en">
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>FAQ || Clothing</title>
+    <meta name="description" content="Clothing – eCommerce Fashion Template is a clean and elegant design – suitable for selling clothing, fashion, high fashion, men fashion, women fashion, accessories, digital, kids, watches, jewelries, shoes, kids, furniture, sports, tools….. It has a fully responsive width adjusts automatically to any screen size or resolution.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Basic Page Needs
-  ================================================== -->
-  <meta charset="utf-8">
-  <title>Aviato | E-commerce template</title>
+    <link rel="shortcut icon" type="image/x-icon" href="images/icons/favicon.png">
+    <!-- Place favicon.png in the root directory -->
 
-  <!-- Mobile Specific Metas
-  ================================================== -->
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="Construction Html5 Template">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <meta name="author" content="Themefisher">
-  <meta name="generator" content="Themefisher Constra HTML Template v1.0">
-  
-  <!-- Favicon -->
-  <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
-  
-  <!-- Themefisher Icon font -->
-  <link rel="stylesheet" href="plugins/themefisher-font/style.css">
-  <!-- bootstrap.min css -->
-  <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
-  
-  <!-- Animate css -->
-  <link rel="stylesheet" href="plugins/animate/animate.css">
-  <!-- Slick Carousel -->
-  <link rel="stylesheet" href="plugins/slick/slick.css">
-  <link rel="stylesheet" href="plugins/slick/slick-theme.css">
-  
-  <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="css/style.css">
+    <!-- All css files are included here. -->
+    <!-- Bootstrap fremwork main css -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- This core.css file contents all plugings css file. -->
+    <link rel="stylesheet" href="css/core.css">
+    <!-- Theme shortcodes/elements style -->
+    <link rel="stylesheet" href="css/shortcode/shortcodes.css">
+    <!-- Theme main style -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Responsive css -->
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- User style -->
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/color/skin-default.css">
 
+
+    <!-- Modernizr JS -->
+    <script src="js/vendor/modernizr-3.11.2.min.js"></script>
 </head>
 
-<body id="body">
+<body>
+    <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
 
-<!-- Start Top Header Bar -->
-<section class="top-header">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-4 col-xs-12 col-sm-4">
-				<div class="contact-number">
-					<i class="tf-ion-ios-telephone"></i>
-					<span>0129- 12323-123123</span>
-				</div>
-			</div>
-			<div class="col-md-4 col-xs-12 col-sm-4">
-				<!-- Site Logo -->
-				<div class="logo text-center">
-					<a href="index.html">
-						<!-- replace logo here -->
-						<svg width="135px" height="29px" viewBox="0 0 155 29" version="1.1" xmlns="http://www.w3.org/2000/svg"
-							xmlns:xlink="http://www.w3.org/1999/xlink">
-							<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" font-size="40"
-								font-family="AustinBold, Austin" font-weight="bold">
-								<g id="Group" transform="translate(-108.000000, -297.000000)" fill="#000000">
-									<text id="AVIATO">
-										<tspan x="108.94" y="325">AVIATO</tspan>
-									</text>
-								</g>
-							</g>
-						</svg>
-					</a>
-				</div>
-			</div>
-			<div class="col-md-4 col-xs-12 col-sm-4">
-				<!-- Cart -->
-				<ul class="top-menu text-right list-inline">
-					<li class="dropdown cart-nav dropdown-slide">
-						<a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i
-								class="tf-ion-android-cart"></i>Cart</a>
-						<div class="dropdown-menu cart-dropdown">
-							<!-- Cart Item -->
-							<div class="media">
-								<a class="pull-left" href="#!">
-									<img class="media-object" src="images/shop/cart/cart-1.jpg" alt="image" />
-								</a>
-								<div class="media-body">
-									<h4 class="media-heading"><a href="#!">Ladies Bag</a></h4>
-									<div class="cart-price">
-										<span>1 x</span>
-										<span>1250.00</span>
-									</div>
-									<h5><strong>$1200</strong></h5>
-								</div>
-								<a href="#!" class="remove"><i class="tf-ion-close"></i></a>
-							</div><!-- / Cart Item -->
-							<!-- Cart Item -->
-							<div class="media">
-								<a class="pull-left" href="#!">
-									<img class="media-object" src="images/shop/cart/cart-2.jpg" alt="image" />
-								</a>
-								<div class="media-body">
-									<h4 class="media-heading"><a href="#!">Ladies Bag</a></h4>
-									<div class="cart-price">
-										<span>1 x</span>
-										<span>1250.00</span>
-									</div>
-									<h5><strong>$1200</strong></h5>
-								</div>
-								<a href="#!" class="remove"><i class="tf-ion-close"></i></a>
-							</div><!-- / Cart Item -->
+    <!-- Body main wrapper start -->
+    <div class="wrapper wishlist">
 
-							<div class="cart-summary">
-								<span>Total</span>
-								<span class="total-price">$1799.00</span>
-							</div>
-							<ul class="text-center cart-buttons">
-								<li><a href="cart.html" class="btn btn-small">View Cart</a></li>
-								<li><a href="checkout.html" class="btn btn-small btn-solid-border">Checkout</a></li>
-							</ul>
-						</div>
+        <!-- Start of header area -->
+        <header class="header-area header-wrapper">
+            <div class="header-top-bar black-bg clearfix">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6 col-6">
+                            <div class="login-register-area">
+                                <ul>
+                                    <li><a href="#">Login</a></li>
+                                    <li><a href="#">Register</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6 d-none d-md-block">
+                            <div class="social-search-area text-center">
+                                <div class="social-icon socile-icon-style-2">
+                                    <ul>
+                                        <li><a href="#" title="facebook"><i class="fa fa-facebook"></i></a> </li>
+                                        <li><a href="#" title="twitter"><i class="fa fa-twitter"></i></a> </li>
+                                        <li> <a href="#" title="dribble"><i class="fa fa-dribbble"></i></a></li>
+                                        <li> <a href="#" title="behance"><i class="fa fa-behance"></i></a> </li>
+                                        <li> <a href="#" title="rss"><i class="fa fa-rss"></i></a> </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-6">
+                            <div class="cart-currency-area login-register-area text-end">
+                                <ul>
+                                    <li>
+                                        <div class="header-currency">
+                                            <select>
+                                                <option value="1">USD</option>
+                                                <option value="2">Pound</option>
+                                                <option value="3">Euro</option>
+                                                <option value="4">Dinar</option>
+                                            </select>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="header-cart">
+                                            <div class="cart-icon"> <a href="#">Cart<i
+                                                        class="zmdi zmdi-shopping-cart"></i></a>
+                                                <span>2</span> </div>
+                                            <div class="cart-content-wraper">
+                                                <div class="cart-single-wraper">
+                                                    <div class="cart-img">
+                                                        <a href="#"><img src="images/product/01.jpg" alt=""></a>
+                                                    </div>
+                                                    <div class="cart-content">
+                                                        <div class="cart-name"> <a href="#">Aenean Eu Tristique</a>
+                                                        </div>
+                                                        <div class="cart-price"> $70.00 </div>
+                                                        <div class="cart-qty"> Qty: <span>1</span> </div>
+                                                    </div>
+                                                    <div class="remove"> <a href="#"><i class="zmdi zmdi-close"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="cart-single-wraper">
+                                                    <div class="cart-img">
+                                                        <a href="#"><img src="images/product/02.jpg" alt=""></a>
+                                                    </div>
+                                                    <div class="cart-content">
+                                                        <div class="cart-name"> <a href="#">Aenean Eu Tristique</a>
+                                                        </div>
+                                                        <div class="cart-price"> $70.00 </div>
+                                                        <div class="cart-qty"> Qty: <span>1</span> </div>
+                                                    </div>
+                                                    <div class="remove"> <a href="#"><i class="zmdi zmdi-close"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="cart-subtotal"> Subtotal: <span>$200.00</span> </div>
+                                                <div class="cart-check-btn">
+                                                    <div class="view-cart"> <a class="btn-def" href="cart.html">View
+                                                            Cart</a> </div>
+                                                    <div class="check-btn"> <a class="btn-def"
+                                                            href="checkout.html">Checkout</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="sticky-header" class="header-middle-area">
+                <div class="container">
+                    <div class="full-width-mega-dropdown">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="logo ptb-20"><a href="index.html">
+                                        <img src="images/logo/logo.png" alt="main logo"></a>
+                                </div>
+                            </div>
+                            <div class="col-lg-7 col-md-10 d-none d-md-block">
+                                <nav id="primary-menu">
+                                    <ul class="main-menu">
+                                        <li class="current"><a href="index.html">Home</a>
+                                            <ul class="dropdown">
+                                                <li><a href="index.html">Home One</a></li>
+                                                <li><a href="index-2.html">Home Two</a></li>
+                                                <li><a href="index-boxed-01.html">Home Three (Boxed)</a></li>
+                                                <li><a href="index-boxed-02.html">Home Four (Boxed)</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="mega-parent pos-rltv"><a href="shop.html">Man</a>
+                                            <div class="mega-menu-area mma-800">
+                                                <ul class="single-mega-item">
+                                                    <li class="menu-title uppercase">Shirts</li>
+                                                    <li><a href="shop.html">Shirt 01</a></li>
+                                                    <li><a href="shop.html">Shirt 02</a></li>
+                                                    <li><a href="shop.html">Shirt 03</a></li>
+                                                    <li><a href="shop.html">Shirt 04</a></li>
+                                                </ul>
+                                                <ul class="single-mega-item">
+                                                    <li class="menu-title uppercase">Pants</li>
+                                                    <li><a href="shop.html">Pant 01</a></li>
+                                                    <li><a href="shop.html">Pant 02</a></li>
+                                                    <li><a href="shop.html">Pant 03</a></li>
+                                                    <li><a href="shop.html">Pant 04</a></li>
+                                                </ul>
+                                                <ul class="single-mega-item">
+                                                    <li class="menu-title uppercase">T-Shirts</li>
+                                                    <li><a href="shop.html">T-Shirt 01</a></li>
+                                                    <li><a href="shop.html">T-Shirt 02</a></li>
+                                                    <li><a href="shop.html">T-Shirt 03</a></li>
+                                                    <li><a href="shop.html">T-Shirt 04</a></li>
+                                                </ul>
+                                                <div class="mega-banner-img">
+                                                    <a href="single-product.html"><img
+                                                            src="images/banner/banner-fashion-02.jpg" alt=""></a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="mega-parent pos-rltv"><a href="shop.html">Women</a>
+                                            <div class="mega-menu-area mma-700">
+                                                <ul class="single-mega-item">
+                                                    <li class="menu-title uppercase">Sharees</li>
+                                                    <li><a href="shop.html">Sharee 01</a></li>
+                                                    <li><a href="shop.html">Sharee 02</a></li>
+                                                    <li><a href="shop.html">Sharee 03</a></li>
+                                                    <li><a href="shop.html">Sharee 04</a></li>
+                                                    <li><a href="shop.html">Sharee 05</a></li>
+                                                </ul>
+                                                <ul class="single-mega-item">
+                                                    <li class="menu-title uppercase">Lahenga</li>
+                                                    <li><a href="shop.html">Lahenga 01</a></li>
+                                                    <li><a href="shop.html">Lahenga 02</a></li>
+                                                    <li><a href="shop.html">Lahenga 03</a></li>
+                                                    <li><a href="shop.html">Lahenga 04</a></li>
+                                                    <li><a href="shop.html">Lahenga 05</a></li>
+                                                </ul>
+                                                <ul class="single-mega-item">
+                                                    <li class="menu-title uppercase">Sandels</li>
+                                                    <li><a href="shop.html">Sandel 01</a></li>
+                                                    <li><a href="shop.html">Sandel 02</a></li>
+                                                    <li><a href="shop.html">Sandel 03</a></li>
+                                                    <li><a href="shop.html">Sandel 04</a></li>
+                                                    <li><a href="shop.html">Sandel 05</a></li>
+                                                </ul>
+                                                <div class="mega-banner-img">
+                                                    <a href="single-product.html"><img
+                                                            src="images/banner/banner-fashion.jpg" alt=""></a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="mega-parent"><a href="shop.html">Shortcut</a>
+                                            <div class="mega-menu-area mma-970">
+                                                <ul class="single-mega-item">
+                                                    <li class="menu-title uppercase">Shortcode-01</li>
+                                                    <li><a href="shortcode-banner.html"
+                                                            >shortcode-banner</a>
+                                                    </li>
+                                                    <li><a href="shortcode-best-top-on-sale-slider.html"
+                                                            >too-on-sale</a></li>
+                                                    <li><a href="shortcode-blog-item.html" >Short Blog
+                                                            Item</a></li>
+                                                    <li><a href="shortcode-brand-prodcut.html" >Brand
+                                                            Product</a></li>
+                                                    <li><a href="shortcode-brand-slider.html" >Brand
+                                                            Slider</a></li>
+                                                </ul>
+                                                <ul class="single-mega-item">
+                                                    <li class="menu-title uppercase">Shortcode-02</li>
+                                                    <li><a href="shortcode-breadcrumb.html"
+                                                            >Breadcrumb</a></li>
+                                                    <li><a href="shortcode-related-product.html" >Related
+                                                            Product</a></li>
+                                                    <li><a href="shortcode-service.html" >Service</a>
+                                                    </li>
+                                                    <li><a href="shortcode-skill.html" >Skill</a></li>
+                                                    <li><a href="shortcode-slider.html" >Slider</a></li>
+                                                </ul>
+                                                <ul class="single-mega-item">
+                                                    <li class="menu-title uppercase">Shortcode-03</li>
+                                                    <li><a href="shortcode-team.html" >Team</a></li>
+                                                    <li><a href="shortcode-testimonial.html"
+                                                            >Testimonial</a>
+                                                    </li>
+                                                    <li><a href="shortcode-why-choose-us.html" >Why
+                                                            Choose Us</a></li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li class="mega-parent"><a class="active" href="index.html">Pages</a>
+                                            <div class="mega-menu-area mma-970">
+                                                <ul class="single-mega-item coloum-4">
+                                                    <li class="menu-title uppercase">Pages-01</li>
+                                                    <li><a href="about-us.html" >About-us</a></li>
+                                                    <li><a href="blog.html" >Blog</a></li>
+                                                    <li><a href="blog-right.html" >Blog-Right</a></li>
+                                                    <li><a href="single-blog.html" >Single Blog</a></li>
+                                                    <li><a href="single-blog-right.html" >Single Blog
+                                                            Right</a></li>
+                                                    <li><a href="blog-full.html" >Blog-Fullwidth</a></li>
+                                                </ul>
+                                                <ul class="single-mega-item coloum-4">
+                                                    <li class="menu-title uppercase">pages-02</li>
+                                                    <li><a href="blog-full-right.html" >Blog Ful
+                                                            Rightl</a></li>
+                                                    <li><a href="cart.html" >Cart</a></li>
+                                                    <li><a href="checkout.html" >Checkout</a></li>
+                                                    <li><a href="compare.html" >Compare</a></li>
+                                                    <li><a href="complete-order.html" >Complete Order</a>
+                                                    </li>
+                                                    <li><a href="contact-us.html" >Contact US</a></li>
+                                                </ul>
+                                                <ul class="single-mega-item coloum-4">
+                                                    <li class="menu-title uppercase">pages-03</li>
+                                                    <li><a href="login.html" >Login</a></li>
+                                                    <li><a href="my-account.html" >My Account</a></li>
+                                                    <li><a href="shop-full-grid.html" >Shop Full Grid</a>
+                                                    </li>
+                                                    <li><a href="shop-full-list.html" >Shop Full List</a>
+                                                    </li>
+                                                    <li><a href="shop-list-right-sidebar.html" >Shop List
+                                                            Right</a></li>
+                                                    <li><a href="shop-list.html" >Shop List</a></li>
+                                                </ul>
+                                                <ul class="single-mega-item coloum-4">
+                                                    <li class="menu-title uppercase">pages-03</li>
+                                                    <li><a href="shop-right-sidebar.html" >Shop Right</a>
+                                                    </li>
+                                                    <li><a href="shop.html" >Shop</a></li>
+                                                    <li><a href="single-product.html" >Single Prodcut</a>
+                                                    </li>
+                                                    <li><a href="wishlist.html" >Wishlist</a></li>
+                                                    <li><a href="faq.html" >FAQ</a></li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li><a href="blog.html">BLOG</a></li>
+                                        <li><a href="about-us.html">ABOUT</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <div class="col-lg-3 d-none d-lg-block">
+                                <div class="search-box global-table">
+                                    <div class="global-row">
+                                        <div class="global-cell">
+                                            <form action="#">
+                                                <div class="input-box">
+                                                    <input class="single-input" placeholder="Search anything"
+                                                        type="text">
+                                                    <button class="src-btn"><i class="fa fa-search"></i></button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-					</li><!-- / Cart -->
+                            <!-- mobile-menu-area start -->
+                            <div class="mobile-menu-area">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <nav id="dropdown">
+                                                <ul>
+                                                    <li><a href="index.html">Home</a>
+                                                        <ul>
+                                                            <li><a class="active" href="index.html">Home One</a></li>
+                                                            <li><a href="index-2.html">Home Two</a></li>
+                                                            <li><a href="index-boxed-01.html">Home Three (Boxed)</a>
+                                                            </li>
+                                                            <li><a href="index-boxed-02.html">Home Four (Boxed)</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li><a href="shop.html">Man</a>
+                                                        <ul class="single-mega-item">
+                                                            <li><a href="shop.html">Shirt 01</a></li>
+                                                            <li><a href="shop.html">Shirt 02</a></li>
+                                                            <li><a href="shop.html">Shirt 03</a></li>
+                                                            <li><a href="shop.html">Shirt 04</a></li>
+                                                            <li><a href="shop.html">Pant 01</a></li>
+                                                            <li><a href="shop.html">Pant 02</a></li>
+                                                            <li><a href="shop.html">Pant 03</a></li>
+                                                            <li><a href="shop.html">Pant 04</a></li>
+                                                            <li><a href="shop.html">T-Shirt 01</a></li>
+                                                            <li><a href="shop.html">T-Shirt 02</a></li>
+                                                            <li><a href="shop.html">T-Shirt 03</a></li>
+                                                            <li><a href="shop.html">T-Shirt 04</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li><a href="shop.html">Shop</a>
+                                                        <ul class="single-mega-item">
+                                                            <li><a href="shop.html">Sharee 01</a></li>
+                                                            <li><a href="shop.html">Sharee 02</a></li>
+                                                            <li><a href="shop.html">Sharee 03</a></li>
+                                                            <li><a href="shop.html">Sharee 04</a></li>
+                                                            <li><a href="shop.html">Sharee 05</a></li>
+                                                            <li><a href="shop.html">Lahenga 01</a></li>
+                                                            <li><a href="shop.html">Lahenga 02</a></li>
+                                                            <li><a href="shop.html">Lahenga 03</a></li>
+                                                            <li><a href="shop.html">Lahenga 04</a></li>
+                                                            <li><a href="shop.html">Lahenga 05</a></li>
+                                                            <li><a href="shop.html">Sandel 01</a></li>
+                                                            <li><a href="shop.html">Sandel 02</a></li>
+                                                            <li><a href="shop.html">Sandel 03</a></li>
+                                                            <li><a href="shop.html">Sandel 04</a></li>
+                                                            <li><a href="shop.html">Sandel 05</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li><a href="#">Shortcode</a>
+                                                        <ul class="single-mega-item">
+                                                            <li><a href="shortcode-banner.html"
+                                                                    >shortcode-banner</a></li>
+                                                            <li><a href="shortcode-best-top-on-sale-slider.html"
+                                                                    >too-on-sale</a></li>
+                                                            <li><a href="shortcode-blog-item.html" >Short
+                                                                    Blog Item</a></li>
+                                                            <li><a href="shortcode-brand-prodcut.html"
+                                                                    >Brand
+                                                                    Product</a></li>
+                                                            <li><a href="shortcode-brand-slider.html"
+                                                                    >Brand
+                                                                    Slider</a></li>
 
-					<!-- Search -->
-					<li class="dropdown search dropdown-slide">
-						<a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i
-								class="tf-ion-ios-search-strong"></i> Search</a>
-						<ul class="dropdown-menu search-dropdown">
-							<li>
-								<form action="post"><input type="search" class="form-control" placeholder="Search..."></form>
-							</li>
-						</ul>
-					</li><!-- / Search -->
+                                                            <li><a href="shortcode-breadcrumb.html"
+                                                                    >Breadcrumb</a></li>
+                                                            <li><a href="shortcode-related-product.html"
+                                                                    >Related
+                                                                    Product</a></li>
+                                                            <li><a href="shortcode-service.html"
+                                                                    >Service</a>
+                                                            </li>
+                                                            <li><a href="shortcode-skill.html" >Skill</a>
+                                                            </li>
+                                                            <li><a href="shortcode-slider.html"
+                                                                    >Slider</a></li>
 
-					<!-- Languages -->
-					<li class="commonSelect">
-						<select class="form-control">
-							<option>EN</option>
-							<option>DE</option>
-							<option>FR</option>
-							<option>ES</option>
-						</select>
-					</li><!-- / Languages -->
+                                                            <li><a href="shortcode-team.html" >Team</a>
+                                                            </li>
+                                                            <li><a href="shortcode-testimonial.html"
+                                                                    >Testimonial</a></li>
+                                                            <li><a href="shortcode-why-choose-us.html"
+                                                                    >Why
+                                                                    Choose Us</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li> <a href="#">Pages</a>
+                                                        <ul class="single-mega-item coloum-4">
+                                                            <li><a href="about-us.html" >About-us</a>
+                                                            </li>
+                                                            <li><a href="blog.html" >Blog</a></li>
+                                                            <li><a href="blog-right.html" >Blog-Right</a>
+                                                            </li>
+                                                            <li><a href="single-blog.html" >Single
+                                                                    Blog</a></li>
+                                                            <li><a href="single-blog-right.html" >Single
+                                                                    Blog Right</a></li>
+                                                            <li><a href="blog-full.html"
+                                                                    >Blog-Fullwidth</a></li>
+                                                            <li class="menu-title uppercase">pages-02</li>
+                                                            <li><a href="blog-full-right.html" >Blog Ful
+                                                                    Rightl</a></li>
+                                                            <li><a href="cart.html" >Cart</a></li>
+                                                            <li><a href="checkout.html" >Checkout</a>
+                                                            </li>
+                                                            <li><a href="compare.html" >Compare</a></li>
+                                                            <li><a href="complete-order.html" >Complete
+                                                                    Order</a></li>
+                                                            <li><a href="contact-us.html" >Contact US</a>
+                                                            </li>
+                                                            <li class="menu-title uppercase">pages-03</li>
+                                                            <li><a href="login.html" >Login</a></li>
+                                                            <li><a href="my-account.html" >My Account</a>
+                                                            </li>
+                                                            <li><a href="shop-full-grid.html" >Shop Full
+                                                                    Grid</a></li>
+                                                            <li><a href="shop-full-list.html" >Shop Full
+                                                                    List</a></li>
+                                                            <li><a href="shop-list-right-sidebar.html"
+                                                                    >Shop List
+                                                                    Right</a></li>
+                                                            <li><a href="shop-list.html" >Shop List</a>
+                                                            </li>
+                                                            <li class="menu-title uppercase">pages-03</li>
+                                                            <li><a href="shop-right-sidebar.html" >Shop
+                                                                    Right</a></li>
+                                                            <li><a href="shop.html" >Shop</a></li>
+                                                            <li><a href="single-product.html" >Single
+                                                                    Prodcut</a></li>
+                                                            <li><a href="wishlist.html" >Wishlist</a>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li><a href="about-us.html">about</a></li>
+                                                </ul>
+                                            </nav>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--mobile menu area end-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- End of header area -->
 
-				</ul><!-- / .nav .navbar-nav .navbar-right -->
-			</div>
-		</div>
-	</div>
-</section><!-- End Top Header Bar -->
+        <!--breadcumb area start -->
+        <div class="breadcumb-area overlay pos-rltv">
+            <div class="bread-main">
+                <div class="bred-hading text-center">
+                    <h5>Wishlist Details</h5>
+                </div>
+                <ol class="breadcrumb">
+                    <li class="home"><a title="Go to Home Page" href="index.html">Home</a></li>
+                    <li class="active">FAQ</li>
+                </ol>
+            </div>
+        </div>
+        <!--breadcumb area end -->
 
+        <!-- Begin Frequently Area -->
+        <div class="frequently-area pt-70 pb-60">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="frequently-content">
+                            <div class="frequently-desc">
+                                <h3>Below are frequently asked questions, you may find the answer for yourself</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id erat sagittis,
+                                    faucibus metus malesuada, eleifend turpis. Mauris semper augue id nisl aliquet, a
+                                    porta lectus mattis. Nulla at tortor augue. In eget enim diam. Donec gravida tortor
+                                    sem, ac fermentum nibh rutrum sit amet. Nulla convallis mauris vitae congue
+                                    consequat. Donec interdum nunc purus, vitae vulputate arcu fringilla quis. Vivamus
+                                    iaculis euismod dui.</p>
+                            </div>
+                        </div>
+                        <!-- Begin Frequently Accordin -->
+                        <div class="frequently-accordion">
+                            <div id="accordion">
+                                <div class="card actives">
+                                    <div class="card-header" id="headingOne">
+                                        <h5 class="mb-0">
+                                            <a class="" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                                aria-expanded="true" aria-controls="collapseOne">
+                                                Mauris congue euismod purus at semper. Morbi et vulputate massa?
+                                            </a>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                        data-bs-parent="#accordion">
+                                        <div class="card-body">
+                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+                                            richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard
+                                            dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon
+                                            tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
+                                            assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore
+                                            wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
+                                            vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic
+                                            synth nesciunt you probably haven't heard of them accusamus labore
+                                            sustainable VHS.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header" id="headingTwo">
+                                        <h5 class="mb-0">
+                                            <a class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                                aria-expanded="false" aria-controls="collapseTwo">
+                                                Donec mattis finibus elit ut tristique?
+                                            </a>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                        data-bs-parent="#accordion">
+                                        <div class="card-body">
+                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+                                            richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard
+                                            dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon
+                                            tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
+                                            assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore
+                                            wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
+                                            vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic
+                                            synth nesciunt you probably haven't heard of them accusamus labore
+                                            sustainable VHS.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header" id="headingThree">
+                                        <h5 class="mb-0">
+                                            <a class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                                                aria-expanded="false" aria-controls="collapseThree">
+                                                Vestibulum a lorem placerat, porttitor urna vel?
+                                            </a>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                                        data-bs-parent="#accordion">
+                                        <div class="card-body">
+                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+                                            richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard
+                                            dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon
+                                            tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
+                                            assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore
+                                            wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
+                                            vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic
+                                            synth nesciunt you probably haven't heard of them accusamus labore
+                                            sustainable VHS.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header" id="headingFour">
+                                        <h5 class="mb-0">
+                                            <a class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFour"
+                                                aria-expanded="false" aria-controls="collapseFour">
+                                                Aenean elit orci, efficitur quis nisl at, accumsan?
+                                            </a>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseFour" class="collapse" aria-labelledby="headingFour"
+                                        data-bs-parent="#accordion">
+                                        <div class="card-body">
+                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+                                            richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard
+                                            dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon
+                                            tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
+                                            assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore
+                                            wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
+                                            vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic
+                                            synth nesciunt you probably haven't heard of them accusamus labore
+                                            sustainable VHS.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header" id="headingFive">
+                                        <h5 class="mb-0">
+                                            <a class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFive"
+                                                aria-expanded="false" aria-controls="collapseFive">
+                                                Pellentesque habitant morbi tristique senectus et netus?
+                                            </a>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseFive" class="collapse" aria-labelledby="headingFive"
+                                        data-bs-parent="#accordion">
+                                        <div class="card-body">
+                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+                                            richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard
+                                            dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon
+                                            tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
+                                            assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore
+                                            wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
+                                            vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic
+                                            synth nesciunt you probably haven't heard of them accusamus labore
+                                            sustainable VHS.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header" id="headingSix">
+                                        <h5 class="mb-0">
+                                            <a class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapseSix"
+                                                aria-expanded="false" aria-controls="collapseSix">
+                                                Nam pellentesque aliquam metus?
+                                            </a>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseSix" class="collapse" aria-labelledby="headingSix"
+                                        data-bs-parent="#accordion">
+                                        <div class="card-body">
+                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+                                            richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard
+                                            dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon
+                                            tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
+                                            assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore
+                                            wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
+                                            vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic
+                                            synth nesciunt you probably haven't heard of them accusamus labore
+                                            sustainable VHS.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header" id="headingSeven">
+                                        <h5 class="mb-0">
+                                            <a class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapseSeven"
+                                                aria-expanded="false" aria-controls="collapseSeven">
+                                                Aenean elit orci, efficitur quis nisl at?
+                                            </a>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven"
+                                        data-bs-parent="#accordion">
+                                        <div class="card-body">
+                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+                                            richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard
+                                            dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon
+                                            tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
+                                            assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore
+                                            wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
+                                            vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic
+                                            synth nesciunt you probably haven't heard of them accusamus labore
+                                            sustainable VHS.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header" id="headingEight">
+                                        <h5 class="mb-0">
+                                            <a class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapseEight"
+                                                aria-expanded="false" aria-controls="collapseEight">
+                                                Morbi gravida, nisi id fringilla ultricies, elit lorem?
+                                            </a>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseEight" class="collapse" aria-labelledby="headingEight"
+                                        data-bs-parent="#accordion">
+                                        <div class="card-body">
+                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+                                            richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard
+                                            dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon
+                                            tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
+                                            assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore
+                                            wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
+                                            vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic
+                                            synth nesciunt you probably haven't heard of them accusamus labore
+                                            sustainable VHS.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Frequently Accordin End Here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Frequently Area End Here -->
 
-<!-- Main Menu Section -->
-<section class="menu">
-	<nav class="navbar navigation">
-		<div class="container">
-			<div class="navbar-header">
-				<h2 class="menu-title">Main Menu</h2>
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-					aria-expanded="false" aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
+        <!-- footer area start-->
+        <div class="footer-area ptb-50">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-3 col-lg-3 col-md-4">
+                        <div class="single-footer contact-us">
+                            <div class="footer-title uppercase">
+                                <h5>Contact US</h5>
+                            </div>
+                            <ul>
+                                <li>
+                                    <div class="contact-icon"> <i class="zmdi zmdi-pin-drop"></i> </div>
+                                    <div class="contact-text">
+                                        <p>Address: Your address goes here</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="contact-icon"> <i class="zmdi zmdi-email-open"></i> </div>
+                                    <div class="contact-text">
+                                        <p><span><a href="mailto://demo@example.com">demo@example.com</a></span>
+                                            <span><a href="mailto://info@example.com">info@example.com</a></span></p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="contact-icon"> <i class="zmdi zmdi-phone-paused"></i> </div>
+                                    <div class="contact-text">
+                                        <p><a href="tel://01234567890">01234567890</a> <a
+                                                href="tel://01234567890">01234567890</a></p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-2 col-md-4">
+                        <div class="single-footer informaton-area">
+                            <div class="footer-title uppercase">
+                                <h5>Information</h5>
+                            </div>
+                            <div class="informatoin">
+                                <ul>
+                                    <li><a href="#">My Account</a></li>
+                                    <li><a href="#">Order History</a></li>
+                                    <li><a href="#">Wishlist</a></li>
+                                    <li><a href="#">Returnes</a></li>
+                                    <li><a href="#">Private Policy</a></li>
+                                    <li><a href="#">Site Map</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-4 d-md-none d-block d-lg-block">
+                        <div class="single-footer instagrm-area">
+                            <div class="footer-title uppercase">
+                                <h5>InstaGram</h5>
+                            </div>
+                            <div class="instagrm">
+                                <ul>
+                                    <li><a href="#"><img src="images/gallery/01.jpg" alt=""></a></li>
+                                    <li><a href="#"><img src="images/gallery/02.jpg" alt=""></a></li>
+                                    <li><a href="#"><img src="images/gallery/03.jpg" alt=""></a></li>
+                                    <li><a href="#"><img src="images/gallery/04.jpg" alt=""></a></li>
+                                    <li><a href="#"><img src="images/gallery/05.jpg" alt=""></a></li>
+                                    <li><a href="#"><img src="images/gallery/06.jpg" alt=""></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 offset-xl-1">
+                        <div class="single-footer newslatter-area">
+                            <div class="footer-title uppercase">
+                                <h5>Get Newsletters</h5>
+                            </div>
+                            <div class="newslatter">
+                                <form action="#" method="post">
+                                    <div class="input-box pos-rltv">
+                                        <input placeholder="Type Your Email hear" type="text">
+                                        <a href="#">
+                                            <i class="zmdi zmdi-arrow-right"></i>
+                                        </a>
+                                    </div>
+                                </form>
+                                <div class="social-icon socile-icon-style-3 mt-40">
+                                    <div class="footer-title uppercase">
+                                        <h5>Social Network</h5>
+                                    </div>
+                                    <ul>
+                                        <li><a href="#"><i class="zmdi zmdi-facebook"></i></a></li>
+                                        <li><a href="#"><i class="zmdi zmdi-linkedin"></i></a></li>
+                                        <li><a href="#"><i class="zmdi zmdi-pinterest"></i></a></li>
+                                        <li><a href="#"><i class="zmdi zmdi-google"></i></a></li>
+                                        <li><a href="#"><i class="zmdi zmdi-twitter"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--footer area start-->
 
-			</div><!-- / .navbar-header -->
+        <!--footer bottom area start-->
+        <div class="footer-bottom global-table">
+            <div class="global-row">
+                <div class="global-cell">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                 <p class="copyrigth text-center">
+                    © 2022 <span class="text-capitalize">clothing</span>. Made
+                    with <i style="color: #f53400;" class="fa fa-heart"></i>
+ by
+                    <a  href="https://themeforest.net/user/codecarnival/portfolio">CodeCarnival</a>
+                  </p>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="payment-support text-end">
+                                    <li>
+                                        <a href="#"><img src="images/icons/pay1.png" alt="" /></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><img src="images/icons/pay2.png" alt="" /></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><img src="images/icons/pay3.png" alt="" /></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><img src="images/icons/pay4.png" alt="" /></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><img src="images/icons/pay5.png" alt="" /></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--footer bottom area end-->
 
-			<!-- Navbar Links -->
-			<div id="navbar" class="navbar-collapse collapse text-center">
-				<ul class="nav navbar-nav">
+    </div>
+    <!-- Body main wrapper end -->
 
-					<!-- Home -->
-					<li class="dropdown ">
-						<a href="index.html">Home</a>
-					</li><!-- / Home -->
+    <!-- Placed js at the end of the document so the pages load faster -->
 
+    <!-- jquery latest version -->
+    <script src="js/vendor/jquery-3.6.0.min.js"></script>
+    <script src="js/vendor/jquery-migrate-3.3.2.min.js"></script>
+    <!-- Bootstrap framework js -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <!-- Slider js -->
+    <script src="js/slider/jquery.nivo.slider.pack.js"></script>
+    <script src="js/slider/nivo-active.js"></script>
+    <!-- counterUp-->
+    <script src="js/jquery.countdown.min.js"></script>
+    <!-- All js plugins included in this file. -->
+    <script src="js/plugins.js"></script>
+    <!-- Main js file that contents all jQuery plugins activation. -->
+    <script src="js/main.js"></script>
 
-					<!-- Elements -->
-					<li class="dropdown dropdown-slide">
-						<a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="350"
-							role="button" aria-haspopup="true" aria-expanded="false">Shop <span
-								class="tf-ion-ios-arrow-down"></span></a>
-						<div class="dropdown-menu">
-							<div class="row">
+</body>
 
-								<!-- Basic -->
-								<div class="col-lg-6 col-md-6 mb-sm-3">
-									<ul>
-										<li class="dropdown-header">Pages</li>
-										<li role="separator" class="divider"></li>
-										<li><a href="shop.html">Shop</a></li>
-										<li><a href="checkout.html">Checkout</a></li>
-										<li><a href="cart.html">Cart</a></li>
-										<li><a href="pricing.html">Pricing</a></li>
-										<li><a href="confirmation.html">Confirmation</a></li>
-
-									</ul>
-								</div>
-
-								<!-- Layout -->
-								<div class="col-lg-6 col-md-6 mb-sm-3">
-									<ul>
-										<li class="dropdown-header">Layout</li>
-										<li role="separator" class="divider"></li>
-										<li><a href="product-single.html">Product Details</a></li>
-										<li><a href="shop-sidebar.html">Shop With Sidebar</a></li>
-
-									</ul>
-								</div>
-
-							</div><!-- / .row -->
-						</div><!-- / .dropdown-menu -->
-					</li><!-- / Elements -->
-
-
-					<!-- Pages -->
-					<li class="dropdown full-width dropdown-slide">
-						<a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="350"
-							role="button" aria-haspopup="true" aria-expanded="false">Pages <span
-								class="tf-ion-ios-arrow-down"></span></a>
-						<div class="dropdown-menu">
-							<div class="row">
-
-								<!-- Introduction -->
-								<div class="col-sm-3 col-xs-12">
-									<ul>
-										<li class="dropdown-header">Introduction</li>
-										<li role="separator" class="divider"></li>
-										<li><a href="contact.html">Contact Us</a></li>
-										<li><a href="about.html">About Us</a></li>
-										<li><a href="404.html">404 Page</a></li>
-										<li><a href="coming-soon.html">Coming Soon</a></li>
-										<li><a href="faq.html">FAQ</a></li>
-									</ul>
-								</div>
-
-								<!-- Contact -->
-								<div class="col-sm-3 col-xs-12">
-									<ul>
-										<li class="dropdown-header">Dashboard</li>
-										<li role="separator" class="divider"></li>
-										<li><a href="dashboard.html">User Interface</a></li>
-										<li><a href="order.html">Orders</a></li>
-										<li><a href="address.html">Address</a></li>
-										<li><a href="profile-details.html">Profile Details</a></li>
-									</ul>
-								</div>
-
-								<!-- Utility -->
-								<div class="col-sm-3 col-xs-12">
-									<ul>
-										<li class="dropdown-header">Utility</li>
-										<li role="separator" class="divider"></li>
-										<li><a href="login.html">Login Page</a></li>
-										<li><a href="signin.html">Signin Page</a></li>
-										<li><a href="forget-password.html">Forget Password</a></li>
-									</ul>
-								</div>
-
-								<!-- Mega Menu -->
-								<div class="col-sm-3 col-xs-12">
-									<a href="shop.html">
-										<img class="img-responsive" src="images/shop/header-img.jpg" alt="menu image" />
-									</a>
-								</div>
-							</div><!-- / .row -->
-						</div><!-- / .dropdown-menu -->
-					</li><!-- / Pages -->
-
-
-
-					<!-- Blog -->
-					<li class="dropdown dropdown-slide">
-						<a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="350"
-							role="button" aria-haspopup="true" aria-expanded="false">Blog <span
-								class="tf-ion-ios-arrow-down"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
-							<li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-							<li><a href="blog-full-width.html">Blog Full Width</a></li>
-							<li><a href="blog-grid.html">Blog 2 Columns</a></li>
-							<li><a href="blog-single.html">Blog Single</a></li>
-						</ul>
-					</li><!-- / Blog -->
-
-					<!-- Shop -->
-					<li class="dropdown dropdown-slide">
-						<a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="350"
-							role="button" aria-haspopup="true" aria-expanded="false">Elements <span
-								class="tf-ion-ios-arrow-down"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="typography.html">Typography</a></li>
-							<li><a href="buttons.html">Buttons</a></li>
-							<li><a href="alerts.html">Alerts</a></li>
-						</ul>
-					</li><!-- / Blog -->
-				</ul><!-- / .nav .navbar-nav -->
-
-			</div>
-			<!--/.navbar-collapse -->
-		</div><!-- / .container -->
-	</nav>
-</section>
-
-<section class="page-header">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="content">
-					<h1 class="page-name">Frequently Asked Questions</h1>
-					<ol class="breadcrumb">
-						<li><a href="index.html">Home</a></li>
-						<li class="active">f.a.q</li>
-					</ol>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-
-<section class="page-wrapper">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-4">
-				<h2>Frequently Asked Questions</h2>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi, repudiandae.</p>
-				<p>admin@mail.com</p>
-			</div>
-			<div class="col-md-8">
-				<h4>Order Status</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas iusto, alias, tempora fuga quam eveniet neque excepturi aliquid. Eligendi, mollitia.</p>
-				<h4>Shipping & Delivery</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam voluptatibus, incidunt similique nobis sint quisquam nam ab error consequuntur sit ullam ex eum exercitationem, excepturi explicabo beatae eos aspernatur odit ad perspiciatis, neque saepe magni enim. Maiores quia, quae sequi.</p>
-				<h4>Payments</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus repellat id, laboriosam ipsa repudiandae quisquam, suscipit officiis, praesentium itaque facilis distinctio dolorum. Velit reiciendis libero laudantium corporis, delectus impedit sunt.</p>
-				<h4>Returns & Exchanges</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam eaque nam, ab voluptas et debitis sint hic vel ratione dignissimos.</p>
-				<h4>Privacy Policy</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae blanditiis quod saepe, inventore ipsum sint cum iste quae ratione nobis laborum minima autem totam similique, quia neque deleniti! Provident, suscipit.</p>
-			</div>
-		</div>
-	</div>
-</section>
-
-
-
-<footer class="footer section text-center">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<ul class="social-media">
-					<li>
-						<a href="https://www.facebook.com/themefisher">
-							<i class="tf-ion-social-facebook"></i>
-						</a>
-					</li>
-					<li>
-						<a href="https://www.instagram.com/themefisher">
-							<i class="tf-ion-social-instagram"></i>
-						</a>
-					</li>
-					<li>
-						<a href="https://www.twitter.com/themefisher">
-							<i class="tf-ion-social-twitter"></i>
-						</a>
-					</li>
-					<li>
-						<a href="https://www.pinterest.com/themefisher/">
-							<i class="tf-ion-social-pinterest"></i>
-						</a>
-					</li>
-				</ul>
-				<ul class="footer-menu text-uppercase">
-					<li>
-						<a href="contact.html">CONTACT</a>
-					</li>
-					<li>
-						<a href="shop.html">SHOP</a>
-					</li>
-					<li>
-						<a href="pricing.html">Pricing</a>
-					</li>
-					<li>
-						<a href="contact.html">PRIVACY POLICY</a>
-					</li>
-				</ul>
-				<p class="copyright-text">Copyright &copy;2021, Designed &amp; Developed by <a href="https://themefisher.com/">Themefisher</a></p>
-			</div>
-		</div>
-	</div>
-</footer>
-
-    <!-- 
-    Essential Scripts
-    =====================================-->
-    
-    <!-- Main jQuery -->
-    <script src="plugins/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap 3.1 -->
-    <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
-    <!-- Bootstrap Touchpin -->
-    <script src="plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
-    <!-- Instagram Feed Js -->
-    <script src="plugins/instafeed/instafeed.min.js"></script>
-    <!-- Video Lightbox Plugin -->
-    <script src="plugins/ekko-lightbox/dist/ekko-lightbox.min.js"></script>
-    <!-- Count Down Js -->
-    <script src="plugins/syo-timer/build/jquery.syotimer.min.js"></script>
-
-    <!-- slick Carousel -->
-    <script src="plugins/slick/slick.min.js"></script>
-    <script src="plugins/slick/slick-animation.min.js"></script>
-
-    <!-- Google Mapl -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC72vZw-6tGqFyRhhg5CkF2fqfILn2Tsw"></script>
-    <script type="text/javascript" src="plugins/google-map/gmap.js"></script>
-
-    <!-- Main Js File -->
-    <script src="js/script.js"></script>
-    
-
-
-  </body>
-  </html>
+</html>
