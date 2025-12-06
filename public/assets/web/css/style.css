@@ -25,29 +25,29 @@ CSS INDEX
 13. breadcumb
 14. pagination
 15. shop side bar
-16. copmare page 
-17. cart page 
+16. copmare page
+17. cart page
 18. Wishlist page
-19. checkout page 
-20. login Page 
-21. about us page 
-22. contact-page 
+19. checkout page
+20. login Page
+21. about us page
+22. contact-page
 23. Blog Page
-24. comments 
-25. 404 page 
-26. Scroll UP 
+24. comments
+25. 404 page
+26. Scroll UP
 27. Contact Form
 28. FAQ
 
 -----------------------------------------------------------------------------------*/
 /* Google Fonts */
 
-@import 'https://fonts.googleapis.com/css?family=Lato:300,400,700|Montserrat:400,700';
+@import "https://fonts.googleapis.com/css?family=Lato:300,400,700|Montserrat:400,700";
 /*----------------------------------------*/
 /*  5. promo style
 /*----------------------------------------*/
 /*************************************
- Custom-content all   
+ Custom-content all
 **************************************/
 
 .boxed-layout .wrapper,
@@ -67,7 +67,7 @@ CSS INDEX
     width: 1240px;
 }
 .mobile-menu-area {
-    display: none
+    display: none;
 }
 .wrapper.home-one {
     background: #fff none repeat scroll 0 0;
@@ -132,7 +132,8 @@ CSS INDEX
     font-weight: 700;
 }
 .branding-section-area {
-    background: rgba(0, 0, 0, 0) url("images/bg/brand-bg.jpg") no-repeat scroll center center / cover;
+    background: rgba(0, 0, 0, 0) url("/assets/web/images/bg/brand-bg.webp")
+        no-repeat scroll center center / cover;
 }
 .slick-slide .brand-img img {
     display: inline-block;
@@ -163,20 +164,20 @@ CSS INDEX
     left: 15px;
 }
 /* single product */
-.total-new-arrival{
+.total-new-arrival {
     margin-left: -15px;
     margin-right: -15px;
 }
-.total-new-arrival .product-item{
+.total-new-arrival .product-item {
     margin-left: 15px;
     margin-right: 15px;
 }
 .single-product {
     position: relative;
-    overflow: hidden
+    overflow: hidden;
 }
 .product-img {
-    position: relative
+    position: relative;
 }
 .product-img a img.primary-image {
     -webkit-transition: all 0.3s ease 0s;
@@ -193,7 +194,7 @@ CSS INDEX
     z-index: 1;
 }
 .product-img img {
-    width: 100%
+    width: 100%;
 }
 .single-product:hover .product-img a img.secondary-image {
     opacity: 1;
@@ -280,7 +281,7 @@ CSS INDEX
     font-size: 12px;
 }
 .prodcut-ratting {
-    float: right
+    float: right;
 }
 .prodcut-price {
     color: #000;
@@ -288,7 +289,7 @@ CSS INDEX
     font-size: 14px;
 }
 .old-price {
-    display: inline-block
+    display: inline-block;
 }
 .old-price {
     color: #cccccc;
@@ -336,16 +337,16 @@ CSS INDEX
 .single-product:hover .product-overlay:before,
 .single-ctg-item:hover .product-overlay:before,
 .product-overlay:hover:before {
-    opacity: .5;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)"
+    opacity: 0.5;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
 }
 /* End Single Product */
 /* ---Team--- */
-.total-team{
+.total-team {
     margin-left: -15px;
     margin-right: -15px;
 }
-.total-team .team-item{
+.total-team .team-item {
     margin-left: 15px;
     margin-right: 15px;
 }
@@ -370,7 +371,7 @@ CSS INDEX
     width: 45px;
     z-index: 9;
     opacity: 0;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
 }
 .carsoule-btn .slick-arrow:hover {
     border-color: #cc3333;
@@ -493,7 +494,7 @@ CSS INDEX
     margin-left: 40px;
 }
 .title-tab-product-category li + li a:after {
-    content: url("images/icons/tab-style.png");
+    content: url("/assets/web/images/icons/tab-style.png");
     height: 100%;
     left: -19px;
     position: absolute;
@@ -505,7 +506,8 @@ CSS INDEX
 /*----------------------------------------*/
 
 .testimonial-area {
-    background: rgba(0, 0, 0, 0) url("images/bg/testimonial.jpg") no-repeat fixed 0 0 / cover;
+    background: rgba(0, 0, 0, 0) url("/assets/web/images/bg/testimonial.webp") no-repeat
+        fixed 0 0 / cover;
 }
 .total-testimonial {
     margin: auto;
@@ -576,11 +578,11 @@ CSS INDEX
     width: 100%;
 }
 /*total brand*/
-.total-brand{
+.total-brand {
     margin-left: -15px;
     margin-right: -15px;
 }
-.total-brand .brand-item{
+.total-brand .brand-item {
     margin-left: 15px;
     margin-right: 15px;
 }
@@ -600,17 +602,17 @@ CSS INDEX
 /*----------------------------------------*/
 .total-blog,
 .total-blog-2,
-.total-blog-3{
+.total-blog-3 {
     margin-left: -15px;
     margin-right: -15px;
 }
 .total-blog .blog-item,
 .total-blog-2 .blog-item,
-.total-blog-3 .blog-item{
+.total-blog-3 .blog-item {
     margin-left: 15px;
     margin-right: 15px;
 }
-.total-blog .blog-item .blog-content{
+.total-blog .blog-item .blog-content {
     text-align: left;
 }
 .blog-title h5 {
@@ -640,7 +642,7 @@ CSS INDEX
 }
 .like-comments-date li.blog-date a {
     color: #cc3333;
-    font-style: normal
+    font-style: normal;
 }
 .read-more {
     color: #333;
@@ -659,9 +661,10 @@ CSS INDEX
 /*----------------------------------------*/
 
 .best-product {
-    background: rgba(0, 0, 0, 0) url("images/bg/best-product.jpg") no-repeat scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("/assets/web/images/bg/best-product.jpg") no-repeat
+        scroll 0 0;
 }
-.best-heading{
+.best-heading {
     position: relative;
 }
 .best-text {
@@ -727,7 +730,7 @@ CSS INDEX
 .left-type .heading-style:before,
 .left-type .heading-style:after {
     right: 0;
-    left: auto
+    left: auto;
 }
 .timer.timr-2 .cdown {
     border: 2px solid #888888;
@@ -736,7 +739,7 @@ CSS INDEX
     margin-right: 0;
     padding: 0;
     width: 50px;
-    color: 000
+    color: 000;
 }
 .timer.timr-2 .cdown + .cdown {
     margin-left: 15px;
@@ -771,12 +774,13 @@ CSS INDEX
 /*----------------------------------------*/
 
 .fashion-banner {
-    background: rgba(0, 0, 0, 0) url("images/banner/banner-fashion-03.jpg") no-repeat scroll center center;
+    background: rgba(0, 0, 0, 0) url("/assets/web/images/banner/banner-fashion-03.webp")
+        no-repeat scroll center center;
     padding: 120px 0;
 }
 .fashoin-banner-content > p {
     color: #888888;
-    font-size: 18px
+    font-size: 18px;
 }
 .fashoin-banner-content > h3 {
     font-size: 30px;
@@ -820,7 +824,8 @@ CSS INDEX
     justify-content: center;
 }
 .breadcumb-area {
-    background: rgba(0, 0, 0, 0) url("images/bg/breadcumb.jpg") no-repeat scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("/assets/web/images/bg/breadcumb.webp") no-repeat scroll
+        0 0;
     min-height: 245px;
 }
 .bread-main {
@@ -841,7 +846,7 @@ CSS INDEX
 .breadcrumb > .active {
     color: #fff;
 }
-.breadcrumb > li+li:before {
+.breadcrumb > li + li:before {
     content: "/\00a0";
     padding: 0 5px;
     color: #ccc;
@@ -851,10 +856,12 @@ CSS INDEX
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
 }
 .breadcumb-area.breadcumb-2 {
-    background: rgba(0, 0, 0, 0) url("images/bg/breadcumb2.jpg") no-repeat scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("/assets/web/images/bg/breadcumb2.webp") no-repeat
+        scroll 0 0;
 }
 .breadcumb-area.breadcumb-3 {
-    background: rgba(0, 0, 0, 0) url("images/bg/breadcumb3.jpg") no-repeat scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("/assets/web/images/bg/breadcumb3.webp") no-repeat
+        scroll 0 0;
 }
 /* shop full grid page */
 
@@ -993,7 +1000,7 @@ CSS INDEX
 .aside-title {
     padding-bottom: 20px;
 }
-.single-aside +.single-aside {
+.single-aside + .single-aside {
     margin-top: 50px;
 }
 /* Treeeview Css */
@@ -1032,10 +1039,10 @@ CSS INDEX
     border-top: 1px solid #e5e5e5;
 }
 .product-cat ul li ul li {
-    padding-left: 15px
+    padding-left: 15px;
 }
 .product-cat ul li ul li a {
-    font-size: 13px
+    font-size: 13px;
 }
 /* End Treeeview css */
 
@@ -1050,7 +1057,8 @@ CSS INDEX
 /*Price Slider
 /*----------------------------------------*/
 
-.price_filter .ui-slider.ui-slider-horizontal.ui-widget.ui-widget-content.ui-corner-all {
+.price_filter
+    .ui-slider.ui-slider-horizontal.ui-widget.ui-widget-content.ui-corner-all {
     background: #eee none repeat scroll 0 0;
     border: medium none;
     border-radius: 0;
@@ -1072,7 +1080,7 @@ CSS INDEX
     background: #aaa none repeat scroll 0 0;
 }
 .info_widget {
-    margin-top: 20px
+    margin-top: 20px;
 }
 .price_slider_amount > input[type="text"] {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
@@ -1108,10 +1116,10 @@ CSS INDEX
     color: #fff;
 }
 .ui-slider-horizontal .ui-slider-handle {
-    margin-left: 0
+    margin-left: 0;
 }
 .ui-slider-horizontal .ui-slider-handle:last-child {
-    margin-left: -15px
+    margin-left: -15px;
 }
 /* End Price Slider */
 
@@ -1175,7 +1183,7 @@ CSS INDEX
 .tag-filter li a:hover {
     background: #666;
     color: #fff;
-    border-color: #666
+    border-color: #666;
 }
 .size-filter > li + li {
     margin-left: 13px;
@@ -1261,7 +1269,7 @@ CSS INDEX
     width: 25%;
 }
 /*----------------------------------------*/
-/*  16. copmare page 
+/*  16. copmare page
 /*----------------------------------------*/
 
 .cart-area .cart_item td {
@@ -1278,7 +1286,7 @@ CSS INDEX
 .table-head {
     font-size: 18px;
     width: 25%;
-    font-weight: normal
+    font-weight: normal;
 }
 .item-quality {
     font-family: montserrat;
@@ -1294,7 +1302,7 @@ CSS INDEX
 }
 .table-head.th-name {
     font-family: montserrat;
-    font-weight: 700
+    font-weight: 700;
 }
 .table-head.item-nam {
     color: #cc3333;
@@ -1319,7 +1327,7 @@ CSS INDEX
 .tab-content.active-portfolio-area {
     float: left;
     width: 70%;
-    overflow: hidden
+    overflow: hidden;
 }
 .tab-content.active-portfolio-area .product-img img {
     width: 100%;
@@ -1328,7 +1336,7 @@ CSS INDEX
 .product-more-views {
     float: left;
     width: 30%;
-    padding-right: 30px
+    padding-right: 30px;
 }
 .thumbnail-carousel a {
     background: #fafafa none repeat scroll 0 0;
@@ -1339,10 +1347,10 @@ CSS INDEX
     width: 100px;
     height: 121px;
 }
-.thumbnail-carousel > ul{
+.thumbnail-carousel > ul {
     display: block;
 }
-.thumbnail-carousel > ul > li{
+.thumbnail-carousel > ul > li {
     display: block;
 }
 .thumbnail-carousel > ul li a {
@@ -1373,10 +1381,10 @@ CSS INDEX
     top: 10px;
     width: 40px;
     z-index: 9;
-    color: #999
+    color: #999;
 }
 .social-tag a:hover {
-    color: #cc3333
+    color: #cc3333;
 }
 .quantity-area label {
     color: #333;
@@ -1421,7 +1429,7 @@ input.cart-plus-minus-box {
 .inc.qtybutton:hover {
     color: #fff;
     background: #cc3333;
-    border-color: #cc3333
+    border-color: #cc3333;
 }
 .sp-top-des > h3 {
     font-size: 22px;
@@ -1434,7 +1442,7 @@ input.cart-plus-minus-box {
 }
 .single-product-description .prodcut-ratting > a {
     font-size: 18px;
-    color: #cc3333
+    color: #cc3333;
 }
 .single-product-description .prodcut-ratting {
     float: none;
@@ -1535,22 +1543,22 @@ input.cart-plus-minus-box {
     text-align: center;
 }
 .product-thumbnail {
-    width: 10%
+    width: 10%;
 }
 .product-name {
     width: 40%;
 }
 .product-price {
-    width: 10%
+    width: 10%;
 }
 .product-quantity {
-    width: 20%
+    width: 20%;
 }
 .product-subtotal {
-    width: 10%
+    width: 10%;
 }
 .product-remove {
-    width: 10%
+    width: 10%;
 }
 table.table {
     margin-bottom: 0;
@@ -1571,7 +1579,7 @@ table.table {
     width: 20px;
 }
 .remove-item a:hover {
-    color: #cc3333
+    color: #cc3333;
 }
 .cart-page-area .cart_item .item-img {
     padding: 5px;
@@ -1581,7 +1589,7 @@ table.table {
     width: 90px;
 }
 .shop_table-2 thead tr {
-    background: #e5e5e5 none repeat scroll 0 0
+    background: #e5e5e5 none repeat scroll 0 0;
 }
 .shop_table-2 thead tr th {
     font-size: 15px;
@@ -1594,7 +1602,7 @@ table.table {
     transition: all 0.3s ease 0s;
 }
 .cart tbody tr:hover {
-    background: #f6f6f7 none repeat scroll 0 0
+    background: #f6f6f7 none repeat scroll 0 0;
 }
 .item-qty > input {
     text-align: center;
@@ -1605,7 +1613,7 @@ table.table {
     height: 32px;
 }
 .catagory-title.cat-tit-5 > h3 {
-    font-size: 20px
+    font-size: 20px;
 }
 .coupn-area,
 .cart-total-area {
@@ -1628,10 +1636,10 @@ table.table {
     margin-left: 5px;
 }
 .shipping-method p a {
-    color: #999999
+    color: #999999;
 }
 .shipping-method p a:hover {
-    color: #cc3333
+    color: #cc3333;
 }
 .process-cart-total > p {
     font-size: 20px;
@@ -1667,11 +1675,11 @@ textarea:focus {
     border: 1px solid #ccc;
 }
 select option {
-    padding: 5px
+    padding: 5px;
 }
 .create-acc-body,
 .ship-acc-body {
-    display: none
+    display: none;
 }
 .acc-toggle > input,
 .ship-toggle > input {
@@ -1687,7 +1695,7 @@ select option {
     line-height: 14px;
 }
 .create-acc-body .sm-des {
-    padding: 10px 0
+    padding: 10px 0;
 }
 .ship-toggle > label {
     font-size: 22px;
@@ -1695,7 +1703,7 @@ select option {
     line-height: 25px;
 }
 .cart_item.check-heading {
-    border-top: 1px solid #ccc
+    border-top: 1px solid #ccc;
 }
 .ship-toggle > input {
     position: relative;
@@ -1708,7 +1716,7 @@ select option {
     margin-bottom: 0;
 }
 .coupne-customer-area .panel-default > .panel-heading {
-    height: 60px
+    height: 60px;
 }
 .panel-title > img {
     margin-right: 10px;
@@ -1725,7 +1733,7 @@ select option {
     margin-bottom: 30px;
 }
 .coupne-customer-area .panel-group .panel-heading {
-    background: #f7f6f7 none repeat scroll 0 0
+    background: #f7f6f7 none repeat scroll 0 0;
 }
 .coupne-customer-area .panel-body {
     border: 1px solid #ccc;
@@ -1742,7 +1750,7 @@ select option {
     line-height: 30px;
 }
 .pay-type input {
-    margin-right: 10px
+    margin-right: 10px;
 }
 .panel-checkout .panel-title > a {
     color: #999999;
@@ -1751,7 +1759,7 @@ select option {
     padding-left: 5px;
 }
 .panel-checkout .panel-title > a:hover {
-    color: #cc3333
+    color: #cc3333;
 }
 .checkout-area .input-box > label {
     font-weight: 400;
@@ -1765,7 +1773,7 @@ select option {
     width: 100%;
 }
 .first-last-area .forgotten.forg:hover {
-    color: #cc3333
+    color: #cc3333;
 }
 .first-last-area {
     overflow: hidden;
@@ -1780,13 +1788,13 @@ select option {
     padding-bottom: 10px;
 }
 .btn-group.bootstrap-select.select-custom {
-    width: 100% !important
+    width: 100% !important;
 }
 .checkout-payment-area tr.prd-name:hover {
-    background: #F9F9F9
+    background: #f9f9f9;
 }
 .btn.dropdown-toggle.btn-default {
-    height: 45px
+    height: 45px;
 }
 .bs-searchbox {
     position: relative;
@@ -1815,7 +1823,7 @@ select option {
     text-transform: uppercase;
 }
 .ctg-type.crt-total {
-    font-size: 18px
+    font-size: 18px;
 }
 .cgt-des.prc-total {
     font-size: 18px;
@@ -1827,7 +1835,7 @@ select option {
     text-transform: capitalize;
 }
 .ship-opt .shipp span {
-    font-weight: 700
+    font-weight: 700;
 }
 .payment-section a.btn-def {
     height: 50px;
@@ -1922,7 +1930,7 @@ span input.remr {
     margin-top: 10px;
 }
 .account-area .forgotten:hover {
-    color: #cc3333
+    color: #cc3333;
 }
 .frm-action .input-box {
     float: left;
@@ -1944,7 +1952,7 @@ span input.remr {
     width: auto;
     vertical-align: middle;
 }
-.idea-tab-menu ul{
+.idea-tab-menu ul {
     display: block;
 }
 .idea-tab-menu ul li {
@@ -2029,14 +2037,36 @@ span input.remr {
 
 .progress-bar {
     background: rgba(207, 65, 65, 1) !important;
-    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(207, 65, 65, 1)), color-stop(49%, rgba(255, 255, 255, 1)), color-stop(65%, rgba(255, 255, 255, 1)), color-stop(71%, rgba(255, 255, 255, 1)), color-stop(100%, rgba(207, 65, 65, 1)));
-    background: -webkit-linear-gradient(top, rgba(207, 65, 65, 1) 0%, rgba(255, 255, 255, 1) 49%, rgba(255, 255, 255, 1) 65%, rgba(255, 255, 255, 1) 71%, rgba(207, 65, 65, 1) 100%);
-    background: linear-gradient(to bottom, rgba(207, 65, 65, 1) 0%, rgba(255, 255, 255, 1) 49%, rgba(255, 255, 255, 1) 65%, rgba(255, 255, 255, 1) 71%, rgba(207, 65, 65, 1) 100%);
+    background: -webkit-gradient(
+        left top,
+        left bottom,
+        color-stop(0%, rgba(207, 65, 65, 1)),
+        color-stop(49%, rgba(255, 255, 255, 1)),
+        color-stop(65%, rgba(255, 255, 255, 1)),
+        color-stop(71%, rgba(255, 255, 255, 1)),
+        color-stop(100%, rgba(207, 65, 65, 1))
+    );
+    background: -webkit-linear-gradient(
+        top,
+        rgba(207, 65, 65, 1) 0%,
+        rgba(255, 255, 255, 1) 49%,
+        rgba(255, 255, 255, 1) 65%,
+        rgba(255, 255, 255, 1) 71%,
+        rgba(207, 65, 65, 1) 100%
+    );
+    background: linear-gradient(
+        to bottom,
+        rgba(207, 65, 65, 1) 0%,
+        rgba(255, 255, 255, 1) 49%,
+        rgba(255, 255, 255, 1) 65%,
+        rgba(255, 255, 255, 1) 71%,
+        rgba(207, 65, 65, 1) 100%
+    );
     filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#cf4141', endColorstr='#cf4141', GradientType=0);
 }
 .progress {
     height: 10px;
-    margin-bottom: 25px
+    margin-bottom: 25px;
 }
 .progess-heading {
     font-family: montserrat;
@@ -2131,7 +2161,7 @@ span input.remr {
 }
 textarea {
     background: transparent;
-    border: 1px solid #e5e5e5
+    border: 1px solid #e5e5e5;
 }
 .contact-us-2 .social-icon li {
     margin-bottom: 0;
@@ -2197,7 +2227,7 @@ textarea {
     margin-bottom: 0;
 }
 .signle-comments > img {
-    float: left
+    float: left;
 }
 .commets-text {
     overflow: hidden;
@@ -2228,10 +2258,10 @@ textarea {
     padding: 7px 14px;
 }
 .comments-body ul li.signle-comments:last-child {
-    margin: 0
+    margin: 0;
 }
 .comments-body ul li:nth-child(2n) {
-    padding-left: 70px
+    padding-left: 70px;
 }
 .leave-ib input {
     border-color: #e2e2e2;
@@ -2261,10 +2291,10 @@ textarea {
     transition: all 0.3s ease 0s;
 }
 .post-comment input.submit:hover {
-    color: #ff004d
+    color: #ff004d;
 }
 .input-box.post-comment {
-    float: left
+    float: left;
 }
 .sb-title {
     margin-bottom: 20px;
@@ -2277,7 +2307,7 @@ textarea {
 /*----------------------------------------*/
 
 .text-404 {
-    margin: 50px 0
+    margin: 50px 0;
 }
 .text-404 h1 {
     font-size: 36px;
@@ -2299,10 +2329,10 @@ textarea {
     right: 10px;
 }
 .content-404 .search-box.blog-search input {
-    padding: 0 60px 0 15px
+    padding: 0 60px 0 15px;
 }
 .src-btn:hover {
-    color: #cc3333
+    color: #cc3333;
 }
 .search-box.serch-404 {
     height: auto;
@@ -2342,13 +2372,13 @@ textarea {
 /*----------------------------------------*/
 
 p.form-messege {
-    margin: 15px 0 0 0
+    margin: 15px 0 0 0;
 }
 p.success {
-    color: green
+    color: green;
 }
 p.error {
-    color: red
+    color: red;
 }
 
 /*----------------------------------------*/
@@ -2356,54 +2386,54 @@ p.error {
 /*----------------------------------------*/
 .frequently-desc {
     margin-bottom: 21px;
-  }
-  .frequently-desc h3 {
+}
+.frequently-desc h3 {
     color: #242424;
     font-size: 14px;
     font-weight: 400;
     text-transform: capitalize;
     line-height: 1;
-  }
-  .frequently-desc p {
+}
+.frequently-desc p {
     margin: 0;
     font-size: 13px;
-  }
-  .card-body {
+}
+.card-body {
     font-size: 13px;
-  }
-  .frequently-accordion .card.actives {
+}
+.frequently-accordion .card.actives {
     border: 1px solid #e23e57;
-  }
-  .frequently-accordion .card {
+}
+.frequently-accordion .card {
     border-radius: 0;
     margin-bottom: 15px;
-  }
-  .frequently-accordion .card-header {
+}
+.frequently-accordion .card-header {
     padding: 0;
     margin-bottom: 0;
     background-color: #f5f5f5;
     border: 0;
-  }
-  .frequently-accordion .card-header a.collapsed:before,
-  .frequently-accordion .card-header a:after {
+}
+.frequently-accordion .card-header a.collapsed:before,
+.frequently-accordion .card-header a:after {
     content: "\f067";
     font-family: fontawesome;
     position: absolute;
     right: 15px;
     top: 15px;
     color: #b9b9b9;
-  }
-  .frequently-accordion .card-header a:after {
+}
+.frequently-accordion .card-header a:after {
     content: "\f068 ";
-  }
-  .frequently-accordion .card-header a {
+}
+.frequently-accordion .card-header a {
     display: block;
     padding: 15px 10px 15px 25px;
     cursor: pointer;
     font-size: 14px;
     font-weight: 400;
     text-transform: capitalize;
-  }
-  .frequently-accordion .card-header a:hover {
-    color: #e23e57!important;
-  }
+}
+.frequently-accordion .card-header a:hover {
+    color: #e23e57 !important;
+}

@@ -1,23 +1,6 @@
 <script>
     console.log({{ $products->min('effective_price') }}, {{ $products->max('effective_price') }});
 
-    var slider = document.getElementById('price-slider');
-
-    noUiSlider.create(slider, {
-        start: [{{ $minPrice }}, {{ $maxPrice }}],
-        connect: true,
-        range: {
-            'min': {{ $minPrice }},
-            'max': {{ $maxPrice }}
-    }
-    });
-    slider.noUiSlider.on('update', function (values) {
-        $('#min_price').val(values[0]);
-        $('#max_price').val(values[1]);
-
-        loadProducts(); // AJAX reload
-    });
-
 
     // Sorting
     $("#sort-select").change(function () {
@@ -62,11 +45,11 @@
             url: "{{ route('web.product.index') }}",
             data: data,
             beforeSend: function () {
-                $(".product-list-div").append(`<div class="loader-overlay"><i class="fa fa-spinner fa-spin fa-2x"></i></div>`);
+                $(".product-list").LoadingOverlay('show');
             },
             success: function (response) {
-                $(".loader-overlay").remove();
-                $(".product-list-div").html(response.data.html);
+                $(".product-list").LoadingOverlay('hide');
+                $(".product-list").html(response.data.html);
                 $(".pagination-div").html(response.data.pagination);
                 $("#showing-results-container").html(response.data.showing_results);
             }
