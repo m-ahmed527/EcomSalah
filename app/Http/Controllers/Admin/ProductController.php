@@ -105,7 +105,6 @@ class ProductController extends Controller
     {
         try {
             DB::beginTransaction();
-
             // 1️⃣ Update product fields
             $product->update($request->sanitized());
             $product->categories()->sync([$request->category_id]);
@@ -117,6 +116,7 @@ class ProductController extends Controller
                     $product->images()->createMany($images);
                 }
             }
+            // dd($request->all());
 
             // 3️⃣ Update variants
             if ($request->has('variants')) {
@@ -247,6 +247,7 @@ class ProductController extends Controller
                 'sku' => $variant['sku'] ?? null,
                 'variant_name' => $variant['sku'] ?? null,
                 'price' => $variant['price'] ?? 0,
+                'effective_price' => (float) $variant['price'] + (float) $product->base_price,
                 'stock' => $variant['stock'] ?? 1,
                 'created_at' => $now,
                 'updated_at' => $now,
@@ -319,6 +320,7 @@ class ProductController extends Controller
                     'sku' => $variant['sku'] ?? null,
                     'variant_name' => $variant['sku'] ?? null,
                     'price' => $variant['price'] ?? 0,
+                    'effective_price' => (float) $variant['price'] + (float) $product->base_price,
                     'stock' => $variant['stock'] ?? 1,
                     'updated_at' => $now,
                 ];
@@ -331,6 +333,7 @@ class ProductController extends Controller
                     'sku' => $variant['sku'] ?? null,
                     'variant_name' => $variant['sku'] ?? null,
                     'price' => $variant['price'] ?? 0,
+                    'effective_price' => (float) $variant['price'] + (float) $product->base_price,
                     'stock' => $variant['stock'] ?? 1,
                     'created_at' => $now,
                     'updated_at' => $now,
@@ -346,6 +349,7 @@ class ProductController extends Controller
                     'sku' => $data['sku'],
                     'variant_name' => $data['variant_name'],
                     'price' => $data['price'],
+                    'effective_price' => $data['effective_price'],
                     'stock' => $data['stock'],
                     'updated_at' => $data['updated_at'],
                 ]);

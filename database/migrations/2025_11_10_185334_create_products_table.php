@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -18,6 +17,7 @@ return new class extends Migration
             $table->text('short_description')->nullable();
             $table->text('long_description')->nullable();
             $table->decimal('base_price', 10, 2)->nullable();
+            $table->decimal('effective_price', 10, 2)->default(0)->after('base_price')->comment('Price with base price')->index();
             $table->integer('stock')->nullable();
             $table->string('sku')->unique()->nullable();
             $table->string('featured_image')->nullable();

@@ -1,38 +1,60 @@
 @extends('layouts.auth.app')
-@section('title', "Login | Salah Wears")
 @section('content')
-
-    <section class="signin-page account">
+    <!-- Account Area Start -->
+    <div class="account-area ptb-80">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 col-md-offset-3">
-                    <div class="block text-center">
-                        <a class="logo logo-a w-100" href="{{ route('web.index') }}">
-                            <img src="{{ setting('logo') ?: asset('assets/web/images/logo.png') }}" alt="logo">
-                        </a>
-                        <h2 class="text-center">Welcome Back</h2>
-                        <form class="text-left clearfix" action="{{ route('login') }}" method="POST" id="login-form"
-                            autocomplete="off">
-                            @csrf
-                            <div class="form-group">
-                                <input type="email" class="form-control" placeholder="Email" name="email" autofocus>
+                <div class="col-md-6">
+                    <form action="{{ route('login') }}" method="POST" id="login-form input" class="login-side">
+                        @csrf
+                        <div class="login-reg">
+                            <h3>Login</h3>
+                            <div class="input-box mb-20">
+                                <label class="control-label">E-Mail</label>
+                                <input type="email" placeholder="E-Mail" value="" name="email" class="info">
                             </div>
-                            <div class="form-group">
-                                <input type="password" class="form-control" placeholder="Password" name="password">
+                            <div class="input-box">
+                                <label class="control-label">Password</label>
+                                <input type="password" placeholder="Password" value="" name="password" class="info">
                             </div>
-                            <div class="text-center">
-                                <button type="button" class="btn btn-main text-center" id="login-btn">Login</button>
+                        </div>
+                        <div class="frm-action">
+                            <div class="input-box tci-box">
+                                <a type="button" id="login-btn" class="btn-def btn2">Login</a>
                             </div>
-                        </form>
-                        <p class="mt-20">New in this site ?<a href="{{ route('register') }}"> Create New Account</a></p>
-                    </div>
+                            <span>
+                                <input class="remr" type="checkbox"> Remember me
+                            </span>
+                            <a href="#" class="forgotten forg">Forgotten Password</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6 lr2">
+                    <form action="#">
+                        <div class="login-reg">
+                            <h3>Register</h3>
+                            <div class="input-box mb-20">
+                                <label class="control-label">E-Mail</label>
+                                <input type="email" class="info" placeholder="E-Mail" value="" name="email">
+                            </div>
+                            <div class="input-box">
+                                <label class="control-label">Password</label>
+                                <input type="password" class="info" placeholder="Password" value="" name="password">
+                            </div>
+                        </div>
+                        <div class="frm-action">
+                            <div class="input-box tci-box">
+                                <a href="#" class="btn-def btn2">Register</a>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+    <!-- Account Area End -->
 
 @endsection
-
 @push('scripts')
-    @include('includes.auth.ajax-requests.login-script', ['redirectUrl' => route('web.index')])
+    @include('includes.auth.ajax-requests.login-script',['redirectUrl' => route('web.index')])
 @endpush

@@ -1,22 +1,21 @@
-@include('includes.web.layout.head')
+<!doctype html>
+<html class="no-js" lang="en">
 
-<body id="body">
-    @include('includes.web.layout.header')
-    @include('includes.web.layout.menu')
-    @yield('content')
-    @include('includes.web.layout.footer')
+<body>
+    @include('includes.web.layout.head')
+    <!-- Body main wrapper start -->
+    <div class="wrapper home-one">
+        @include('includes.web.layout.header')
+
+
+        @yield('content')
+
+
+        @include('includes.web.layout.footer')
+
+    </div>
+    <!-- Body main wrapper end -->
+    @include('includes.web.layout.foot')
 </body>
 
 </html>
-
-
-{{-- Saifu se banwaya hua --}}
-{{-- @include('includes.web.layout.head')
-
-<body id="body">
-    @include('includes.web.layout.header')
-    @yield('content')
-    @include('includes.web.layout.footer')
-</body>
-
-</html> --}}

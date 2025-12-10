@@ -76,7 +76,7 @@ class UpdateProductRequest extends FormRequest
 
     public function sanitized(): array
     {
-        // dd(substr($this->sku, 4));
+
         $baseSku = strtoupper(substr(Str::slug($this->name), 0, 3)); // Example: "TSH"
         $sku = $baseSku . '-' . substr($this->sku, 4);
         $data = $this->validated();
@@ -89,6 +89,8 @@ class UpdateProductRequest extends FormRequest
         $data['sku'] = $data['sku'] ?? $sku;
         $data['slug'] = Str::slug($data['name']);
         $data['has_variants'] = $this->filled('is_variable');
+        $effectivePrice = $this->filled('is_variable') ? (float) $this->base_price + (float) min(array_column($this->variants, 'price')) : (float) $this->base_price;
+        $data['effective_price'] = $effectivePrice;
         return $data;
     }
 }
