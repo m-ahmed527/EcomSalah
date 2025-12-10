@@ -27,16 +27,7 @@
                 <div class="col-md-3 col-sm-6 col-6">
                     <div class="cart-currency-area login-register-area text-end">
                         <ul>
-                            {{-- <li>
-                                <div class="header-currency">
-                                    <select>
-                                        <option value="1">USD</option>
-                                        <option value="2">Pound</option>
-                                        <option value="3">Euro</option>
-                                        <option value="4">Dinar</option>
-                                    </select>
-                                </div>
-                            </li> --}}
+                            
                             <li>
                                 <div class="header-cart">
                                     <div class="cart-icon"> <a href="#">Cart<i class="zmdi zmdi-shopping-cart"></i></a>
@@ -105,39 +96,7 @@
                                 <li class="mega-parent pos-rltv"><a href="{{ route('web.product.index') }}">PRODUCTS</a>
                                 </li>
 
-                                {{-- <li class="mega-parent"><a href="shop.html">Shortcut</a>
-                                    <div class="mega-menu-area mma-970">
-                                        <ul class="single-mega-item">
-                                            <li class="menu-title uppercase">Shortcode-01</li>
-                                            <li><a href="shortcode-banner.html">shortcode-banner</a></li>
-                                            <li><a href="shortcode-best-top-on-sale-slider.html">too-on-sale</a>
-                                            </li>
-                                            <li><a href="shortcode-blog-item.html">Short Blog
-                                                    Item</a></li>
-                                            <li><a href="shortcode-brand-prodcut.html">Brand
-                                                    Product</a></li>
-                                            <li><a href="shortcode-brand-slider.html">Brand
-                                                    Slider</a></li>
-                                        </ul>
-                                        <ul class="single-mega-item">
-                                            <li class="menu-title uppercase">Shortcode-02</li>
-                                            <li><a href="shortcode-breadcrumb.html">Breadcrumb</a></li>
-                                            <li><a href="shortcode-related-product.html">Related
-                                                    Product</a></li>
-                                            <li><a href="shortcode-service.html">Service</a>
-                                            </li>
-                                            <li><a href="shortcode-skill.html">Skill</a></li>
-                                            <li><a href="shortcode-slider.html">Slider</a></li>
-                                        </ul>
-                                        <ul class="single-mega-item">
-                                            <li class="menu-title uppercase">Shortcode-03</li>
-                                            <li><a href="shortcode-team.html">Team</a></li>
-                                            <li><a href="shortcode-testimonial.html">Testimonial</a></li>
-                                            <li><a href="shortcode-why-choose-us.html">Why
-                                                    Choose Us</a></li>
-                                        </ul>
-                                    </div>
-                                </li> --}}
+
                                 <li class="mega-parent"><a href="{{ route('web.contact.index') }}">CONTACT US </a></li>
                                 <li><a href="{{ route('web.blog.index') }}">BLOG</a></li>
                                 <li><a href="{{ route('web.about.index') }}">ABOUT US</a></li>
