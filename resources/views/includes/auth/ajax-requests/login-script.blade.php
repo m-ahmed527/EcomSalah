@@ -13,7 +13,7 @@
 
             let form = $('#login-form');
             let formData = new FormData(form[0]);
-            disableButtons();
+            disableButtons('#login-btn');
             // $.LoadingOverlay("show");
             $.ajax({
                 url: form.attr('action'),
@@ -22,7 +22,7 @@
                 processData: false,
                 contentType: false,
                 success: function (response) {
-                    enableButtons();
+                    enableButtons('#login-btn');
                     // $.LoadingOverlay("hide");
                     console.log(response);
                     if (response.success) {
@@ -45,7 +45,7 @@
                     }
                 },
                 error: function (error) {
-                    enableButtons();
+                    enableButtons('#login-btn');
                     // $.LoadingOverlay("hide");
                     let errors = error.responseJSON.errors;
 
@@ -55,8 +55,8 @@
 
                     if (errors) {
                         $.each(errors, function (key, value) {
-                            let inputField = $(`input[name="${key}"]`);
-
+                            let inputField = $(`#login-form input[name="${key}"]`);
+                            console.log(inputField);
                             // red border lagao
                             inputField.addClass('is-invalid');
 

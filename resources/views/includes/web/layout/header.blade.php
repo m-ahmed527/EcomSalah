@@ -6,8 +6,20 @@
                 <div class="col-md-3 col-sm-6 col-6">
                     <div class="login-register-area">
                         <ul>
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="#">Register</a></li>
+                            @guest
+                                <li><a href="{{ route('login') }}">Login</a></li>
+                                <li><a href="{{ route('register') }}">Register</a></li>
+                            @else
+                                @if(auth()->user()->role == App\Models\User::ADMIN)
+                                    <li><a href="{{ route('admin.index') }}">Admin Dashboard</a></li>
+                                @endif
+                                <li><a href="javascript:void(0)"
+                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                </li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            @endguest
                         </ul>
                     </div>
                 </div>

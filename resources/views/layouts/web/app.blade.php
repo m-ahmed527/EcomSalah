@@ -5,14 +5,16 @@
     @include('includes.web.layout.head')
     <!-- Body main wrapper start -->
     <div class="wrapper home-one">
-        @include('includes.web.layout.header')
+
+        @if (!in_array(request()->path(), ['login', 'register']))
+            @include('includes.web.layout.header')
+        @endif
 
 
         @yield('content')
-
-
-        @include('includes.web.layout.footer')
-
+        @if (!in_array(request()->path(), ['login', 'register']))
+            @include('includes.web.layout.footer')
+        @endif
     </div>
     <!-- Body main wrapper end -->
     @include('includes.web.layout.foot')

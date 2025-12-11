@@ -10,7 +10,7 @@
             e.preventDefault();
             let form = $('#register-form');
             let formData = new FormData(form[0]);
-            disableButtons();
+            disableButtons('#register-btn');
             // $.LoadingOverlay("show");
             $.ajax({
                 url: form.attr('action'),
@@ -19,7 +19,7 @@
                 processData: false,
                 contentType: false,
                 success: function (response) {
-                    enableButtons();
+                    enableButtons('#register-btn');
                     // $.LoadingOverlay("hide");
                     if (response.success) {
                         Toast.fire({
@@ -41,7 +41,7 @@
                     }
                 },
                 error: function (error) {
-                    enableButtons();
+                    enableButtons('#register-btn');
                     // $.LoadingOverlay("hide");
                     let errors = error.responseJSON.errors;
 
@@ -51,7 +51,7 @@
 
                     if (errors) {
                         $.each(errors, function (key, value) {
-                            let inputField = $(`input[name="${key}"]`);
+                            let inputField = $(`#register-form input[name="${key}"]`);
 
                             // red border lagao
                             inputField.addClass('is-invalid');
