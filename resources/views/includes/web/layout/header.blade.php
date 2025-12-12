@@ -26,13 +26,13 @@
                 <div class="col-md-6 d-none d-md-block">
                     <div class="social-search-area text-center">
                         <div class="social-icon socile-icon-style-2">
-                            <ul>
+                            {{-- <ul>
                                 <li><a href="#" title="facebook"><i class="fa fa-facebook"></i></a> </li>
                                 <li><a href="#" title="twitter"><i class="fa fa-twitter"></i></a> </li>
                                 <li> <a href="#" title="dribble"><i class="fa fa-dribbble"></i></a></li>
                                 <li> <a href="#" title="behance"><i class="fa fa-behance"></i></a> </li>
                                 <li> <a href="#" title="rss"><i class="fa fa-rss"></i></a> </li>
-                            </ul>
+                            </ul> --}}
                         </div>
                     </div>
                 </div>
@@ -113,7 +113,7 @@
                     <div class="col-lg-7 col-md-10 d-none d-md-block">
                         <nav id="primary-menu">
                             <ul class="main-menu">
-                                <li class="current"><a class="active" href="{{ route('web.index') }}">HOME</a></li>
+                                <li class=""><a class="" href="{{ route('web.index') }}">HOME</a></li>
                                 <li class="mega-parent pos-rltv"><a href="{{ route('web.product.index') }}">PRODUCTS</a>
                                 </li>
 

@@ -220,17 +220,17 @@ Version: 1.0
     /*----------------------------
      price-slider active
     ------------------------------ */
-    $("#slider-range").slider({
-        range: true,
-        min: 40,
-        max: 600,
-        values: [40, 600],
-        slide: function (event, ui) {
-            $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
-        }
-    });
-    $("#amount").val("$" + $("#slider-range").slider("values", 0) +
-        " - $" + $("#slider-range").slider("values", 1));
+    // $("#slider-range").slider({
+    //     range: true,
+    //     min: 40,
+    //     max: 600,
+    //     values: [40, 600],
+    //     slide: function (event, ui) {
+    //         $("#amount").val("RS " + ui.values[0] + " - " + ui.values[1]);
+    //     }
+    // });
+    // $("#amount").val("RS " + $("#slider-range").slider("values", 0) +
+    //     " - " + $("#slider-range").slider("values", 1));
 
     /*----------------------------
     Countdown active
@@ -376,3 +376,20 @@ function enableButtons(selector = null) {
 // disableButtons(); // sab disable
 // disableButtons('#submitBtn'); // sirf ek button disable
 // disableButtons('.save-btn'); // sirf specific class wale disable
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const currentUrl = window.location.href;
+
+    document.querySelectorAll("#primary-menu a").forEach(link => {
+        if (currentUrl === link.href) {
+            link.classList.add("active");
+
+            // agar link <li> ke andar hai to <li> ko bhi active karo
+            const li = link.closest("li");
+            if (li) {
+                li.classList.add( "current");
+            }
+        }
+    });
+});

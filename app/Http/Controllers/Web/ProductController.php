@@ -6,6 +6,7 @@ use App\Filters\Product\PriceRange;
 use App\Filters\Product\SortByName;
 use App\Filters\Product\SortByPrice;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductVariant;
 use Illuminate\Http\Request;
@@ -20,6 +21,7 @@ class ProductController extends Controller
             'Home' => route('web.index'),
             'Products' => route('web.product.index'),
         ];
+        $categories = Category::with('children')->whereNull('parent_id')->get();
         $products = Product::filter([
             SortByName::class,
             SortByPrice::class,
@@ -42,7 +44,6 @@ class ProductController extends Controller
         } else {
             return view('screens.web.product.index', get_defined_vars());
         }
-
     }
 
     public function show(Product $product)
@@ -108,7 +109,6 @@ class ProductController extends Controller
             create_error_log('Get Variant Ajax', $e);
             return errorResponse('Failed to fetch variant', $e->getMessage());
         }
-
     }
 
     public function details(Product $product)
@@ -127,5 +127,4 @@ class ProductController extends Controller
             }
         }
     }
-
 }

@@ -1,9 +1,30 @@
 <script>
-    console.log({{ $products->min('effective_price') }}, {{ $products->max('effective_price') }});
+    console.log({{ $minPrice }}, {{ $maxPrice }});
+    $("#slider-range").slider({
+        range: true,
+        min: {{ $minPrice }},
+        max: {{ $maxPrice }},
+        values: [{{ $minPrice }}, {{ $maxPrice }}],
+        slide: function (event, ui) {
+            $("#amount").text("RS " + ui.values[0] + " - " + ui.values[1]);
+            $('#min_price').val(Math.floor($("#slider-range").slider("values", 0)));
+            $('#max_price').val(Math.ceil($("#slider-range").slider("values", 1)));
+        },
+        change: function (event, ui) {
+            $("#amount").text("RS " + ui.values[0] + " - " + ui.values[1]);
+            $('#min_price').val(Math.floor($("#slider-range").slider("values", 0)));
+            $('#max_price').val(Math.ceil($("#slider-range").slider("values", 1)));
+        }
+    });
+    $("#amount").text("RS " + $("#slider-range").slider("values", 0) +
+        " - " + $("#slider-range").slider("values", 1));
 
 
     // Sorting
-    $("#sort-select").change(function () {
+    $("#price-range-btn").click(function () {
+        loadProducts();
+    });
+    $("#input-sort").change(function () {
         loadProducts();
     });
 
@@ -19,7 +40,7 @@
 
         let data = {
             page: page,
-            sort: $("#sort-select").val(),
+            sort: $("#input-sort").val(),
             // category_id: $("#category-select").val(),
             // brand_id: $("#brand-select").val(),
             price_min: $("#min_price").val(),

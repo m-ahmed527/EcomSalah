@@ -1,5 +1,3 @@
-
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -25,7 +23,7 @@
     <!-- User style -->
     <link rel="stylesheet" href="{{asset('assets/web/css/custom.css')}}">
     <link rel="stylesheet" href="{{asset('assets/web/css/color/skin-default.css')}}">
-
+    {{-- <link rel="stylesheet" href="{{asset('assets/admin/plugins/fontawesome-free/css/all.min.css')}}"> --}}
 
     <!-- Modernizr JS -->
     <script src="{{ asset('assets/web/js/vendor/modernizr-3.11.2.min.js') }}"></script>

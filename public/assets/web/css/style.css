@@ -432,16 +432,6 @@ CSS INDEX
     position: relative;
 }
 .banner-list ul li:before,
-.product-cat ul li a:before {
-    background: #999 none repeat scroll 0 0;
-    content: "";
-    height: 5px;
-    left: 0;
-    margin-top: -1px;
-    position: absolute;
-    top: 50%;
-    width: 5px;
-}
 .banner-text > p {
     color: #999999;
 }
@@ -506,8 +496,8 @@ CSS INDEX
 /*----------------------------------------*/
 
 .testimonial-area {
-    background: rgba(0, 0, 0, 0) url("/assets/web/images/bg/testimonial.webp") no-repeat
-        fixed 0 0 / cover;
+    background: rgba(0, 0, 0, 0) url("/assets/web/images/bg/testimonial.webp")
+        no-repeat fixed 0 0 / cover;
 }
 .total-testimonial {
     margin: auto;
@@ -661,8 +651,8 @@ CSS INDEX
 /*----------------------------------------*/
 
 .best-product {
-    background: rgba(0, 0, 0, 0) url("/assets/web/images/bg/best-product.jpg") no-repeat
-        scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("/assets/web/images/bg/best-product.jpg")
+        no-repeat scroll 0 0;
 }
 .best-heading {
     position: relative;
@@ -774,8 +764,9 @@ CSS INDEX
 /*----------------------------------------*/
 
 .fashion-banner {
-    background: rgba(0, 0, 0, 0) url("/assets/web/images/banner/banner-fashion-03.webp")
-        no-repeat scroll center center;
+    background: rgba(0, 0, 0, 0)
+        url("/assets/web/images/banner/banner-fashion-03.webp") no-repeat scroll
+        center center;
     padding: 120px 0;
 }
 .fashoin-banner-content > p {
@@ -824,8 +815,8 @@ CSS INDEX
     justify-content: center;
 }
 .breadcumb-area {
-    background: rgba(0, 0, 0, 0) url("/assets/web/images/bg/breadcumb.webp") no-repeat scroll
-        0 0;
+    background: rgba(0, 0, 0, 0) url("/assets/web/images/bg/breadcumb.webp")
+        no-repeat scroll 0 0;
     min-height: 245px;
 }
 .bread-main {
@@ -856,12 +847,12 @@ CSS INDEX
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
 }
 .breadcumb-area.breadcumb-2 {
-    background: rgba(0, 0, 0, 0) url("/assets/web/images/bg/breadcumb2.webp") no-repeat
-        scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("/assets/web/images/bg/breadcumb2.webp")
+        no-repeat scroll 0 0;
 }
 .breadcumb-area.breadcumb-3 {
-    background: rgba(0, 0, 0, 0) url("/assets/web/images/bg/breadcumb3.webp") no-repeat
-        scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("/assets/web/images/bg/breadcumb3.webp")
+        no-repeat scroll 0 0;
 }
 /* shop full grid page */
 
@@ -1008,9 +999,7 @@ CSS INDEX
 .treeview li {
     position: relative;
 }
-.product-cat ul li {
-    display: block;
-}
+
 .treeview .hitarea {
     cursor: pointer;
     height: 40px;
@@ -1028,6 +1017,19 @@ CSS INDEX
 .hitarea.collapsable-hitarea:before {
     content: "-";
     font-size: 20px;
+}
+.product-cat ul li {
+    display: block;
+}
+.product-cat ul li a:before {
+    background: #999 none repeat scroll 0 0;
+    content: "";
+    height: 5px;
+    left: 0;
+    margin-top: -1px;
+    position: absolute;
+    top: 50%;
+    width: 5px;
 }
 .product-cat ul li a {
     color: #333;
@@ -1053,6 +1055,30 @@ CSS INDEX
 .product-cat {
     margin-top: 15px;
 }
+
+/* .cat-label {
+    position: relative;
+    display: block;
+    padding-left: 15px;
+    line-height: 40px;
+    cursor: pointer;
+}
+
+.cat-label input {
+    margin-right: 8px;
+}
+
+.cat-label span::before {
+    background: #999;
+    content: "";
+    height: 5px;
+    width: 5px;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin-top: -1px;
+} */
+
 /*----------------------------------------*/
 /*Price Slider
 /*----------------------------------------*/
@@ -2438,7 +2464,6 @@ p.error {
     color: #e23e57 !important;
 }
 
-
 .swal2-container {
     z-index: 99999999 !important;
 }
@@ -2446,3 +2471,14 @@ p.error {
 /* .swal2-toast {
     z-index: 999999 !important;
 } */
+.product-list-img {
+    width: 270px;
+    height: 390px;
+    overflow: hidden;
+}
+
+.product-list-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

@@ -30,11 +30,14 @@
                                         <div class="sort product-type">
                                             <label>Sort By</label>
                                             <select id="input-sort">
-                                                <option value="#" selected>Default</option>
-                                                <option value="#">Name (A - Z)</option>
-                                                <option value="#">Name (Z - A)</option>
-                                                <option value="#">Price (Low &gt; High)</option>
-                                                <option value="#">Price (High &gt; Low)</option>
+                                                <option value="">Default</option>
+                                                <option value="name_asc" {{ request('sort') == 'name_asc' ? 'selected' : '' }}>Name (A-Z)</option>
+                                                <option value="name_desc" {{ request('sort') == 'name_desc' ? 'selected' : '' }}>Name (Z-A)
+                                                </option>
+                                                <option value="price_low_high" {{ request('sort') == 'price_low_high' ? 'selected' : '' }}>Price
+                                                    (Low &gt; High)</option>
+                                                <option value="price_high_low" {{ request('sort') == 'price_high_low' ? 'selected' : '' }}>Price
+                                                    (High &gt; Low)</option>
                                             </select>
                                         </div>
                                     </div>
@@ -109,72 +112,17 @@
                             </div>
                             <div id="cat-treeview" class="product-cat">
                                 <ul>
-                                    <li class="closed"><a href="#">Men (05)</a>
-                                        <ul>
-                                            <li><a href="#">T-Shirt</a></li>
-                                            <li><a href="#">Shirt</a></li>
-                                            <li><a href="#">Pant</a></li>
-                                            <li><a href="#">Shoe</a></li>
-                                            <li><a href="#">Gifts</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="closed"><a href="#">Women (10)</a>
-                                        <ul>
-                                            <li><a href="#">T-Shirt</a>
+                                    @foreach($categories as $cat)
+                                        <li class="{{ $cat->childrenRecursive->count() ? 'closed' : ''}}">
+                                            <a href="#">{{ $cat->name }}</a>
+                                            @if($cat->childrenRecursive->count())
                                                 <ul>
-                                                    <li><a href="#">T-Shirt 01</a></li>
-                                                    <li><a href="#">T-Shirt 02</a></li>
+                                                    @include('screens.web.product.partials.categories-recursion', ['children' => $cat->childrenRecursive])
                                                 </ul>
-                                            </li>
-                                            <li><a href="#">Shirt</a>
-                                                <ul>
-                                                    <li><a href="#">Shirt 01</a></li>
-                                                    <li><a href="#">Shirt 02</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="#">Pant</a>
-                                                <ul>
-                                                    <li><a href="#">Pant 01</a></li>
-                                                    <li><a href="#">Pant 02</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="#">Shoe</a>
-                                                <ul>
-                                                    <li><a href="#">Shoe 01</a></li>
-                                                    <li><a href="#">Shoe 02</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="#">Gifts</a>
-                                                <ul>
-                                                    <li><a href="#">Gift 01</a></li>
-                                                    <li><a href="#">Gift 02</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="closed"><a href="#">Accessories (07)</a>
-                                        <ul>
-                                            <li><a href="#">Accessories 01</a></li>
-                                            <li><a href="#">Accessories 02</a></li>
-                                            <li><a href="#">Accessories 03</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="closed"><a href="#">Beauty (06)</a>
-                                        <ul>
-                                            <li><a href="#">Beauty 01</a></li>
-                                            <li><a href="#">Beauty 02</a></li>
-                                            <li><a href="#">Beauty 03</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="closed"><a href="#">Watch (09)</a>
-                                        <ul>
-                                            <li><a href="#">Watch 01</a></li>
-                                            <li><a href="#">Watch 02</a></li>
-                                            <li><a href="#">Watch 03</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="closed"><a href="#">Sports</a></li>
-                                    <li class="closed"><a href="#">Others</a></li>
+                                            @endif
+                                        </li>
+                                    @endforeach
+
                                 </ul>
                             </div>
                         </aside>
@@ -187,46 +135,17 @@
                             </div>
                             <div class="price_filter">
                                 <div id="slider-range"></div>
-                                <div class="price_slider_amount">
-                                    <input type="text" id="amount" name="price" placeholder="Add Your Price" />
-                                    <input type="submit" value="Filter" />
+                                <div class="price_slider_amount d-flex justify-content-center">
+                                    <div class="" id="amount"></div>
+                                    <input type="hidden" id="min_price" name="min_price">
+                                    <input type="hidden" id="max_price" name="max_price">
                                 </div>
+                                <button class="btn btn-secondary" id="price-range-btn">Filter</button>
                             </div>
                         </aside>
                         <!--single aside end-->
 
-                        <!--single aside start-->
-                        <aside class="single-aside color-aside">
-                            <div class="heading-title aside-title pos-rltv">
-                                <h5 class="uppercase">Color</h5>
-                            </div>
-                            <ul class="color-filter mt-30">
-                                <li><a href="#" class="color-1"></a></li>
-                                <li><a href="#" class="color-2 active"></a></li>
-                                <li><a href="#" class="color-3"></a></li>
-                                <li><a href="#" class="color-4"></a></li>
-                                <li><a href="#" class="color-5"></a></li>
-                                <li><a href="#" class="color-6"></a></li>
-                                <li><a href="#" class="color-7"></a></li>
-                                <li><a href="#" class="color-8"></a></li>
-                                <li><a href="#" class="color-9"></a></li>
-                            </ul>
-                        </aside>
-                        <!--single aside end-->
 
-                        <!--single aside start-->
-                        <aside class="single-aside size-aside">
-                            <div class="heading-title aside-title pos-rltv">
-                                <h5 class="uppercase">Size Option</h5>
-                            </div>
-                            <ul class="size-filter mt-30">
-                                <li><a href="#" class="size-s">S</a></li>
-                                <li><a href="#" class="size-m">M</a></li>
-                                <li><a href="#" class="size-l">L</a></li>
-                                <li><a href="#" class="size-xl">XL</a></li>
-                                <li><a href="#" class="size-xxl">XXL</a></li>
-                            </ul>
-                        </aside>
 
                         <!--single aside start-->
                         <aside class="single-aside tag-aside">
@@ -246,7 +165,7 @@
                         </aside>
                         <!--single aside end-->
 
-                        <!--single aside start-->
+                        {{-- <!--single aside start-->
                         <aside class="single-aside product-aside">
                             <div class="heading-title aside-title pos-rltv">
                                 <h5 class="uppercase">Recent Product</h5>
@@ -488,7 +407,7 @@
                             <a href="single-product.html"><img src="{{ asset('assets/web/images/banner/add.webp') }}"
                                     alt=""></a>
                         </aside>
-                        <!--single aside end-->
+                        <!--single aside end--> --}}
                     </div>
                 </div>
                 <!--shop sidebar end-->

@@ -2,6 +2,8 @@
     $(document).on('click', '.modalProductShow', function () {
         var url = $(this).data('url');
         console.log(url);
+        $('#productModal').modal('show');
+
         // AJAX request to fetch product details
         $.ajax({
             url: url,
@@ -24,6 +26,5 @@
                 console.log('AJAX Error: ' + error.responseJSON.message);
             }
         });
-        $('#productModal').modal('show');
     });
 </script>

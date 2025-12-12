@@ -25,21 +25,17 @@ class Product extends Model
             }
         });
     }
-   
+
     public static function globalMinPrice()
     {
-        $minProduct = Product::min('effective_price');
-        $minVariant = ProductVariant::min('effective_price');
-        $min = $minVariant > $minProduct ? $minVariant : $minProduct;
-        return $min ?? Product::min('base_price');
+
+        return Product::min('effective_price');
     }
 
     public static function globalMaxPrice()
     {
-        $maxProduct = Product::max('effective_price');
-        $maxVariant = ProductVariant::max('effective_price');
-        $max = $maxVariant > $maxProduct ? $maxVariant : $maxProduct;
-        return $max ?? Product::max('base_price');
+
+        return Product::max('effective_price');
     }
 
     public function priceRange()

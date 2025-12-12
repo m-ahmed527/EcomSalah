@@ -56,14 +56,7 @@
                 <div class="s-price-box"> <span class="new-price">PKR {{ $product->priceRange() }}</span> <span
                         class="old-price"></span> </div>
             </div> <a href="{{ route('web.product.show', $product->slug) }}" class="see-all">See all features</a>
-            {{-- <div class="quick-add-to-cart">
-                <form method="post" class="cart">
-                    <div class="numbers-row">
-                        <input type="number" id="french-hens" value="3" min="1">
-                    </div>
-                    <button class="single_add_to_cart_button" type="submit">Add to cart</button>
-                </form>
-            </div> --}}
+            
             <div class="quick-desc"> {!! $product->short_description !!}</div>
             <div class="social-sharing-modal">
                 <div class="widget widget_socialsharing_widget">

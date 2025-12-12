@@ -6,11 +6,11 @@
                 <div class="product-label red">
                     <div class="new">New</div>
                 </div>
-                <div class="single-prodcut-img  product-overlay pos-rltv">
+                <div class="single-prodcut-img product-list-img  product-overlay pos-rltv">
                     <a href="single-product.html"> <img alt=""
-                            src="{{$product->featured_image ?? asset('assets/web/images/product/01.jpg')}}"
+                            src="{{$product->featured_image ?? asset('assets/web/images/product/no-image.png')}}"
                             class="primary-image">
-                        <img alt="" src="{{$product->featured_image ?? asset('assets/web/images/product/02.jpg')}}"
+                        <img alt="" src="{{$product->featured_image ?? asset('assets/web/images/product/no-image.png')}}"
                             class="secondary-image">
                     </a>
                 </div>
@@ -18,9 +18,8 @@
                     <ul>
 
                         <li><a href="#" data-tooltip="Wishlist" class="w-list"><i class="fa fa-heart-o"></i></a></li>
-                        <li><a href="javascript:void(0)" data-tooltip="Quick View"
-                                data-url="{{ route('web.product.details', $product->slug) }}" class="q-view modalProductShow"
-                                ><i class="fa fa-eye"></i></a></li>
+                        <li><a href="javascript:void(0)" data-url="{{ route('web.product.details', $product->slug) }}"
+                                class="modalProductShow"><i class="fa fa-eye"></i></a></li>
                     </ul>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 @if ($paginator->hasPages())
-    <nav class="d-flex justify-items-center justify-content-center">
+    <nav class="d-flex justify-items-center justify-content-center pagination-btn">
         {{-- <div class="d-flex justify-content-between flex-fill d-sm-none">
             <ul class="pagination">
                 @if ($paginator->onFirstPage())
