@@ -33,6 +33,9 @@
             </div>
         </div>
         <!-- single product end-->
+
+
+
     </div>
 @empty
 

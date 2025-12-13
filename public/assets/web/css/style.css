@@ -995,7 +995,7 @@ CSS INDEX
     margin-top: 50px;
 }
 /* Treeeview Css */
-
+/* 
 .treeview li {
     position: relative;
 }
@@ -1009,8 +1009,8 @@ CSS INDEX
     text-align: center;
     top: 0;
     width: 40px;
-}
-.hitarea.expandable-hitarea:before {
+} */
+/* .hitarea.expandable-hitarea:before {
     content: "+";
     font-size: 20px;
 }
@@ -1046,39 +1046,69 @@ CSS INDEX
 .product-cat ul li ul li a {
     font-size: 13px;
 }
-/* End Treeeview css */
 
+*/
+/*
 .product-cat ul li a {
     padding-left: 15px;
     position: relative;
 }
 .product-cat {
     margin-top: 15px;
+} */
+
+.tree {
+    margin: 2% auto;
+    width: 100%;
 }
 
-/* .cat-label {
-    position: relative;
-    display: block;
-    padding-left: 15px;
-    line-height: 40px;
+.tree ul {
+    display: none;
+    margin: 4px auto;
+    margin-left: 0px;
+    border-left: 1px dashed #dfdfdf;
+}
+
+.tree li {
+    padding: 12px 18px;
+    cursor: pointer;
+    vertical-align: middle;
+    background: #fff;
+}
+
+.tree li:first-child {
+    border-radius: 3px 3px 0 0;
+}
+
+.tree li:last-child {
+    border-radius: 0 0 3px 3px;
+}
+
+.tree .active {
+    background: #efefef;
+}
+
+.tree label {
     cursor: pointer;
 }
 
-.cat-label input {
-    margin-right: 8px;
+.tree input[type="checkbox"] {
+    margin: -2px 6px 0 0px;
+    vertical-align: middle !important;
+    width: unset;
 }
 
-.cat-label span::before {
-    background: #999;
-    content: "";
-    height: 5px;
-    width: 5px;
-    position: absolute;
-    left: 0;
-    top: 50%;
-    margin-top: -1px;
-} */
+.has > label {
+    color: #000;
+}
 
+.tree .total {
+    color: #e13300;
+}
+/* .tree input[type="checkbox"] {
+    vertical-align: middle !important;
+    width: unset;
+} */
 /*----------------------------------------*/
 /*Price Slider
 /*----------------------------------------*/

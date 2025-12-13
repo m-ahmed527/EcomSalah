@@ -22,7 +22,12 @@
                             <div class="input-box">
                                 <label class="control-label">Password</label>
                                 <input type="password" placeholder="Password" value="" name="password" id="login-password"
-                                    class="info">
+                                    class="info password">
+                                <!-- 👁 Eye icon -->
+                                <span class="toggle-password"
+                                    style="position:absolute; right:15px; top:40px; cursor:pointer; font-size:17px;">
+                                    <i class="fa fa-eye"></i>
+                                </span>
                             </div>
                         </div>
                         <div class="frm-action">
@@ -32,7 +37,8 @@
                             <span>
                                 <input class="remr" type="checkbox"> Remember me
                             </span>
-                            <a href="#" class="forgotten forg">Forgotten Password</a>
+                            <a href="#" class="forgotten forg">Forgotten Password.</a>
+                            <a href="{{ route('register') }}" class="forgotten forg">Don't have an account?</a>
                         </div>
                     </form>
                 </div>
@@ -45,5 +51,6 @@
 @endsection
 @push('scripts')
     @include('includes.auth.ajax-requests.login-script', ['redirectUrl' => route('web.index')])
+
 
 @endpush

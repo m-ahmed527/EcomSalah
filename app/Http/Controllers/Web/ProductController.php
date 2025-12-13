@@ -29,6 +29,7 @@ class ProductController extends Controller
         ])->paginate(6);
         if (request()->ajax()) {
             try {
+                dd(request()->all());
                 $html = view('screens.web.product.partials.list', get_defined_vars())->render();
                 $pagination = view('screens.web.product.partials.pagination', get_defined_vars())->render();
                 $showingResults = view('screens.web.product.partials.showing-results', get_defined_vars())->render();

@@ -111,18 +111,19 @@
                                 <h5 class="uppercase">categories</h5>
                             </div>
                             <div id="cat-treeview" class="product-cat">
-                                <ul>
+                               
+                                <ul class="tree d-flex flex-column">
                                     @foreach($categories as $cat)
-                                        <li class="{{ $cat->childrenRecursive->count() ? 'closed' : ''}}">
-                                            <a href="#">{{ $cat->name }}</a>
-                                            @if($cat->childrenRecursive->count())
-                                                <ul>
-                                                    @include('screens.web.product.partials.categories-recursion', ['children' => $cat->childrenRecursive])
-                                                </ul>
-                                            @endif
+                                        <li class="{{ $cat->childrenRecursive->count() ? 'has' : ''}}">
+                                            <input type="checkbox" name="parent[]" value="{{ $cat->id }}">
+                                            <label>{{ $cat->name }} <span
+                                                    class="total">({{ $cat->childrenRecursive->count() }})</span></label>
+                                            <ul class="">
+
+                                                @include('screens.web.product.partials.categories-recursion', ['children' => $cat->childrenRecursive])
+                                            </ul>
                                         </li>
                                     @endforeach
-
                                 </ul>
                             </div>
                         </aside>
@@ -165,249 +166,7 @@
                         </aside>
                         <!--single aside end-->
 
-                        {{-- <!--single aside start-->
-                        <aside class="single-aside product-aside">
-                            <div class="heading-title aside-title pos-rltv">
-                                <h5 class="uppercase">Recent Product</h5>
-                            </div>
-                            <div class="recent-prodcut-wraper total-rectnt-slider">
-                                <div class="single-rectnt-slider">
-                                    <!-- single product start-->
-                                    <div class="single-product recent-single-product">
-                                        <div class="product-img">
-                                            <div class="single-prodcut-img  product-overlay pos-rltv">
-                                                <a href="single-product.html"> <img alt=""
-                                                        src="{{asset('assets/web/images/product/rp01.webp')}}"
-                                                        class="primary-image">
-                                                    <img alt="" src="{{asset('assets/web/images/product/rp02.webp')}}"
-                                                        class="secondary-image"> </a>
-                                            </div>
-                                        </div>
-                                        <div class="product-text">
-                                            <div class="prodcut-name"> <a href="single-product.html">Copenhagen
-                                                    Spitfire Chair</a> </div>
-                                            <div class="prodcut-ratting-price">
-                                                <div class="prodcut-ratting"> <a href="#"><i class="fa fa-star"></i></a> <a
-                                                        href="#"><i class="fa fa-star"></i></a> <a href="#"><i
-                                                            class="fa fa-star"></i></a> <a href="#"><i
-                                                            class="fa fa-star"></i></a> <a href="#"><i
-                                                            class="fa fa-star-o"></i></a> </div>
-                                                <div class="prodcut-price">
-                                                    <div class="new-price"> $220 </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- single product end-->
-
-                                    <!-- single product start-->
-                                    <div class="single-product recent-single-product">
-                                        <div class="product-img">
-                                            <div class="single-prodcut-img  product-overlay pos-rltv">
-                                                <a href="single-product.html"> <img alt=""
-                                                        src="{{asset('assets/web/images/product/rp03.webp')}}"
-                                                        class="primary-image">
-                                                    <img alt="" src="{{asset('assets/web/images/product/rp04.webp')}}"
-                                                        class="secondary-image"> </a>
-                                            </div>
-                                        </div>
-                                        <div class="product-text">
-                                            <div class="prodcut-name"> <a href="single-product.html">Copenhagen
-                                                    Spitfire Chair</a> </div>
-                                            <div class="prodcut-ratting-price">
-                                                <div class="prodcut-ratting"> <a href="#"><i class="fa fa-star"></i></a> <a
-                                                        href="#"><i class="fa fa-star"></i></a> <a href="#"><i
-                                                            class="fa fa-star"></i></a> <a href="#"><i
-                                                            class="fa fa-star"></i></a> <a href="#"><i
-                                                            class="fa fa-star-o"></i></a> </div>
-                                                <div class="prodcut-price">
-                                                    <div class="new-price"> $220 </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- single product end-->
-
-                                    <!-- single product start-->
-                                    <div class="single-product recent-single-product">
-                                        <div class="product-img">
-                                            <div class="single-prodcut-img  product-overlay pos-rltv">
-                                                <a href="single-product.html"> <img alt=""
-                                                        src="{{asset('assets/web/images/product/rp02.webp')}}"
-                                                        class="primary-image">
-                                                    <img alt="" src="{{asset('assets/web/images/product/rp03.webp')}}"
-                                                        class="secondary-image"> </a>
-                                            </div>
-                                        </div>
-                                        <div class="product-text">
-                                            <div class="prodcut-name"> <a href="single-product.html">Copenhagen
-                                                    Spitfire Chair</a> </div>
-                                            <div class="prodcut-ratting-price">
-                                                <div class="prodcut-ratting"> <a href="#"><i class="fa fa-star"></i></a> <a
-                                                        href="#"><i class="fa fa-star"></i></a> <a href="#"><i
-                                                            class="fa fa-star"></i></a> <a href="#"><i
-                                                            class="fa fa-star"></i></a> <a href="#"><i
-                                                            class="fa fa-star-o"></i></a> </div>
-                                                <div class="prodcut-price">
-                                                    <div class="new-price"> $220 </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- single product end-->
-
-                                    <!-- single product start-->
-                                    <div class="single-product recent-single-product">
-                                        <div class="product-img">
-                                            <div class="single-prodcut-img  product-overlay pos-rltv">
-                                                <a href="single-product.html"> <img alt=""
-                                                        src="{{asset('assets/web/images/product/rp04.webp')}}"
-                                                        class="primary-image">
-                                                    <img alt="" src="{{asset('assets/web/images/product/rp01.webp')}}"
-                                                        class="secondary-image"> </a>
-                                            </div>
-                                        </div>
-                                        <div class="product-text">
-                                            <div class="prodcut-name"> <a href="single-product.html">Copenhagen
-                                                    Spitfire Chair</a> </div>
-                                            <div class="prodcut-ratting-price">
-                                                <div class="prodcut-ratting"> <a href="#"><i class="fa fa-star"></i></a> <a
-                                                        href="#"><i class="fa fa-star"></i></a> <a href="#"><i
-                                                            class="fa fa-star"></i></a> <a href="#"><i
-                                                            class="fa fa-star"></i></a> <a href="#"><i
-                                                            class="fa fa-star-o"></i></a> </div>
-                                                <div class="prodcut-price">
-                                                    <div class="new-price"> $220 </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- single product end-->
-                                </div>
-                                <div class="single-rectnt-slider">
-                                    <!-- single product start-->
-                                    <div class="single-product recent-single-product">
-                                        <div class="product-img">
-                                            <div class="single-prodcut-img  product-overlay pos-rltv">
-                                                <a href="single-product.html"> <img alt=""
-                                                        src="{{asset('assets/web/images/product/rp01.webp')}}"
-                                                        class="primary-image">
-                                                    <img alt="" src="{{asset('assets/web/images/product/rp02.webp')}}"
-                                                        class="secondary-image"> </a>
-                                            </div>
-                                        </div>
-                                        <div class="product-text">
-                                            <div class="prodcut-name"> <a href="single-product.html">Copenhagen
-                                                    Spitfire Chair</a> </div>
-                                            <div class="prodcut-ratting-price">
-                                                <div class="prodcut-ratting"> <a href="#"><i class="fa fa-star"></i></a> <a
-                                                        href="#"><i class="fa fa-star"></i></a> <a href="#"><i
-                                                            class="fa fa-star"></i></a> <a href="#"><i
-                                                            class="fa fa-star"></i></a> <a href="#"><i
-                                                            class="fa fa-star-o"></i></a> </div>
-                                                <div class="prodcut-price">
-                                                    <div class="new-price"> $220 </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- single product end-->
-
-                                    <!-- single product start-->
-                                    <div class="single-product recent-single-product">
-                                        <div class="product-img">
-                                            <div class="single-prodcut-img  product-overlay pos-rltv">
-                                                <a href="single-product.html"> <img alt=""
-                                                        src="{{asset('assets/web/images/product/rp03.webp')}}"
-                                                        class="primary-image">
-                                                    <img alt="" src="{{asset('assets/web/images/product/rp04.webp')}}"
-                                                        class="secondary-image"> </a>
-                                            </div>
-                                        </div>
-                                        <div class="product-text">
-                                            <div class="prodcut-name"> <a href="single-product.html">Copenhagen
-                                                    Spitfire Chair</a> </div>
-                                            <div class="prodcut-ratting-price">
-                                                <div class="prodcut-ratting"> <a href="#"><i class="fa fa-star"></i></a> <a
-                                                        href="#"><i class="fa fa-star"></i></a> <a href="#"><i
-                                                            class="fa fa-star"></i></a> <a href="#"><i
-                                                            class="fa fa-star"></i></a> <a href="#"><i
-                                                            class="fa fa-star-o"></i></a> </div>
-                                                <div class="prodcut-price">
-                                                    <div class="new-price"> $220 </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- single product end-->
-
-                                    <!-- single product start-->
-                                    <div class="single-product recent-single-product">
-                                        <div class="product-img">
-                                            <div class="single-prodcut-img  product-overlay pos-rltv">
-                                                <a href="single-product.html"> <img alt=""
-                                                        src="{{asset('assets/web/images/product/rp02.webp')}}"
-                                                        class="primary-image">
-                                                    <img alt="" src="{{asset('assets/web/images/product/rp03.webp')}}"
-                                                        class="secondary-image"> </a>
-                                            </div>
-                                        </div>
-                                        <div class="product-text">
-                                            <div class="prodcut-name"> <a href="single-product.html">Copenhagen
-                                                    Spitfire Chair</a> </div>
-                                            <div class="prodcut-ratting-price">
-                                                <div class="prodcut-ratting"> <a href="#"><i class="fa fa-star"></i></a> <a
-                                                        href="#"><i class="fa fa-star"></i></a> <a href="#"><i
-                                                            class="fa fa-star"></i></a> <a href="#"><i
-                                                            class="fa fa-star"></i></a> <a href="#"><i
-                                                            class="fa fa-star-o"></i></a> </div>
-                                                <div class="prodcut-price">
-                                                    <div class="new-price"> $220 </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- single product end-->
-
-                                    <!-- single product start-->
-                                    <div class="single-product recent-single-product">
-                                        <div class="product-img">
-                                            <div class="single-prodcut-img  product-overlay pos-rltv">
-                                                <a href="single-product.html"> <img alt=""
-                                                        src="{{asset('assets/web/images/product/rp04.webp')}}"
-                                                        class="primary-image">
-                                                    <img alt="" src="{{asset('assets/web/images/product/rp01.webp')}}"
-                                                        class="secondary-image"> </a>
-                                            </div>
-                                        </div>
-                                        <div class="product-text">
-                                            <div class="prodcut-name"> <a href="single-product.html">Copenhagen
-                                                    Spitfire Chair</a> </div>
-                                            <div class="prodcut-ratting-price">
-                                                <div class="prodcut-ratting"> <a href="#"><i class="fa fa-star"></i></a> <a
-                                                        href="#"><i class="fa fa-star"></i></a> <a href="#"><i
-                                                            class="fa fa-star"></i></a> <a href="#"><i
-                                                            class="fa fa-star"></i></a> <a href="#"><i
-                                                            class="fa fa-star-o"></i></a> </div>
-                                                <div class="prodcut-price">
-                                                    <div class="new-price"> $220 </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- single product end-->
-                                </div>
-                            </div>
-
-                        </aside>
-                        <!--single aside end-->
-
-                        <!--single aside start-->
-                        <aside class="single-aside add-aside">
-                            <a href="single-product.html"><img src="{{ asset('assets/web/images/banner/add.webp') }}"
-                                    alt=""></a>
-                        </aside>
-                        <!--single aside end--> --}}
+                        
                     </div>
                 </div>
                 <!--shop sidebar end-->
@@ -420,4 +179,23 @@
 @push('scripts')
     @include('includes.web.common.pagination-script')
     @include('includes.web.common.modal-script')
+    <script>
+        $(document).on('click', '.tree label', function (e) {
+            $(this).next('ul').fadeToggle();
+            e.stopPropagation();
+        });
+
+        // $(document).on('change', '.tree input[type=checkbox]', function (e) {
+        //     $(this).siblings('ul').find("input[type='checkbox']").prop('checked', this.checked);
+        //     $(this).parentsUntil('.tree').children("input[type='checkbox']").prop('checked', this.checked);
+        //     e.stopPropagation();
+        // });
+        $(document).on('change', 'input[name="parent[]"],input[name="child[]"]', function (e) {
+            const checkedValues = $('input[name="parent[]"]:checked, input[name="child[]"]:checked').map(function () {
+                return $(this).val();
+            }).get();
+            console.log(checkedValues); // use checkedValues as needed
+        });
+
+    </script>
 @endpush

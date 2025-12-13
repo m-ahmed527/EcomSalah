@@ -321,6 +321,9 @@ $(window).scroll(function () {
     }
 });
 
+/*----------------------------
+   Disable-Enable Button
+  ------------------------------ */
 
 //Start-> Page load hone par buttons disable karne aur load hone ke baad enable karne ka code
 function disableButtons(selector = null) {
@@ -378,6 +381,11 @@ function enableButtons(selector = null) {
 // disableButtons('.save-btn'); // sirf specific class wale disable
 
 
+
+/*----------------------------
+     active navigation menu
+    ------------------------------
+*/
 document.addEventListener("DOMContentLoaded", function () {
     const currentUrl = window.location.href;
 
@@ -388,8 +396,32 @@ document.addEventListener("DOMContentLoaded", function () {
             // agar link <li> ke andar hai to <li> ko bhi active karo
             const li = link.closest("li");
             if (li) {
-                li.classList.add( "current");
+                li.classList.add("current");
             }
         }
     });
 });
+
+
+/*----------------------------
+     Eye icon toggle
+    ------------------------------
+*/
+document.querySelectorAll('.toggle-password').forEach(function (toggle) {
+    toggle.addEventListener('click', function () {
+
+        // jis input ke sath yeh icon hai usi ko target karo
+        let input = this.previousElementSibling;
+
+        if (input.type === 'password') {
+            input.type = 'text';
+            this.innerHTML = '<i class="fa fa-eye-slash"></i>';
+        } else {
+            input.type = 'password';
+            this.innerHTML = '<i class="fa fa-eye"></i>';
+        }
+
+    });
+});
+
+

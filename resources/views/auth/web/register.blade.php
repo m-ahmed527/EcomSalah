@@ -34,12 +34,22 @@
                                 </div>
                                 <div class="input-box col-md-6">
                                     <label class="control-label">Password</label>
-                                    <input type="password" class="info" placeholder="Password" name="password">
+                                    <input type="password" class="info password" placeholder="Password" name="password">
+                                    <!-- 👁 Eye icon -->
+                                    <span class="toggle-password"
+                                        style="position:absolute; right:25px; top:40px; cursor:pointer; font-size:17px;">
+                                        <i class="fa fa-eye"></i>
+                                    </span>
                                 </div>
                                 <div class="input-box col-md-6">
                                     <label class="control-label">Password</label>
-                                    <input type="password" class="info" placeholder="Confirm Password"
+                                    <input type="password" class="info password" placeholder="Confirm Password"
                                         name="password_confirmation">
+                                    <!-- 👁 Eye icon -->
+                                    <span class="toggle-password"
+                                        style="position:absolute; right:25px; top:40px; cursor:pointer; font-size:17px;">
+                                        <i class="fa fa-eye"></i>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -47,6 +57,8 @@
                             <div class="input-box tci-box">
                                 <a href="#" class="btn-def btn2" id="register-btn">Register</a>
                             </div>
+                            <a href="{{ route('login') }}" class="forgotten forg">Already have an account?</a>
+                        
                         </div>
                     </form>
                 </div>

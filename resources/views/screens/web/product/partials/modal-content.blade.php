@@ -9,16 +9,16 @@
             <div class="portfolio-thumbnil-area-2">
                 <div class="tab-content active-portfolio-area-2">
                     <div role="tabpanel" class="tab-pane active" id="view1">
-                        <div class="product-img">
+                        <div class="product-img product-list-img">
 
-                            <a href="#"><img src="{{$product->featured_image}}" alt="Single portfolio" /></a>
+                            <a href="#"><img src="{{$product->featured_image ?? asset('assets/web/images/product/no-image.png')}}" alt="Single portfolio" /></a>
                         </div>
                     </div>
                     @foreach ($product->images as $image)
                         <div role="tabpanel" class="tab-pane" id="view{{ $loop->iteration + 1 }}">
                             <div class="product-img">
 
-                                <a href="#"><img src="{{$image->image}}" alt="Single portfolio" /></a>
+                                <a href="#"><img src="{{$image->image }}" alt="Single portfolio" /></a>
                             </div>
                         </div>
                     @endforeach
@@ -26,20 +26,20 @@
                 </div>
                 <div class="product-more-views-2">
                     <ul class="thumbnail-carousel-modal-2 nav" data-tabs="tabs">
-                        <li class="nav-item" role="presentation">
+                        <li class="nav-item" role="presentation" style="width: 76px; height: 97px; overflow: hidden;">
                             <a class="nav-link active" id="view1" data-bs-toggle="tab" href="#view1" role="tab"
                                 aria-controls="view1" aria-selected="true">
 
-                                <img src="{{$product->featured_image}}" alt="" />
+                                <img src="{{$product->featured_image ?? asset('assets/web/images/product/no-image.png')}}" alt="" style="width: 100%; height: 100%; object-fit: cover;" />
                             </a>
                         </li>
                         @foreach ($product->images as $image)
-                            <li class="nav-item" role="presentation">
+                            <li class="nav-item" role="presentation" style="width: 76px; height: 97px; overflow: hidden;">
                                 <a class="nav-link" id="view{{ $loop->iteration + 1 }}" data-bs-toggle="tab"
                                     href="#view{{ $loop->iteration + 1 }}" role="tab"
                                     aria-controls="view{{ $loop->iteration + 1 }}" aria-selected="true">
 
-                                    <img src="{{$image->image}}" alt="" />
+                                    <img src="{{$image->image}}" alt="" style="width: 100%; height: 100%; object-fit: cover;" />
                                 </a>
                             </li>
                         @endforeach

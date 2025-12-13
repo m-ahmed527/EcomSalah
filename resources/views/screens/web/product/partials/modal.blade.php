@@ -16,7 +16,7 @@
                             <div class="portfolio-thumbnil-area-2">
                                 <div class="tab-content active-portfolio-area-2">
                                     <div role="tabpanel" class="tab-pane active" id="view1">
-                                        <div class="product-img">
+                                        <div class="product-img product-list-img">
 
                                             <a href="#"><img src="{{asset('assets/web/images/product/no-image.png')}}"
                                                     alt="Single portfolio" /></a>
