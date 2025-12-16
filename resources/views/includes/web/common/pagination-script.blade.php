@@ -35,22 +35,15 @@
         let page = $(this).attr('href').split('page=')[1];
         loadProducts(page);
     });
-    $(document).on('change', 'input[name="parent[]"],input[name="child[]"]', function (e) {
-        const checkedValues = $('input[name="parent[]"]:checked, input[name="child[]"]:checked').map(function () {
-            return $(this).val();
-        }).get();
-        console.log(checkedValues); // use checkedValues as needed
-       
-        let page = 1;
-        loadProducts(page, checkedValues);
+    $(document).on('change', 'input[name="category[]"]', function (e) {
+        loadProducts();
     });
     function loadProducts(page = 1, categories = []) {
 
         let data = {
             page: page,
             sort: $("#input-sort").val(),
-            category_id: categories,
-            // brand_id: $("#brand-select").val(),
+            category_id: $('input[name="category[]"]:checked').val(),
             price_min: $("#min_price").val(),
             price_max: $("#max_price").val(),
             // attributes: {}

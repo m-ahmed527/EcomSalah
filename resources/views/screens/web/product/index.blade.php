@@ -111,11 +111,11 @@
                                 <h5 class="uppercase">categories</h5>
                             </div>
                             <div id="cat-treeview" class="product-cat">
-                               
+
                                 <ul class="tree d-flex flex-column">
                                     @foreach($categories as $cat)
                                         <li class="{{ $cat->childrenRecursive->count() ? 'has' : ''}}">
-                                            <input type="checkbox" name="parent[]" value="{{ $cat->id }}">
+                                            <input type="radio" name="category[]" value="{{ $cat->id }}">
                                             <label>{{ $cat->name }} <span
                                                     class="total">({{ $cat->childrenRecursive->count() }})</span></label>
                                             <ul class="">
@@ -138,8 +138,8 @@
                                 <div id="slider-range"></div>
                                 <div class="price_slider_amount d-flex justify-content-center">
                                     <div class="" id="amount"></div>
-                                    <input type="hidden" id="min_price" name="min_price">
-                                    <input type="hidden" id="max_price" name="max_price">
+                                    <input type="hidden" id="min_price" name="min_price" value="{{ $minPrice }}">
+                                    <input type="hidden" id="max_price" name="max_price" value="{{ $maxPrice }}">
                                 </div>
                                 <button class="btn btn-secondary" id="price-range-btn">Filter</button>
                             </div>
@@ -166,7 +166,7 @@
                         </aside>
                         <!--single aside end-->
 
-                        
+
                     </div>
                 </div>
                 <!--shop sidebar end-->

@@ -995,7 +995,7 @@ CSS INDEX
     margin-top: 50px;
 }
 /* Treeeview Css */
-/* 
+/*
 .treeview li {
     position: relative;
 }
@@ -1092,7 +1092,7 @@ CSS INDEX
     cursor: pointer;
 }
 
-.tree input[type="checkbox"] {
+.tree input[type="radio"] {
     margin: -2px 6px 0 0px;
     vertical-align: middle !important;
     width: unset;

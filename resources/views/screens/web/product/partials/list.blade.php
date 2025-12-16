@@ -33,10 +33,9 @@
             </div>
         </div>
         <!-- single product end-->
-
-
-
     </div>
 @empty
-
+    <div class="col-lg-4 col-md-6 item">
+        <h3 class="text-center">No Matching Product Found</h3>
+    </div>
 @endforelse
