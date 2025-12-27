@@ -19,10 +19,10 @@
                         showConfirmButton: false,
                         timer: 1500
                     });
-                    if (icon.hasClass('fa-regular')) {
-                        icon.removeClass('fa-regular').addClass('fa-solid');
+                    if (icon.hasClass('fa-heart-o')) {
+                        icon.removeClass('fa-heart-o').addClass('fa-heart');
                     } else {
-                        icon.removeClass('fa-solid').addClass('fa-regular');
+                        icon.removeClass('fa-heart').addClass('fa-heart-o');
                     }
                     $('.wishlist-count').text(response.data.wishlist_count);
                 }
@@ -34,7 +34,7 @@
                         showConfirmButton: true,
                         timer: false
                     });
-                   
+
                 }
             },
             error: function (error) {

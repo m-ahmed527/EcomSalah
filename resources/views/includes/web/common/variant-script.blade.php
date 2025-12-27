@@ -87,7 +87,7 @@
                                     `<span class="label label-success label-lg">In Stock</span>` :
                                     `<span class="label label-danger label-lg">Out of stock</span>`);
 
-                                $('.product-price').text(`PKR ${parseFloat(parseFloat(response.data.price) + parseFloat(basePrice)).toFixed(2)}`);
+                                $('.new-price').text(`PKR ${parseFloat(parseFloat(response.data.price) + parseFloat(basePrice)).toFixed(2)}`);
                                 $('#stock').val(response.data.stock);
 
                             } else {

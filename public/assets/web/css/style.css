@@ -1388,6 +1388,7 @@ CSS INDEX
 .tab-content.active-portfolio-area .product-img img {
     width: 100%;
     max-height: 575px;
+    object-fit: cover;
 }
 .product-more-views {
     float: left;
@@ -2508,6 +2509,17 @@ p.error {
 }
 
 .product-list-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.product-show-img {
+    width: 100%;
+    height: 538px;
+    overflow: hidden;
+}
+
+.product-show-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;

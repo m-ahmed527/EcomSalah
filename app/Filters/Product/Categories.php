@@ -12,8 +12,7 @@ class Categories
     {
 
         $category_id = request('category_id');
-
-        if ($category_id) {
+        if ($category_id && $category_id != null) {
 
             $category = Category::with('childrenRecursive')->find($category_id);
 

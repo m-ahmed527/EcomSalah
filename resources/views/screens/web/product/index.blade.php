@@ -26,7 +26,17 @@
                             <div class="shop-area-top">
                                 <div class="row">
                                     <div class="col-xl-6 col-lg-9 col-md-9">
-
+                                        <div class="sort product-show">
+                                            <label>View</label>
+                                            <select id="input-perPage" name="pagination">
+                                                <option value="9" selected>9</option>
+                                                <option value="10">10</option>
+                                                <option value="15">15</option>
+                                                <option value="20">20</option>
+                                                <option value="25">25</option>
+                                                <option value="{{ $products->total() }}">All</option>
+                                            </select>
+                                        </div>
                                         <div class="sort product-type">
                                             <label>Sort By</label>
                                             <select id="input-sort">

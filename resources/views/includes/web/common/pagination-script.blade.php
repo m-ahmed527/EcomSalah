@@ -27,6 +27,9 @@
     $("#input-sort").change(function () {
         loadProducts();
     });
+    $("#input-perPage").change(function () {
+        loadProducts();
+    });
 
     // AJAX Pagination
     $(document).on('click', '.pagination a', function (event) {
@@ -42,8 +45,9 @@
 
         let data = {
             page: page,
+            perPage: $("#input-perPage").val(),
             sort: $("#input-sort").val(),
-            category_id: $('input[name="category[]"]:checked').val(),
+            category_id: $('input[name="category[]"]:checked').val() ?? null,
             price_min: $("#min_price").val(),
             price_max: $("#max_price").val(),
             // attributes: {}

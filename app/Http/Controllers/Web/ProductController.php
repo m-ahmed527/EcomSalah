@@ -22,16 +22,16 @@ class ProductController extends Controller
             'Home' => route('web.index'),
             'Products' => route('web.product.index'),
         ];
+        $perPage = request()->get('perPage', 6);
         $categories = Category::with('children')->whereNull('parent_id')->get();
         $products = Product::filter([
             SortByName::class,
             SortByPrice::class,
             PriceRange::class,
             Categories::class
-        ])->paginate(6);
+        ])->paginate((int)$perPage);
         if (request()->ajax()) {
             try {
-                // dd($products);
                 $html = view('screens.web.product.partials.list', get_defined_vars())->render();
                 $pagination = view('screens.web.product.partials.pagination', get_defined_vars())->render();
                 $showingResults = view('screens.web.product.partials.showing-results', get_defined_vars())->render();
@@ -84,7 +84,7 @@ class ProductController extends Controller
             }
             $variantMap[] = $combo;
         }
-        $relatedProducts = Product::where('id', '!=', $product->id)->inRandomOrder()->take(4)->get();
+        $relatedProducts = Product::where('id', '!=', $product->id)->inRandomOrder()->take(5)->get();
         return view('screens.web.product.show', get_defined_vars());
     }
     public function getVariant(Request $request)
