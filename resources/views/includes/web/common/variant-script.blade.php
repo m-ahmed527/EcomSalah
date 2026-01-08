@@ -84,8 +84,8 @@
                             if (response.data.price) {
                                 priceDisplay.text(`PKR ${response.data.price}`);
                                 stockDisplay.html(response.data.stock > 0 ?
-                                    `<span class="label label-success label-lg">In Stock</span>` :
-                                    `<span class="label label-danger label-lg">Out of stock</span>`);
+                                    `<span class="label label-success label-lg">(In Stock)</span>` :
+                                    `<span class="label label-danger label-lg">(Out of stock)</span>`);
 
                                 $('.new-price').text(`PKR ${parseFloat(parseFloat(response.data.price) + parseFloat(basePrice)).toFixed(2)}`);
                                 $('#stock').val(response.data.stock);

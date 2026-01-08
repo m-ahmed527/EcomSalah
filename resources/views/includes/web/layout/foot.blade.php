@@ -49,7 +49,7 @@
         })
     @endif
 
-
+    
 </script>
 @include('includes.web.common.cart.cart-wishlist-index-script')
 @include('includes.web.common.wishlist.add-to-wishlist-script')

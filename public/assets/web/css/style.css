@@ -1528,7 +1528,7 @@ input.cart-plus-minus-box {
 .single-product-description {
     background: #fafafa none repeat scroll 0 0;
     border: 1px solid #ccc;
-    padding: 43px 0;
+    padding: 20px 0;
 }
 .single-product-option .sort {
     float: none;
@@ -2515,7 +2515,7 @@ p.error {
 }
 .product-show-img {
     width: 100%;
-    height: 538px;
+    height: 538px !important;
     overflow: hidden;
 }
 
@@ -2523,4 +2523,32 @@ p.error {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+
+
+
+.thumbnail-carousel {
+    max-height: 538px;        /* apni layout ke hisaab se adjust */
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* optional: scrollbar thora clean lagay */
+.thumbnail-carousel::-webkit-scrollbar {
+    width: 6px;
+}
+
+.thumbnail-carousel::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+}
+
+.thumbnail-carousel::-webkit-scrollbar-track {
+    background: transparent;
+}
+.thumbnail-carousel ul.nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }

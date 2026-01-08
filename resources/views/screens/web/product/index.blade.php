@@ -29,11 +29,11 @@
                                         <div class="sort product-show">
                                             <label>View</label>
                                             <select id="input-perPage" name="pagination">
-                                                <option value="9" selected>9</option>
-                                                <option value="10">10</option>
+                                                <option value="6" selected>6</option>
+                                                <option value="9">9</option>
+                                                <option value="12">12</option>
                                                 <option value="15">15</option>
-                                                <option value="20">20</option>
-                                                <option value="25">25</option>
+                                                <option value="18">18</option>
                                                 <option value="{{ $products->total() }}">All</option>
                                             </select>
                                         </div>
@@ -105,14 +105,14 @@
                 <div class="col-lg-3 col-md-4 order-lg-1 order-md-1 order-2">
                     <div class="shop-sidebar">
                         <!--single aside start-->
-                        <aside class="single-aside search-aside search-box">
+                        {{-- <aside class="single-aside search-aside search-box">
                             <form action="#">
                                 <div class="input-box">
-                                    <input class="single-input" placeholder="Search...." type="text">
+                                    <input class="single-input" placeholder="Search for Products..." type="text">
                                     <button class="src-btn sb-2"><i class="fa fa-search"></i></button>
                                 </div>
                             </form>
-                        </aside>
+                        </aside> --}}
                         <!--single aside end-->
 
                         <!--single aside start-->
@@ -195,11 +195,7 @@
             e.stopPropagation();
         });
 
-        // $(document).on('change', '.tree input[type=checkbox]', function (e) {
-        //     $(this).siblings('ul').find("input[type='checkbox']").prop('checked', this.checked);
-        //     $(this).parentsUntil('.tree').children("input[type='checkbox']").prop('checked', this.checked);
-        //     e.stopPropagation();
-        // });
+
         $(document).on('change', 'input[name="parent[]"],input[name="child[]"]', function (e) {
             const checkedValues = $('input[name="parent[]"]:checked, input[name="child[]"]:checked').map(function () {
                 return $(this).val();

@@ -53,19 +53,7 @@
             // attributes: {}
         };
 
-        // collect attributes filters e.g. color[1,2], size[3,4]
-        // $(".attribute-filter").each(function () {
-        //     let attrId = $(this).data("attribute-id");
-        //     let selectedValues = [];
 
-        //     $(this).find("input[type=checkbox]:checked").each(function () {
-        //         selectedValues.push($(this).val());
-        //     });
-
-        //     if (selectedValues.length > 0) {
-        //         data.attributes[attrId] = selectedValues;
-        //     }
-        // });
         console.log(data);
         $.ajax({
             url: "{{ route('web.product.index') }}",
@@ -84,3 +72,16 @@
 
 
 </script>
+ {{-- // collect attributes filters e.g. color[1,2], size[3,4]
+        // $(".attribute-filter").each(function () {
+        //     let attrId = $(this).data("attribute-id");
+        //     let selectedValues = [];
+
+        //     $(this).find("input[type=checkbox]:checked").each(function () {
+        //         selectedValues.push($(this).val());
+        //     });
+
+        //     if (selectedValues.length > 0) {
+        //         data.attributes[attrId] = selectedValues;
+        //     }
+        // }); --}}

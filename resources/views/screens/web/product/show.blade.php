@@ -40,8 +40,6 @@
                                                     data-bs-toggle="tab"><img src="{{ $image->image }}" alt="" /></a>
                                             </li>
                                         @endforeach
-
-
                                     </ul>
                                 </div>
                             </div>
@@ -73,7 +71,7 @@
                 <div class="col-lg-5">
                     <div class="single-product-description">
                         <div class="sp-top-des">
-                            <h3>{{ $product->name }} <span>()</span></h3>
+                            <h3>{{ $product->name }} <span id="variant-stock">({{ $product->stock > 0 ? "In Stock" : "Out of Stock" }})</span></h3>
                             <div class="prodcut-ratting-price">
                                 <div class="prodcut-ratting">
                                     <a href="#" tabindex="0"><i class="fa fa-star-o"></i></a>
@@ -95,75 +93,82 @@
                         <div class="sp-bottom-des">
 
                             <div class="row" id="variant-selectors">
-                            @foreach ($attributes as $attribute)
+                                @foreach ($attributes as $attribute)
 
-                                <div class="mb-3">
-                                    <label class="">{{ $attribute->name }}:</label>
-                                    <div style="display: flex; gap:10px;">
-                                        @foreach ($attribute->values as $value)
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input variant-radio" type="radio"
-                                                    name="attribute_{{ $attribute->id }}" data-attribute-id="{{ $attribute->id }}"
-                                                    value="{{ $value->id }}" id="{{ $value->value }}">
-                                                <label class="" for="{{ $value->value }}">{{ $value->value }}</label>
-                                            </div>
-                                        @endforeach
+                                    <div class="mb-3">
+                                        <div style="display: flex; gap:10px;">
+                                            <label class="">{{ $attribute->name }}:</label>
+                                            @foreach ($attribute->values as $value)
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input variant-radio" type="radio"
+                                                        name="attribute_{{ $attribute->id }}" data-attribute-id="{{ $attribute->id }}"
+                                                        value="{{ $value->id }}" id="{{ $value->value }}">
+                                                    <label class="" for="{{ $value->value }}">{{ $value->value }}</label>
+                                                </div>
+                                            @endforeach
+                                            {{-- Reset Button --}}
+                                            <button type="button" class="btn btn-sm btn-outline-secondary reset-attribute"
+                                                data-attribute-id="{{ $attribute->id }}" title="Reset">
+                                                <i class="fa fa-refresh"></i> {{ $attribute->name }}
+                                            </button>
+                                        </div>
                                     </div>
-                                    {{-- Reset Button --}}
-                                    <button type="button" class="btn btn-sm btn-outline-secondary reset-attribute"
-                                        data-attribute-id="{{ $attribute->id }}">
-                                        <i class="fa fa-refresh"></i> {{ $attribute->name }}
-                                    </button>
-                                </div>
-                            @endforeach
-                        </div>
-                        <div class="mt-4">
-                            <h5 style="display:{{ $product->has_variants ? 'block' : 'none' }}">Additional price: <span
-                                    id="variant-price">-</span>
-                            </h5>
-                            <h2 id="variant-stock">
-                                @if ($product->stock > 0)
-                                    <span class="label label-success label-lg">In Stock</span>
-                                @else
-                                    <span class="label label-danger label-lg">Out of Stock</span>
-                                @endif
-                            </h2>
-                            <input type="hidden" id="stock" value="{{ $product->has_variants ? '' : $product->stock }}">
-                        </div>
-                        <form id="cart-form" action="{{ route('web.cart.add') }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="{{ $product->has_variants ? 'variant_id' : 'product_id' }}"
-                                id="selected-variant-id" value="{{ $product->has_variants ? '' : $product->id }}">
-                            <div class="quantity-area">
-                                <label>Qty :</label>
-                                <div class="cart-quantity">
+                                @endforeach
+                            </div>
 
-                                        <div class="product-qty">
-                                            <div class="cart-quantity">
-                                                <div class="cart-plus-minus">
-                                                    <div class="dec qtybutton">-</div>
-                                                    <input type="text" value="1" name="product-quantity"
-                                                        class="cart-plus-minus-box" id="quantity">
-                                                    <div class="inc qtybutton">+</div>
+                            <div class="mt-4">
+                                <h5 style="display:{{ $product->has_variants ? 'block' : 'none' }}">
+                                    Additional price: <span id="variant-price">-</span>
+                                </h5>
+                                
+                                <input type="hidden" id="stock" value="{{ $product->has_variants ? '' : $product->stock }}">
+                            </div>
+
+                            <form id="cart-form" action="{{ route('web.cart.add') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="{{ $product->has_variants ? 'variant_id' : 'product_id' }}"
+                                    id="selected-variant-id" value="{{ $product->has_variants ? '' : $product->id }}">
+
+                                <div class="quantity-area">
+                                    <label>Qty :</label>
+                                    <div class="cart-quantity">
+
+                                            <div class="product-qty">
+                                                <div class="cart-quantity">
+                                                    <div class="cart-plus-minus">
+                                                        <div class="dec qtybutton">-</div>
+                                                        <input type="text" value="1" name="product-quantity"
+                                                            class="cart-plus-minus-box" id="quantity">
+                                                        <div class="inc qtybutton">+</div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
 
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="social-icon socile-icon-style-1">
-                                <ul>
-                                    <li><a href="javascript:void(0)"  data-tooltip="Add To Cart" class="add-cart add-cart-text"
-                                            data-placement="left" tabindex="0" id="add-to-cart" {{ $product->has_variants ? 'disabled' : '' }}
-                                title="{{ $product->has_variants ? 'Please select a valid variant' : '' }}">Add To Cart<i
-                                                class="fa fa-cart-plus"></i></a></li>
-                                    <li><a href="javascript:void(0)" data-tooltip="Wishlist" class="w-list add-to-wishlist" id="add-to-wishlist" data-slug="{{ $product->slug }}"
-                                data-url="{{ route('web.wishlist.store', $product->slug) }}" tabindex="0">
-                                <i class="fa {{ auth()?->user()?->hasWishlisted($product->id) ? 'fa-heart' : 'fa-heart-o' }}"></i></a></li>
 
-                                </ul>
-                            </div>
+                                <div class="social-icon socile-icon-style-1">
+                                    <ul>
+                                        <li><a href="javascript:void(0)"  data-tooltip="Add To Cart" class="add-cart add-cart-text"
+                                            data-placement="left" tabindex="0" id="add-to-cart" {{ $product->has_variants ? 'disabled' : '' }}
+                                            title="{{ $product->has_variants ? 'Please select a valid variant' : '' }}">
+                                            Add To Cart<i class="fa fa-cart-plus"></i></a></li>
+                                        <li><a href="javascript:void(0)" data-tooltip="Wishlist" class="w-list add-to-wishlist" id="add-to-wishlist" data-slug="{{ $product->slug }}"
+                                            data-url="{{ route('web.wishlist.store', $product->slug) }}" tabindex="0">
+                                            <i class="fa {{ auth()?->user()?->hasWishlisted($product->id) ? 'fa-heart' : 'fa-heart-o' }}"></i></a></li>
+                                    </ul>
+                                </div>
                             </form>
+
+                            <div class="d-flex gap-3 mt-4">
+                                <h5>Categories:</h5>
+                                    @forelse ($product->categories as $category)
+                                        <h5>{{ $category->name }}</h5>
+                                    @empty
+                                        <h5>Uncategorized</h5>
+                                    @endforelse
+
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -283,8 +288,9 @@
                                     <div class="product-icon socile-icon-tooltip text-center">
                                         <ul>
 
-                                            <li><a href="#" data-tooltip="Wishlist" class="w-list"><i
-                                                        class="fa fa-heart-o"></i></a></li>
+                                            <li><a href="javascript:void(0)" data-tooltip="Wishlist" class="w-list add-to-wishlist" id="add-to-wishlist" data-slug="{{ $rel->slug }}"
+                                            data-url="{{ route('web.wishlist.store', $rel->slug) }}" tabindex="0">
+                                            <i class="fa {{ auth()?->user()?->hasWishlisted($rel->id) ? 'fa-heart' : 'fa-heart-o' }}"></i></a></li>
                                             <li><a href="javascript:void(0)"
                                                     data-url="{{ route('web.product.details', $rel->slug) }}"
                                                     class="modalProductShow"><i class="fa fa-eye"></i></a></li>
@@ -318,7 +324,7 @@
     @include('screens.web.product.partials.modal')
 @endsection
 @push('scripts')
- @include('includes.web.common.modal-script')
-  @include('includes.web.common.variant-script')
+    @include('includes.web.common.modal-script')
+    @include('includes.web.common.variant-script')
     @include('includes.web.common.cart.add-to-cart-script')
 @endpush

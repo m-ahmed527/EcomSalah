@@ -64,24 +64,38 @@
                         $('#cart-total-amount').text(`PKR ${response.data.total_amount ?? 0}`);
                         $('#cart-total-items').text(response.data.total_items ?? 0);
                         $('#cart-drop').append(`
-                            <a class="pull-left" href="javascript:void(0);">
-                                <img class="media-object" id="cart-product-image" src="${response.data.item.product.featured_image}"
-                                    alt="image" />
-                            </a>
-                            <div class="media-body">
-                                <h4 class="media-heading cart-product-name" id="cart-product-name">${response.data.item.product.name}</h4>
-                                <div class="cart-price">
-                                    <span id="cart-product-quantity">${response.data.item.quantity}x</span>
-                                    <span id="cart-product-price">${(() => {
-                                        const base = parseFloat(response.data.item.product.base_price);
-                                        const variant = parseFloat(response?.data?.item?.variant?.price);
-                                        return ((isNaN(base) ? 0 : base) + (isNaN(variant) ? 0 : variant)).toFixed(2);
-                                    })()}</span>
+
+                                <div class="cart-img">
+                                    <a href="#">
+                                        <img
+                                            class="media-object"
+                                            id="cart-product-image"
+                                            src="${response.data.item.product.featured_image}"
+                                            alt="image"
+                                        />
+                                    </a>
                                 </div>
-                                <h5><strong id="cart-product-total">PKR ${(response.data.item.total_price).toFixed(2)}</strong></h5>
-                            </div>
+
+                                <div class="cart-content">
+                                    <div class="cart-name">
+                                        <a href="#">${response.data.item.product.name}</a>
+                                    </div>
+
+                                    <div class="cart-price">
+                                        PKR ${(() => {
+                                                        const base = parseFloat(response.data.item.product.base_price);
+                                                        const variant = parseFloat(response?.data?.item?.variant?.price);
+                                                        return ((isNaN(base) ? 0 : base) + (isNaN(variant) ? 0 : variant)).toFixed(2);
+                                                    })()}
+                                    </div>
+
+                                    <div class="cart-qty">
+                                        Qty: <span>${response.data.item.quantity}</span>
+                                    </div>
+                                </div>
 
                         `);
+
                     }
 
                 },

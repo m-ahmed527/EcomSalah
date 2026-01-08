@@ -52,46 +52,50 @@
                             <li>
                                 <div class="header-cart">
                                     <div class="cart-icon"> <a href="#">Cart<i class="zmdi zmdi-shopping-cart"></i></a>
-                                        <span>2</span>
+                                       <span class="cart-count"
+                                    title="Cart">{{ session('cart.total_items', 0) }}</span>
                                     </div>
                                     <div class="cart-content-wraper">
-                                        <div class="cart-single-wraper">
-                                            <div class="cart-img">
+                                        @php
+                                            $first = collect(session('cart.items', []))->last();
+                                        @endphp
+                                        @if($first)
+                                            <div class="cart-single-wraper" id="cart-drop">
+                                                <div class="cart-img">
 
-                                                <a href="#"><img src="{{asset('assets/web/images/product/01.webp')}}"
-                                                        alt=""></a>
-                                            </div>
-                                            <div class="cart-content">
-                                                <div class="cart-name"> <a href="#">Aenean Eu Tristique</a>
+                                                    <a href="#"><img class="media-object" id="cart-product-image"
+                                                        src="{{$first['product']['featured_image']  }}" alt="image" />
+                                                    </a>
                                                 </div>
-                                                <div class="cart-price"> $70.00 </div>
-                                                <div class="cart-qty"> Qty: <span>1</span> </div>
-                                            </div>
-                                            <div class="remove"> <a href="#"><i class="zmdi zmdi-close"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="cart-single-wraper">
-                                            <div class="cart-img">
+                                                <div class="cart-content">
+                                                    <div class="cart-name"> <a href="#">{{ $first['product']['name'] }}</a>
+                                                    </div>
+                                                    <div class="cart-price">PKR {{ number_format($first['product']['base_price'] + ($first['variant']['price'] ?? 0), 2) }} </div>
+                                                    <div class="cart-qty"> Qty: <span>{{ $first['quantity'] }}</span> </div>
+                                                </div>
 
-                                                <a href="#"><img src="{{asset('assets/web/images/product/02.webp')}}"
-                                                        alt=""></a>
                                             </div>
-                                            <div class="cart-content">
-                                                <div class="cart-name"> <a href="#">Aenean Eu Tristique</a>
-                                                </div>
-                                                <div class="cart-price"> $70.00 </div>
-                                                <div class="cart-qty"> Qty: <span>1</span> </div>
+                                        @else
+                                            <div class="cart-single-wraper">
+                                                <p class="text-center">Your cart is empty</p>
                                             </div>
-                                            <div class="remove"> <a href="#"><i class="zmdi zmdi-close"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="cart-subtotal"> Subtotal: <span>$200.00</span> </div>
+                                        @endif
+                                        <div class="cart-subtotal"> Subtotal: <span id="cart-total-amount">PKR {{ session('cart.total_amount', 0) }}</span> </div>
+                                        
                                         <div class="cart-check-btn">
                                             <div class="view-cart"> <a class="btn-def" href="cart.html">View
                                                     Cart</a> </div>
                                             <div class="check-btn"> <a class="btn-def" href="checkout.html">Checkout</a>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="header-cart">
+                                    <div class="cart-icon"> <a href="#" data-tooltip="Wishlist" class="w-list">
+                                       Wishlist<i class="fa fa-heart"></i></a>
+                                       <span class="wishlist-count" title="Wishlist">0</span>
                                     </div>
                                 </div>
                             </li>
