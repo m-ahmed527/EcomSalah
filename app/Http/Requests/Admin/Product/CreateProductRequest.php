@@ -23,7 +23,8 @@ class CreateProductRequest extends FormRequest
      */
     public function rules(): array
     {
-        // dd($this->all());
+        // $tags = json_decode($this->tags, true);
+        // dd($tags);
         $rules = [
             'name' => 'required|string|max:255',
             'sku' => 'nullable|string|unique:products,sku',

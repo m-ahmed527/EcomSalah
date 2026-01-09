@@ -6,10 +6,12 @@ use App\Filters\Product\Categories;
 use App\Filters\Product\PriceRange;
 use App\Filters\Product\SortByName;
 use App\Filters\Product\SortByPrice;
+use App\Filters\Product\TagsFilter;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductVariant;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Throwable;
 
@@ -24,11 +26,13 @@ class ProductController extends Controller
         ];
         $perPage = request()->get('perPage', 6);
         $categories = Category::with('children')->whereNull('parent_id')->get();
+        $tags = Tag::all();
         $products = Product::filter([
             SortByName::class,
             SortByPrice::class,
             PriceRange::class,
-            Categories::class
+            Categories::class,
+            TagsFilter::class,
         ])->paginate((int)$perPage);
         if (request()->ajax()) {
             try {
@@ -68,7 +72,6 @@ class ProductController extends Controller
                 $usedAttributes->push($value->attribute);
             }
         }
-        // dd($product->variants);
         // Unique attributes and values only
         $attributes = $usedAttributes->unique('id')->map(function ($attribute) use ($usedValues) {
             $attribute->values = $usedValues->where('attribute_id', $attribute->id)->unique('id')->values();
@@ -128,6 +131,28 @@ class ProductController extends Controller
                 create_error_log('Product Details Ajax', $e);
                 return errorResponse('Failed to fetch product details', $e->getMessage());
             }
+        }
+    }
+
+    public function headerSearch(Request $request)
+    {
+        try {
+            $searchTerm = $request->input('q');
+            $products = Product::where('name', 'LIKE', "%{$searchTerm}%")
+                ->orWhere('short_description', 'LIKE', "%{$searchTerm}%")
+                ->orWhere('sku', 'LIKE', "%{$searchTerm}%")    
+                ->orWhereHas('tags', function ($q) use ($searchTerm) {
+                    $q->where('name', 'LIKE', "%{$searchTerm}%");
+                })            
+                ->take(5)
+                ->get();
+            $html = view('screens.web.product.partials.header-search-results', get_defined_vars())->render();
+            return successResponse('Search results fetched successfully', [
+                'html' => $html,
+            ]);
+        } catch (Throwable $e) {
+            create_error_log('Header Search Ajax', $e);
+            return errorResponse('Failed to fetch search results', $e->getMessage());
         }
     }
 }

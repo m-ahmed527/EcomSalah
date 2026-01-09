@@ -64,7 +64,7 @@
                                                 <div class="cart-img">
 
                                                     <a href="#"><img class="media-object" id="cart-product-image"
-                                                        src="{{$first['product']['featured_image']  }}" alt="image" />
+                                                        src="{{$first['product']['featured_image'] ?? asset('assets/web/images/product/no-image.png')  }}" alt="image" />
                                                     </a>
                                                 </div>
                                                 <div class="cart-content">
@@ -83,7 +83,7 @@
                                         <div class="cart-subtotal"> Subtotal: <span id="cart-total-amount">PKR {{ session('cart.total_amount', 0) }}</span> </div>
                                         
                                         <div class="cart-check-btn">
-                                            <div class="view-cart"> <a class="btn-def" href="cart.html">View
+                                            <div class="view-cart"> <a class="btn-def view-cart-btn" href="{{ route('web.cart.index') }}">View
                                                     Cart</a> </div>
                                             <div class="check-btn"> <a class="btn-def" href="checkout.html">Checkout</a>
                                             </div>
@@ -93,7 +93,7 @@
                             </li>
                             <li>
                                 <div class="header-cart">
-                                    <div class="cart-icon"> <a href="#" data-tooltip="Wishlist" class="w-list">
+                                    <div class="cart-icon"> <a href="#" data-tooltip="Wishlist" class="w-list view-wishlist-btn">
                                        Wishlist<i class="fa fa-heart"></i></a>
                                        <span class="wishlist-count" title="Wishlist">0</span>
                                     </div>
@@ -164,12 +164,17 @@
                         <div class="search-box global-table">
                             <div class="global-row">
                                 <div class="global-cell">
-                                    <form action="#">
-                                        <div class="input-box">
-                                            <input class="single-input" placeholder="Search anything" type="text">
-                                            <button class="src-btn"><i class="fa fa-search"></i></button>
+                                    {{-- <form action="#"> --}}
+                                        <div class="input-box pos-rltv">
+                                            <input class="single-input" placeholder="Search anything" type="text" id="header-search-input" autocomplete="off">
+                                            <button type="button" class="src-btn"><i class="fa fa-search"></i></button>
+                                            <div class="search-dropdown" id="search-dropdown">
+                                                <ul id="search-dropdown-ul">
+                                                    {{-- Ajax se append ho rha hai --}}
+                                                </ul>
+                                            </div>
                                         </div>
-                                    </form>
+                                    {{-- </form> --}}
                                 </div>
                             </div>
                         </div>
@@ -200,4 +205,7 @@
         </div>
     </div>
 </header>
+
+
+
 <!-- End of header area -->

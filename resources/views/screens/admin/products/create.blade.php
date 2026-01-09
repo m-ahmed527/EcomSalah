@@ -51,6 +51,11 @@
                         <label class="required">SKU</label>
                         <input type="text" name="sku" class="form-control" readonly>
                     </div>
+                    <div class="form-group col-6">
+                        <label class="">Product Tags (Optional)</label>
+                        <input id="tags-input" name="tags" placeholder="Type tag & select..."
+                            class="tagify--custom-dropdown">
+                    </div>
                     <hr>
 
                     {{-- 🔹 Images --}}
@@ -71,6 +76,7 @@
                             <div id="galleryPreview" class="d-flex flex-wrap mt-2"></div>
                         </div>
                     </div>
+
                     {{-- 🔹 Descriptions --}}
                     <div class="form-group">
                         <label>Short Description</label>
@@ -442,6 +448,28 @@
 
         });
 
+
+        var input = document.querySelector('#tags-input');
+        var clothingTags = [
+            "men", "women", "kids", "unisex",
+            "t-shirt", "shirt", "kurta", "kurti", "jeans", "hoodie", "jacket", "abaya",
+            "cotton", "lawn", "chiffon", "denim", "khaddar", "silk",
+            "casual", "formal", "party wear", "wedding wear", "eid collection",
+            "summer", "winter", "all season",
+            "regular fit", "slim fit", "oversized",
+            "black", "white", "blue", "red", "green",
+            "s", "m", "l", "xl", "xxl",
+            "new arrival", "best seller", "sale", "discount", "premium"
+        ];
+        var tagify = new Tagify(input, {
+            whitelist: clothingTags,
+            dropdown: {
+                maxItems: 10,
+                classname: "tags-look",
+                enabled: 0,
+                closeOnSelect: false
+            }
+        });
     </script>
 
     @include('includes.admin.ajax-requests.create', ['redirectUrl' => null])

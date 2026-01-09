@@ -65,6 +65,7 @@ Route::prefix('web')->name('web.')->group(function () {
         Route::get('/show/{product}', 'show')->name('show');
         Route::post('/get-variant', 'getVariant')->name('get.variant');
         Route::get('/details/{product}', 'details')->name('details');
+        Route::get('/header-search', 'headerSearch')->name('header.search');
     });
 
 });

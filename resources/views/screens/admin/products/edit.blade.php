@@ -54,7 +54,11 @@
                         <label class="required">SKU</label>
                         <input type="text" name="sku" class="form-control" readonly value="{{ $product->sku }}">
                     </div>
-
+                    <div class="form-group col-6">
+                        <label class="">Product Tags (Optional)</label>
+                        <input id="tags-input" name="tags" placeholder="Type tag & select..."
+                            class="tagify--custom-dropdown">
+                    </div>
                     <hr>
 
                     {{-- 🔹 Images --}}
@@ -452,19 +456,20 @@
 
                 files.forEach((file, index) => {
                     const wrapper = $(`
-                            <div class="position-relative m-1" data-index="${index}">
-                                <img src="${URL.createObjectURL(file)}" class="img-thumbnail"
-                                     style="width:100px;height:100px;object-fit:cover;">
-                                <button type="button"
-                                        class="btn btn-danger btn-sm position-absolute remove-gallery"
-                                        style="top:2px;right:2px;">&times;</button>
-                            </div>
-                                `);
+                                <div class="position-relative m-1" data-index="${index}">
+                                    <img src="${URL.createObjectURL(file)}" class="img-thumbnail"
+                                         style="width:100px;height:100px;object-fit:cover;">
+                                    <button type="button"
+                                            class="btn btn-danger btn-sm position-absolute remove-gallery"
+                                            style="top:2px;right:2px;">&times;</button>
+                                </div>
+                                    `);
 
                     $('#galleryPreview').append(wrapper);
                 });
             });
 
+            
 
             // // -------------------------
             // //  GALLERY PREVIEW
@@ -483,7 +488,29 @@
 
 
         });
+        var input = document.querySelector('#tags-input');
+        var clothingTags = [
+            "men", "women", "kids", "unisex",
+            "t-shirt", "shirt", "kurta", "kurti", "jeans", "hoodie", "jacket", "abaya",
+            "cotton", "lawn", "chiffon", "denim", "khaddar", "silk",
+            "casual", "formal", "party wear", "wedding wear", "eid collection",
+            "summer", "winter", "all season",
+            "regular fit", "slim fit", "oversized",
+            "black", "white", "blue", "red", "green",
+            "s", "m", "l", "xl", "xxl",
+            "new arrival", "best seller", "sale", "discount", "premium"
+        ];
+            var tagify = new Tagify(input, {
+                whitelist: clothingTags,
+                dropdown: {
+                maxItems: 10,
+                classname: "tags-look",
+                enabled: 0,
+                closeOnSelect: false
+                }
+            });
 
+            tagify.addTags(@json($tagsForTagify));
     </script>
 
     @include('includes.admin.ajax-requests.create', ['redirectUrl' => route('admin.products.index')])

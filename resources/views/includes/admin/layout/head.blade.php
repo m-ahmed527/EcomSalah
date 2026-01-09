@@ -41,7 +41,7 @@
     <link rel="stylesheet" href="{{asset('assets/admin/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
     <link rel="stylesheet"
         href="{{asset('assets/admin/plugins/datatables-fixedheader/css/fixedHeader.bootstrap4.min.css')}}">
-
+    <link rel="stylesheet" href="https://unpkg.com/@yaireo/tagify/dist/tagify.css">
 
 
     <link rel="stylesheet" href="{{ asset('assets/admin/plugins/select2/css/select2.min.css') }}">
@@ -142,6 +142,32 @@
             font-size: 18px;
             /* 👈 Bara size */
             line-height: 1;
+        }
+
+        .tagify {
+            width: 100%;
+            max-width: 700px;
+        }
+
+        .tags-look .tagify__dropdown__item {
+            display: inline-block;
+            border-radius: 3px;
+            padding: .3em .5em;
+            border: 1px solid #CCC;
+            background: #F3F3F3;
+            margin: .2em;
+            font-size: .85em;
+            color: black;
+            transition: 0s;
+        }
+
+        .tags-look .tagify__dropdown__item--active {
+            color: black;
+        }
+
+        .tags-look .tagify__dropdown__item:hover {
+            background: lightyellow;
+            border-color: gold;
         }
     </style>
 

@@ -74,4 +74,9 @@ class Product extends Model
     {
         return $this->belongsToMany(User::class, 'wishlists')->withTimestamps();
     }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
 }

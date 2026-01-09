@@ -41,6 +41,13 @@
     $(document).on('change', 'input[name="category[]"]', function (e) {
         loadProducts();
     });
+    $(document).on('change', 'input[name="tags[]"]', function (e) {
+        loadProducts();
+    });
+    $(document).on('click', '#reset-tags', function () {
+        $('input[name="tags[]"]').prop('checked', false);
+        loadProducts();
+    });
     function loadProducts(page = 1, categories = []) {
 
         let data = {
@@ -50,6 +57,9 @@
             category_id: $('input[name="category[]"]:checked').val() ?? null,
             price_min: $("#min_price").val(),
             price_max: $("#max_price").val(),
+            tags: $('input[name="tags[]"]:checked').map(function () {
+                return this.value;
+            }).get(),
             // attributes: {}
         };
 
@@ -72,16 +82,16 @@
 
 
 </script>
- {{-- // collect attributes filters e.g. color[1,2], size[3,4]
-        // $(".attribute-filter").each(function () {
-        //     let attrId = $(this).data("attribute-id");
-        //     let selectedValues = [];
+{{-- // collect attributes filters e.g. color[1,2], size[3,4]
+// $(".attribute-filter").each(function () {
+// let attrId = $(this).data("attribute-id");
+// let selectedValues = [];
 
-        //     $(this).find("input[type=checkbox]:checked").each(function () {
-        //         selectedValues.push($(this).val());
-        //     });
+// $(this).find("input[type=checkbox]:checked").each(function () {
+// selectedValues.push($(this).val());
+// });
 
-        //     if (selectedValues.length > 0) {
-        //         data.attributes[attrId] = selectedValues;
-        //     }
-        // }); --}}
+// if (selectedValues.length > 0) {
+// data.attributes[attrId] = selectedValues;
+// }
+// }); --}}

@@ -48,8 +48,59 @@
             timer: 1500
         })
     @endif
+    $(document).ready(function () {
 
-    
+        const $searchInput = $('#header-search-input');
+        const $searchDropdown = $('#search-dropdown-ul');
+
+        function toggleDropdown() {
+            let keyword = $searchInput.val().trim();
+
+            if (keyword.length > 0) {
+                $searchDropdown.show();
+
+                // 🔹 AJAX request on input
+                $.ajax({
+                    url: "{{ route('web.product.header.search') }}",   // apna backend route
+                    type: 'GET',
+                    data: {
+                        q: keyword
+                    },
+                    beforeSend: function () {
+                        $searchDropdown.html('<li>Loading...</li>');
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        $searchDropdown.html(response.data.html);
+                    },
+                    error: function () {
+                        $searchDropdown.html('<li>Error loading results</li>');
+                    }
+                });
+
+            } else {
+                $searchDropdown.hide();
+            }
+        }
+
+        // focus event
+        $searchInput.on('focus', toggleDropdown);
+
+        // input event
+        $searchInput.on('keyup', toggleDropdown);
+
+        // click outside hide dropdown
+        $(document).on('click', function (e) {
+            if (!$searchInput.is(e.target) &&
+                !$searchDropdown.is(e.target) &&
+                $searchDropdown.has(e.target).length === 0) {
+
+                $searchDropdown.hide();
+            }
+        });
+
+    });
+
 </script>
 @include('includes.web.common.cart.cart-wishlist-index-script')
 @include('includes.web.common.wishlist.add-to-wishlist-script')

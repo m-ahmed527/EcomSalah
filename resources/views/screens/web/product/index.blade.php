@@ -163,16 +163,18 @@
                             <div class="heading-title aside-title pos-rltv">
                                 <h5 class="uppercase">Product Tags</h5>
                             </div>
-                            <ul class="tag-filter mt-30">
-                                <li><a href="#">Fashion</a></li>
-                                <li><a href="#">Women</a></li>
-                                <li><a href="#">Winter</a></li>
-                                <li><a href="#">Street Style</a></li>
-                                <li><a href="#">Style</a></li>
-                                <li><a href="#">Shop</a></li>
-                                <li><a href="#">Collection</a></li>
-                                <li><a href="#">Spring 2022</a></li>
+
+                            <ul class="tag-filter scroll-box">
+                                @foreach($tags as $tag)
+                                <li>
+                                    <label class="tag-check">
+                                        <input type="checkbox" name="tags[]" value="{{ $tag->id }}">
+                                        <span>{{ strtoupper($tag->name) }}</span>
+                                    </label>
+                                </li>
+                                @endforeach
                             </ul>
+                            <button class="btn btn-secondary mt-3" id="reset-tags" title="Reset All Tags"><i class="fa fa-refresh"></i> Reset</button>
                         </aside>
                         <!--single aside end-->
 
@@ -202,6 +204,7 @@
             }).get();
             console.log(checkedValues); // use checkedValues as needed
         });
-
+        
+       
     </script>
 @endpush

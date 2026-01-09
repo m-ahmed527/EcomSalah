@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductVariant;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
@@ -76,8 +77,8 @@ class ProductController extends Controller
             if ($request->has('variants')) {
                 // ✅ Variants handle (refactored)
                 $this->createProductVariants($product, $request->variants ?? []);
-
             }
+            $this->tagsCreation($request, $product);
             DB::commit();
             return successResponse("Product created successfully.");
         } catch (Throwable $e) {
@@ -97,7 +98,9 @@ class ProductController extends Controller
         $product->load('variants.values.attribute', 'images', 'categories');
         $attributes = Attribute::with('values')->get();
         $categories = Category::all();
-        // dd($product);
+        $tagsForTagify = $product->tags->map(function ($tag) {
+            return ['value' => $tag->name];
+        });
         return view('screens.admin.products.edit', get_defined_vars());
     }
 
@@ -122,14 +125,12 @@ class ProductController extends Controller
             if ($request->has('variants')) {
                 // 3️⃣ Handle variants (optimized batch)
                 $this->syncProductVariants($product, $request->variants ?? []);
-
             }
-
+            $this->tagsCreation($request, $product);
             DB::commit();
             return successResponse("Product updated successfully.");
         } catch (Throwable $e) {
             DB::rollBack();
-            dd($e->getMessage());
             create_error_log('Product Update', $e);
             return errorResponse("Something went wrong.");
         }
@@ -405,7 +406,23 @@ class ProductController extends Controller
         }
     }
 
+    private function tagsCreation($request, $product): void
+    {
+        $tags = json_decode($request->tags, true);
 
+        $tagIds = [];
+
+        foreach ($tags as $tag) {
+            $tagModel = Tag::firstOrCreate(
+                ['name' => strtolower($tag['value'])],
+                ['slug' => Str::slug($tag['value'])]
+            );
+
+            $tagIds[] = $tagModel->id;
+        }
+
+        $product->tags()->sync($tagIds);
+    }
 }
 
 /**
