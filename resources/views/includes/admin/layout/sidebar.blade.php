@@ -106,6 +106,12 @@
                     </ul>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('admin.plans.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>Manage Plans</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('admin.profile.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Profile</p>

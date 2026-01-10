@@ -47,12 +47,12 @@
                                     </div>
                                     <!-- cart are end-->
                                 </div>
-                                <div role="tabpanel" class="tab-pane  fade in " id="checkout">
+                                <div role="tabpanel" class="tab-pane  fade in" id="checkout">
                                     <!-- Checkout are start-->
                                     <div class="checkout-area">
-                                        <div class="">
                                             <div class="row">
                                                 <div class="col-lg-12">
+                                                    @guest
                                                     <div class="coupne-customer-area mb50">
                                                         <div class="panel-group" id="accordion" role="tablist"
                                                             aria-multiselectable="true">
@@ -82,71 +82,46 @@
                                                                             proceed to the Billing & Shipping
                                                                             section.
                                                                         </div>
-                                                                        <div class="first-last-area">
-                                                                            <div class="input-box mtb-20">
-                                                                                <label>User Name Or
-                                                                                    Email</label>
-                                                                                <input type="email" placeholder="Your Email"
-                                                                                    class="info" name="email">
-                                                                            </div>
-                                                                            <div class="input-box mb-20">
-                                                                                <label>Password</label>
-                                                                                <input type="password"
-                                                                                    placeholder="Password" class="info"
-                                                                                    name="padd">
-                                                                            </div>
-                                                                            <div class="frm-action cc-area">
-                                                                                <div class="input-box tci-box">
-                                                                                    <a href="#"
-                                                                                        class="btn-def btn2">Login</a>
+                                                                         <form action="{{ route('login') }}" method="POST" id="login-form" class="login-side">
+                                                                            @csrf
+                                                                                <div class="first-last-area">
+                                                                                    <div class="input-box mtb-20">
+                                                                                        <label>User Name Or
+                                                                                            Email</label>
+                                                                                        <input type="email" placeholder="Your Email"
+                                                                                            class="info" name="email">
+                                                                                    </div>
+                                                                                    <div class="input-box mb-20">
+                                                                                        <label>Password</label>
+                                                                                        <input type="password"
+                                                                                            placeholder="Password" class="info"
+                                                                                            name="password">
+                                                                                        <span class="toggle-password"
+                                                                                            style="position:absolute; right:15px; top:40px; cursor:pointer; font-size:17px;">
+                                                                                            <i class="fa fa-eye"></i>
+                                                                                        </span>
+                                                                                    </div>
+                                                                                    <div class="frm-action cc-area">
+                                                                                        <div class="input-box tci-box">
+                                                                                            <a type="button" id="login-btn" class="btn-def btn2">Login</a>
+                                                                                        </div>
+                                                                                        <span>
+                                                                                            <input type="checkbox" class="remr">
+                                                                                            Remember
+                                                                                            me
+                                                                                        </span>
+                                                                                        <a class="forgotten forg" href="#">Forgotten
+                                                                                            Password</a>
+                                                                                    </div>
                                                                                 </div>
-                                                                                <span>
-                                                                                    <input type="checkbox" class="remr">
-                                                                                    Remember
-                                                                                    me
-                                                                                </span>
-                                                                                <a class="forgotten forg" href="#">Forgotten
-                                                                                    Password</a>
-                                                                            </div>
-                                                                        </div>
+                                                                        </form>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="panel panel-checkout">
-                                                                <div class="panel-heading" role="tab" id="headingThree">
-                                                                    <h4 class="panel-title">
-                                                                        <img src="images/icons/acc.jpg" alt="">
-                                                                        Have A Coupon?
-                                                                        <a class="collapsed" role="button"
-                                                                            data-bs-toggle="collapse"
-                                                                            data-bs-parent="#accordion"
-                                                                            href="#collapseThree" aria-expanded="false"
-                                                                            aria-controls="collapseThree">
-                                                                            Click here to enter your code
-                                                                        </a>
-                                                                    </h4>
-                                                                </div>
-                                                                <div id="collapseThree" class="panel-collapse collapse"
-                                                                    role="tabpanel" aria-labelledby="headingThree">
-                                                                    <div class="panel-body coupon-body">
 
-                                                                        <div class="first-last-area">
-                                                                            <div class="input-box mtb-20">
-                                                                                <input type="text" placeholder="Coupon Code"
-                                                                                    class="info" name="code">
-                                                                            </div>
-                                                                            <div class="frm-action">
-                                                                                <div class="input-box tci-box">
-                                                                                    <a href="#" class="btn-def btn2">Apply
-                                                                                        Coupon</a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
                                                         </div>
                                                     </div>
+                                                    @endguest
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <div class="billing-details">
@@ -567,10 +542,15 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <div class="payment-section mt-20">
+                                                                <a class="btn-def btn2 order-complete" href="#complete-order">Complete order</a>
+                                                         </div>
+
                                                     </div>
                                                 </div>
+
                                             </div>
-                                        </div>
+
                                     </div>
                                     <!-- Checkout are end-->
                                 </div>
@@ -610,18 +590,10 @@
                                                                         <td class="ctg-type">Shipping</td>
                                                                         <td class="cgt-des ship-opt">
                                                                             <div class="shipp">
-                                                                                <input type="radio" id="pay-toggle"
-                                                                                    name="ship">
-                                                                                <label for="pay-toggle">Flat
-                                                                                    Rate:
-                                                                                    <span>$03</span></label>
+                                                                                
+                                                                                    <span>Free</span>
                                                                             </div>
-                                                                            <div class="shipp">
-                                                                                <input type="radio" id="pay-toggle2"
-                                                                                    name="ship">
-                                                                                <label for="pay-toggle2">Free
-                                                                                    Shipping</label>
-                                                                            </div>
+                                                                            
                                                                         </td>
                                                                     </tr>
                                                                     <tr class="cart_item">
@@ -640,25 +612,16 @@
                                                     <div class="pay-toggle">
                                                         <form action="#">
                                                             <div class="pay-type-total">
+                                                                
                                                                 <div class="pay-type">
-                                                                    <input type="radio" id="pay-toggle01" name="pay">
-                                                                    <label for="pay-toggle01">Direct Bank
-                                                                        Transfer</label>
-                                                                </div>
-                                                                <div class="pay-type">
-                                                                    <input type="radio" id="pay-toggle02" name="pay">
-                                                                    <label for="pay-toggle02">Cheque
-                                                                        Payment</label>
-                                                                </div>
-                                                                <div class="pay-type">
-                                                                    <input type="radio" id="pay-toggle03" name="pay">
+                                                                    <input type="radio" id="pay-toggle03" name="pay" checked>
                                                                     <label for="pay-toggle03">Cash on
                                                                         Delivery</label>
                                                                 </div>
-                                                                <div class="pay-type">
+                                                                {{-- <div class="pay-type">
                                                                     <input type="radio" id="pay-toggle04" name="pay">
                                                                     <label for="pay-toggle04">Paypal</label>
-                                                                </div>
+                                                                </div> --}}
                                                             </div>
                                                             <div class="input-box mt-20">
                                                                 <a class="btn-def btn2" href="#">Place order</a>
@@ -683,4 +646,18 @@
 @endsection
 @push('scripts')
     @include('includes.web.common.cart.update-cart')
+    @include('includes.auth.ajax-requests.login-script', ['redirectUrl' => route('web.cart.index'),'cart' => true])
+    <script>
+        // tab show checkout
+        $(document).on('click', '.process-checkout-btn a', function (e) {
+            e.preventDefault();
+            $('a[href="#checkout"]').tab('show');
+
+        });
+        // complete order
+        $(document).on('click', '.order-complete', function (e) {
+            e.preventDefault();
+            $('a[href="#complete-order"]').tab('show');
+        });
+    </script>
 @endpush

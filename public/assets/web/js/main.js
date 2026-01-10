@@ -273,7 +273,7 @@ Version: 1.0
      cart-plus-minus-button
     ------------------------------ */
     $(".cart-plus-minus")
-    $(".qtybutton").on("click", function () {
+    $(document).on("click", ".qtybutton",function () {
         var $button = $(this);
         var oldValue = $button.parent().find("input").val();
         if ($button.text() == "+") {

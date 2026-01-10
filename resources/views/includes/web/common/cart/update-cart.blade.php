@@ -64,15 +64,18 @@
 
 
         // update
-        $(document).on('input', '[name="quantity"]', function (e) {
+        $(document).on('input', '[name="product-quantity"]', function (e) {
             e.preventDefault();
-            if ($(this).val() <= 0) {
+
+            let quantity = parseInt($(this).val());
+
+            if (quantity <= 0 || isNaN(quantity)) {
                 Toast.fire('Invalid Quantity', 'Please enter a valid quantity.', 'warning');
                 return;
             }
-            let quantity = $(this).val();
+
             let id = $(this).data('id');
-            console.log(quantity, id);
+
             $.ajax({
                 url: "{{ route('web.cart.update') }}",
                 type: "POST",
@@ -82,12 +85,8 @@
                     _token: "{{ csrf_token() }}"
                 },
                 success: function (response) {
-                    console.log(response);
-
                     if (response.success) {
-
                         $('.cart-product-list').html(response.data.html);
-
                     }
                 },
                 error: function (error) {
@@ -98,8 +97,18 @@
                     });
                 }
             });
+        });
 
-        })
+        $(document).on('click', '.qtybutton', function () {
+
+            let $input = $(this).siblings('input[name="product-quantity"]');
+            let oldVal = parseInt($input.val());
+
+            // 🔥 input event manually trigger
+            $input.trigger('input');
+        });
+
+
     })
 
 

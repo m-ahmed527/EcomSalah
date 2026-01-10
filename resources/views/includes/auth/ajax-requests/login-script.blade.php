@@ -1,6 +1,6 @@
 <script>
     var redirectUrl = @json($redirectUrl);
-
+    var cart = @json($cart ?? false);
     $(document).ready(function () {
         $('#login-form input').on('keypress', function (e) {
             if (e.which === 13) {
@@ -35,6 +35,9 @@
                         setTimeout(function () {
                             window.location.href = redirectUrl;
                         }, 1500)
+                        if (cart) {
+                            $('a[href="#checkout"]').tab('show');
+                        }
                     } else {
                         Toast.fire({
                             icon: "error",

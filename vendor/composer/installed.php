@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => 'aacd198dbbbaf096b4a50535fc9e9952bf2f0c36',
+        'reference' => '310ac8db95bc857f3759a1b263b8136144b79868',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -403,7 +403,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'aacd198dbbbaf096b4a50535fc9e9952bf2f0c36',
+            'reference' => '310ac8db95bc857f3759a1b263b8136144b79868',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -1069,6 +1069,15 @@
             'install_path' => __DIR__ . '/../staabm/side-effects-detector',
             'aliases' => array(),
             'dev_requirement' => true,
+        ),
+        'stripe/stripe-php' => array(
+            'pretty_version' => 'v19.1.0',
+            'version' => '19.1.0.0',
+            'reference' => '4e3de7211645699b1f5b5f1f1b45bd9faf369426',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../stripe/stripe-php',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'symfony/clock' => array(
             'pretty_version' => 'v7.3.0',

@@ -3,6 +3,16 @@
         $(document).on('click', '#delete-btn, .remove-gallery', function (e) {
             e.preventDefault();
             let button = $(this);
+            let deleteAble = button.data('delete');
+            if (!deleteAble) {
+                Swal.fire({
+                    icon: "warning",
+                    title: "Cannot Delete",
+                    text: "This item cannot be deleted as it is in use.",
+                    showConfirmButton: true,
+                });
+                return;
+            }
             console.log(123);
             if ($('.remove-gallery').length > 0) {
                 if (!button.data('id')) {
